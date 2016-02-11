@@ -1,0 +1,158 @@
+decl atomic,
+    i0,
+    i1,
+    i2,
+    i3,
+    i4,
+    i5,
+    i6,
+    i7,
+
+    j0,
+    j1,
+    j2,
+    j3,
+    j4,
+    j5,
+    j6,
+    j7
+;
+
+void init()
+begin
+decl at;
+    at := F;
+    atomic := F;
+    i0, i1, i2, i3, i4, i5, i6, i7 := F, F, F, F, F, F, F, T;   // i = 1
+    j0, j1, j2, j3, j4, j5, j6, j7 := F, F, F, F, F, F, F, T;   // j = 1
+    endinit: skip;
+end
+
+
+void thread1 ()
+begin
+decl at;
+decl c0;
+decl c1;
+decl c2;
+decl c3;
+decl c4;
+decl c5;
+decl c6;
+decl c7;
+
+    at := F;
+    c0, c1, c2, c3, c4, c5, c6, c7 := F, F, F, F, F, F, F, F;
+
+    // i += j;
+    atomic, at := T, T;
+    i7, c7 := ((i7^j7)^0), ((i7&j7)|(0&(i7|j7)));
+    i6, c6 := ((i6^j6)^c7), ((i6&j6)|(c7&(i6|j6)));
+    i5, c5 := ((i5^j5)^c6), ((i5&j5)|(c6&(i5|j5)));
+    i4, c4 := ((i4^j4)^c5), ((i4&j4)|(c5&(i4|j4)));
+    i3, c3 := ((i3^j3)^c4), ((i3&j3)|(c4&(i3|j3)));
+    i2, c2 := ((i2^j2)^c3), ((i2&j2)|(c3&(i2|j2)));
+    i1, c1 := ((i1^j1)^c2), ((i1&j1)|(c2&(i1|j1)));
+    i0, c0 := ((i0^j0)^c1), ((i0&j0)|(c1&(i0|j0)));
+    atomic, at := F, F;
+
+      // i += j;
+    atomic, at := T, T;
+    i7, c7 := ((i7^j7)^0), ((i7&j7)|(0&(i7|j7)));
+    i6, c6 := ((i6^j6)^c7), ((i6&j6)|(c7&(i6|j6)));
+    i5, c5 := ((i5^j5)^c6), ((i5&j5)|(c6&(i5|j5)));
+    i4, c4 := ((i4^j4)^c5), ((i4&j4)|(c5&(i4|j4)));
+    i3, c3 := ((i3^j3)^c4), ((i3&j3)|(c4&(i3|j3)));
+    i2, c2 := ((i2^j2)^c3), ((i2&j2)|(c3&(i2|j2)));
+    i1, c1 := ((i1^j1)^c2), ((i1&j1)|(c2&(i1|j1)));
+    i0, c0 := ((i0^j0)^c1), ((i0&j0)|(c1&(i0|j0)));
+    atomic, at := F, F;
+
+    // i += j;
+    atomic, at := T, T;
+    i7, c7 := ((i7^j7)^0), ((i7&j7)|(0&(i7|j7)));
+    i6, c6 := ((i6^j6)^c7), ((i6&j6)|(c7&(i6|j6)));
+    i5, c5 := ((i5^j5)^c6), ((i5&j5)|(c6&(i5|j5)));
+    i4, c4 := ((i4^j4)^c5), ((i4&j4)|(c5&(i4|j4)));
+    i3, c3 := ((i3^j3)^c4), ((i3&j3)|(c4&(i3|j3)));
+    i2, c2 := ((i2^j2)^c3), ((i2&j2)|(c3&(i2|j2)));
+    i1, c1 := ((i1^j1)^c2), ((i1&j1)|(c2&(i1|j1)));
+    i0, c0 := ((i0^j0)^c1), ((i0&j0)|(c1&(i0|j0)));
+    atomic, at := F, F;
+
+    assume(T);
+end
+
+
+void thread2 ()
+begin
+decl at;
+decl c0;
+decl c1;
+decl c2;
+decl c3;
+decl c4;
+decl c5;
+decl c6;
+decl c7;
+
+    at := F;
+    c0, c1, c2, c3, c4, c5, c6, c7 := F, F, F, F, F, F, F, F;
+
+    // j += i;
+    atomic, at := T, T;
+    j7, c7 := ((i7^j7)^0), ((i7&j7)|(0&(i7|j7)));
+    j6, c6 := ((i6^j6)^c7), ((i6&j6)|(c7&(i6|j6)));
+    j5, c5 := ((i5^j5)^c6), ((i5&j5)|(c6&(i5|j5)));
+    j4, c4 := ((i4^j4)^c5), ((i4&j4)|(c5&(i4|j4)));
+    j3, c3 := ((i3^j3)^c4), ((i3&j3)|(c4&(i3|j3)));
+    j2, c2 := ((i2^j2)^c3), ((i2&j2)|(c3&(i2|j2)));
+    j1, c1 := ((i1^j1)^c2), ((i1&j1)|(c2&(i1|j1)));
+    j0, c0 := ((i0^j0)^c1), ((i0&j0)|(c1&(i0|j0)));
+    atomic, at := F, F;
+
+    // j += i;
+    atomic, at := T, T;
+    j7, c7 := ((i7^j7)^0), ((i7&j7)|(0&(i7|j7)));
+    j6, c6 := ((i6^j6)^c7), ((i6&j6)|(c7&(i6|j6)));
+    j5, c5 := ((i5^j5)^c6), ((i5&j5)|(c6&(i5|j5)));
+    j4, c4 := ((i4^j4)^c5), ((i4&j4)|(c5&(i4|j4)));
+    j3, c3 := ((i3^j3)^c4), ((i3&j3)|(c4&(i3|j3)));
+    j2, c2 := ((i2^j2)^c3), ((i2&j2)|(c3&(i2|j2)));
+    j1, c1 := ((i1^j1)^c2), ((i1&j1)|(c2&(i1|j1)));
+    j0, c0 := ((i0^j0)^c1), ((i0&j0)|(c1&(i0|j0)));
+    atomic, at := F, F;
+
+    // j += i;
+    atomic, at := T, T;
+    j7, c7 := ((i7^j7)^0), ((i7&j7)|(0&(i7|j7)));
+    j6, c6 := ((i6^j6)^c7), ((i6&j6)|(c7&(i6|j6)));
+    j5, c5 := ((i5^j5)^c6), ((i5&j5)|(c6&(i5|j5)));
+    j4, c4 := ((i4^j4)^c5), ((i4&j4)|(c5&(i4|j4)));
+    j3, c3 := ((i3^j3)^c4), ((i3&j3)|(c4&(i3|j3)));
+    j2, c2 := ((i2^j2)^c3), ((i2&j2)|(c3&(i2|j2)));
+    j1, c1 := ((i1^j1)^c2), ((i1&j1)|(c2&(i1|j1)));
+    j0, c0 := ((i0^j0)^c1), ((i0&j0)|(c1&(i0|j0)));
+    atomic, at := F, F;
+
+    assume(T);
+end
+
+
+void main()
+begin
+decl at;
+    at := F;
+    // 21 = 00010101
+    if (    // i == 22
+        (!i0 & !i1 & !i2 & i3 & !i4 & i5 & i6 & !i7)
+        | (!j0 & !j1 & !j2 & j3 & !j4 & j5 & j6 & !j7)  // j==22
+        ) then
+        SLIC_ERROR: skip;
+    fi
+    assume(T);
+end
+
+
+
+

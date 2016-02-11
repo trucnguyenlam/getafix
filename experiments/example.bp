@@ -1,0 +1,4 @@
+void main()
+begin
+    assert(0);
+end

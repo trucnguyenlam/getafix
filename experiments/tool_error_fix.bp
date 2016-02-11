@@ -1,0 +1,63 @@
+decl atomic,
+    // For global variables
+    stack_head_0,
+    stack_head_1,
+    stack_head_2,
+
+    stack_count_0,
+    stack_count_1,
+    stack_count_2,
+
+    stack_value0_0,
+    stack_value0_1,
+    stack_value0_2,
+
+    stack_value1_0,
+    stack_value1_1,
+    stack_value1_2,
+
+    stack_value2_0,
+    stack_value2_1,
+    stack_value2_2,
+
+    stack_next0_0,
+    stack_next0_1,
+    stack_next0_2,
+
+    stack_next1_0,
+    stack_next1_1,
+    stack_next1_2,
+
+    stack_next2_0,
+    stack_next2_1,
+    stack_next2_2
+;
+
+void init ()
+begin
+decl at;
+    //__VERIFIER_atomic_store(&stack.count, pushCount);
+    stack_count_0, stack_count_1, stack_count_2 := F, T, T;
+    SLIC_ERROR: skip;
+    //__VERIFIER_atomic_store(&stack.head, 0);
+    stack_head_0, stack_head_1, stack_head_2 := F, F, F;
+    //__VERIFIER_atomic_store(&stack.array[0].Next, 1);
+    stack_next0_0, stack_next0_1, stack_next0_2 := F, F, T;
+    // __VERIFIER_atomic_store(&stack.array[1].Next, 2);
+    stack_next1_0, stack_next1_1, stack_next1_2 := F, T, F;
+    // __VERIFIER_atomic_store(&stack.array[2].Next, -1);
+    stack_next2_0, stack_next2_1, stack_next2_2 := F, T, F;
+
+    endinit: skip;
+end
+
+void thread0 ()
+begin
+    skip;
+end
+
+void thread1 ()
+begin
+    skip;
+end
+

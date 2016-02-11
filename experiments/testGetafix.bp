@@ -1,0 +1,30 @@
+decl atomic,
+    a,
+    b,
+    c
+;
+
+
+void init ()
+begin
+decl at;
+    a, b, c := F, F, F;
+   endinit: skip;
+end
+
+void thread0 ()
+begin
+decl at;
+    atomic, at := T, T;
+    a, b, c := F, F, T;
+    a, b, c := F, T, F;
+    atomic, at := F, F;
+end
+
+void thread1 ()
+begin
+    if (!a & !b & c) then
+        SLIC_ERROR: skip;
+    fi
+
+end

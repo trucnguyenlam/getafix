@@ -1,0 +1,1838 @@
+decl atomic; // global variables
+
+
+void init ()
+begin
+decl at;
+
+   at := F;
+   atomic := F;
+   l1: skip;
+   if (*) then
+      assume(T);
+      goto l2;
+   fi
+   assume(T);
+   assume(T);
+   if (F) then
+      SLIC_ERROR: skip;
+   fi
+   goto l1;
+   l2: skip;
+   l3: skip;
+   if (*) then
+      assume(T);
+      goto l4;
+   fi
+   assume(T);
+   assume(T);
+   goto l3;
+   l4: skip;
+   l5: skip;
+   if (*) then
+      goto l6;
+   fi
+   assume(T);
+   goto l21;
+   l6: skip;
+   assume(T);
+   if (*) then
+      goto l20;
+   fi
+   assume(T);
+   assume(T);
+   assume((T|T));
+   if (*) then
+      assume((T|T));
+      goto l20;
+   fi
+   assume((T&T));
+   if (*) then
+      goto l7;
+   fi
+   assume(T);
+   goto l63;
+   l7: skip;
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l8;
+   fi
+   assume(T);
+   assume(T);
+   goto l63;
+   l8: skip;
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l9;
+   fi
+   assume(T);
+   if (*) then
+      goto l9;
+   fi
+   assume(T);
+   if (*) then
+      goto l9;
+   fi
+   assume(T);
+   if (*) then
+      goto l9;
+   fi
+   assume(T);
+   goto l10;
+   l9: skip;
+   goto l14;
+   l10: skip;
+   if (*) then
+      assume(T);
+      goto l11;
+   fi
+   assume(T);
+   l11: skip;
+   if (*) then
+      assume((T&T));
+      goto l12;
+   fi
+   assume((T|T));
+   goto l14;
+   l12: skip;
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l13;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   goto l14;
+   l13: skip;
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   l14: skip;
+   if (*) then
+      assume(T);
+      goto l15;
+   fi
+   assume(T);
+   goto l20;
+   l15: skip;
+   assume(T);
+   if (*) then
+      goto l16;
+   fi
+   assume(T);
+   assume(T);
+   goto l18;
+   goto l17;
+   l16: skip;
+   goto l18;
+   l17: skip;
+   l18: skip;
+   if (*) then
+      goto l19;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   goto l20;
+   l19: skip;
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   l20: skip;
+   goto l5;
+   l21: skip;
+   if (*) then
+      assume((T&T));
+      goto l23;
+   fi
+   assume((T|T));
+   if (*) then
+      goto l22;
+   fi
+   assume(T);
+   goto l43;
+   goto l23;
+   l22: skip;
+   goto l63;
+   l23: skip;
+   l24: skip;
+   if (*) then
+      assume(T);
+      goto l42;
+   fi
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l25;
+   fi
+   assume(T);
+   goto l41;
+   l25: skip;
+   if (*) then
+      goto l26;
+   fi
+   assume(T);
+   if (*) then
+      goto l26;
+   fi
+   assume(T);
+   if (*) then
+      goto l26;
+   fi
+   assume(T);
+   if (*) then
+      goto l26;
+   fi
+   assume(T);
+   goto l27;
+   l26: skip;
+   goto l31;
+   l27: skip;
+   if (*) then
+      assume(T);
+      goto l28;
+   fi
+   assume(T);
+   l28: skip;
+   if (*) then
+      assume((T&T));
+      goto l29;
+   fi
+   assume((T|T));
+   goto l31;
+   l29: skip;
+   if (*) then
+      goto l30;
+   fi
+   assume(T);
+   goto l31;
+   l30: skip;
+   l31: skip;
+   if (*) then
+      goto l32;
+   fi
+   assume(T);
+   goto l33;
+   l32: skip;
+   goto l41;
+   l33: skip;
+   if (*) then
+      assume(T);
+      goto l39;
+   fi
+   assume(T);
+   if (*) then
+      goto l34;
+   fi
+   assume(T);
+   goto l36;
+   goto l35;
+   l34: skip;
+   goto l36;
+   l35: skip;
+   l36: skip;
+   if (*) then
+      goto l37;
+   fi
+   assume(T);
+   goto l38;
+   l37: skip;
+   l38: skip;
+   goto l40;
+   l39: skip;
+   l40: skip;
+   l41: skip;
+   goto l24;
+   l42: skip;
+   if (*) then
+      assume(T);
+      goto l43;
+   fi
+   assume(T);
+   l43: skip;
+   if (*) then
+      goto l57;
+   fi
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l47;
+   fi
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume((T|T));
+   assume((T|T));
+   assume((T|T));
+   if (*) then
+      assume(T);
+      goto l45;
+   fi
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l44;
+   fi
+   assume(T);
+   goto l45;
+   l44: skip;
+   goto l46;
+   l45: skip;
+   l46: skip;
+   goto l49;
+   goto l48;
+   l47: skip;
+   goto l49;
+   l48: skip;
+   l49: skip;
+   if (*) then
+      goto l50;
+   fi
+   assume(T);
+   goto l58;
+   l50: skip;
+   l51: skip;
+   if (*) then
+      assume(T);
+      goto l56;
+   fi
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l55;
+   fi
+   assume(T);
+   l52: skip;
+   if (*) then
+      assume(T);
+      goto l53;
+   fi
+   assume(T);
+   assume(T);
+   goto l52;
+   l53: skip;
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l54;
+   fi
+   assume(T);
+   goto l55;
+   l54: skip;
+   l55: skip;
+   goto l51;
+   l56: skip;
+   goto l63;
+   goto l58;
+   l57: skip;
+   goto l63;
+   l58: skip;
+   l59: skip;
+   if (*) then
+      assume(T);
+      goto l62;
+   fi
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l61;
+   fi
+   assume(T);
+   if (*) then
+      goto l60;
+   fi
+   assume(T);
+   assume(T);
+   l60: skip;
+   l61: skip;
+   goto l59;
+   l62: skip;
+   l63: skip;
+   if (*) then
+      goto l64;
+   fi
+   assume(T);
+   assume(0);
+   l64: skip;
+   endinit: skip;
+end
+
+
+void thread0 ()
+begin
+decl at;
+
+   at := F;
+   l65: skip;
+   if (*) then
+      goto l66;
+   fi
+   assume(T);
+   if (*) then
+      goto l68;
+   fi
+   assume(T);
+   if (*) then
+      goto l93;
+   fi
+   assume(T);
+   if (*) then
+      goto l95;
+   fi
+   assume(T);
+   if (*) then
+      goto l97;
+   fi
+   assume(T);
+   goto l103;
+   l66: skip;
+   assume(T);
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l67;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(F);
+   l67: skip;
+   goto l103;
+   l68: skip;
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l92;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l69;
+   fi
+   assume(T);
+   goto l92;
+   l69: skip;
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l70;
+   fi
+   assume(T);
+   goto l92;
+   l70: skip;
+   assume(T);
+   l71: skip;
+   l72: skip;
+   if (*) then
+      assume(T);
+      goto l89;
+   fi
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l88;
+   fi
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   l73: skip;
+   atomic, at := T, T;
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l74;
+   fi
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   goto l75;
+   l74: skip;
+   atomic, at := F, F;
+   goto l73;
+   l75: skip;
+   assume(T);
+   if (*) then
+      goto l76;
+   fi
+   assume(T);
+   goto l77;
+   l76: skip;
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   goto l88;
+   l77: skip;
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l78;
+   fi
+   assume(T);
+   goto l79;
+   l78: skip;
+   assume(T);
+   l79: skip;
+   assume(T);
+   if (*) then
+      goto l80;
+   fi
+   assume(T);
+   goto l82;
+   l80: skip;
+   assume(T);
+   if (*) then
+      goto l81;
+   fi
+   assume(T);
+   goto l82;
+   l81: skip;
+   assume(T);
+   l82: skip;
+   assume(T);
+   if (*) then
+      goto l83;
+   fi
+   assume(T);
+   goto l84;
+   l83: skip;
+   if (*) then
+      goto l84;
+   fi
+   assume(T);
+   assume(T);
+   l84: skip;
+   assume(T);
+   if (*) then
+      goto l85;
+   fi
+   assume(T);
+   goto l86;
+   l85: skip;
+   if (*) then
+      goto l86;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   l86: skip;
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l87;
+   fi
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   goto l88;
+   l87: skip;
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   l88: skip;
+   goto l72;
+   l89: skip;
+   if (*) then
+      goto l90;
+   fi
+   assume(T);
+   goto l91;
+   l90: skip;
+   l91: skip;
+   if (*) then
+      goto l71;
+   fi
+   assume(T);
+   l92: skip;
+   goto l103;
+   l93: skip;
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l94;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(F);
+   assume(T);
+   l94: skip;
+   goto l103;
+   l95: skip;
+   assume(T);
+   assume(T);
+   assume(T);
+   assume((T|T));
+   assume(T);
+   if (*) then
+      assume((T|T));
+      goto l96;
+   fi
+   assume((T&T));
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(F);
+   assume(T);
+   assume(T);
+   l96: skip;
+   goto l103;
+   l97: skip;
+   if (*) then
+      goto l101;
+   fi
+   assume(T);
+   if (*) then
+      goto l98;
+   fi
+   assume(T);
+   goto l102;
+   l98: skip;
+   if (*) then
+      assume(T);
+      goto l100;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(F);
+   if (*) then
+      assume(T);
+      goto l99;
+   fi
+   assume(T);
+   l99: skip;
+   l100: skip;
+   goto l102;
+   l101: skip;
+   if (*) then
+      goto l102;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(F);
+   l102: skip;
+   l103: skip;
+   if (*) then
+      goto l65;
+   fi
+   assume(T);
+end
+
+
+void thread1 ()
+begin
+decl at;
+
+   at := F;
+   l104: skip;
+   if (*) then
+      assume(T);
+      goto l105;
+   fi
+   assume(T);
+   goto l252;
+   l105: skip;
+   assume((T&T));
+   if (*) then
+      goto l106;
+   fi
+   assume(T);
+   if (*) then
+      goto l108;
+   fi
+   assume(T);
+   if (*) then
+      goto l147;
+   fi
+   assume(T);
+   if (*) then
+      goto l148;
+   fi
+   assume(T);
+   if (*) then
+      goto l187;
+   fi
+   assume(T);
+   if (*) then
+      goto l188;
+   fi
+   assume(T);
+   if (*) then
+      goto l189;
+   fi
+   assume(T);
+   if (*) then
+      goto l190;
+   fi
+   assume(T);
+   if (*) then
+      goto l238;
+   fi
+   assume(T);
+   if (*) then
+      goto l239;
+   fi
+   assume(T);
+   if (*) then
+      goto l240;
+   fi
+   assume(T);
+   if (*) then
+      goto l241;
+   fi
+   assume(T);
+   if (*) then
+      goto l243;
+   fi
+   assume(T);
+   if (*) then
+      goto l244;
+   fi
+   assume(T);
+   if (*) then
+      goto l246;
+   fi
+   assume(T);
+   if (*) then
+      goto l247;
+   fi
+   assume(T);
+   if (*) then
+      goto l248;
+   fi
+   assume(T);
+   if (*) then
+      goto l249;
+   fi
+   assume(T);
+   if (*) then
+      goto l250;
+   fi
+   assume(T);
+   if (*) then
+      goto l251;
+   fi
+   assume(T);
+   if (*) then
+      goto l252;
+   fi
+   assume(T);
+   if (*) then
+      goto l252;
+   fi
+   assume(T);
+   if (*) then
+      goto l252;
+   fi
+   assume(T);
+   if (*) then
+      goto l252;
+   fi
+   assume(T);
+   if (*) then
+      goto l252;
+   fi
+   assume(T);
+   if (*) then
+      goto l252;
+   fi
+   assume(T);
+   if (*) then
+      goto l252;
+   fi
+   assume(T);
+   goto l252;
+   l106: skip;
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   if (*) then
+      goto l107;
+   fi
+   assume(T);
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   assume(T);
+   l107: skip;
+   goto l252;
+   l108: skip;
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   if (*) then
+      goto l146;
+   fi
+   assume(T);
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   assume((T|T));
+   assume(((T|T)|T));
+   assume(((T|T)|T));
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l129;
+   fi
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l110;
+   fi
+   assume(T);
+   if (*) then
+      goto l109;
+   fi
+   assume(T);
+   l109: skip;
+   goto l128;
+   l110: skip;
+   assume(T);
+   if (*) then
+      goto l111;
+   fi
+   assume(T);
+   goto l128;
+   l111: skip;
+   assume(T);
+   if (*) then
+      goto l112;
+   fi
+   assume(T);
+   goto l128;
+   l112: skip;
+   assume((T|T));
+   if (*) then
+      assume(((T&T)&T));
+      goto l113;
+   fi
+   assume(((T|T)|T));
+   goto l128;
+   l113: skip;
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   l114: skip;
+   atomic, at := T, T;
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l115;
+   fi
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   goto l116;
+   l115: skip;
+   atomic, at := F, F;
+   goto l114;
+   l116: skip;
+   assume(T);
+   if (*) then
+      goto l117;
+   fi
+   assume(T);
+   goto l118;
+   l117: skip;
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   assume(T);
+   goto l128;
+   l118: skip;
+   l119: skip;
+   assume(T);
+   if (*) then
+      goto l120;
+   fi
+   assume(T);
+   goto l125;
+   l120: skip;
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   assume(T);
+   if (*) then
+      goto l121;
+   fi
+   assume(T);
+   goto l128;
+   l121: skip;
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   l122: skip;
+   atomic, at := T, T;
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l123;
+   fi
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   goto l124;
+   l123: skip;
+   atomic, at := F, F;
+   goto l122;
+   l124: skip;
+   goto l119;
+   l125: skip;
+   assume(T);
+   assume(T);
+   l126: skip;
+   if (*) then
+      assume(T);
+      goto l127;
+   fi
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   goto l126;
+   l127: skip;
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   l128: skip;
+   goto l146;
+   l129: skip;
+   if (*) then
+      assume(T);
+      goto l130;
+   fi
+   assume(T);
+   goto l145;
+   l130: skip;
+   if (*) then
+      assume(F);
+      goto l144;
+   fi
+   assume(T);
+   l131: skip;
+   if (*) then
+      assume(T);
+      goto l142;
+   fi
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l141;
+   fi
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   l132: skip;
+   atomic, at := T, T;
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l133;
+   fi
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   goto l134;
+   l133: skip;
+   atomic, at := F, F;
+   goto l132;
+   l134: skip;
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l139;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   l135: skip;
+   if (*) then
+      assume(T);
+      goto l136;
+   fi
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   goto l135;
+   l136: skip;
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   assume(T);
+   if (*) then
+      goto l137;
+   fi
+   assume(T);
+   goto l145;
+   l137: skip;
+   assume(T);
+   if (*) then
+      goto l138;
+   fi
+   assume(T);
+   goto l145;
+   l138: skip;
+   goto l145;
+   l139: skip;
+   if (*) then
+      assume(T);
+      goto l140;
+   fi
+   assume(T);
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   assume(T);
+   goto l145;
+   l140: skip;
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   l141: skip;
+   goto l131;
+   l142: skip;
+   assume(T);
+   if (*) then
+      goto l143;
+   fi
+   assume(T);
+   goto l145;
+   l143: skip;
+   goto l130;
+   l144: skip;
+   l145: skip;
+   l146: skip;
+   goto l252;
+   l147: skip;
+   goto l252;
+   l148: skip;
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   if (*) then
+      goto l186;
+   fi
+   assume(T);
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   assume((T|T));
+   assume(((T|T)|T));
+   assume(((T|T)|T));
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l169;
+   fi
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l150;
+   fi
+   assume(T);
+   if (*) then
+      goto l149;
+   fi
+   assume(T);
+   l149: skip;
+   goto l168;
+   l150: skip;
+   assume(T);
+   if (*) then
+      goto l151;
+   fi
+   assume(T);
+   goto l168;
+   l151: skip;
+   assume(T);
+   if (*) then
+      goto l152;
+   fi
+   assume(T);
+   goto l168;
+   l152: skip;
+   assume((T|T));
+   if (*) then
+      assume(((T&T)&T));
+      goto l153;
+   fi
+   assume(((T|T)|T));
+   goto l168;
+   l153: skip;
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   l154: skip;
+   atomic, at := T, T;
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l155;
+   fi
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   goto l156;
+   l155: skip;
+   atomic, at := F, F;
+   goto l154;
+   l156: skip;
+   assume(T);
+   if (*) then
+      goto l157;
+   fi
+   assume(T);
+   goto l158;
+   l157: skip;
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   assume(T);
+   goto l168;
+   l158: skip;
+   l159: skip;
+   assume(T);
+   if (*) then
+      goto l160;
+   fi
+   assume(T);
+   goto l165;
+   l160: skip;
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   assume(T);
+   if (*) then
+      goto l161;
+   fi
+   assume(T);
+   goto l168;
+   l161: skip;
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   l162: skip;
+   atomic, at := T, T;
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l163;
+   fi
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   goto l164;
+   l163: skip;
+   atomic, at := F, F;
+   goto l162;
+   l164: skip;
+   goto l159;
+   l165: skip;
+   assume(T);
+   assume(T);
+   l166: skip;
+   if (*) then
+      assume(T);
+      goto l167;
+   fi
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   goto l166;
+   l167: skip;
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   l168: skip;
+   goto l186;
+   l169: skip;
+   if (*) then
+      assume(T);
+      goto l170;
+   fi
+   assume(T);
+   goto l185;
+   l170: skip;
+   if (*) then
+      assume(F);
+      goto l184;
+   fi
+   assume(T);
+   l171: skip;
+   if (*) then
+      assume(T);
+      goto l182;
+   fi
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l181;
+   fi
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   l172: skip;
+   atomic, at := T, T;
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l173;
+   fi
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   goto l174;
+   l173: skip;
+   atomic, at := F, F;
+   goto l172;
+   l174: skip;
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l179;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   l175: skip;
+   if (*) then
+      assume(T);
+      goto l176;
+   fi
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   goto l175;
+   l176: skip;
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   assume(T);
+   if (*) then
+      goto l177;
+   fi
+   assume(T);
+   goto l185;
+   l177: skip;
+   assume(T);
+   if (*) then
+      goto l178;
+   fi
+   assume(T);
+   goto l185;
+   l178: skip;
+   goto l185;
+   l179: skip;
+   if (*) then
+      assume(T);
+      goto l180;
+   fi
+   assume(T);
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   assume(T);
+   goto l185;
+   l180: skip;
+   assume(T);
+   atomic, at := T, T;
+   assume(T);
+   assume(T);
+   assume(T);
+   atomic, at := F, F;
+   l181: skip;
+   goto l171;
+   l182: skip;
+   assume(T);
+   if (*) then
+      goto l183;
+   fi
+   assume(T);
+   goto l185;
+   l183: skip;
+   goto l170;
+   l184: skip;
+   l185: skip;
+   l186: skip;
+   goto l252;
+   l187: skip;
+   goto l252;
+   l188: skip;
+   goto l252;
+   l189: skip;
+   goto l252;
+   l190: skip;
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   if (*) then
+      goto l237;
+   fi
+   assume(T);
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l191;
+   fi
+   assume(T);
+   assume(T);
+   l191: skip;
+   assume(((T&T)&T));
+   if (*) then
+      assume(T);
+      goto l192;
+   fi
+   assume(T);
+   goto l236;
+   l192: skip;
+   assume(T);
+   if (*) then
+      goto l193;
+   fi
+   assume(T);
+   goto l236;
+   l193: skip;
+   assume((T|T));
+   assume(((T|T)|T));
+   if (*) then
+      assume(((T|T)|(T&T)));
+      goto l195;
+   fi
+   assume(((T&T)&(T|T)));
+   if (*) then
+      goto l194;
+   fi
+   assume(T);
+   l194: skip;
+   goto l236;
+   l195: skip;
+   if (*) then
+      goto l196;
+   fi
+   assume(T);
+   if (*) then
+      goto l200;
+   fi
+   assume(T);
+   if (*) then
+      goto l210;
+   fi
+   assume(T);
+   if (*) then
+      goto l216;
+   fi
+   assume(T);
+   if (*) then
+      goto l217;
+   fi
+   assume(T);
+   if (*) then
+      goto l219;
+   fi
+   assume(T);
+   if (*) then
+      goto l220;
+   fi
+   assume(T);
+   goto l234;
+   l196: skip;
+   assume(T);
+   l197: skip;
+   if (*) then
+      assume(T);
+      goto l198;
+   fi
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume((T|T));
+   goto l197;
+   l198: skip;
+   assume(T);
+   if (*) then
+      goto l199;
+   fi
+   assume(T);
+   l199: skip;
+   goto l235;
+   l200: skip;
+   assume(T);
+   l201: skip;
+   if (*) then
+      assume(T);
+      goto l202;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   assume((T|T));
+   goto l201;
+   l202: skip;
+   l203: skip;
+   if (*) then
+      assume(T);
+      goto l204;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   assume((T|T));
+   goto l203;
+   l204: skip;
+   l205: skip;
+   if (*) then
+      assume(T);
+      goto l206;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   assume((T|T));
+   goto l205;
+   l206: skip;
+   assume(T);
+   assume((T|T));
+   assume(T);
+   l207: skip;
+   if (*) then
+      assume(T);
+      goto l208;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   assume((T|T));
+   goto l207;
+   l208: skip;
+   assume(T);
+   assume(T);
+   assume(T);
+   assume((T|T));
+   assume(F);
+   assume(T);
+   if (*) then
+      goto l209;
+   fi
+   assume(T);
+   l209: skip;
+   goto l235;
+   l210: skip;
+   assume(T);
+   l211: skip;
+   if (*) then
+      assume(T);
+      goto l212;
+   fi
+   assume(T);
+   goto l211;
+   l212: skip;
+   assume((T|T));
+   assume(T);
+   assume(T);
+   l213: skip;
+   if (*) then
+      assume(T);
+      goto l215;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l214;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   l214: skip;
+   goto l213;
+   l215: skip;
+   goto l235;
+   l216: skip;
+   assume(T);
+   assume((T|T));
+   goto l235;
+   l217: skip;
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   if (*) then
+      goto l218;
+   fi
+   assume(T);
+   l218: skip;
+   goto l235;
+   l219: skip;
+   assume((T|T));
+   assume(T);
+   assume((T|T));
+   assume(T);
+   assume((T|T));
+   assume(T);
+   assume(T);
+   assume(T);
+   goto l235;
+   l220: skip;
+   l221: skip;
+   if (*) then
+      assume(T);
+      goto l226;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l225;
+   fi
+   assume(T);
+   l222: skip;
+   if (*) then
+      assume(T);
+      goto l223;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   goto l222;
+   l223: skip;
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l224;
+   fi
+   assume(T);
+   goto l225;
+   l224: skip;
+   l225: skip;
+   goto l221;
+   l226: skip;
+   if (*) then
+      assume(T);
+      goto l227;
+   fi
+   assume(T);
+   l227: skip;
+   if (*) then
+      assume(T);
+      goto l228;
+   fi
+   assume(T);
+   l228: skip;
+   if (*) then
+      assume(T);
+      goto l229;
+   fi
+   assume(T);
+   l229: skip;
+   if (*) then
+      goto l230;
+   fi
+   assume(T);
+   l230: skip;
+   l231: skip;
+   if (*) then
+      assume(T);
+      goto l233;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l232;
+   fi
+   assume(T);
+   if (*) then
+      goto l232;
+   fi
+   assume(T);
+   l232: skip;
+   goto l231;
+   l233: skip;
+   goto l235;
+   l234: skip;
+   l235: skip;
+   assume(T);
+   l236: skip;
+   l237: skip;
+   goto l252;
+   l238: skip;
+   goto l252;
+   l239: skip;
+   goto l252;
+   l240: skip;
+   goto l252;
+   l241: skip;
+   assume((T|T));
+   assume(((T|T)|T));
+   assume(((T|T)|T));
+   assume((T|T));
+   if (*) then
+      assume((T|T));
+      goto l242;
+   fi
+   assume((T&T));
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   assume(T);
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l242;
+   fi
+   assume(T);
+   l242: skip;
+   goto l252;
+   l243: skip;
+   goto l252;
+   l244: skip;
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   if (*) then
+      assume((T|T));
+      goto l245;
+   fi
+   assume((T&T));
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   assume(T);
+   assume(T);
+   assume((T|T));
+   assume((T|T));
+   assume(T);
+   assume(T);
+   if (*) then
+      assume(T);
+      goto l245;
+   fi
+   assume(T);
+   l245: skip;
+   goto l252;
+   l246: skip;
+   goto l252;
+   l247: skip;
+   goto l252;
+   l248: skip;
+   goto l252;
+   l249: skip;
+   goto l252;
+   l250: skip;
+   goto l252;
+   l251: skip;
+   goto l252;
+   l252: skip;
+   if (*) then
+      goto l104;
+   fi
+   assume(T);
+   assume(T);
+   l253: skip;
+   if (*) then
+      assume(T);
+      goto l256;
+   fi
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l255;
+   fi
+   assume(T);
+   assume(T);
+   if (*) then
+      goto l254;
+   fi
+   assume(T);
+   assume(T);
+   assume(T);
+   assume(T);
+   l254: skip;
+   assume(T);
+   l255: skip;
+   goto l253;
+   l256: skip;
+   l257: skip;
+end
+
+

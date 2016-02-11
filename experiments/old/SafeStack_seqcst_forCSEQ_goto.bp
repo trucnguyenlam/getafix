@@ -1,0 +1,1233 @@
+decl atomic,
+    // For global variables
+    stack_head_0,
+    stack_head_1,
+    stack_head_2,
+
+    stack_count_0,
+    stack_count_1,
+    stack_count_2,
+
+    stack_value0_0,
+    stack_value0_1,
+    stack_value0_2,
+
+    stack_value1_0,
+    stack_value1_1,
+    stack_value1_2,
+
+    stack_value2_0,
+    stack_value2_1,
+    stack_value2_2,
+
+    stack_next0_0,
+    stack_next0_1,
+    stack_next0_2,
+
+    stack_next1_0,
+    stack_next1_1,
+    stack_next1_2,
+
+    stack_next2_0,
+    stack_next2_1,
+    stack_next2_2
+;
+
+void init ()
+begin
+decl at;
+    stack_count_0, stack_count_1, stack_count_2 := F, T, T;   // stack_count = 3
+    stack_head_0, stack_head_1, stack_head_2 := F, F, F;    // stack_head = 0
+    stack_next0_0, stack_next0_1, stack_next0_2 := F, F, T;   // next0 = 1
+    stack_next1_0, stack_next1_1, stack_next1_2 := F, T, F;  // next1 = 2
+    stack_next2_0, stack_next2_1, stack_next2_2 := F, T, F;   // next2 = -1
+    endinit: skip;
+end
+
+void thread0 ()
+begin
+decl at;
+decl ifcond;
+decl elem_0, elem_1, elem_2;
+decl head1Pop_0, head1Pop_1, head1Pop_2;
+decl head2Pop_0, head2Pop_1, head2Pop_2;
+decl next1Pop_0, next1Pop_1, next1Pop_2;
+decl head1Push_0, head1Push_1, head1Push_2;
+
+    // for (i := 0; i < 2; i++)
+    // First loop of thread
+        while1: skip;     // for (;;)
+            // Inline Pop function
+            whilePop1: skip;
+            if (!(!stack_count_0 & stack_count_1)) then   // if (__VERIFIER_atomic_load(&stack.count) > 1)
+                goto whilePopEnd1;
+            fi
+                // Enter while loop of Pop
+                // int head1 := __VERIFIER_atomic_load(&stack.head);
+                atomic, at := T, T;
+                head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
+                atomic, at := F, F;
+                atomic, at := T, T;
+                // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
+                if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
+                    next1Pop_0, next1Pop_1, next1Pop_2 := stack_next0_0, stack_next0_1, stack_next0_2;
+                    stack_next0_0, stack_next0_1, stack_next0_2 := T, T, T;   // stack_next := -1
+                else
+                    if (!head1Pop_0 & !head1Pop_1 & head1Pop_2) then  // if head1 :=:= 1
+                        next1Pop_0, next1Pop_1, next1Pop_2 := stack_next1_0, stack_next1_1, stack_next1_2;
+                        stack_next1_0, stack_next1_1, stack_next1_2 := T, T, T;
+                    else
+                        if (!head1Pop_0 & head1Pop_1 & !head1Pop_2) then   // if head1 :=:= 2
+                            next1Pop_0, next1Pop_1, next1Pop_2 := stack_next2_0, stack_next2_1, stack_next2_2;
+                            stack_next2_0, stack_next2_1, stack_next2_2 := T, T, T;
+                        else
+                            // prevent bad things happen
+                            assume(F);
+                        fi
+                    fi
+                fi
+                atomic, at := F, F;
+
+                if (!next1Pop_0) then    // if (next1 >:= 0)
+                    head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
+                    atomic, at := T, T;
+                    // if (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head2, next1))
+                    if ((stack_head_0 = head2Pop_0) & (stack_head_1 = head2Pop_1) & (stack_head_2 = head2Pop_2)) then
+                        stack_head_0, stack_head_1, stack_head_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                        ifcond := T;
+                    else
+                        head2Pop_0, head2Pop_1, head2Pop_2 := stack_head_0, stack_head_1, stack_head_2;
+                        ifcond := F;
+                    fi
+                    atomic, at := F, F;
+                    if (ifcond) then
+                        //  __VERIFIER_atomic_fetch_sub(&stack.count, 1);
+                        atomic, at := T, T;
+                        if (!stack_count_0 & stack_count_1 & stack_count_2) then    // stack_count = 3
+                            stack_count_0, stack_count_1, stack_count_2 := F, T, F;
+                        else
+                            if (!stack_count_0 & stack_count_1 & !stack_count_2) then   // stack_count = 2
+                                stack_count_0, stack_count_1, stack_count_2 := F, F, T;
+                            else
+                                if (!stack_count_0 & !stack_count_1 & stack_count_2) then   // stack_count = 1
+                                    stack_count_0, stack_count_1, stack_count_2 := F, F, F;
+                                else
+                                    assume(F);
+                                fi
+                            fi
+                        fi
+                        atomic, at := F, F;
+                        elem_0, elem_1, elem_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // return head1;
+                        goto EndPop1;
+                    else
+                        // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
+                        atomic, at := T, T;
+                        if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then       // if head1 :=:= 0
+                            stack_next0_0, stack_next0_1, stack_next0_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                        else
+                            if (!head1Pop_0 & !head1Pop_1 & head1Pop_2) then   // head1 :=:= 1
+                                stack_next1_0, stack_next1_1, stack_next1_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                            else
+                                if (!head1Pop_0 & head1Pop_1 & !head1Pop_2) then    // head1 :=:= 2
+                                    stack_next2_0, stack_next2_1, stack_next2_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                                else
+                                    assume(F);
+                                fi
+                            fi
+                        fi
+                        atomic, at := F, F;
+                    fi
+                fi
+                goto whilePop1;
+            // End while loop of Pop
+            whilePopEnd1: elem_0, elem_1, elem_2 := T, T, T;      // Return -1
+            goto EndPop1;
+        EndPop1: skip;   // elem := Pop();
+
+        if (!elem_0) then    // if elem >:= 0
+            goto endwhile1;    // break while
+        else
+            goto while1;
+        fi
+    endwhile1: skip;
+
+    atomic, at := T, T;
+    // stack.array[elem].Value := 0;
+    if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
+        stack_value0_0, stack_value0_1, stack_value0_2 := F, F, F;   // value := 0
+    else
+        if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
+            stack_value1_0, stack_value1_1, stack_value1_2 := F, F, F;
+        else
+            if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
+                stack_value2_0, stack_value2_1, stack_value2_2 := F, F, F;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+    atomic, at := T, T;
+    // assert(stack.array[elem].Value :=:= 0);
+    if (!elem_0 & !elem_1 & !elem_2) then
+        if (!(!stack_value0_0 & !stack_value0_1 & !stack_value0_2)) then
+            SLIC_ERROR: skip;
+        fi
+    else
+        if (!elem_0 & !elem_1 & elem_2) then
+            if (!(!stack_value1_0 & !stack_value1_1 & !stack_value1_2)) then
+                SLIC_ERROR: skip;
+            fi
+        else
+            if (!elem_0 & elem_1 & !elem_2) then
+                if(!(!stack_value2_0 & !stack_value2_1 & !stack_value2_2)) then
+                    SLIC_ERROR: skip;
+                fi
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+
+    // Push(elem);
+    atomic, at := T, T;
+    // int head1 := __VERIFIER_atomic_load(&stack.head);
+    head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
+    atomic, at := F, F;
+    dowhilePush1: skip;
+    atomic, at := T, T;
+        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
+            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
+        else
+            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
+                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
+            else
+                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
+                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
+                else
+                    assume(F);
+                fi
+            fi
+        fi
+    atomic, at := F, F;
+    atomic, at := T, T;
+    // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
+    if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
+        stack_head_0, stack_head_1, stack_head_2 := elem_0, elem_1, elem_2;
+        ifcond := T;
+    else
+        head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
+        ifcond := F;
+    fi
+    atomic, at := F, F;
+
+    if (!ifcond) then
+        goto dowhilePush1;
+    else
+        goto dowhilePushEnd1;
+    fi
+
+    dowhilePushEnd1: skip;
+    // __VERIFIER_atomic_fetch_add(&stack.count, 1);
+    atomic, at := T, T;
+    if (!stack_count_0 & !stack_count_1 & !stack_count_2) then    // stack_count = 0
+        stack_count_0, stack_count_1, stack_count_2 := F, F, T;
+    else
+        if (!stack_count_0 & !stack_count_1 & stack_count_2) then  // stack_count = 1
+            stack_count_0, stack_count_1, stack_count_2 := F, T, F;
+        else
+            if (!stack_count_0 & stack_count_1 & !stack_count_2) then   // stack_count = 2
+                stack_count_0, stack_count_1, stack_count_2 := F, T, T;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+
+    // Second loop TODO
+        while2: skip;     // for (;;)
+            // Inline Pop function
+            whilePop2: skip;
+            if (!(!stack_count_0 & stack_count_1)) then   // if (__VERIFIER_atomic_load(&stack.count) > 1)
+                goto whilePopEnd2;
+            fi
+                // Enter while loop of Pop
+                // int head1 := __VERIFIER_atomic_load(&stack.head);
+                atomic, at := T, T;
+                head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
+                atomic, at := F, F;
+                atomic, at := T, T;
+                // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
+                if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
+                    next1Pop_0, next1Pop_1, next1Pop_2 := stack_next0_0, stack_next0_1, stack_next0_2;
+                    stack_next0_0, stack_next0_1, stack_next0_2 := T, T, T;   // stack_next := -1
+                else
+                    if (!head1Pop_0 & !head1Pop_1 & head1Pop_2) then  // if head1 :=:= 1
+                        next1Pop_0, next1Pop_1, next1Pop_2 := stack_next1_0, stack_next1_1, stack_next1_2;
+                        stack_next1_0, stack_next1_1, stack_next1_2 := T, T, T;
+                    else
+                        if (!head1Pop_0 & head1Pop_1 & !head1Pop_2) then   // if head1 :=:= 2
+                            next1Pop_0, next1Pop_1, next1Pop_2 := stack_next2_0, stack_next2_1, stack_next2_2;
+                            stack_next2_0, stack_next2_1, stack_next2_2 := T, T, T;
+                        else
+                            // prevent bad things happen
+                            assume(F);
+                        fi
+                    fi
+                fi
+                atomic, at := F, F;
+
+                if (!next1Pop_0) then    // if (next1 >:= 0)
+                    head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
+                    atomic, at := T, T;
+                    // if (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head2, next1))
+                    if ((stack_head_0 = head2Pop_0) & (stack_head_1 = head2Pop_1) & (stack_head_2 = head2Pop_2)) then
+                        stack_head_0, stack_head_1, stack_head_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                        ifcond := T;
+                    else
+                        head2Pop_0, head2Pop_1, head2Pop_2 := stack_head_0, stack_head_1, stack_head_2;
+                        ifcond := F;
+                    fi
+                    atomic, at := F, F;
+                    if (ifcond) then
+                        //  __VERIFIER_atomic_fetch_sub(&stack.count, 1);
+                        atomic, at := T, T;
+                        if (!stack_count_0 & stack_count_1 & stack_count_2) then    // stack_count = 3
+                            stack_count_0, stack_count_1, stack_count_2 := F, T, F;
+                        else
+                            if (!stack_count_0 & stack_count_1 & !stack_count_2) then   // stack_count = 2
+                                stack_count_0, stack_count_1, stack_count_2 := F, F, T;
+                            else
+                                if (!stack_count_0 & !stack_count_1 & stack_count_2) then   // stack_count = 1
+                                    stack_count_0, stack_count_1, stack_count_2 := F, F, F;
+                                else
+                                    assume(F);
+                                fi
+                            fi
+                        fi
+                        atomic, at := F, F;
+                        elem_0, elem_1, elem_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // return head1;
+                        goto EndPop2;
+                    else
+                        // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
+                        atomic, at := T, T;
+                        if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then       // if head1 :=:= 0
+                            stack_next0_0, stack_next0_1, stack_next0_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                        else
+                            if (!head1Pop_0 & !head1Pop_1 & head1Pop_2) then   // head1 :=:= 1
+                                stack_next1_0, stack_next1_1, stack_next1_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                            else
+                                if (!head1Pop_0 & head1Pop_1 & !head1Pop_2) then    // head1 :=:= 2
+                                    stack_next2_0, stack_next2_1, stack_next2_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                                else
+                                    assume(F);
+                                fi
+                            fi
+                        fi
+                        atomic, at := F, F;
+                    fi
+                fi
+                goto whilePop2;
+            // End while loop of Pop
+            whilePopEnd2: elem_0, elem_1, elem_2 := T, T, T;      // Return -1
+            goto EndPop2;
+        EndPop2: skip;   // elem := Pop();
+
+        if (!elem_0) then    // if elem >:= 0
+            goto endwhile2;    // break while
+        else
+            goto while2;
+        fi
+    endwhile2: skip;
+    atomic, at := T, T;
+    // stack.array[elem].Value := 0;
+    if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
+        stack_value0_0, stack_value0_1, stack_value0_2 := F, F, F;   // value := 0
+    else
+        if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
+            stack_value1_0, stack_value1_1, stack_value1_2 := F, F, F;
+        else
+            if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
+                stack_value2_0, stack_value2_1, stack_value2_2 := F, F, F;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+    atomic, at := T, T;
+    // assert(stack.array[elem].Value :=:= 0);
+    if (!elem_0 & !elem_1 & !elem_2) then
+        if (!(!stack_value0_0 & !stack_value0_1 & !stack_value0_2)) then
+            SLIC_ERROR: skip;
+        fi
+    else
+        if (!elem_0 & !elem_1 & elem_2) then
+            if (!(!stack_value1_0 & !stack_value1_1 & !stack_value1_2)) then
+                SLIC_ERROR: skip;
+            fi
+        else
+            if (!elem_0 & elem_1 & !elem_2) then
+                if(!(!stack_value2_0 & !stack_value2_1 & !stack_value2_2)) then
+                    SLIC_ERROR: skip;
+                fi
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+
+    // Push(elem);
+    atomic, at := T, T;
+    // int head1 := __VERIFIER_atomic_load(&stack.head);
+    head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
+    atomic, at := F, F;
+    dowhilePush2: skip;
+    atomic, at := T, T;
+        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
+            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
+        else
+            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
+                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
+            else
+                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
+                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
+                else
+                    assume(F);
+                fi
+            fi
+        fi
+    atomic, at := F, F;
+    atomic, at := T, T;
+    // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
+    if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
+        stack_head_0, stack_head_1, stack_head_2 := elem_0, elem_1, elem_2;
+        ifcond := T;
+    else
+        head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
+        ifcond := F;
+    fi
+    atomic, at := F, F;
+
+    if (!ifcond) then
+        goto dowhilePush2;
+    else
+        goto dowhilePushEnd2;
+    fi
+
+    dowhilePushEnd2: skip;
+    // __VERIFIER_atomic_fetch_add(&stack.count, 1);
+    atomic, at := T, T;
+    if (!stack_count_0 & !stack_count_1 & !stack_count_2) then    // stack_count = 0
+        stack_count_0, stack_count_1, stack_count_2 := F, F, T;
+    else
+        if (!stack_count_0 & !stack_count_1 & stack_count_2) then  // stack_count = 1
+            stack_count_0, stack_count_1, stack_count_2 := F, T, F;
+        else
+            if (!stack_count_0 & stack_count_1 & !stack_count_2) then   // stack_count = 2
+                stack_count_0, stack_count_1, stack_count_2 := F, T, T;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+end
+
+void thread1 ()
+begin
+decl at;
+decl ifcond;
+decl elem_0, elem_1, elem_2;
+decl head1Pop_0, head1Pop_1, head1Pop_2;
+decl head2Pop_0, head2Pop_1, head2Pop_2;
+decl next1Pop_0, next1Pop_1, next1Pop_2;
+decl head1Push_0, head1Push_1, head1Push_2;
+
+    // for (i := 0; i < 2; i++)
+    // First loop of thread
+        while1: skip;     // for (;;)
+            // Inline Pop function
+            whilePop1: skip;
+            if (!(!stack_count_0 & stack_count_1)) then   // if (__VERIFIER_atomic_load(&stack.count) > 1)
+                goto whilePopEnd1;
+            fi
+                // Enter while loop of Pop
+                // int head1 := __VERIFIER_atomic_load(&stack.head);
+                atomic, at := T, T;
+                head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
+                atomic, at := F, F;
+                atomic, at := T, T;
+                // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
+                if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
+                    next1Pop_0, next1Pop_1, next1Pop_2 := stack_next0_0, stack_next0_1, stack_next0_2;
+                    stack_next0_0, stack_next0_1, stack_next0_2 := T, T, T;   // stack_next := -1
+                else
+                    if (!head1Pop_0 & !head1Pop_1 & head1Pop_2) then  // if head1 :=:= 1
+                        next1Pop_0, next1Pop_1, next1Pop_2 := stack_next1_0, stack_next1_1, stack_next1_2;
+                        stack_next1_0, stack_next1_1, stack_next1_2 := T, T, T;
+                    else
+                        if (!head1Pop_0 & head1Pop_1 & !head1Pop_2) then   // if head1 :=:= 2
+                            next1Pop_0, next1Pop_1, next1Pop_2 := stack_next2_0, stack_next2_1, stack_next2_2;
+                            stack_next2_0, stack_next2_1, stack_next2_2 := T, T, T;
+                        else
+                            // prevent bad things happen
+                            assume(F);
+                        fi
+                    fi
+                fi
+                atomic, at := F, F;
+
+                if (!next1Pop_0) then    // if (next1 >:= 0)
+                    head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
+                    atomic, at := T, T;
+                    // if (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head2, next1))
+                    if ((stack_head_0 = head2Pop_0) & (stack_head_1 = head2Pop_1) & (stack_head_2 = head2Pop_2)) then
+                        stack_head_0, stack_head_1, stack_head_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                        ifcond := T;
+                    else
+                        head2Pop_0, head2Pop_1, head2Pop_2 := stack_head_0, stack_head_1, stack_head_2;
+                        ifcond := F;
+                    fi
+                    atomic, at := F, F;
+                    if (ifcond) then
+                        //  __VERIFIER_atomic_fetch_sub(&stack.count, 1);
+                        atomic, at := T, T;
+                        if (!stack_count_0 & stack_count_1 & stack_count_2) then    // stack_count = 3
+                            stack_count_0, stack_count_1, stack_count_2 := F, T, F;
+                        else
+                            if (!stack_count_0 & stack_count_1 & !stack_count_2) then   // stack_count = 2
+                                stack_count_0, stack_count_1, stack_count_2 := F, F, T;
+                            else
+                                if (!stack_count_0 & !stack_count_1 & stack_count_2) then   // stack_count = 1
+                                    stack_count_0, stack_count_1, stack_count_2 := F, F, F;
+                                else
+                                    assume(F);
+                                fi
+                            fi
+                        fi
+                        atomic, at := F, F;
+                        elem_0, elem_1, elem_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // return head1;
+                        goto EndPop1;
+                    else
+                        // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
+                        atomic, at := T, T;
+                        if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then       // if head1 :=:= 0
+                            stack_next0_0, stack_next0_1, stack_next0_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                        else
+                            if (!head1Pop_0 & !head1Pop_1 & head1Pop_2) then   // head1 :=:= 1
+                                stack_next1_0, stack_next1_1, stack_next1_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                            else
+                                if (!head1Pop_0 & head1Pop_1 & !head1Pop_2) then    // head1 :=:= 2
+                                    stack_next2_0, stack_next2_1, stack_next2_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                                else
+                                    assume(F);
+                                fi
+                            fi
+                        fi
+                        atomic, at := F, F;
+                    fi
+                fi
+                goto whilePop1;
+            // End while loop of Pop
+            whilePopEnd1: elem_0, elem_1, elem_2 := T, T, T;      // Return -1
+            goto EndPop1;
+        EndPop1: skip;   // elem := Pop();
+
+        if (!elem_0) then    // if elem >:= 0
+            goto endwhile1;    // break while
+        else
+            goto while1;
+        fi
+    endwhile1: skip;
+    atomic, at := T, T;
+    // stack.array[elem].Value := 0;
+    if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
+        stack_value0_0, stack_value0_1, stack_value0_2 := F, F, T;   // value := 1
+    else
+        if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
+            stack_value1_0, stack_value1_1, stack_value1_2 := F, F, T;
+        else
+            if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
+                stack_value2_0, stack_value2_1, stack_value2_2 := F, F, T;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+    atomic, at := T, T;
+    // assert(stack.array[elem].Value == 1);
+    if (!elem_0 & !elem_1 & !elem_2) then
+        if (!(!stack_value0_0 & !stack_value0_1 & stack_value0_2)) then
+            SLIC_ERROR: skip;
+        fi
+    else
+        if (!elem_0 & !elem_1 & elem_2) then
+            if (!(!stack_value1_0 & !stack_value1_1 & stack_value1_2)) then
+                SLIC_ERROR: skip;
+            fi
+        else
+            if (!elem_0 & elem_1 & !elem_2) then
+                if(!(!stack_value2_0 & !stack_value2_1 & stack_value2_2)) then
+                    SLIC_ERROR: skip;
+                fi
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+
+    // Push(elem);
+    atomic, at := T, T;
+    // int head1 := __VERIFIER_atomic_load(&stack.head);
+    head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
+    atomic, at := F, F;
+    dowhilePush1: skip;
+    atomic, at := T, T;
+        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
+            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
+        else
+            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
+                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
+            else
+                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
+                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
+                else
+                    assume(F);
+                fi
+            fi
+        fi
+    atomic, at := F, F;
+    atomic, at := T, T;
+    // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
+    if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
+        stack_head_0, stack_head_1, stack_head_2 := elem_0, elem_1, elem_2;
+        ifcond := T;
+    else
+        head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
+        ifcond := F;
+    fi
+    atomic, at := F, F;
+
+    if (!ifcond) then
+        goto dowhilePush1;
+    else
+        goto dowhilePushEnd1;
+    fi
+
+    dowhilePushEnd1: skip;
+    // __VERIFIER_atomic_fetch_add(&stack.count, 1);
+    atomic, at := T, T;
+    if (!stack_count_0 & !stack_count_1 & !stack_count_2) then    // stack_count = 0
+        stack_count_0, stack_count_1, stack_count_2 := F, F, T;
+    else
+        if (!stack_count_0 & !stack_count_1 & stack_count_2) then  // stack_count = 1
+            stack_count_0, stack_count_1, stack_count_2 := F, T, F;
+        else
+            if (!stack_count_0 & stack_count_1 & !stack_count_2) then   // stack_count = 2
+                stack_count_0, stack_count_1, stack_count_2 := F, T, T;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+
+    // Second loop TODO
+        while2: skip;     // for (;;)
+            // Inline Pop function
+            whilePop2: skip;
+            if (!(!stack_count_0 & stack_count_1)) then   // if (__VERIFIER_atomic_load(&stack.count) > 1)
+                goto whilePopEnd2;
+            fi
+                // Enter while loop of Pop
+                // int head1 := __VERIFIER_atomic_load(&stack.head);
+                atomic, at := T, T;
+                head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
+                atomic, at := F, F;
+                atomic, at := T, T;
+                // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
+                if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
+                    next1Pop_0, next1Pop_1, next1Pop_2 := stack_next0_0, stack_next0_1, stack_next0_2;
+                    stack_next0_0, stack_next0_1, stack_next0_2 := T, T, T;   // stack_next := -1
+                else
+                    if (!head1Pop_0 & !head1Pop_1 & head1Pop_2) then  // if head1 :=:= 1
+                        next1Pop_0, next1Pop_1, next1Pop_2 := stack_next1_0, stack_next1_1, stack_next1_2;
+                        stack_next1_0, stack_next1_1, stack_next1_2 := T, T, T;
+                    else
+                        if (!head1Pop_0 & head1Pop_1 & !head1Pop_2) then   // if head1 :=:= 2
+                            next1Pop_0, next1Pop_1, next1Pop_2 := stack_next2_0, stack_next2_1, stack_next2_2;
+                            stack_next2_0, stack_next2_1, stack_next2_2 := T, T, T;
+                        else
+                            // prevent bad things happen
+                            assume(F);
+                        fi
+                    fi
+                fi
+                atomic, at := F, F;
+
+                if (!next1Pop_0) then    // if (next1 >:= 0)
+                    head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
+                    atomic, at := T, T;
+                    // if (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head2, next1))
+                    if ((stack_head_0 = head2Pop_0) & (stack_head_1 = head2Pop_1) & (stack_head_2 = head2Pop_2)) then
+                        stack_head_0, stack_head_1, stack_head_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                        ifcond := T;
+                    else
+                        head2Pop_0, head2Pop_1, head2Pop_2 := stack_head_0, stack_head_1, stack_head_2;
+                        ifcond := F;
+                    fi
+                    atomic, at := F, F;
+                    if (ifcond) then
+                        //  __VERIFIER_atomic_fetch_sub(&stack.count, 1);
+                        atomic, at := T, T;
+                        if (!stack_count_0 & stack_count_1 & stack_count_2) then    // stack_count = 3
+                            stack_count_0, stack_count_1, stack_count_2 := F, T, F;
+                        else
+                            if (!stack_count_0 & stack_count_1 & !stack_count_2) then   // stack_count = 2
+                                stack_count_0, stack_count_1, stack_count_2 := F, F, T;
+                            else
+                                if (!stack_count_0 & !stack_count_1 & stack_count_2) then   // stack_count = 1
+                                    stack_count_0, stack_count_1, stack_count_2 := F, F, F;
+                                else
+                                    assume(F);
+                                fi
+                            fi
+                        fi
+                        atomic, at := F, F;
+                        elem_0, elem_1, elem_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // return head1;
+                        goto EndPop2;
+                    else
+                        // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
+                        atomic, at := T, T;
+                        if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then       // if head1 :=:= 0
+                            stack_next0_0, stack_next0_1, stack_next0_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                        else
+                            if (!head1Pop_0 & !head1Pop_1 & head1Pop_2) then   // head1 :=:= 1
+                                stack_next1_0, stack_next1_1, stack_next1_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                            else
+                                if (!head1Pop_0 & head1Pop_1 & !head1Pop_2) then    // head1 :=:= 2
+                                    stack_next2_0, stack_next2_1, stack_next2_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                                else
+                                    assume(F);
+                                fi
+                            fi
+                        fi
+                        atomic, at := F, F;
+                    fi
+                fi
+                goto whilePop2;
+            // End while loop of Pop
+            whilePopEnd2: elem_0, elem_1, elem_2 := T, T, T;      // Return -1
+            goto EndPop2;
+        EndPop2: skip;   // elem := Pop();
+
+        if (!elem_0) then    // if elem >:= 0
+            goto endwhile2;    // break while
+        else
+            goto while2;
+        fi
+    endwhile2: skip;
+    atomic, at := T, T;
+    // stack.array[elem].Value := 0;
+    if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
+        stack_value0_0, stack_value0_1, stack_value0_2 := F, F, T;   // value := 1
+    else
+        if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
+            stack_value1_0, stack_value1_1, stack_value1_2 := F, F, T;
+        else
+            if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
+                stack_value2_0, stack_value2_1, stack_value2_2 := F, F, T;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+    atomic, at := T, T;
+    // assert(stack.array[elem].Value :=:= 0);
+    if (!elem_0 & !elem_1 & !elem_2) then
+        if (!(!stack_value0_0 & !stack_value0_1 & stack_value0_2)) then
+            SLIC_ERROR: skip;
+        fi
+    else
+        if (!elem_0 & !elem_1 & elem_2) then
+            if (!(!stack_value1_0 & !stack_value1_1 & stack_value1_2)) then
+                SLIC_ERROR: skip;
+            fi
+        else
+            if (!elem_0 & elem_1 & !elem_2) then
+                if(!(!stack_value2_0 & !stack_value2_1 & stack_value2_2)) then
+                    SLIC_ERROR: skip;
+                fi
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+
+    // Push(elem);
+    atomic, at := T, T;
+    // int head1 := __VERIFIER_atomic_load(&stack.head);
+    head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
+    atomic, at := F, F;
+    dowhilePush2: skip;
+    atomic, at := T, T;
+        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
+            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
+        else
+            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
+                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
+            else
+                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
+                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
+                else
+                    assume(F);
+                fi
+            fi
+        fi
+    atomic, at := F, F;
+    atomic, at := T, T;
+    // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
+    if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
+        stack_head_0, stack_head_1, stack_head_2 := elem_0, elem_1, elem_2;
+        ifcond := T;
+    else
+        head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
+        ifcond := F;
+    fi
+    atomic, at := F, F;
+
+    if (!ifcond) then
+        goto dowhilePush2;
+    else
+        goto dowhilePushEnd2;
+    fi
+
+    dowhilePushEnd2: skip;
+    // __VERIFIER_atomic_fetch_add(&stack.count, 1);
+    atomic, at := T, T;
+    if (!stack_count_0 & !stack_count_1 & !stack_count_2) then    // stack_count = 0
+        stack_count_0, stack_count_1, stack_count_2 := F, F, T;
+    else
+        if (!stack_count_0 & !stack_count_1 & stack_count_2) then  // stack_count = 1
+            stack_count_0, stack_count_1, stack_count_2 := F, T, F;
+        else
+            if (!stack_count_0 & stack_count_1 & !stack_count_2) then   // stack_count = 2
+                stack_count_0, stack_count_1, stack_count_2 := F, T, T;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+end
+
+
+void thread2 ()
+begin
+decl at;
+decl ifcond;
+decl elem_0, elem_1, elem_2;
+decl head1Pop_0, head1Pop_1, head1Pop_2;
+decl head2Pop_0, head2Pop_1, head2Pop_2;
+decl next1Pop_0, next1Pop_1, next1Pop_2;
+decl head1Push_0, head1Push_1, head1Push_2;
+
+    // for (i := 0; i < 2; i++)
+    // First loop of thread
+        while1: skip;     // for (;;)
+            // Inline Pop function
+            whilePop1: skip;
+            if (!(!stack_count_0 & stack_count_1)) then   // if (__VERIFIER_atomic_load(&stack.count) > 1)
+                goto whilePopEnd1;
+            fi
+                // Enter while loop of Pop
+                // int head1 := __VERIFIER_atomic_load(&stack.head);
+                atomic, at := T, T;
+                head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
+                atomic, at := F, F;
+                atomic, at := T, T;
+                // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
+                if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
+                    next1Pop_0, next1Pop_1, next1Pop_2 := stack_next0_0, stack_next0_1, stack_next0_2;
+                    stack_next0_0, stack_next0_1, stack_next0_2 := T, T, T;   // stack_next := -1
+                else
+                    if (!head1Pop_0 & !head1Pop_1 & head1Pop_2) then  // if head1 :=:= 1
+                        next1Pop_0, next1Pop_1, next1Pop_2 := stack_next1_0, stack_next1_1, stack_next1_2;
+                        stack_next1_0, stack_next1_1, stack_next1_2 := T, T, T;
+                    else
+                        if (!head1Pop_0 & head1Pop_1 & !head1Pop_2) then   // if head1 :=:= 2
+                            next1Pop_0, next1Pop_1, next1Pop_2 := stack_next2_0, stack_next2_1, stack_next2_2;
+                            stack_next2_0, stack_next2_1, stack_next2_2 := T, T, T;
+                        else
+                            // prevent bad things happen
+                            assume(F);
+                        fi
+                    fi
+                fi
+                atomic, at := F, F;
+
+                if (!next1Pop_0) then    // if (next1 >:= 0)
+                    head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
+                    atomic, at := T, T;
+                    // if (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head2, next1))
+                    if ((stack_head_0 = head2Pop_0) & (stack_head_1 = head2Pop_1) & (stack_head_2 = head2Pop_2)) then
+                        stack_head_0, stack_head_1, stack_head_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                        ifcond := T;
+                    else
+                        head2Pop_0, head2Pop_1, head2Pop_2 := stack_head_0, stack_head_1, stack_head_2;
+                        ifcond := F;
+                    fi
+                    atomic, at := F, F;
+                    if (ifcond) then
+                        //  __VERIFIER_atomic_fetch_sub(&stack.count, 1);
+                        atomic, at := T, T;
+                        if (!stack_count_0 & stack_count_1 & stack_count_2) then    // stack_count = 3
+                            stack_count_0, stack_count_1, stack_count_2 := F, T, F;
+                        else
+                            if (!stack_count_0 & stack_count_1 & !stack_count_2) then   // stack_count = 2
+                                stack_count_0, stack_count_1, stack_count_2 := F, F, T;
+                            else
+                                if (!stack_count_0 & !stack_count_1 & stack_count_2) then   // stack_count = 1
+                                    stack_count_0, stack_count_1, stack_count_2 := F, F, F;
+                                else
+                                    assume(F);
+                                fi
+                            fi
+                        fi
+                        atomic, at := F, F;
+                        elem_0, elem_1, elem_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // return head1;
+                        goto EndPop1;
+                    else
+                        // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
+                        atomic, at := T, T;
+                        if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then       // if head1 :=:= 0
+                            stack_next0_0, stack_next0_1, stack_next0_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                        else
+                            if (!head1Pop_0 & !head1Pop_1 & head1Pop_2) then   // head1 :=:= 1
+                                stack_next1_0, stack_next1_1, stack_next1_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                            else
+                                if (!head1Pop_0 & head1Pop_1 & !head1Pop_2) then    // head1 :=:= 2
+                                    stack_next2_0, stack_next2_1, stack_next2_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                                else
+                                    assume(F);
+                                fi
+                            fi
+                        fi
+                        atomic, at := F, F;
+                    fi
+                fi
+                goto whilePop1;
+            // End while loop of Pop
+            whilePopEnd1: elem_0, elem_1, elem_2 := T, T, T;      // Return -1
+            goto EndPop1;
+        EndPop1: skip;   // elem := Pop();
+
+        if (!elem_0) then    // if elem >:= 0
+            goto endwhile1;    // break while
+        else
+            goto while1;
+        fi
+    endwhile1: skip;
+    atomic, at := T, T;
+    // stack.array[elem].Value := 0;
+    if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
+        stack_value0_0, stack_value0_1, stack_value0_2 := F, T, F;   // value := 2
+    else
+        if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
+            stack_value1_0, stack_value1_1, stack_value1_2 := F, T, F;
+        else
+            if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
+                stack_value2_0, stack_value2_1, stack_value2_2 := F, T, F;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+    atomic, at := T, T;
+    // assert(stack.array[elem].Value == 1);
+    if (!elem_0 & !elem_1 & !elem_2) then
+        if (!(!stack_value0_0 & stack_value0_1 & !stack_value0_2)) then
+            SLIC_ERROR: skip;
+        fi
+    else
+        if (!elem_0 & !elem_1 & elem_2) then
+            if (!(!stack_value1_0 & stack_value1_1 & !stack_value1_2)) then
+                SLIC_ERROR: skip;
+            fi
+        else
+            if (!elem_0 & elem_1 & !elem_2) then
+                if(!(!stack_value2_0 & stack_value2_1 & !stack_value2_2)) then
+                    SLIC_ERROR: skip;
+                fi
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+
+    // Push(elem);
+    atomic, at := T, T;
+    // int head1 := __VERIFIER_atomic_load(&stack.head);
+    head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
+    atomic, at := F, F;
+    dowhilePush1: skip;
+    atomic, at := T, T;
+        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
+            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
+        else
+            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
+                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
+            else
+                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
+                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
+                else
+                    assume(F);
+                fi
+            fi
+        fi
+    atomic, at := F, F;
+    atomic, at := T, T;
+    // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
+    if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
+        stack_head_0, stack_head_1, stack_head_2 := elem_0, elem_1, elem_2;
+        ifcond := T;
+    else
+        head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
+        ifcond := F;
+    fi
+    atomic, at := F, F;
+
+    if (!ifcond) then
+        goto dowhilePush1;
+    else
+        goto dowhilePushEnd1;
+    fi
+
+    dowhilePushEnd1: skip;
+    // __VERIFIER_atomic_fetch_add(&stack.count, 1);
+    atomic, at := T, T;
+    if (!stack_count_0 & !stack_count_1 & !stack_count_2) then    // stack_count = 0
+        stack_count_0, stack_count_1, stack_count_2 := F, F, T;
+    else
+        if (!stack_count_0 & !stack_count_1 & stack_count_2) then  // stack_count = 1
+            stack_count_0, stack_count_1, stack_count_2 := F, T, F;
+        else
+            if (!stack_count_0 & stack_count_1 & !stack_count_2) then   // stack_count = 2
+                stack_count_0, stack_count_1, stack_count_2 := F, T, T;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+
+    // Second loop TODO
+        while2: skip;     // for (;;)
+            // Inline Pop function
+            whilePop2: skip;
+            if (!(!stack_count_0 & stack_count_1)) then   // if (__VERIFIER_atomic_load(&stack.count) > 1)
+                goto whilePopEnd2;
+            fi
+                // Enter while loop of Pop
+                // int head1 := __VERIFIER_atomic_load(&stack.head);
+                atomic, at := T, T;
+                head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
+                atomic, at := F, F;
+                atomic, at := T, T;
+                // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
+                if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
+                    next1Pop_0, next1Pop_1, next1Pop_2 := stack_next0_0, stack_next0_1, stack_next0_2;
+                    stack_next0_0, stack_next0_1, stack_next0_2 := T, T, T;   // stack_next := -1
+                else
+                    if (!head1Pop_0 & !head1Pop_1 & head1Pop_2) then  // if head1 :=:= 1
+                        next1Pop_0, next1Pop_1, next1Pop_2 := stack_next1_0, stack_next1_1, stack_next1_2;
+                        stack_next1_0, stack_next1_1, stack_next1_2 := T, T, T;
+                    else
+                        if (!head1Pop_0 & head1Pop_1 & !head1Pop_2) then   // if head1 :=:= 2
+                            next1Pop_0, next1Pop_1, next1Pop_2 := stack_next2_0, stack_next2_1, stack_next2_2;
+                            stack_next2_0, stack_next2_1, stack_next2_2 := T, T, T;
+                        else
+                            // prevent bad things happen
+                            assume(F);
+                        fi
+                    fi
+                fi
+                atomic, at := F, F;
+
+                if (!next1Pop_0) then    // if (next1 >:= 0)
+                    head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
+                    atomic, at := T, T;
+                    // if (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head2, next1))
+                    if ((stack_head_0 = head2Pop_0) & (stack_head_1 = head2Pop_1) & (stack_head_2 = head2Pop_2)) then
+                        stack_head_0, stack_head_1, stack_head_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                        ifcond := T;
+                    else
+                        head2Pop_0, head2Pop_1, head2Pop_2 := stack_head_0, stack_head_1, stack_head_2;
+                        ifcond := F;
+                    fi
+                    atomic, at := F, F;
+                    if (ifcond) then
+                        //  __VERIFIER_atomic_fetch_sub(&stack.count, 1);
+                        atomic, at := T, T;
+                        if (!stack_count_0 & stack_count_1 & stack_count_2) then    // stack_count = 3
+                            stack_count_0, stack_count_1, stack_count_2 := F, T, F;
+                        else
+                            if (!stack_count_0 & stack_count_1 & !stack_count_2) then   // stack_count = 2
+                                stack_count_0, stack_count_1, stack_count_2 := F, F, T;
+                            else
+                                if (!stack_count_0 & !stack_count_1 & stack_count_2) then   // stack_count = 1
+                                    stack_count_0, stack_count_1, stack_count_2 := F, F, F;
+                                else
+                                    assume(F);
+                                fi
+                            fi
+                        fi
+                        atomic, at := F, F;
+                        elem_0, elem_1, elem_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // return head1;
+                        goto EndPop2;
+                    else
+                        // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
+                        atomic, at := T, T;
+                        if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then       // if head1 :=:= 0
+                            stack_next0_0, stack_next0_1, stack_next0_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                        else
+                            if (!head1Pop_0 & !head1Pop_1 & head1Pop_2) then   // head1 :=:= 1
+                                stack_next1_0, stack_next1_1, stack_next1_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                            else
+                                if (!head1Pop_0 & head1Pop_1 & !head1Pop_2) then    // head1 :=:= 2
+                                    stack_next2_0, stack_next2_1, stack_next2_2 := next1Pop_0, next1Pop_1, next1Pop_2;
+                                else
+                                    assume(F);
+                                fi
+                            fi
+                        fi
+                        atomic, at := F, F;
+                    fi
+                fi
+                goto whilePop2;
+            // End while loop of Pop
+            whilePopEnd2: elem_0, elem_1, elem_2 := T, T, T;      // Return -1
+            goto EndPop2;
+        EndPop2: skip;   // elem := Pop();
+
+        if (!elem_0) then    // if elem >:= 0
+            goto endwhile2;    // break while
+        else
+            goto while2;
+        fi
+    endwhile2: skip;
+
+    atomic, at := T, T;
+    // stack.array[elem].Value := 0;
+    if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
+        stack_value0_0, stack_value0_1, stack_value0_2 := F, T, F;   // value := 2
+    else
+        if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
+            stack_value1_0, stack_value1_1, stack_value1_2 := F, T, F;
+        else
+            if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
+                stack_value2_0, stack_value2_1, stack_value2_2 := F, T, F;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+    atomic, at := T, T;
+    // assert(stack.array[elem].Value == 1);
+    if (!elem_0 & !elem_1 & !elem_2) then
+        if (!(!stack_value0_0 & stack_value0_1 & !stack_value0_2)) then
+            SLIC_ERROR: skip;
+        fi
+    else
+        if (!elem_0 & !elem_1 & elem_2) then
+            if (!(!stack_value1_0 & stack_value1_1 & !stack_value1_2)) then
+                SLIC_ERROR: skip;
+            fi
+        else
+            if (!elem_0 & elem_1 & !elem_2) then
+                if(!(!stack_value2_0 & stack_value2_1 & !stack_value2_2)) then
+                    SLIC_ERROR: skip;
+                fi
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+
+
+    // Push(elem);
+    atomic, at := T, T;
+    // int head1 := __VERIFIER_atomic_load(&stack.head);
+    head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
+    atomic, at := F, F;
+    dowhilePush2: skip;
+    atomic, at := T, T;
+        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
+            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
+        else
+            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
+                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
+            else
+                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
+                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
+                else
+                    assume(F);
+                fi
+            fi
+        fi
+    atomic, at := F, F;
+    atomic, at := T, T;
+    // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
+    if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
+        stack_head_0, stack_head_1, stack_head_2 := elem_0, elem_1, elem_2;
+        ifcond := T;
+    else
+        head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
+        ifcond := F;
+    fi
+    atomic, at := F, F;
+
+    if (!ifcond) then
+        goto dowhilePush2;
+    else
+        goto dowhilePushEnd2;
+    fi
+
+    dowhilePushEnd2: skip;
+    // __VERIFIER_atomic_fetch_add(&stack.count, 1);
+    atomic, at := T, T;
+    if (!stack_count_0 & !stack_count_1 & !stack_count_2) then    // stack_count = 0
+        stack_count_0, stack_count_1, stack_count_2 := F, F, T;
+    else
+        if (!stack_count_0 & !stack_count_1 & stack_count_2) then  // stack_count = 1
+            stack_count_0, stack_count_1, stack_count_2 := F, T, F;
+        else
+            if (!stack_count_0 & stack_count_1 & !stack_count_2) then   // stack_count = 2
+                stack_count_0, stack_count_1, stack_count_2 := F, T, T;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+end
+
+

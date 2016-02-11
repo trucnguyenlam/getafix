@@ -1,0 +1,52 @@
+decl
+atomic,  // v1
+    a,   // v2
+    b    // v3
+;
+
+
+void init ()  // cm = 2
+begin
+decl at;
+    at := F;    // pc0
+    atomic := F;  //pc1
+    a, b := F, F;  //pc2
+    // SLIC_ERROR: skip;
+    endinit: skip; //pc3
+                   //
+                   //pc6
+end
+
+void thread0 ()   // cm = 0
+begin
+decl at;
+    // a := a &b;  // pc0
+    at := F;  //pc1
+    atomic, at := T, T;  //pc2
+    a, b := T, F;  //pc3
+    a, b := F, T;  // pc4
+    atomic, at := F, F; //pc5
+    assume(T);
+end
+
+void thread1 ()   // cm=1
+begin
+decl at;
+    at := F;  // pc0
+    if (a & !b) then  //pc1
+        // goto SLIC_ERROR; //pc2
+        skip;
+    fi //
+
+    assume(F);
+    SLIC_ERROR: skip;
+    assume(T);  //pc6
+end
+
+void thread2 ()   // cm=1
+begin
+decl at;
+    skip;
+    assume(T);
+end
+

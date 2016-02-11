@@ -1,0 +1,145 @@
+decl
+    atomic,
+    v2,
+    v3,
+    v4,
+    v5,
+    v6,
+    r
+;
+
+
+void init()
+begin
+    v2, v3, v4, v5, v6 := F, F, F, F, F;   // A = 0
+    endinit: skip;
+end
+
+void main() // Module 1
+begin
+    decl l_0, l_1, l_2;  // l_0 = v0, l_1 = v1, l_2 = v2
+    l_0, l_1, l_2 := F, F, F;
+    __VERIFIER_atomic_set(l_0, l_1, l_2, T);
+    // l_0, l_1, l_2 := F, F, T;
+    // __VERIFIER_atomic_set(l_0, l_1, l_2, T);
+    // v3 = T
+    if (v2) then
+        SLIC_ERROR: skip;
+    fi
+    assume(T);
+end
+
+void thread1() // Module 2
+begin
+    skip;
+    assume(T);
+end
+
+void thread2() // Module 3
+begin
+    skip;
+    assume(T);
+end
+
+// index_0 = v3, index_1 = v4, index_2 = v5, value = v6
+void __VERIFIER_atomic_set(index_0, index_1, index_2, value)  // Module 4
+begin
+    r := T;
+    if (!index_0 & !index_1 & !index_2) then
+        v2 := value;
+    else
+        if (!index_0 & !index_1 & index_2) then
+            v3 := value;
+        else
+            if (!index_0 & index_1 & !index_2) then
+                v4 := value;
+            else
+                if (!index_0 & index_1 & index_2) then
+                    v5 := value;
+                else
+                    skip;
+                fi
+            fi
+        fi
+    fi
+    return;
+end
+
+// bool __VERIFIER_atomic_get(index_0, index_1, index_2)
+// begin
+//     decl tmp;
+//     if (!index_0 & !index_1 & !index_2) then
+//         tmp := v2;
+//     else
+//         if (!index_0 & !index_1 & index_2) then
+//             tmp := v3;
+//         else
+//             if (!index_0 & index_1 & !index_2) then
+//                 tmp := v4;
+//             else
+//                 if (!index_0 & index_1 & index_2) then
+//                     tmp := v5;
+//                 else
+//                     assume(F);
+//                 fi
+//             fi
+//         fi
+//     fi
+//     return tmp;
+// end
+
+// bool __VERIFIER_atomic_get_ver2(index_0, index_1, index_2)
+// begin
+//     if (!index_0 & !index_1 & !index_2) then
+//         return v2;
+//     else
+//         if (!index_0 & !index_1 & index_2) then
+//             return v3;
+//         else
+//             if (!index_0 & index_1 & !index_2) then
+//                 return v4;
+//             else
+//                 if (!index_0 & index_1 & index_2) then
+//                     return v5;
+//                 else
+//                     assume(F);
+//                 fi
+//             fi
+//         fi
+//     fi
+// end
+
+// bool<3> __VERIFIER_atomic_increase(value_0, value_1, value_2)
+// begin
+//     decl tmp_0, tmp_1, tmp_2;
+//     if (!value_0 & !value_1 & !value_2) then
+//         tmp_0, tmp_1, tmp_2 := F, F, T;
+//     else
+//         if (!value_0 & !value_1 & value_2) then
+//             tmp_0, tmp_1, tmp_2 := F, T, F;
+//         else
+//             if (!value_0 & value_1 & !value_2) then
+//                 tmp_0, tmp_1, tmp_2 := F, T, T;
+//             else
+//                 if (!value_0 & value_1 & value_2) then
+//                     tmp_0, tmp_1, tmp_2 := T, F, F;
+//                 else
+//                     if (value_0 & !value_1 & !value_2) then
+//                         tmp_0, tmp_1, tmp_2 := T, F, T;
+//                     else
+//                         if (value_0 & !value_1 & value_2) then
+//                             tmp_0, tmp_1, tmp_2 := T, T, F;
+//                         else
+//                             if (value_0 & value_1 & !value_2) then
+//                                 tmp_0, tmp_1, tmp_2 := T, T, T;
+//                             else
+//                                 assume(T);
+//                             fi
+//                         fi
+//                     fi
+//                 fi
+//             fi
+//         fi
+//     fi
+//     return tmp_0, tmp_1, tmp_2;
+// end

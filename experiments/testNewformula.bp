@@ -1,0 +1,180 @@
+decl
+    atomic,
+    a,      // Counter
+    b,
+    c
+;
+
+
+void init ()
+begin
+decl at;
+    at := F;
+    atomic := F;
+    a, b, c := F, F, F;  // Counter:=0
+    endinit: skip;
+end
+
+void thread1 ()
+begin
+decl at;
+    at := F;
+    atomic, at := T, T;
+    if (!a & !b & !c) then     // counter=0
+        a, b, c := F, F, T;    // counter:=1
+    else
+        if (!a & !b & c) then     // counter=1
+            a, b, c := F, T, F;    // counter:=2
+        else
+            if (!a & b & !c) then     // counter=2
+                a, b, c := F, T, T;    // counter:=3
+            else
+                if (!a & b & c) then     // counter=3
+                    a, b, c := T, F, F;    // counter:=4
+                else
+                    if (a & !b & !c) then     // counter=4
+                        a, b, c := T, F, T;    // counter:=5
+                    else
+                        if (a & !b & c) then     // counter=5
+                            a, b, c := T, T, F;    // counter:=6
+                        else
+                            if (a & b & !c) then     // counter=6
+                                a, b, c := T, T, T;    // counter:=7
+                            else
+                                if (a & b & c) then
+                                    a, b, c := T, T, T;  // Counter:=7
+                                fi
+                            fi
+                        fi
+                    fi
+                fi
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+    assume(T);
+end
+
+void thread2 ()
+begin
+decl at;
+    at := F;
+    atomic, at := T, T;
+    if (!a & !b & !c) then     // counter=0
+        a, b, c := F, F, T;    // counter:=1
+    else
+        if (!a & !b & c) then     // counter=1
+            a, b, c := F, T, F;    // counter:=2
+        else
+            if (!a & b & !c) then     // counter=2
+                a, b, c := F, T, T;    // counter:=3
+            else
+                if (!a & b & c) then     // counter=3
+                    a, b, c := T, F, F;    // counter:=4
+                else
+                    if (a & !b & !c) then     // counter=4
+                        a, b, c := T, F, T;    // counter:=5
+                    else
+                        if (a & !b & c) then     // counter=5
+                            a, b, c := T, T, F;    // counter:=6
+                        else
+                            if (a & b & !c) then     // counter=6
+                                a, b, c := T, T, T;    // counter:=7
+                            else
+                                if (a & b & c) then
+                                    a, b, c := T, T, T;  // Counter:=7
+                                fi
+                            fi
+                        fi
+                    fi
+                fi
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+    assume(T);
+end
+
+void thread3 ()
+begin
+decl at;
+    at := F;
+    atomic, at := T, T;
+    if (!a & !b & !c) then     // counter=0
+        a, b, c := F, F, T;    // counter:=1
+    else
+        if (!a & !b & c) then     // counter=1
+            a, b, c := F, T, F;    // counter:=2
+        else
+            if (!a & b & !c) then     // counter=2
+                a, b, c := F, T, T;    // counter:=3
+            else
+                if (!a & b & c) then     // counter=3
+                    a, b, c := T, F, F;    // counter:=4
+                else
+                    if (a & !b & !c) then     // counter=4
+                        a, b, c := T, F, T;    // counter:=5
+                    else
+                        if (a & !b & c) then     // counter=5
+                            a, b, c := T, T, F;    // counter:=6
+                        else
+                            if (a & b & !c) then     // counter=6
+                                a, b, c := T, T, T;    // counter:=7
+                            else
+                                if (a & b & c) then
+                                    a, b, c := T, T, T;  // Counter:=0
+                                fi
+                            fi
+                        fi
+                    fi
+                fi
+            fi
+        fi
+    fi
+    atomic, at := F, F;
+    if (a & b & c) then
+        SLIC_ERROR: skip;
+    fi
+    assume(T);
+end
+
+// void thread4 ()
+// begin
+// decl at;
+//     at := F;
+//     atomic, at := T, T;
+//     if (!a & !b & !c) then     // counter=0
+//         a, b, c := F, F, T;    // counter:=1
+//     else
+//         if (!a & !b & c) then     // counter=1
+//             a, b, c := F, T, F;    // counter:=2
+//         else
+//             if (!a & b & !c) then     // counter=2
+//                 a, b, c := F, T, T;    // counter:=3
+//             else
+//                 if (!a & b & c) then     // counter=3
+//                     a, b, c := T, F, F;    // counter:=4
+//                 else
+//                     if (a & !b & !c) then     // counter=4
+//                         a, b, c := T, F, T;    // counter:=5
+//                     else
+//                         if (a & !b & c) then     // counter=5
+//                             a, b, c := T, T, F;    // counter:=6
+//                         else
+//                             if (a & b & !c) then     // counter=6
+//                                 a, b, c := T, T, T;    // counter:=7
+//                             else
+//                                 if (a & b & c) then
+//                                     a, b, c := T, T, T;    // counter:=7
+//                                 fi
+//                             fi
+//                         fi
+//                     fi
+//                 fi
+//             fi
+//         fi
+//     fi
+//     atomic, at := F, F;
+
+//     assume(T);
+// end
