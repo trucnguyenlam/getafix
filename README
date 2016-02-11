@@ -1,0 +1,11 @@
+Rules for writting concurrent boolean program:
+=================================================================
+
+- global variable 'super_atomic' and 'atomic' must be declared first following the order
+- init always the first function
+- In init function, super_atomic and atomic must be set to F
+- the first statement of every thread must be  'atomic := F;'
+- always use assume(T) at the end of each thread
+
+
+
