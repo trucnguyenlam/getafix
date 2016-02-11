@@ -1,31 +1,36 @@
 decl
     atomic,
-    v2,
-    v3,
-    v4,
-    v5,
-    v6,
-    r
+    v2
+    // v3,
+    // v4,
+    // v5,
+    // v6
 ;
 
 
 void init()
 begin
-    v2, v3, v4, v5, v6 := F, F, F, F, F;   // A = 0
+    // v2, v3, v4, v5, v6 := F, F, F, F, F;   // A = 0
+    v2 := F;
     endinit: skip;
 end
 
 void main() // Module 1
 begin
-    decl l_0, l_1, l_2;  // l_0 = v0, l_1 = v1, l_2 = v2
-    l_0, l_1, l_2 := F, F, F;
-    __VERIFIER_atomic_set(l_0, l_1, l_2, T);
+    // l_0 = v0, l_1 = v1, l_2 = v2
+    // decl l_0, l_1, l_2;
+
+    // l_0, l_1, l_2 := F, F, F;
+
+
+    __VERIFIER_atomic_set(T);
     // l_0, l_1, l_2 := F, F, T;
     // __VERIFIER_atomic_set(l_0, l_1, l_2, T);
     // v3 = T
-    if (v2) then
         SLIC_ERROR: skip;
-    fi
+    // if (v2) then
+        // skip;
+    // fi
     assume(T);
 end
 
@@ -42,26 +47,26 @@ begin
 end
 
 // index_0 = v3, index_1 = v4, index_2 = v5, value = v6
-void __VERIFIER_atomic_set(index_0, index_1, index_2, value)  // Module 4
+// void __VERIFIER_atomic_set(index_0, index_1, index_2, value)  // Module 4
+void __VERIFIER_atomic_set(value)  // Module 4
 begin
-    r := T;
-    if (!index_0 & !index_1 & !index_2) then
+    // if (!index_0 & !index_1 & !index_2) then
         v2 := value;
-    else
-        if (!index_0 & !index_1 & index_2) then
-            v3 := value;
-        else
-            if (!index_0 & index_1 & !index_2) then
-                v4 := value;
-            else
-                if (!index_0 & index_1 & index_2) then
-                    v5 := value;
-                else
-                    skip;
-                fi
-            fi
-        fi
-    fi
+    // else
+    //     if (!index_0 & !index_1 & index_2) then
+    //         v3 := value;
+    //     else
+    //         if (!index_0 & index_1 & !index_2) then
+    //             v4 := value;
+    //         else
+    //             if (!index_0 & index_1 & index_2) then
+    //                 v5 := value;
+    //             else
+    //                 skip;
+    //             fi
+    //         fi
+    //     fi
+    // fi
     return;
 end
 

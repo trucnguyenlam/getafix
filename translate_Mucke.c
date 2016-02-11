@@ -442,17 +442,14 @@ static void print_recursive_statement_program_Int1(bp_stmt_t p, bp_fun_t fun, sh
         printf("                    /* CALL */ \n");
         print_PC("cp", p->numlabel, n_bit_pc);
         print_d_pc(p);
-
+        printf("\n");
         callee = find_function(p->e.a.label);
         printf("& (exists\n");
-        printf("    PrCount u_pc,\n");
         printf("    Local   u_ENTRY_CL.\n");
         printf("    (\n");
-        printf("      (\n");
-        printf("           programCall(cm, %d, cp, L, u_ENTRY_CL, G)\n", callee->funname_replace);
-        printf("         & SetReturnTS(cm, %d, cp, u_pc, L, dL, G, dG)\n", callee->funname_replace);
-        printf("      )\n");
+        printf("      programCall(cm, %d, cp, L, u_ENTRY_CL, G)\n", callee->funname_replace);
         printf("    & (exists\n");
+        printf("         PrCount u_pc,\n");
         printf("         Local   u_CL,\n");
         printf("         Global  u_CG.\n");
         printf("         (\n");
@@ -460,6 +457,7 @@ static void print_recursive_statement_program_Int1(bp_stmt_t p, bp_fun_t fun, sh
         printf("              %s(%d, u_pc, u_CL, u_CG, u_ENTRY_CL, G)\n", callee->funname, callee->funname_replace);
         printf("             & Exit(%d, u_pc)\n", callee->funname_replace);
         printf("           )\n");
+        printf("          & SetReturnTS(cm, %d, cp, u_pc, L, dL, G, dG)\n", callee->funname_replace);
         printf("          & SetReturnUS(cm, %d, cp, u_pc, u_CL, dL, u_CG, dG)\n", callee->funname_replace);
         printf("         )\n");
         printf("      )\n");
@@ -863,6 +861,48 @@ static void print_recursive_statement_Copy_Var_Locals_Assign(bp_stmt_t p, bp_fun
     return;
 }
 
+static void print_recursive_statement_Exemption_CopyVariables(bp_stmt_t p) {
+    bp_idref_t q;
+    bp_ident_t z;
+
+    if ((!p) || (p->visited != 0)) return;
+    p->visited = 1;
+
+    switch (p->type) {
+    case BP_CALL:
+    {
+        printf(" | ");
+        print_PC("p", p->numlabel, n_bit_pc);
+        break;
+    }
+
+    case BP_IF:
+    case BP_ELSEIF:
+    case BP_WHILE: {
+        print_recursive_statement_Exemption_CopyVariables(p->next_then);
+        print_recursive_statement_Exemption_CopyVariables(p->next_else);
+        break;
+    }
+    }
+
+    print_recursive_statement_Exemption_CopyVariables(p->next_stmt);
+    return;
+}
+
+static void print_Exemption_CopyVariables(void)
+{
+    bp_fun_t fun;
+    for (fun = bp_functions; fun; fun = fun->next) {
+        if (isThreadFunction(fun))
+        {
+            printf("|((m=%d)&(false ", fun->funname_replace);
+            reset_flag_visited(fun->stmt);
+            print_recursive_statement_Exemption_CopyVariables(fun->stmt);
+            printf("))\n");
+        }
+    }
+}
+
 static void CopyVariables_ProgramInt(void) {
     bp_fun_t fun;
     bp_ident_t z;
@@ -883,9 +923,9 @@ static void CopyVariables_ProgramInt(void) {
     printf(" cL  <  cG,\n");
     printf(" cG  ~+ dG\n");
     printf("(false \n");
-
+    // TRUC's modification
+    print_Exemption_CopyVariables();
     printf("| (true\n");
-
     for (varnum = 0; varnum <= maxindexlocvar; varnum++) {
         flag = 0;
         printf("&((dL.v%d=cL.v%d)", varnum, varnum);
@@ -3573,7 +3613,7 @@ static void print_recursive_statement(bp_fun_t fun, bp_stmt_t p, int indent, FIL
 }
 
 static void
-print_program(void) {
+print_debug_program(void) {
 
     int totallocals, processedlocals, max_global_var;
 
@@ -4148,7 +4188,7 @@ print_Mucke_program(int ord, char *formulaFilename) {
     printf("// pc_return=%d\n", pc_return);
     printf("// dead_pc=%d\n", dead_pc);
 
-    print_program();
+    // print_debug_program();
 
     // TRUC's modification
     tmp = 0;
