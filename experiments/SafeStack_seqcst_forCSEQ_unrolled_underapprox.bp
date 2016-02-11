@@ -38,8 +38,6 @@ decl
 
 void init ()
 begin
-// decl at;
-    // at := F;
     stack_count_0, stack_count_1, stack_count_2 := F, T, T;   // stack_count = 3
     stack_head_0, stack_head_1, stack_head_2 := F, F, F;    // stack_head = 0
     stack_next0_0, stack_next0_1, stack_next0_2 := F, F, T;   // next0 = 1
@@ -79,13 +77,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -106,9 +100,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop1;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -116,13 +108,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -143,9 +131,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop1;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -153,13 +139,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -180,9 +162,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop1;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -190,7 +170,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop1_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop1: skip;   // elem := Pop();
+            EndPop1: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While1;    // break while
@@ -204,13 +184,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -231,9 +207,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop2;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -241,13 +215,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -268,9 +238,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop2;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -278,13 +246,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -305,9 +269,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop2;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -315,7 +277,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop2_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop2: skip;   // elem := Pop();
+            EndPop2: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While1;    // break while
@@ -328,13 +290,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -355,9 +313,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop3;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -365,13 +321,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -392,9 +344,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop3;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -402,13 +352,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -429,9 +375,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop3;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -439,7 +383,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop3_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop3: skip;   // elem := Pop();
+            EndPop3: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While1;    // break while
@@ -490,27 +434,11 @@ decl head1Push_0, head1Push_1, head1Push_2;
     atomic := F;
 
     // Push(elem);
-    atomic := T;
     // int head1 := __VERIFIER_atomic_load(&stack.head);
     head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
-    atomic := F;
 
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -525,22 +453,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
     if (ifcond) then
         goto EndPush1_Dowhile1;
     fi
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -555,22 +469,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
     if (ifcond) then
         goto EndPush1_Dowhile1;
     fi
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -586,11 +486,12 @@ decl head1Push_0, head1Push_1, head1Push_2;
         goto EndPush1_Dowhile1;
     fi
     assume (!ifcond);
-    EndPush1_Dowhile1: skip;
+    EndPush1_Dowhile1: head1Push_0, head1Push_1, head1Push_2 := schoose[F, F], schoose[F, F], schoose[F, F];
 
     // __VERIFIER_atomic_fetch_add(&stack.count, 1);
     __VERIFIER_atomic_fetch_add();
 
+    elem_0, elem_1, elem_2 := schoose[F, F], schoose[F, F], schoose[F, F];
 
 
         // while (T) do     // for (;;)
@@ -601,13 +502,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -628,9 +525,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop4;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -638,13 +533,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -665,9 +556,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop4;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -675,13 +564,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -702,9 +587,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop4;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -712,7 +595,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop4_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop4: skip;   // elem := Pop();
+            EndPop4: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While2;    // break while
@@ -726,13 +609,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -753,9 +632,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop5;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -763,13 +640,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -790,9 +663,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop5;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -800,13 +671,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -827,9 +694,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop5;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -837,7 +702,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop5_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop5: skip;   // elem := Pop();
+            EndPop5: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While2;    // break while
@@ -850,13 +715,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -877,9 +738,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop6;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -887,13 +746,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -914,9 +769,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop6;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -924,13 +777,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -951,9 +800,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop6;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -961,7 +808,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop6_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop6: skip;   // elem := Pop();
+            EndPop6: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While2;    // break while
@@ -1012,27 +859,11 @@ decl head1Push_0, head1Push_1, head1Push_2;
     atomic := F;
 
     // Push(elem);
-    atomic := T;
     // int head1 := __VERIFIER_atomic_load(&stack.head);
     head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
-    atomic := F;
 
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -1047,22 +878,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
     if (ifcond) then
         goto EndPush2_Dowhile1;
     fi
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -1077,22 +894,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
     if (ifcond) then
         goto EndPush2_Dowhile1;
     fi
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -1108,11 +911,12 @@ decl head1Push_0, head1Push_1, head1Push_2;
         goto EndPush2_Dowhile1;
     fi
     assume (!ifcond);
-    EndPush2_Dowhile1: skip;
+    EndPush2_Dowhile1: head1Push_0, head1Push_1, head1Push_2 := schoose[F, F], schoose[F, F], schoose[F, F];
 
     // __VERIFIER_atomic_fetch_add(&stack.count, 1);
     __VERIFIER_atomic_fetch_add();
 
+    elem_0, elem_1, elem_2 := schoose[F, F], schoose[F, F], schoose[F, F];
 
     assume(F);
     SLIC_ERROR: skip;
@@ -1147,13 +951,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1174,9 +974,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop1;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -1184,13 +982,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1211,9 +1005,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop1;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -1221,13 +1013,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1248,9 +1036,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop1;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -1258,7 +1044,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop1_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop1: skip;   // elem := Pop();
+            EndPop1: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While1;    // break while
@@ -1272,13 +1058,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1299,9 +1081,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop2;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -1309,13 +1089,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1336,9 +1112,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop2;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -1346,13 +1120,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1373,9 +1143,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop2;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -1383,7 +1151,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop2_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop2: skip;   // elem := Pop();
+            EndPop2: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While1;    // break while
@@ -1396,13 +1164,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1423,9 +1187,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop3;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -1433,13 +1195,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1460,9 +1218,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop3;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -1470,13 +1226,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1497,9 +1249,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop3;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -1507,7 +1257,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop3_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop3: skip;   // elem := Pop();
+            EndPop3: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While1;    // break while
@@ -1607,27 +1357,11 @@ decl head1Push_0, head1Push_1, head1Push_2;
 
 
     // Push(elem);
-    atomic := T;
     // int head1 := __VERIFIER_atomic_load(&stack.head);
     head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
-    atomic := F;
 
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -1642,22 +1376,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
     if (ifcond) then
         goto EndPush1_Dowhile1;
     fi
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -1672,22 +1392,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
     if (ifcond) then
         goto EndPush1_Dowhile1;
     fi
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -1703,11 +1409,12 @@ decl head1Push_0, head1Push_1, head1Push_2;
         goto EndPush1_Dowhile1;
     fi
     assume (!ifcond);
-    EndPush1_Dowhile1: skip;
+    EndPush1_Dowhile1: head1Push_0, head1Push_1, head1Push_2 := schoose[F, F], schoose[F, F], schoose[F, F];
 
     // __VERIFIER_atomic_fetch_add(&stack.count, 1);
     __VERIFIER_atomic_fetch_add();
 
+    elem_0, elem_1, elem_2 := schoose[F, F], schoose[F, F], schoose[F, F];
 
 
 
@@ -1723,13 +1430,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1750,9 +1453,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop4;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -1760,13 +1461,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1787,9 +1484,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop4;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -1797,13 +1492,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1824,9 +1515,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop4;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -1834,7 +1523,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop4_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop4: skip;   // elem := Pop();
+            EndPop4: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While2;    // break while
@@ -1848,13 +1537,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1875,9 +1560,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop5;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -1885,13 +1568,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1912,9 +1591,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop5;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -1922,13 +1599,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1949,9 +1622,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop5;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -1959,7 +1630,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop5_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop5: skip;   // elem := Pop();
+            EndPop5: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While2;    // break while
@@ -1972,13 +1643,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -1999,9 +1666,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop6;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -2009,13 +1674,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -2036,9 +1697,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop6;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -2046,13 +1705,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -2073,9 +1728,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop6;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -2083,7 +1736,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop6_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop6: skip;   // elem := Pop();
+            EndPop6: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While2;    // break while
@@ -2183,27 +1836,11 @@ decl head1Push_0, head1Push_1, head1Push_2;
 
 
     // Push(elem);
-    atomic := T;
     // int head1 := __VERIFIER_atomic_load(&stack.head);
     head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
-    atomic := F;
 
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -2218,22 +1855,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
     if (ifcond) then
         goto EndPush2_Dowhile1;
     fi
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -2248,22 +1871,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
     if (ifcond) then
         goto EndPush2_Dowhile1;
     fi
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -2279,11 +1888,12 @@ decl head1Push_0, head1Push_1, head1Push_2;
         goto EndPush2_Dowhile1;
     fi
     assume (!ifcond);
-    EndPush2_Dowhile1: skip;
+    EndPush2_Dowhile1: head1Push_0, head1Push_1, head1Push_2 := schoose[F, F], schoose[F, F], schoose[F, F];
 
     // __VERIFIER_atomic_fetch_add(&stack.count, 1);
     __VERIFIER_atomic_fetch_add();
 
+    elem_0, elem_1, elem_2 := schoose[F, F], schoose[F, F], schoose[F, F];
 
     assume(F);
     SLIC_ERROR: skip;
@@ -2318,13 +1928,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -2345,9 +1951,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop1;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -2355,13 +1959,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -2382,9 +1982,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop1;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -2392,13 +1990,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -2419,9 +2013,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop1;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -2429,7 +2021,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop1_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop1: skip;   // elem := Pop();
+            EndPop1: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While1;    // break while
@@ -2443,13 +2035,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -2470,9 +2058,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop2;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -2480,13 +2066,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -2507,9 +2089,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop2;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -2517,13 +2097,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -2544,9 +2120,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop2;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -2554,7 +2128,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop2_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop2: skip;   // elem := Pop();
+            EndPop2: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While1;    // break while
@@ -2567,13 +2141,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -2594,9 +2164,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop3;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -2604,13 +2172,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -2631,9 +2195,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop3;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -2641,13 +2203,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -2668,9 +2226,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop3;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -2678,7 +2234,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop3_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop3: skip;   // elem := Pop();
+            EndPop3: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While1;    // break while
@@ -2781,27 +2337,11 @@ decl head1Push_0, head1Push_1, head1Push_2;
 
 
     // Push(elem);
-    atomic := T;
     // int head1 := __VERIFIER_atomic_load(&stack.head);
     head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
-    atomic := F;
 
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -2816,22 +2356,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
     if (ifcond) then
         goto EndPush1_Dowhile1;
     fi
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -2846,22 +2372,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
     if (ifcond) then
         goto EndPush1_Dowhile1;
     fi
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -2877,11 +2389,12 @@ decl head1Push_0, head1Push_1, head1Push_2;
         goto EndPush1_Dowhile1;
     fi
     assume (!ifcond);
-    EndPush1_Dowhile1: skip;
+    EndPush1_Dowhile1: head1Push_0, head1Push_1, head1Push_2 := schoose[F, F], schoose[F, F], schoose[F, F];
 
     // __VERIFIER_atomic_fetch_add(&stack.count, 1);
     __VERIFIER_atomic_fetch_add();
 
+    elem_0, elem_1, elem_2 := schoose[F, F], schoose[F, F], schoose[F, F];
 
 
 
@@ -2897,13 +2410,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -2924,9 +2433,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop4;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -2934,13 +2441,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -2961,9 +2464,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop4;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -2971,13 +2472,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -2998,9 +2495,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop4;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -3008,7 +2503,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop4_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop4: skip;   // elem := Pop();
+            EndPop4: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While2;    // break while
@@ -3022,13 +2517,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -3049,9 +2540,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop5;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -3059,13 +2548,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -3086,9 +2571,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop5;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -3096,13 +2579,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -3123,9 +2602,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop5;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -3133,7 +2610,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop5_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop5: skip;   // elem := Pop();
+            EndPop5: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While2;    // break while
@@ -3146,13 +2623,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -3173,9 +2646,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop6;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -3183,13 +2654,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -3210,9 +2677,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop6;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -3220,13 +2685,9 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
-                atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 next1Pop_0, next1Pop_1, next1Pop_2 := __VERIFIER_atomic_exchange(head1Pop_0, head1Pop_1, head1Pop_2, T, T, T);
-                atomic := F;
 
                 if (!next1Pop_0) then    // if (next1 >:= 0)
                     head2Pop_0, head2Pop_1, head2Pop_2 := head1Pop_0, head1Pop_1, head1Pop_2;   // head2 := head1
@@ -3247,9 +2708,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
                         goto EndPop6;
                     else
                         // __VERIFIER_atomic_exchange(&stack.array[head1].Next, stack_next1);
-                        atomic := T;
                         __VERIFIER_atomic_exchange_noreturn(head1Pop_0, head1Pop_1, head1Pop_2, next1Pop_0, next1Pop_1, next1Pop_2);
-                        atomic := F;
                     fi
                 fi
             fi
@@ -3257,7 +2716,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             assume(!(!stack_count_0 & stack_count_1));
             EndPop6_While1: skip;
             elem_0, elem_1, elem_2 := T, T, T;      // Return -1
-            EndPop6: skip;   // elem := Pop();
+            EndPop6: head1Pop_0, head1Pop_1, head1Pop_2, head2Pop_0, head2Pop_1, head2Pop_2, next1Pop_0, next1Pop_1, next1Pop_2 := schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F], schoose[F, F];
 
             if (!elem_0) then    // if elem >= 0
                 goto EndThread_While2;    // break while
@@ -3357,27 +2816,11 @@ decl head1Push_0, head1Push_1, head1Push_2;
 
 
     // Push(elem);
-    atomic := T;
     // int head1 := __VERIFIER_atomic_load(&stack.head);
     head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
-    atomic := F;
 
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -3392,22 +2835,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
     if (ifcond) then
         goto EndPush2_Dowhile1;
     fi
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -3422,22 +2851,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
     if (ifcond) then
         goto EndPush2_Dowhile1;
     fi
-    atomic := T;
-        // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
-        if (!elem_0 & !elem_1 & !elem_2) then     // elem := 0
-            stack_next0_0, stack_next0_1, stack_next0_2 := head1Push_0, head1Push_1, head1Push_2;
-        else
-            if (!elem_0 & !elem_1 & elem_2) then    // elem := 1
-                stack_next1_0, stack_next1_1, stack_next1_2 := head1Push_0, head1Push_1, head1Push_2;
-            else
-                if (!elem_0 & elem_1 & !elem_2) then    // elem := 2
-                    stack_next2_0, stack_next2_1, stack_next2_2 := head1Push_0, head1Push_1, head1Push_2;
-                else
-                    assume(F);
-                fi
-            fi
-        fi
-    atomic := F;
+    // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
+    __VERIFIER_atomic_store(elem_0, elem_1, elem_2, head1Push_0, head1Push_1, head1Push_2);
     atomic := T;
     // (__VERIFIER_atomic_compare_and_exchange(&stack.head, &head1, index))
     if ((stack_head_0 = head1Push_0) & (stack_head_1 = head1Push_1) & (stack_head_2 = head1Push_2)) then
@@ -3453,11 +2868,12 @@ decl head1Push_0, head1Push_1, head1Push_2;
         goto EndPush2_Dowhile1;
     fi
     assume (!ifcond);
-    EndPush2_Dowhile1: skip;
+    EndPush2_Dowhile1: head1Push_0, head1Push_1, head1Push_2 := schoose[F, F], schoose[F, F], schoose[F, F];
 
     // __VERIFIER_atomic_fetch_add(&stack.count, 1);
     __VERIFIER_atomic_fetch_add();
 
+    elem_0, elem_1, elem_2 := schoose[F, F], schoose[F, F], schoose[F, F];
 
     assume(F);
     SLIC_ERROR: skip;
@@ -3540,4 +2956,21 @@ begin
         fi
     fi
     return;
+end
+
+void __VERIFIER_atomic_store(index_0, index_1, index_2, value_0, value_1, value_2)
+begin
+    if (!index_0 & !index_1 & !index_2) then     // elem := 0
+        stack_next0_0, stack_next0_1, stack_next0_2 := value_0, value_1, value_2;
+    else
+        if (!index_0 & !index_1 & index_2) then    // elem := 1
+            stack_next1_0, stack_next1_1, stack_next1_2 := value_0, value_1, value_2;
+        else
+            if (!index_0 & index_1 & !index_2) then    // elem := 2
+                stack_next2_0, stack_next2_1, stack_next2_2 := value_0, value_1, value_2;
+            else
+                assume(F);
+            fi
+        fi
+    fi
 end

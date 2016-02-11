@@ -79,9 +79,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -158,9 +156,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -237,9 +233,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -331,9 +325,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -410,9 +402,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -489,9 +479,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -582,9 +570,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -661,9 +647,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -740,9 +724,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -871,10 +853,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
     atomic := F;
 
     // Push(elem);
-    atomic := T;
     // int head1 := __VERIFIER_atomic_load(&stack.head);
     head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
-    atomic := F;
 
     atomic := T;
         // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
@@ -1001,9 +981,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -1080,9 +1058,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -1159,9 +1135,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -1253,9 +1227,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -1332,9 +1304,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -1411,9 +1381,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -1503,9 +1471,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -1582,9 +1548,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -1661,9 +1625,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -1791,10 +1753,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
     atomic := F;
 
     // Push(elem);
-    atomic := T;
     // int head1 := __VERIFIER_atomic_load(&stack.head);
     head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
-    atomic := F;
 
     atomic := T;
         // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
@@ -1941,9 +1901,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -2020,9 +1978,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -2099,9 +2055,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -2192,9 +2146,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -2271,9 +2223,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -2350,9 +2300,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -2442,9 +2390,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -2521,9 +2467,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -2600,9 +2544,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -2779,10 +2721,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
 
 
     // Push(elem);
-    atomic := T;
     // int head1 := __VERIFIER_atomic_load(&stack.head);
     head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
-    atomic := F;
 
     atomic := T;
         // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
@@ -2910,9 +2850,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -2989,9 +2927,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -3068,9 +3004,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -3161,9 +3095,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -3240,9 +3172,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -3319,9 +3249,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -3411,9 +3339,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -3490,9 +3416,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -3569,9 +3493,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -3748,10 +3670,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
 
 
     // Push(elem);
-    atomic := T;
     // int head1 := __VERIFIER_atomic_load(&stack.head);
     head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
-    atomic := F;
 
     atomic := T;
         // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
@@ -3898,9 +3818,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -3977,9 +3895,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -4056,9 +3972,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -4149,9 +4063,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -4228,9 +4140,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -4307,9 +4217,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -4399,9 +4307,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -4478,9 +4384,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -4557,9 +4461,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -4739,10 +4641,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
 
 
     // Push(elem);
-    atomic := T;
     // int head1 := __VERIFIER_atomic_load(&stack.head);
     head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
-    atomic := F;
 
     atomic := T;
         // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
@@ -4870,9 +4770,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -4949,9 +4847,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -5028,9 +4924,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -5121,9 +5015,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -5200,9 +5092,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -5279,9 +5169,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -5371,9 +5259,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -5450,9 +5336,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -5529,9 +5413,7 @@ decl head1Push_0, head1Push_1, head1Push_2;
             else
                 // Enter while loop of Pop
                 // int head1 := __VERIFIER_atomic_load(&stack.head);
-                atomic := T;
                 head1Pop_0, head1Pop_1, head1Pop_2 := stack_head_0, stack_head_1, stack_head_2;
-                atomic := F;
                 atomic := T;
                 // int stack_next1 := __VERIFIER_atomic_exchange(&stack.array[head1].Next, -1);
                 if (!head1Pop_0 & !head1Pop_1 & !head1Pop_2) then     // if head1 :=:= 0
@@ -5708,10 +5590,8 @@ decl head1Push_0, head1Push_1, head1Push_2;
 
 
     // Push(elem);
-    atomic := T;
     // int head1 := __VERIFIER_atomic_load(&stack.head);
     head1Push_0, head1Push_1, head1Push_2 := stack_head_0, stack_head_1, stack_head_2;
-    atomic := F;
 
     atomic := T;
         // __VERIFIER_atomic_store(&stack.array[index].Next, head1);
