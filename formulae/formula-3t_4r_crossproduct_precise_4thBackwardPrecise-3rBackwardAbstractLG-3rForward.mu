@@ -1407,7 +1407,6 @@ mu bool Thread2_0(
 #size Thread2_0;
 #timer;
 
-////#reset Thread1_0;
 
 
 // ###   #  #  ###   ####   ##   ###         ####
@@ -1499,8 +1498,6 @@ mu bool Thread3_0(
 #size Thread3_0;
 #timer;
 
-
-////#reset Thread2_0;
 
 
 
@@ -1606,8 +1603,6 @@ mu bool Thread1_1(
 #size Thread1_1;
 #timer;
 
-////#reset Thread3_0;
-
 
 
  // #####  #   #  ####   #####    #    ####          ###
@@ -1699,9 +1694,6 @@ mu bool Thread2_1(
 );
 #size Thread2_1;
 #timer;
-
-
-////#reset Thread1_1;
 
 
 
@@ -1901,8 +1893,6 @@ mu bool Thread1_2(
 #size Thread1_2;
 #timer;
 
-//#reset Thread3_1;
-
 
 
  // #####  #   #  ####   #####    #    ####          ###
@@ -1993,8 +1983,6 @@ mu bool Thread2_2(
 );
 #size Thread2_2;
 #timer;
-
-//#reset Thread1_2;
 
 
 
@@ -2089,8 +2077,6 @@ mu bool Thread3_2(
 );
 #size Thread3_2;
 #timer;
-
-//#reset Thread2_2;
 
 
 

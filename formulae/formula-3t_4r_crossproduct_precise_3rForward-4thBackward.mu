@@ -2,13 +2,12 @@
 /********************                 DESIGN FOR 3 THREADS            ****************************/
 /*************************************************************************************************/
 #timer go;
-/**
- * Compute first 2 rounds forward
- * Compute 4th round backward
- * Compute 3rd round backward with abstraction
- * Compute 3rd round forward with intersection with the configuration at the end of 2nd round
- */
 
+/**
+ * Compute first three rounds forward precise
+ * Compute the last round backward
+ * Check for intersection at the end of the third round
+ */
 
 /*************************************************************************************************/
 /*************************************************************************************************/
@@ -431,7 +430,6 @@ mu bool Thread2_0(
 #size Thread2_0;
 #timer;
 
-////#reset Thread1_0;
 
 
 // ###   #  #  ###   ####   ##   ###         ####
@@ -523,7 +521,6 @@ mu bool Thread3_0(
 #timer;
 
 
-////#reset Thread2_0;
 
 
 
@@ -628,8 +625,6 @@ mu bool Thread1_1(
 #size Thread1_1;
 #timer;
 
-////#reset Thread3_0;
-
 
 
  // #####  #   #  ####   #####    #    ####          ###
@@ -722,9 +717,6 @@ mu bool Thread2_1(
 #timer;
 
 
-////#reset Thread1_1;
-
-
 
 
 
@@ -813,6 +805,287 @@ mu bool Thread3_1(
 
 );
 #size Thread3_1;
+#timer;
+
+
+// ####    ###   #   #  #   #  ####                  ###
+ // #   #  #   #  #   #  #   #   #  #                #   #
+ // #   #  #   #  #   #  ##  #   #  #                    #
+ // ####   #   #  #   #  # # #   #  #                  ##
+ // # #    #   #  #   #  #  ##   #  #                 #
+ // #  #   #   #  #   #  #   #   #  #                #
+ // #   #   ###    ###   #   #  ####                 #####
+
+
+
+
+// ###   #  #  ###   ####   ##   ###          #
+//  #    #  #  #  #  #     #  #  #  #        ##
+//  #    ####  #  #  ###   #  #  #  #         #
+//  #    #  #  ###   #     ####  #  #         #
+//  #    #  #  # #   #     #  #  #  #         #
+//  #    #  #  #  #  ####  #  #  ###         ###
+
+mu bool Thread1_2(
+ PrCount    s_pc1,                  // Program counter
+ Local      s_CL1,                  // Local variable
+ PrCount    s_pc2,                  // Program counter
+ Local      s_CL2,                  // Local variable
+ PrCount    s_pc3,                  // Program counter
+ Local      s_CL3,                  // Local variable
+ Global    s_G                    // Global variable
+)
+  s_pc1    <  s_CL1,
+ s_CL1    <  s_pc2,
+ s_pc2    <  s_CL2,
+ s_CL2    <  s_pc3,
+ s_pc3    <  s_CL3,
+ s_CL3    <  s_G
+( false
+
+  // early termination
+  | ( exists                   // There exists a state such that
+            PrCount    t_pc1,
+            Local      t_CL1,
+            PrCount    t_pc2,
+            Local      t_CL2,
+            PrCount    t_pc3,
+            Local      t_CL3,
+            Global    t_G.
+        (   Thread1_2( t_pc1, t_CL1, t_pc2, t_CL2, t_pc3, t_CL3, t_G )    // That state in fixed point and ...
+          &    target( 1, t_pc1 )                // target is reached
+        )
+     )
+
+
+  // initial configuration (init)
+  |  (
+        Thread3_1( s_pc1, s_CL1, s_pc2, s_CL2,s_pc3, s_CL3, s_G )
+        &  s_G.v1 = 0
+        &  ContextSwitch_3(s_pc3)
+     )
+
+
+
+
+//*********************************************************************************/
+// forward propagation on internal transitions
+//*********************************************************************************/
+
+  |  (
+         true
+      & (exists                  // There exists an internal state that
+           PrCount t_pc1,
+           Local   t_CL1,
+           Global t_G.
+           (    (   Thread1_2( t_pc1, t_CL1, s_pc2, s_CL2,s_pc3, s_CL3, t_G )
+                )
+               // &( t_G.v1=0 | ( t_G.v1=1 & t_CL1.v0=1 ) )   // Start, so when it ends?
+               &(
+                  ( programInt1_1(t_pc1,s_pc1,t_CL1,s_CL1,t_G,s_G)      // Assignment related
+                    & CopyVariables_ProgramInt_1(t_pc1,t_CL1,s_CL1,t_G,s_G)   //  Copy others global variable
+                  )
+                  | programInt3(1, t_pc1, s_pc1, t_CL1, s_CL1, t_G, s_G )   // constrain
+                )
+           )
+      )
+    )
+
+  | (
+
+          true
+       // & (s_G.v1=0 | ( s_G.v1=1 & s_CL1.v0=1 ) )     // Atomic condition
+       & (exists PrCount t_pc1.
+             (     Thread1_2( t_pc1, s_CL1, s_pc2, s_CL2,s_pc3, s_CL3, s_G )
+                 & programInt2_1(t_pc1,s_pc1,s_CL1,s_G)    // Control flow statement
+             )
+         )
+    )
+
+);
+#size Thread1_2;
+#timer;
+
+
+
+ // #####  #   #  ####   #####    #    ####          ###
+ //   #    #   #  #   #  #       # #    #  #        #   #
+ //   #    #   #  #   #  #      #   #   #  #            #
+ //   #    #####  ####   ####   #   #   #  #          ##
+ //   #    #   #  # #    #      #####   #  #         #
+ //   #    #   #  #  #   #      #   #   #  #        #
+ //   #    #   #  #   #  #####  #   #  ####         #####
+
+mu bool Thread2_2(
+ PrCount    s_pc1,                  // Program counter
+ Local      s_CL1,                  // Local variable
+ PrCount    s_pc2,                  // Program counter
+ Local      s_CL2,                  // Local variable
+ PrCount    s_pc3,                  // Program counter
+ Local      s_CL3,                  // Local variable
+
+ Global    s_G                    // Global variable
+)
+ s_pc1    <  s_CL1,
+ s_CL1    <  s_pc2,
+ s_pc2    <  s_CL2,
+ s_CL2    <  s_pc3,
+ s_pc3    <  s_CL3,
+ s_CL3    <  s_G
+( false
+
+  // early termination
+  | ( exists                   // There exists a state such that
+            PrCount    t_pc1,
+            Local      t_CL1,
+            PrCount    t_pc2,
+            Local      t_CL2,
+            PrCount    t_pc3,
+            Local      t_CL3,
+            Global    t_G.
+        (   Thread2_2( t_pc1, t_CL1, t_pc2, t_CL2, t_pc3, t_CL3, t_G )    // That state in fixed point and ...
+          &    target( 2, t_pc2 )                // target is reached
+        )
+     )
+
+
+  // initial configuration (init)
+  |  (
+        Thread1_2( s_pc1, s_CL1, s_pc2, s_CL2,s_pc3, s_CL3, s_G )
+        &  s_G.v1 = 0
+        &  ContextSwitch_1(s_pc1)
+     )
+
+
+
+
+//*********************************************************************************/
+// forward propagation on internal transitions
+//*********************************************************************************/
+
+  |  (
+      true
+      & (exists                  // There exists an internal state that
+           PrCount t_pc2,
+           Local   t_CL2,
+           Global  t_G.
+           (    (   Thread2_2( s_pc1, s_CL1, t_pc2, t_CL2,s_pc3, s_CL3, t_G )
+                )
+               // &( t_G.v1=0 | ( t_G.v1=1 & t_CL2.v0=1 ) )   // Start, so when it ends?
+               &(
+                  ( programInt1_2(t_pc2,s_pc2,t_CL2,s_CL2,t_G,s_G)      // Assignment related
+                    & CopyVariables_ProgramInt_2(t_pc2,t_CL2,s_CL2,t_G,s_G)   //  Copy others global variable
+                  )
+                  | programInt3(2, t_pc2, s_pc2, t_CL2, s_CL2, t_G, s_G )   // constrain
+                )
+           )
+      )
+    )
+
+  | (
+         true
+       // & (s_G.v1=0 | ( s_G.v1=1 & s_CL2.v0=1 ) )     // Atomic condition
+       & (exists PrCount t_pc2.
+             (     Thread2_2( s_pc1, s_CL1, t_pc2, s_CL2,s_pc3, s_CL3, s_G )
+                 & programInt2_2(t_pc2,s_pc2,s_CL2,s_G)    // Control flow statement
+             )
+         )
+    )
+
+);
+#size Thread2_2;
+#timer;
+
+
+
+
+
+
+// ###   #  #  ###   ####   ##   ###         ####
+//  #    #  #  #  #  #     #  #  #  #           #
+//  #    ####  #  #  ###   #  #  #  #         ##
+//  #    #  #  ###   #     ####  #  #           #
+//  #    #  #  # #   #     #  #  #  #        #  #
+//  #    #  #  #  #  ####  #  #  ###          ##
+
+mu bool Thread3_2(
+ PrCount    s_pc1,                  // Program counter
+ Local      s_CL1,                  // Local variable
+ PrCount    s_pc2,                  // Program counter
+ Local      s_CL2,                  // Local variable
+ PrCount    s_pc3,                  // Program counter
+ Local      s_CL3,                  // Local variable
+
+ Global    s_G                    // Global variable
+)
+ s_pc1    <  s_CL1,
+ s_CL1    <  s_pc2,
+ s_pc2    <  s_CL2,
+ s_CL2    <  s_pc3,
+ s_pc3    <  s_CL3,
+ s_CL3    <  s_G
+( false
+
+  // early termination
+  | ( exists                   // There exists a state such that
+            PrCount    t_pc1,
+            Local      t_CL1,
+            PrCount    t_pc2,
+            Local      t_CL2,
+            PrCount    t_pc3,
+            Local      t_CL3,
+            Global    t_G.
+        (   Thread3_2( t_pc1, t_CL1, t_pc2, t_CL2, t_pc3, t_CL3, t_G )    // That state in fixed point and ...
+          &    target( 3, t_pc3 )                // target is reached
+        )
+     )
+
+
+  // initial configuration (init)
+  |  (
+        Thread2_2( s_pc1, s_CL1, s_pc2, s_CL2,s_pc3, s_CL3, s_G )
+        &  s_G.v1 = 0
+        &  ContextSwitch_2(s_pc2)
+     )
+
+
+
+
+//*********************************************************************************/
+// forward propagation on internal transitions
+//*********************************************************************************/
+
+  |  (
+      true
+      & (exists                  // There exists an internal state that
+           PrCount t_pc3,
+           Local   t_CL3,
+           Global  t_G.
+           (    (   Thread3_2( s_pc1, s_CL1, s_pc2, s_CL2, t_pc3, t_CL3, t_G )
+                )
+               // &( t_G.v1=0 | ( t_G.v1=1 & t_CL3.v0=1 ) )   // Start, so when it ends?
+               &(
+                  ( programInt1_3(t_pc3,s_pc3,t_CL3,s_CL3,t_G,s_G)      // Assignment related
+                    & CopyVariables_ProgramInt_3(t_pc3,t_CL3,s_CL3,t_G,s_G)   //  Copy others global variable
+                  )
+                  | programInt3(3, t_pc3, s_pc3, t_CL3, s_CL3, t_G, s_G )   // constrain
+                )
+           )
+      )
+    )
+
+  | (
+         true
+       // & (s_G.v1=0 | ( s_G.v1=1 & s_CL3.v0=1 ) )     // Atomic condition
+       & (exists PrCount t_pc3.
+             (     Thread3_2( s_pc1, s_CL1, s_pc2, s_CL2,t_pc3, s_CL3, s_G )
+                 & programInt2_3(t_pc3,s_pc3,s_CL3,s_G)    // Control flow statement
+             )
+         )
+    )
+
+);
+#size Thread3_2;
 #timer;
 
 
@@ -1042,544 +1315,6 @@ mu bool Thread1_3(
 );
 #size Thread1_3;
 #timer;
-
-
-
- // ####    ###   #   #  #   #  ####           ###
- // #   #  #   #  #   #  #   #   #  #         #   #
- // #   #  #   #  #   #  ##  #   #  #             #
- // ####   #   #  #   #  # # #   #  #           ##
- // # #    #   #  #   #  #  ##   #  #          #
- // #  #   #   #  #   #  #   #   #  #         #
- // #   #   ###    ###   #   #  ####          #####
-
-
-// BACKWARD
-
-
-
-// ###   #  #  ###   ####   ##   ###         ####
-//  #    #  #  #  #  #     #  #  #  #           #
-//  #    ####  #  #  ###   #  #  #  #         ##
-//  #    #  #  ###   #     ####  #  #           #
-//  #    #  #  # #   #     #  #  #  #        #  #
-//  #    #  #  #  #  ####  #  #  ###          ##
-
-mu bool Thread3_2_backward(
- PrCount    s_pc1,                  // Program counter
- Local      s_CL1,                  // Local variable
- PrCount    s_pc2,                  // Program counter
- Local      s_CL2,                  // Local variable
- PrCount    s_pc3,                  // Program counter
- Local      s_CL3,                  // Local variable
- Global     s_G                    // Global variable
-)
- s_pc1    <  s_CL1,
- s_CL1    <  s_pc2,
- s_pc2    <  s_CL2,
- s_CL2    <  s_pc3,
- s_pc3    <  s_CL3,
- s_CL3    <  s_G
-( false
-
-  // initial configuration (init)
-  | (exists
-        Local   t_CL1,
-        Local   t_CL2,
-        Local   t_CL3,
-        Global  t_G.
-        (
-          Thread1_3(s_pc1, t_CL1, s_pc2, t_CL2, s_pc3, t_CL3, t_G)
-          & t_G.v1 = 0
-        )
-        & ContextSwitch_1(s_pc1)
-        & ContextSwitch_3(s_pc3)
-    )
-
-
-//*********************************************************************************/
-// forward propagation on internal transitions
-//*********************************************************************************/
-
-  |  (
-      true
-      & (exists                  // There exists an internal state that
-           PrCount t_pc3,
-           Local   t_CL3,
-           Global  t_G.
-           (    (
-                  Thread3_2_backward( s_pc1, s_CL1, s_pc2, s_CL2, t_pc3, t_CL3, t_G )
-                )
-               // &( t_G.v1=0 | ( t_G.v1=1 & t_CL3.v0=1 ) )   // Start, so when it ends?
-               &(
-                  ( programInt1_3(s_pc3, t_pc3, s_CL3, t_CL3, s_G, t_G)      // Assignment related
-                    & CopyVariables_ProgramInt_3(s_pc3, s_CL3, t_CL3, s_G, t_G)   //  Copy others global variable
-                  )
-                  | programInt3(3, s_pc3, t_pc3, s_CL3, t_CL3, s_G, t_G )   // constrain
-                )
-           )
-      )
-    )
-
-  | (
-         true
-       & (exists PrCount t_pc3.
-             (
-                Thread3_2_backward( s_pc1, s_CL1, s_pc2, s_CL2, t_pc3, s_CL3, s_G )
-                 & programInt2_3(s_pc3, t_pc3, s_CL3, s_G)    // Control flow statement
-             )
-         )
-    )
-
-);
-#size Thread3_2_backward;
-#timer;
-
- // #####  #   #  ####   #####    #    ####          ###
- //   #    #   #  #   #  #       # #    #  #        #   #
- //   #    #   #  #   #  #      #   #   #  #            #
- //   #    #####  ####   ####   #   #   #  #          ##
- //   #    #   #  # #    #      #####   #  #         #
- //   #    #   #  #  #   #      #   #   #  #        #
- //   #    #   #  #   #  #####  #   #  ####         #####
-
-mu bool Thread2_2_backward(
- PrCount    s_pc1,                  // Program counter
- Local      s_CL1,                  // Local variable
- PrCount    s_pc2,                  // Program counter
- Local      s_CL2,                  // Local variable
- PrCount    s_pc3,                  // Program counter
- Local      s_CL3,                  // Local variable
-
- Global    s_G                    // Global variable
-)
- s_pc1    <  s_CL1,
- s_CL1    <  s_pc2,
- s_pc2    <  s_CL2,
- s_CL2    <  s_pc3,
- s_pc3    <  s_CL3,
- s_CL3    <  s_G
-( false
-
-  // initial configuration (init)
-  |  ( exists
-          Local   t_CL1,
-          Local   t_CL2,
-          Local   t_CL3,
-          Global  t_G.
-        (
-          Thread3_2_backward( s_pc1, t_CL1, s_pc2, t_CL2, s_pc3, t_CL3, t_G )
-          &  t_G.v1 = 0
-        )
-        &  ContextSwitch_2(s_pc2)
-        &  ContextSwitch_3(s_pc3)
-     )
-
-
-//*********************************************************************************/
-// forward propagation on internal transitions
-//*********************************************************************************/
-
-  |  (
-      true
-      & (exists                  // There exists an internal state that
-           PrCount t_pc2,
-           Local   t_CL2,
-           Global  t_G.
-           (    (   Thread2_2_backward( s_pc1, s_CL1, t_pc2, t_CL2,s_pc3, s_CL3, t_G )
-                )
-               // &( t_G.v1=0 | ( t_G.v1=1 & t_CL2.v0=1 ) )   // Start, so when it ends?
-               &(
-                  ( programInt1_2(s_pc2, t_pc2, s_CL2, t_CL2, s_G, t_G)      // Assignment related
-                    & CopyVariables_ProgramInt_2(s_pc2, s_CL2, t_CL2, s_G, t_G)   //  Copy others global variable
-                  )
-                  | programInt3(2, s_pc2, t_pc2, s_CL2, t_CL2, s_G, t_G )   // constrain
-                )
-           )
-      )
-    )
-
-  | (
-         true
-       // & (s_G.v1=0 | ( s_G.v1=1 & s_CL2.v0=1 ) )     // Atomic condition
-       & (exists PrCount t_pc2.
-             (     Thread2_2_backward( s_pc1, s_CL1, t_pc2, s_CL2,s_pc3, s_CL3, s_G )
-                 & programInt2_2(s_pc2, t_pc2,s_CL2,s_G)    // Control flow statement
-             )
-         )
-    )
-
-);
-#size Thread2_2_backward;
-#timer;
-
-
-
-// ###   #  #  ###   ####   ##   ###          #
-//  #    #  #  #  #  #     #  #  #  #        ##
-//  #    ####  #  #  ###   #  #  #  #         #
-//  #    #  #  ###   #     ####  #  #         #
-//  #    #  #  # #   #     #  #  #  #         #
-//  #    #  #  #  #  ####  #  #  ###         ###
-
-mu bool Thread1_2_backward(
- PrCount    s_pc1,                  // Program counter
- Local      s_CL1,                  // Local variable
- PrCount    s_pc2,                  // Program counter
- Local      s_CL2,                  // Local variable
- PrCount    s_pc3,                  // Program counter
- Local      s_CL3,                  // Local variable
- Global    s_G                    // Global variable
-)
- s_pc1    <  s_CL1,
- s_CL1    <  s_pc2,
- s_pc2    <  s_CL2,
- s_CL2    <  s_pc3,
- s_pc3    <  s_CL3,
- s_CL3    <  s_G
-( false
-
-  // initial configuration (init)
-  |  (exists
-          Local   t_CL1,
-          Local   t_CL2,
-          Local   t_CL3,
-          Global  t_G.
-        (
-          Thread2_2_backward( s_pc1, t_CL1, s_pc2, t_CL2, s_pc3, t_CL3, t_G )
-          &  t_G.v1 = 0
-        )
-        &  ContextSwitch_1(s_pc1)
-        &  ContextSwitch_2(s_pc2)
-     )
-
-//*********************************************************************************/
-// forward propagation on internal transitions
-//*********************************************************************************/
-
-  |  (
-         true
-      & (exists                  // There exists an internal state that
-           PrCount t_pc1,
-           Local   t_CL1,
-           Global t_G.
-           (    (   Thread1_2_backward( t_pc1, t_CL1, s_pc2, s_CL2,s_pc3, s_CL3, t_G )
-                )
-               // &( t_G.v1=0 | ( t_G.v1=1 & t_CL1.v0=1 ) )   // Start, so when it ends?
-               &(
-                  ( programInt1_1(s_pc1, t_pc1, s_CL1, t_CL1, s_G, t_G)      // Assignment related
-                    & CopyVariables_ProgramInt_1(s_pc1, s_CL1, t_CL1, s_G, t_G)   //  Copy others global variable
-                  )
-                  | programInt3(1, s_pc1, t_pc1, s_CL1, t_CL1, s_G, t_G )   // constrain
-                )
-           )
-      )
-    )
-
-  | (
-
-          true
-       // & (s_G.v1=0 | ( s_G.v1=1 & s_CL1.v0=1 ) )     // Atomic condition
-       & (exists PrCount t_pc1.
-             (     Thread1_2_backward( t_pc1, s_CL1, s_pc2, s_CL2,s_pc3, s_CL3, s_G )
-                 & programInt2_1(s_pc1,t_pc1,s_CL1,s_G)    // Control flow statement
-             )
-         )
-    )
-
-);
-#size Thread1_2_backward;
-#timer;
-
-
-// ####    ###   #   #  #   #  ####                  ###
- // #   #  #   #  #   #  #   #   #  #                #   #
- // #   #  #   #  #   #  ##  #   #  #                    #
- // ####   #   #  #   #  # # #   #  #                  ##
- // # #    #   #  #   #  #  ##   #  #                 #
- // #  #   #   #  #   #  #   #   #  #                #
- // #   #   ###    ###   #   #  ####                 #####
-
-
-
-
-// ###   #  #  ###   ####   ##   ###          #
-//  #    #  #  #  #  #     #  #  #  #        ##
-//  #    ####  #  #  ###   #  #  #  #         #
-//  #    #  #  ###   #     ####  #  #         #
-//  #    #  #  # #   #     #  #  #  #         #
-//  #    #  #  #  #  ####  #  #  ###         ###
-
-mu bool Thread1_2(
- PrCount    s_pc1,                  // Program counter
- Local      s_CL1,                  // Local variable
- PrCount    s_pc2,                  // Program counter
- Local      s_CL2,                  // Local variable
- PrCount    s_pc3,                  // Program counter
- Local      s_CL3,                  // Local variable
- Global    s_G                    // Global variable
-)
-  s_pc1    <  s_CL1,
- s_CL1    <  s_pc2,
- s_pc2    <  s_CL2,
- s_CL2    <  s_pc3,
- s_pc3    <  s_CL3,
- s_CL3    <  s_G
-( false
-
-  // early termination
-  | ( exists                   // There exists a state such that
-            PrCount    t_pc1,
-            Local      t_CL1,
-            PrCount    t_pc2,
-            Local      t_CL2,
-            PrCount    t_pc3,
-            Local      t_CL3,
-            Global    t_G.
-        (   Thread1_2( t_pc1, t_CL1, t_pc2, t_CL2, t_pc3, t_CL3, t_G )    // That state in fixed point and ...
-          &    target( 1, t_pc1 )                // target is reached
-        )
-     )
-
-
-  // initial configuration (init)
-  |  (
-        Thread3_1( s_pc1, s_CL1, s_pc2, s_CL2,s_pc3, s_CL3, s_G )
-        &  Thread1_2_backward(s_pc1, s_CL1, s_pc2, s_CL2,s_pc3, s_CL3, s_G)
-        &  s_G.v1 = 0
-        &  ContextSwitch_3(s_pc3)
-     )
-
-
-
-
-//*********************************************************************************/
-// forward propagation on internal transitions
-//*********************************************************************************/
-
-  |  (
-         true
-      & (exists                  // There exists an internal state that
-           PrCount t_pc1,
-           Local   t_CL1,
-           Global t_G.
-           (    (   Thread1_2( t_pc1, t_CL1, s_pc2, s_CL2,s_pc3, s_CL3, t_G )
-                )
-               // &( t_G.v1=0 | ( t_G.v1=1 & t_CL1.v0=1 ) )   // Start, so when it ends?
-               &(
-                  ( programInt1_1(t_pc1,s_pc1,t_CL1,s_CL1,t_G,s_G)      // Assignment related
-                    & CopyVariables_ProgramInt_1(t_pc1,t_CL1,s_CL1,t_G,s_G)   //  Copy others global variable
-                  )
-                  | programInt3(1, t_pc1, s_pc1, t_CL1, s_CL1, t_G, s_G )   // constrain
-                )
-           )
-      )
-    )
-
-  | (
-
-          true
-       // & (s_G.v1=0 | ( s_G.v1=1 & s_CL1.v0=1 ) )     // Atomic condition
-       & (exists PrCount t_pc1.
-             (     Thread1_2( t_pc1, s_CL1, s_pc2, s_CL2,s_pc3, s_CL3, s_G )
-                 & programInt2_1(t_pc1,s_pc1,s_CL1,s_G)    // Control flow statement
-             )
-         )
-    )
-
-);
-#size Thread1_2;
-#timer;
-
-//#reset Thread3_1;
-
-
-
- // #####  #   #  ####   #####    #    ####          ###
- //   #    #   #  #   #  #       # #    #  #        #   #
- //   #    #   #  #   #  #      #   #   #  #            #
- //   #    #####  ####   ####   #   #   #  #          ##
- //   #    #   #  # #    #      #####   #  #         #
- //   #    #   #  #  #   #      #   #   #  #        #
- //   #    #   #  #   #  #####  #   #  ####         #####
-
-mu bool Thread2_2(
- PrCount    s_pc1,                  // Program counter
- Local      s_CL1,                  // Local variable
- PrCount    s_pc2,                  // Program counter
- Local      s_CL2,                  // Local variable
- PrCount    s_pc3,                  // Program counter
- Local      s_CL3,                  // Local variable
-
- Global    s_G                    // Global variable
-)
- s_pc1    <  s_CL1,
- s_CL1    <  s_pc2,
- s_pc2    <  s_CL2,
- s_CL2    <  s_pc3,
- s_pc3    <  s_CL3,
- s_CL3    <  s_G
-( false
-
-  // early termination
-  | ( exists                   // There exists a state such that
-            PrCount    t_pc1,
-            Local      t_CL1,
-            PrCount    t_pc2,
-            Local      t_CL2,
-            PrCount    t_pc3,
-            Local      t_CL3,
-            Global    t_G.
-        (   Thread2_2( t_pc1, t_CL1, t_pc2, t_CL2, t_pc3, t_CL3, t_G )    // That state in fixed point and ...
-          &    target( 2, t_pc2 )                // target is reached
-        )
-     )
-
-
-  // initial configuration (init)
-  |  (
-        Thread1_2( s_pc1, s_CL1, s_pc2, s_CL2,s_pc3, s_CL3, s_G )
-        &  s_G.v1 = 0
-        &  ContextSwitch_1(s_pc1)
-     )
-
-
-
-
-//*********************************************************************************/
-// forward propagation on internal transitions
-//*********************************************************************************/
-
-  |  (
-      true
-      & (exists                  // There exists an internal state that
-           PrCount t_pc2,
-           Local   t_CL2,
-           Global  t_G.
-           (    (   Thread2_2( s_pc1, s_CL1, t_pc2, t_CL2,s_pc3, s_CL3, t_G )
-                )
-               // &( t_G.v1=0 | ( t_G.v1=1 & t_CL2.v0=1 ) )   // Start, so when it ends?
-               &(
-                  ( programInt1_2(t_pc2,s_pc2,t_CL2,s_CL2,t_G,s_G)      // Assignment related
-                    & CopyVariables_ProgramInt_2(t_pc2,t_CL2,s_CL2,t_G,s_G)   //  Copy others global variable
-                  )
-                  | programInt3(2, t_pc2, s_pc2, t_CL2, s_CL2, t_G, s_G )   // constrain
-                )
-           )
-      )
-    )
-
-  | (
-         true
-       // & (s_G.v1=0 | ( s_G.v1=1 & s_CL2.v0=1 ) )     // Atomic condition
-       & (exists PrCount t_pc2.
-             (     Thread2_2( s_pc1, s_CL1, t_pc2, s_CL2,s_pc3, s_CL3, s_G )
-                 & programInt2_2(t_pc2,s_pc2,s_CL2,s_G)    // Control flow statement
-             )
-         )
-    )
-
-);
-#size Thread2_2;
-#timer;
-
-//#reset Thread1_2;
-
-
-
-
-
-
-
-// ###   #  #  ###   ####   ##   ###         ####
-//  #    #  #  #  #  #     #  #  #  #           #
-//  #    ####  #  #  ###   #  #  #  #         ##
-//  #    #  #  ###   #     ####  #  #           #
-//  #    #  #  # #   #     #  #  #  #        #  #
-//  #    #  #  #  #  ####  #  #  ###          ##
-
-mu bool Thread3_2(
- PrCount    s_pc1,                  // Program counter
- Local      s_CL1,                  // Local variable
- PrCount    s_pc2,                  // Program counter
- Local      s_CL2,                  // Local variable
- PrCount    s_pc3,                  // Program counter
- Local      s_CL3,                  // Local variable
-
- Global    s_G                    // Global variable
-)
- s_pc1    <  s_CL1,
- s_CL1    <  s_pc2,
- s_pc2    <  s_CL2,
- s_CL2    <  s_pc3,
- s_pc3    <  s_CL3,
- s_CL3    <  s_G
-( false
-
-  // early termination
-  | ( exists                   // There exists a state such that
-            PrCount    t_pc1,
-            Local      t_CL1,
-            PrCount    t_pc2,
-            Local      t_CL2,
-            PrCount    t_pc3,
-            Local      t_CL3,
-            Global    t_G.
-        (   Thread3_2( t_pc1, t_CL1, t_pc2, t_CL2, t_pc3, t_CL3, t_G )    // That state in fixed point and ...
-          &    target( 3, t_pc3 )                // target is reached
-        )
-     )
-
-
-  // initial configuration (init)
-  |  (
-        Thread2_2( s_pc1, s_CL1, s_pc2, s_CL2,s_pc3, s_CL3, s_G )
-        &  s_G.v1 = 0
-        &  ContextSwitch_2(s_pc2)
-     )
-
-
-
-
-//*********************************************************************************/
-// forward propagation on internal transitions
-//*********************************************************************************/
-
-  |  (
-      true
-      & (exists                  // There exists an internal state that
-           PrCount t_pc3,
-           Local   t_CL3,
-           Global  t_G.
-           (    (   Thread3_2( s_pc1, s_CL1, s_pc2, s_CL2, t_pc3, t_CL3, t_G )
-                )
-               // &( t_G.v1=0 | ( t_G.v1=1 & t_CL3.v0=1 ) )   // Start, so when it ends?
-               &(
-                  ( programInt1_3(t_pc3,s_pc3,t_CL3,s_CL3,t_G,s_G)      // Assignment related
-                    & CopyVariables_ProgramInt_3(t_pc3,t_CL3,s_CL3,t_G,s_G)   //  Copy others global variable
-                  )
-                  | programInt3(3, t_pc3, s_pc3, t_CL3, s_CL3, t_G, s_G )   // constrain
-                )
-           )
-      )
-    )
-
-  | (
-         true
-       // & (s_G.v1=0 | ( s_G.v1=1 & s_CL3.v0=1 ) )     // Atomic condition
-       & (exists PrCount t_pc3.
-             (     Thread3_2( s_pc1, s_CL1, s_pc2, s_CL2,t_pc3, s_CL3, s_G )
-                 & programInt2_3(t_pc3,s_pc3,s_CL3,s_G)    // Control flow statement
-             )
-         )
-    )
-
-);
-#size Thread3_2;
-#timer;
-
-//#reset Thread2_2;
-
 
 
 
