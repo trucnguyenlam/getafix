@@ -1,9 +1,11 @@
 # Rules for writting concurrent boolean program #
-- global variable 'super_atomic' and 'atomic' must be declared first following the order
+- global variable 'atomic' must be declared first
 - init always the first function
-- In init function, super_atomic and atomic must be set to F
-- the first statement of every thread must be  'atomic := F;'
+- In init function, 'atomic' must be set to F
 - always use assume(T) at the end of each thread
-
+- Every non-thread function must have return
+- A non-thread function is function with name:
+    + Different from 'init' and 'main'
+    + Not begin with 'thread' (in any mixed case)
 
 

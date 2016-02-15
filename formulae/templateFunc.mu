@@ -1,5 +1,5 @@
 
-FunctionName(
+mu bool FunctionName(
   Module  s_mod,
   PrCount s_pc,
   Local   s_CL,
