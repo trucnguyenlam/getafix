@@ -5,7 +5,7 @@
 
 /**
  * Compute first three rounds forward precise
- * Compute the last round backward
+ * Compute the last round backward precisely
  * Check for intersection at the end of the third round
  */
 
