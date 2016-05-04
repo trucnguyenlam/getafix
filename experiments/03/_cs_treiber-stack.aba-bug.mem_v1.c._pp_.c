@@ -1,4 +1,5 @@
-/*  Generated 0.0.0.0.0.0 (-t7 -r3 -u1 -bcbmc) 2016-04-15 09:50:12  */
+/*  Generated 0.0.0.0.0.0 (-t7 -r3 -u1 -bcbmc) 2016-04-15 09:50:09  */
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -36,7 +37,7 @@ unsigned __CPROVER_bitvector[1] active_thread[THREADS+1]={1};
 unsigned __CPROVER_bitvector[4] pc[THREADS+1];
 unsigned __CPROVER_bitvector[5] pc_cs;
 unsigned int thread_index;
-unsigned __CPROVER_bitvector[4] thread_lines[] = {7, 10, 10, 10, 15, 15, 15, 15};
+unsigned __CPROVER_bitvector[4] thread_lines[] = {7, 10, 10, 10, 14, 14, 14, 14};
 
 /* pthread API */
 typedef int __cs_t;
@@ -144,48 +145,64 @@ unsigned __CPROVER_bitvector[4] guess_pc() {unsigned __CPROVER_bitvector[4] i; r
 /* here */
 
 
-                                                       int __CS_atomic_CAS(void **__csLOCALPARAM___CS_atomic_CAS_address, void *__csLOCALPARAM___CS_atomic_CAS_old_value, void *__csLOCALPARAM___CS_atomic_CAS_new_value)
+typedef int val_t;
+typedef int addr_t;
+                                                       val_t MEM_VALUE[25];
+                                                       void __CS_atomic_init_MEMORY(void)
                                                        {
-                                                         if ((*__csLOCALPARAM___CS_atomic_CAS_address) == __csLOCALPARAM___CS_atomic_CAS_old_value)
+                                                         MEM_VALUE[1] = 0;
+                                                         MEM_VALUE[2] = 0;
+                                                         MEM_VALUE[3] = 0;
+                                                         MEM_VALUE[4] = 0;
+                                                         MEM_VALUE[5] = 0;
+                                                         MEM_VALUE[6] = 0;
+                                                         MEM_VALUE[7] = 0;
+                                                       }
+                                                       
+                                                       addr_t __CS_atomic_malloc_Node()
+                                                       {
+                                                         static int __csLOCAL___CS_atomic_malloc_Node_i;
+                                                         __csLOCAL___CS_atomic_malloc_Node_i = __VERIFIER_nondet_int();
+                                                         __VERIFIER_assume((0 <= __csLOCAL___CS_atomic_malloc_Node_i) && (__csLOCAL___CS_atomic_malloc_Node_i < 2));
+                                                         __VERIFIER_assume(!MEM_VALUE[6 + __csLOCAL___CS_atomic_malloc_Node_i]);
+                                                         MEM_VALUE[6 + __csLOCAL___CS_atomic_malloc_Node_i] = 1;
+                                                         return 2 + (__csLOCAL___CS_atomic_malloc_Node_i * 2);
+                                                       }
+                                                       
+                                                       int __cs_function_malloc_Node_inlined = 1;
+                                                       int __cs_function_free_Node_inlined = 1;
+                                                       _Bool __CS_atomic_CAS(addr_t __csLOCALPARAM___CS_atomic_CAS_address_ptr, addr_t __csLOCALPARAM___CS_atomic_CAS_old_address, addr_t __csLOCALPARAM___CS_atomic_CAS_new_address)
+                                                       {
+                                                         if (MEM_VALUE[__csLOCALPARAM___CS_atomic_CAS_address_ptr] == __csLOCALPARAM___CS_atomic_CAS_old_address)
                                                          {
-                                                           *__csLOCALPARAM___CS_atomic_CAS_address = __csLOCALPARAM___CS_atomic_CAS_new_value;
+                                                           MEM_VALUE[__csLOCALPARAM___CS_atomic_CAS_address_ptr] = __csLOCALPARAM___CS_atomic_CAS_new_address;
                                                            return 1;
                                                          }
                                                        
                                                          return 0;
                                                        }
                                                        
-typedef struct Node Node;
-typedef 
-                                                       struct Node
-                                                       {
-                                                       		Node *next;
-                                                       		int val;
-                                                       } Node;
-typedef 
-                                                       struct Stack
-                                                       {
-                                                       		Node *top;
-                                                       } Stack;
-                                                       Stack gstack;
-                                                       Node nodepointers[2];
-                                                       int allocated[2];
-                                                       Node *__CS_atomic_malloc_Node()
-                                                       {
-                                                         static int __csLOCAL___CS_atomic_malloc_Node_i;
-                                                         __csLOCAL___CS_atomic_malloc_Node_i = nondet_int();
-                                                         __VERIFIER_assume((0 <= __csLOCAL___CS_atomic_malloc_Node_i) && (__csLOCAL___CS_atomic_malloc_Node_i < 2));
-                                                         __VERIFIER_assume(!allocated[__csLOCAL___CS_atomic_malloc_Node_i]);
-                                                         allocated[__csLOCAL___CS_atomic_malloc_Node_i] = 1;
-                                                         return &nodepointers[__csLOCAL___CS_atomic_malloc_Node_i];
-                                                       }
-                                                       
-                                                       int __cs_function_malloc_Node_inlined = 1;
-                                                       int __cs_function_free_Node_inlined = 1;
-                                                       int __cs_function_push_aux_inlined = 1;
-                                                       int __cs_function_pop_aux_inlined = 1;
-                                                       int __cs_function_Push_inlined = 1;
-                                                       int __cs_function_Pop_inlined = 1;
+                                                       int __cs_function_push_aux_t0_inlined = 1;
+                                                       addr_t n_push_t0;
+                                                       int __cs_function_Push_t0_inlined = 1;
+                                                       int __cs_function_push_aux_t1_inlined = 1;
+                                                       addr_t n_push_t1;
+                                                       int __cs_function_Push_t1_inlined = 1;
+                                                       int __cs_function_push_aux_t2_inlined = 1;
+                                                       addr_t n_push_t2;
+                                                       int __cs_function_Push_t2_inlined = 1;
+                                                       int __cs_function_pop_aux_t0_inlined = 1;
+                                                       addr_t n_pop_t0;
+                                                       int __cs_function_Pop_t0_inlined = 1;
+                                                       int __cs_function_pop_aux_t1_inlined = 1;
+                                                       addr_t n_pop_t1;
+                                                       int __cs_function_Pop_t1_inlined = 1;
+                                                       int __cs_function_pop_aux_t2_inlined = 1;
+                                                       addr_t n_pop_t2;
+                                                       int __cs_function_Pop_t2_inlined = 1;
+                                                       int __cs_function_pop_aux_t3_inlined = 1;
+                                                       addr_t n_pop_t3;
+                                                       int __cs_function_Pop_t3_inlined = 1;
                                                        int __cs_function_Init_inlined = 1;
                                                        int PushOpen[2];
                                                        int PushDone[2];
@@ -232,38 +249,36 @@ typedef
                                                        {
 IF(1,0,tinstrPush0_0_1)                                __CS_atomic_atomicIncr_Push(1);
                                                        	{
-                                                       static int __csLOCALPARAM_Push_i;
-                                                       __csLOCALPARAM_Push_i = 1;
-                                                       static Node *__csLOCAL_Push_n;
-                                                       static Node *__retval__malloc_Node_1;
+                                                       static int __csLOCALPARAM_Push_t0_i;
+                                                       __csLOCALPARAM_Push_t0_i = 1;
+                                                       static addr_t __retval__malloc_Node_1;
                                                        		{
 tinstrPush0_0_1: IF(1,1,tinstrPush0_0_2)               __retval__malloc_Node_1 = __CS_atomic_malloc_Node();
                                                        goto __exit__malloc_Node_1;
                                                        			__exit__malloc_Node_1: GUARD(1,2)
                                                        ;
                                                        		};
-tinstrPush0_0_2: IF(1,2,tinstrPush0_0_3)               __csLOCAL_Push_n = __retval__malloc_Node_1;
-tinstrPush0_0_3: IF(1,3,tinstrPush0_0_4)               (*__csLOCAL_Push_n).val = __csLOCALPARAM_Push_i;
+tinstrPush0_0_2: IF(1,2,tinstrPush0_0_3)               n_push_t0 = __retval__malloc_Node_1;
+tinstrPush0_0_3: IF(1,3,tinstrPush0_0_4)               MEM_VALUE[n_push_t0 + 1] = __csLOCALPARAM_Push_t0_i;
                                                        		{
-                                                       static Node *__csLOCALPARAM_push_aux_n;
-tinstrPush0_0_4: IF(1,4,tinstrPush0_0_5)               __csLOCALPARAM_push_aux_n = __csLOCAL_Push_n;
-                                                       static Node *__csLOCAL_push_aux_oldtop;
-tinstrPush0_0_5: IF(1,5,tinstrPush0_0_6)               __csLOCAL_push_aux_oldtop = gstack.top;
-tinstrPush0_0_6: IF(1,6,tinstrPush0_0_7)               (*__csLOCALPARAM_push_aux_n).next = __csLOCAL_push_aux_oldtop;
+                                                       static addr_t __csLOCALPARAM_push_aux_t0_n;
+tinstrPush0_0_4: IF(1,4,tinstrPush0_0_5)               __csLOCALPARAM_push_aux_t0_n = n_push_t0;
+tinstrPush0_0_5: IF(1,5,tinstrPush0_0_6)               MEM_VALUE[8] = MEM_VALUE[1];
+tinstrPush0_0_6: IF(1,6,tinstrPush0_0_7)               MEM_VALUE[__csLOCALPARAM_push_aux_t0_n + 0] = MEM_VALUE[8];
                                                        ;
-                                                       static _Bool __csLOCAL_push_aux___if_cond_0;
-tinstrPush0_0_7: IF(1,7,tinstrPush0_0_8)               __csLOCAL_push_aux___if_cond_0 = __CS_atomic_CAS(&gstack.top, __csLOCAL_push_aux_oldtop, __csLOCALPARAM_push_aux_n);
-                                                       if (__csLOCAL_push_aux___if_cond_0)
+                                                       static _Bool __csLOCAL_push_aux_t0___if_cond_0;
+tinstrPush0_0_7: IF(1,7,tinstrPush0_0_8)               __csLOCAL_push_aux_t0___if_cond_0 = __CS_atomic_CAS(1, MEM_VALUE[8], __csLOCALPARAM_push_aux_t0_n);
+                                                       if (__csLOCAL_push_aux_t0___if_cond_0)
                                                        			{
-                                                       goto __exit__push_aux_1;
+                                                       goto __exit__push_aux_t0_1;
                                                        			}
                                                        			;
 tinstrPush0_0_8: IF(1,8,tinstrPush0_0_9)               __VERIFIER_assume(0);
-                                                       			__exit__push_aux_1: GUARD(1,9)
+                                                       			__exit__push_aux_t0_1: GUARD(1,9)
                                                        ;
                                                        		};
                                                        0;
-                                                       		__exit__Push_1: GUARD(1,9)
+                                                       		__exit__Push_t0_1: GUARD(1,9)
                                                        ;
                                                        	};
                                                        0;
@@ -280,38 +295,36 @@ tinstrPush0_0_10:                                      STOP_NONVOID(10);
                                                        {
 IF(2,0,tinstrPush1_0_1)                                __CS_atomic_atomicIncr_Push(1);
                                                        	{
-                                                       static int __csLOCALPARAM_Push_i;
-                                                       __csLOCALPARAM_Push_i = 1;
-                                                       static Node *__csLOCAL_Push_n;
-                                                       static Node *__retval__malloc_Node_2;
+                                                       static int __csLOCALPARAM_Push_t1_i;
+                                                       __csLOCALPARAM_Push_t1_i = 1;
+                                                       static addr_t __retval__malloc_Node_2;
                                                        		{
 tinstrPush1_0_1: IF(2,1,tinstrPush1_0_2)               __retval__malloc_Node_2 = __CS_atomic_malloc_Node();
                                                        goto __exit__malloc_Node_2;
                                                        			__exit__malloc_Node_2: GUARD(2,2)
                                                        ;
                                                        		};
-tinstrPush1_0_2: IF(2,2,tinstrPush1_0_3)               __csLOCAL_Push_n = __retval__malloc_Node_2;
-tinstrPush1_0_3: IF(2,3,tinstrPush1_0_4)               (*__csLOCAL_Push_n).val = __csLOCALPARAM_Push_i;
+tinstrPush1_0_2: IF(2,2,tinstrPush1_0_3)               n_push_t1 = __retval__malloc_Node_2;
+tinstrPush1_0_3: IF(2,3,tinstrPush1_0_4)               MEM_VALUE[n_push_t1 + 1] = __csLOCALPARAM_Push_t1_i;
                                                        		{
-                                                       static Node *__csLOCALPARAM_push_aux_n;
-tinstrPush1_0_4: IF(2,4,tinstrPush1_0_5)               __csLOCALPARAM_push_aux_n = __csLOCAL_Push_n;
-                                                       static Node *__csLOCAL_push_aux_oldtop;
-tinstrPush1_0_5: IF(2,5,tinstrPush1_0_6)               __csLOCAL_push_aux_oldtop = gstack.top;
-tinstrPush1_0_6: IF(2,6,tinstrPush1_0_7)               (*__csLOCALPARAM_push_aux_n).next = __csLOCAL_push_aux_oldtop;
+                                                       static addr_t __csLOCALPARAM_push_aux_t1_n;
+tinstrPush1_0_4: IF(2,4,tinstrPush1_0_5)               __csLOCALPARAM_push_aux_t1_n = n_push_t1;
+tinstrPush1_0_5: IF(2,5,tinstrPush1_0_6)               MEM_VALUE[9] = MEM_VALUE[1];
+tinstrPush1_0_6: IF(2,6,tinstrPush1_0_7)               MEM_VALUE[__csLOCALPARAM_push_aux_t1_n + 0] = MEM_VALUE[9];
                                                        ;
-                                                       static _Bool __csLOCAL_push_aux___if_cond_0;
-tinstrPush1_0_7: IF(2,7,tinstrPush1_0_8)               __csLOCAL_push_aux___if_cond_0 = __CS_atomic_CAS(&gstack.top, __csLOCAL_push_aux_oldtop, __csLOCALPARAM_push_aux_n);
-                                                       if (__csLOCAL_push_aux___if_cond_0)
+                                                       static _Bool __csLOCAL_push_aux_t1___if_cond_1;
+tinstrPush1_0_7: IF(2,7,tinstrPush1_0_8)               __csLOCAL_push_aux_t1___if_cond_1 = __CS_atomic_CAS(1, MEM_VALUE[9], __csLOCALPARAM_push_aux_t1_n);
+                                                       if (__csLOCAL_push_aux_t1___if_cond_1)
                                                        			{
-                                                       goto __exit__push_aux_2;
+                                                       goto __exit__push_aux_t1_1;
                                                        			}
                                                        			;
 tinstrPush1_0_8: IF(2,8,tinstrPush1_0_9)               __VERIFIER_assume(0);
-                                                       			__exit__push_aux_2: GUARD(2,9)
+                                                       			__exit__push_aux_t1_1: GUARD(2,9)
                                                        ;
                                                        		};
                                                        0;
-                                                       		__exit__Push_2: GUARD(2,9)
+                                                       		__exit__Push_t1_1: GUARD(2,9)
                                                        ;
                                                        	};
                                                        0;
@@ -328,38 +341,36 @@ tinstrPush1_0_10:                                      STOP_NONVOID(10);
                                                        {
 IF(3,0,tinstrPush2_0_1)                                __CS_atomic_atomicIncr_Push(1);
                                                        	{
-                                                       static int __csLOCALPARAM_Push_i;
-                                                       __csLOCALPARAM_Push_i = 1;
-                                                       static Node *__csLOCAL_Push_n;
-                                                       static Node *__retval__malloc_Node_3;
+                                                       static int __csLOCALPARAM_Push_t2_i;
+                                                       __csLOCALPARAM_Push_t2_i = 1;
+                                                       static addr_t __retval__malloc_Node_3;
                                                        		{
 tinstrPush2_0_1: IF(3,1,tinstrPush2_0_2)               __retval__malloc_Node_3 = __CS_atomic_malloc_Node();
                                                        goto __exit__malloc_Node_3;
                                                        			__exit__malloc_Node_3: GUARD(3,2)
                                                        ;
                                                        		};
-tinstrPush2_0_2: IF(3,2,tinstrPush2_0_3)               __csLOCAL_Push_n = __retval__malloc_Node_3;
-tinstrPush2_0_3: IF(3,3,tinstrPush2_0_4)               (*__csLOCAL_Push_n).val = __csLOCALPARAM_Push_i;
+tinstrPush2_0_2: IF(3,2,tinstrPush2_0_3)               n_push_t2 = __retval__malloc_Node_3;
+tinstrPush2_0_3: IF(3,3,tinstrPush2_0_4)               MEM_VALUE[n_push_t2 + 1] = __csLOCALPARAM_Push_t2_i;
                                                        		{
-                                                       static Node *__csLOCALPARAM_push_aux_n;
-tinstrPush2_0_4: IF(3,4,tinstrPush2_0_5)               __csLOCALPARAM_push_aux_n = __csLOCAL_Push_n;
-                                                       static Node *__csLOCAL_push_aux_oldtop;
-tinstrPush2_0_5: IF(3,5,tinstrPush2_0_6)               __csLOCAL_push_aux_oldtop = gstack.top;
-tinstrPush2_0_6: IF(3,6,tinstrPush2_0_7)               (*__csLOCALPARAM_push_aux_n).next = __csLOCAL_push_aux_oldtop;
+                                                       static addr_t __csLOCALPARAM_push_aux_t2_n;
+tinstrPush2_0_4: IF(3,4,tinstrPush2_0_5)               __csLOCALPARAM_push_aux_t2_n = n_push_t2;
+tinstrPush2_0_5: IF(3,5,tinstrPush2_0_6)               MEM_VALUE[10] = MEM_VALUE[1];
+tinstrPush2_0_6: IF(3,6,tinstrPush2_0_7)               MEM_VALUE[__csLOCALPARAM_push_aux_t2_n + 0] = MEM_VALUE[10];
                                                        ;
-                                                       static _Bool __csLOCAL_push_aux___if_cond_0;
-tinstrPush2_0_7: IF(3,7,tinstrPush2_0_8)               __csLOCAL_push_aux___if_cond_0 = __CS_atomic_CAS(&gstack.top, __csLOCAL_push_aux_oldtop, __csLOCALPARAM_push_aux_n);
-                                                       if (__csLOCAL_push_aux___if_cond_0)
+                                                       static _Bool __csLOCAL_push_aux_t2___if_cond_2;
+tinstrPush2_0_7: IF(3,7,tinstrPush2_0_8)               __csLOCAL_push_aux_t2___if_cond_2 = __CS_atomic_CAS(1, MEM_VALUE[10], __csLOCALPARAM_push_aux_t2_n);
+                                                       if (__csLOCAL_push_aux_t2___if_cond_2)
                                                        			{
-                                                       goto __exit__push_aux_3;
+                                                       goto __exit__push_aux_t2_1;
                                                        			}
                                                        			;
 tinstrPush2_0_8: IF(3,8,tinstrPush2_0_9)               __VERIFIER_assume(0);
-                                                       			__exit__push_aux_3: GUARD(3,9)
+                                                       			__exit__push_aux_t2_1: GUARD(3,9)
                                                        ;
                                                        		};
                                                        0;
-                                                       		__exit__Push_3: GUARD(3,9)
+                                                       		__exit__Push_t2_1: GUARD(3,9)
                                                        ;
                                                        	};
                                                        0;
@@ -376,68 +387,65 @@ tinstrPush2_0_10:                                      STOP_NONVOID(10);
                                                        {
 IF(4,0,tinstrPop3_0_1)                                 __CS_atomic_atomicIncr_Pop();
                                                        static int __csLOCAL_instrPop3_localPop_ret;
-                                                       static int __retval__Pop_1;
+                                                       static int __retval__Pop_t0_1;
                                                        	{
-                                                       static Node *__csLOCAL_Pop_n;
-                                                       static Node *__retval__pop_aux_1;
+                                                       static addr_t __retval__pop_aux_t0_1;
                                                        		{
-                                                       static Node *__csLOCAL_pop_aux_oldtop;
-                                                       static Node *__csLOCAL_pop_aux_next;
-tinstrPop3_0_1: IF(4,1,tinstrPop3_0_2)                 __csLOCAL_pop_aux_oldtop = gstack.top;
-tinstrPop3_0_2: IF(4,2,tinstrPop3_0_3)                 if (__csLOCAL_pop_aux_oldtop == 0)
+tinstrPop3_0_1: IF(4,1,tinstrPop3_0_2)                 MEM_VALUE[11] = MEM_VALUE[1];
+tinstrPop3_0_2: IF(4,2,tinstrPop3_0_3)                 if (MEM_VALUE[11] == 0)
                                                        			{
-tinstrPop3_0_3: IF(4,3,tinstrPop3_0_4)                 __retval__pop_aux_1 = 0;
-                                                       goto __exit__pop_aux_1;
+                                                       __retval__pop_aux_t0_1 = 0;
+                                                       goto __exit__pop_aux_t0_1;
                                                        			}
-                                                       			GUARD(4,4);
-tinstrPop3_0_4: IF(4,4,tinstrPop3_0_5)                 __csLOCAL_pop_aux_next = (*__csLOCAL_pop_aux_oldtop).next;
+                                                       			;
+tinstrPop3_0_3: IF(4,3,tinstrPop3_0_4)                 MEM_VALUE[12] = MEM_VALUE[MEM_VALUE[11]];
                                                        ;
-                                                       static _Bool __csLOCAL_pop_aux___if_cond_1;
-tinstrPop3_0_5: IF(4,5,tinstrPop3_0_6)                 __csLOCAL_pop_aux___if_cond_1 = __CS_atomic_CAS(&gstack.top, __csLOCAL_pop_aux_oldtop, __csLOCAL_pop_aux_next);
-                                                       if (__csLOCAL_pop_aux___if_cond_1)
+                                                       static _Bool __csLOCAL_pop_aux_t0___if_cond_3;
+tinstrPop3_0_4: IF(4,4,tinstrPop3_0_5)                 __csLOCAL_pop_aux_t0___if_cond_3 = __CS_atomic_CAS(1, MEM_VALUE[11], MEM_VALUE[12]);
+                                                       if (__csLOCAL_pop_aux_t0___if_cond_3)
                                                        			{
-tinstrPop3_0_6: IF(4,6,tinstrPop3_0_7)                 __retval__pop_aux_1 = __csLOCAL_pop_aux_oldtop;
-                                                       goto __exit__pop_aux_1;
+tinstrPop3_0_5: IF(4,5,tinstrPop3_0_6)                 __retval__pop_aux_t0_1 = MEM_VALUE[11];
+                                                       goto __exit__pop_aux_t0_1;
                                                        			}
-                                                       			GUARD(4,7);
-tinstrPop3_0_7: IF(4,7,tinstrPop3_0_8)                 __VERIFIER_assume(0);
-                                                       			__exit__pop_aux_1: GUARD(4,8)
+                                                       			GUARD(4,6);
+tinstrPop3_0_6: IF(4,6,tinstrPop3_0_7)                 __VERIFIER_assume(0);
+                                                       			__exit__pop_aux_t0_1: GUARD(4,7)
                                                        ;
                                                        		};
-tinstrPop3_0_8: IF(4,8,tinstrPop3_0_9)                 __csLOCAL_Pop_n = __retval__pop_aux_1;
-tinstrPop3_0_9: IF(4,9,tinstrPop3_0_10)                if (__csLOCAL_Pop_n == 0)
+tinstrPop3_0_7: IF(4,7,tinstrPop3_0_8)                 n_pop_t0 = __retval__pop_aux_t0_1;
+tinstrPop3_0_8: IF(4,8,tinstrPop3_0_9)                 if (n_pop_t0 == 0)
                                                        		{
-                                                       __retval__Pop_1 = 2;
-                                                       goto __exit__Pop_1;
+                                                       __retval__Pop_t0_1 = 2;
+                                                       goto __exit__Pop_t0_1;
                                                        		}
                                                        		else
                                                        		{ 
-                                                       static int __csLOCAL_Pop_v;
-tinstrPop3_0_10: IF(4,10,tinstrPop3_0_11)              __csLOCAL_Pop_v = (*__csLOCAL_Pop_n).val;
+                                                       static int __csLOCAL_Pop_t0_v;
+tinstrPop3_0_9: IF(4,9,tinstrPop3_0_10)                __csLOCAL_Pop_t0_v = MEM_VALUE[n_pop_t0 + 1];
                                                        			{
-                                                       static Node *__csLOCALPARAM_free_Node_n;
-tinstrPop3_0_11: IF(4,11,tinstrPop3_0_12)              __csLOCALPARAM_free_Node_n = __csLOCAL_Pop_n;
+                                                       static addr_t __csLOCALPARAM_free_Node_n;
+tinstrPop3_0_10: IF(4,10,tinstrPop3_0_11)              __csLOCALPARAM_free_Node_n = n_pop_t0;
                                                        static int __csLOCAL_free_Node_i;
-                                                       __csLOCAL_free_Node_i = nondet_int();
-tinstrPop3_0_12: IF(4,12,tinstrPop3_0_13)              __VERIFIER_assume((&nodepointers[__csLOCAL_free_Node_i]) == __csLOCALPARAM_free_Node_n);
-tinstrPop3_0_13: IF(4,13,tinstrPop3_0_14)              allocated[__csLOCAL_free_Node_i] = 0;
-                                                       				__exit__free_Node_1: GUARD(4,14)
+                                                       __csLOCAL_free_Node_i = __VERIFIER_nondet_int();
+tinstrPop3_0_11: IF(4,11,tinstrPop3_0_12)              __VERIFIER_assume((2 + (__csLOCAL_free_Node_i * 2)) == __csLOCALPARAM_free_Node_n);
+tinstrPop3_0_12: IF(4,12,tinstrPop3_0_13)              MEM_VALUE[6 + __csLOCAL_free_Node_i] = 0;
+                                                       				__exit__free_Node_1: GUARD(4,13)
                                                        ;
                                                        			};
                                                        0;
-                                                       __retval__Pop_1 = __csLOCAL_Pop_v;
-                                                       goto __exit__Pop_1;
+                                                       __retval__Pop_t0_1 = __csLOCAL_Pop_t0_v;
+                                                       goto __exit__Pop_t0_1;
                                                        		}
-                                                       		GUARD(4,14);
-                                                       		__exit__Pop_1: GUARD(4,14)
+                                                       		GUARD(4,13);
+                                                       		__exit__Pop_t0_1: GUARD(4,13)
                                                        ;
                                                        	};
-                                                       __csLOCAL_instrPop3_localPop_ret = __retval__Pop_1;
-tinstrPop3_0_14: IF(4,14,tinstrPop3_0_15)              __CS_atomic_atomicDecrIncr_Pop(__csLOCAL_instrPop3_localPop_ret);
+                                                       __csLOCAL_instrPop3_localPop_ret = __retval__Pop_t0_1;
+tinstrPop3_0_13: IF(4,13,tinstrPop3_0_14)              __CS_atomic_atomicDecrIncr_Pop(__csLOCAL_instrPop3_localPop_ret);
                                                        goto __exit_instrPop3;
-                                                       	__exit_instrPop3: GUARD(4,15)
+                                                       	__exit_instrPop3: GUARD(4,14)
                                                        ;
-tinstrPop3_0_15:                                       STOP_NONVOID(15);
+tinstrPop3_0_14:                                       STOP_NONVOID(14);
                                                        }
                                                        
                                                        
@@ -446,68 +454,65 @@ tinstrPop3_0_15:                                       STOP_NONVOID(15);
                                                        {
 IF(5,0,tinstrPop4_0_1)                                 __CS_atomic_atomicIncr_Pop();
                                                        static int __csLOCAL_instrPop4_localPop_ret;
-                                                       static int __retval__Pop_2;
+                                                       static int __retval__Pop_t1_1;
                                                        	{
-                                                       static Node *__csLOCAL_Pop_n;
-                                                       static Node *__retval__pop_aux_2;
+                                                       static addr_t __retval__pop_aux_t1_1;
                                                        		{
-                                                       static Node *__csLOCAL_pop_aux_oldtop;
-                                                       static Node *__csLOCAL_pop_aux_next;
-tinstrPop4_0_1: IF(5,1,tinstrPop4_0_2)                 __csLOCAL_pop_aux_oldtop = gstack.top;
-tinstrPop4_0_2: IF(5,2,tinstrPop4_0_3)                 if (__csLOCAL_pop_aux_oldtop == 0)
+tinstrPop4_0_1: IF(5,1,tinstrPop4_0_2)                 MEM_VALUE[13] = MEM_VALUE[1];
+tinstrPop4_0_2: IF(5,2,tinstrPop4_0_3)                 if (MEM_VALUE[13] == 0)
                                                        			{
-tinstrPop4_0_3: IF(5,3,tinstrPop4_0_4)                 __retval__pop_aux_2 = 0;
-                                                       goto __exit__pop_aux_2;
+                                                       __retval__pop_aux_t1_1 = 0;
+                                                       goto __exit__pop_aux_t1_1;
                                                        			}
-                                                       			GUARD(5,4);
-tinstrPop4_0_4: IF(5,4,tinstrPop4_0_5)                 __csLOCAL_pop_aux_next = (*__csLOCAL_pop_aux_oldtop).next;
+                                                       			;
+tinstrPop4_0_3: IF(5,3,tinstrPop4_0_4)                 MEM_VALUE[14] = MEM_VALUE[MEM_VALUE[13]];
                                                        ;
-                                                       static _Bool __csLOCAL_pop_aux___if_cond_1;
-tinstrPop4_0_5: IF(5,5,tinstrPop4_0_6)                 __csLOCAL_pop_aux___if_cond_1 = __CS_atomic_CAS(&gstack.top, __csLOCAL_pop_aux_oldtop, __csLOCAL_pop_aux_next);
-                                                       if (__csLOCAL_pop_aux___if_cond_1)
+                                                       static _Bool __csLOCAL_pop_aux_t1___if_cond_4;
+tinstrPop4_0_4: IF(5,4,tinstrPop4_0_5)                 __csLOCAL_pop_aux_t1___if_cond_4 = __CS_atomic_CAS(1, MEM_VALUE[13], MEM_VALUE[14]);
+                                                       if (__csLOCAL_pop_aux_t1___if_cond_4)
                                                        			{
-tinstrPop4_0_6: IF(5,6,tinstrPop4_0_7)                 __retval__pop_aux_2 = __csLOCAL_pop_aux_oldtop;
-                                                       goto __exit__pop_aux_2;
+tinstrPop4_0_5: IF(5,5,tinstrPop4_0_6)                 __retval__pop_aux_t1_1 = MEM_VALUE[13];
+                                                       goto __exit__pop_aux_t1_1;
                                                        			}
-                                                       			GUARD(5,7);
-tinstrPop4_0_7: IF(5,7,tinstrPop4_0_8)                 __VERIFIER_assume(0);
-                                                       			__exit__pop_aux_2: GUARD(5,8)
+                                                       			GUARD(5,6);
+tinstrPop4_0_6: IF(5,6,tinstrPop4_0_7)                 __VERIFIER_assume(0);
+                                                       			__exit__pop_aux_t1_1: GUARD(5,7)
                                                        ;
                                                        		};
-tinstrPop4_0_8: IF(5,8,tinstrPop4_0_9)                 __csLOCAL_Pop_n = __retval__pop_aux_2;
-tinstrPop4_0_9: IF(5,9,tinstrPop4_0_10)                if (__csLOCAL_Pop_n == 0)
+tinstrPop4_0_7: IF(5,7,tinstrPop4_0_8)                 n_pop_t1 = __retval__pop_aux_t1_1;
+tinstrPop4_0_8: IF(5,8,tinstrPop4_0_9)                 if (n_pop_t1 == 0)
                                                        		{
-                                                       __retval__Pop_2 = 2;
-                                                       goto __exit__Pop_2;
+                                                       __retval__Pop_t1_1 = 2;
+                                                       goto __exit__Pop_t1_1;
                                                        		}
                                                        		else
                                                        		{ 
-                                                       static int __csLOCAL_Pop_v;
-tinstrPop4_0_10: IF(5,10,tinstrPop4_0_11)              __csLOCAL_Pop_v = (*__csLOCAL_Pop_n).val;
+                                                       static int __csLOCAL_Pop_t1_v;
+tinstrPop4_0_9: IF(5,9,tinstrPop4_0_10)                __csLOCAL_Pop_t1_v = MEM_VALUE[n_pop_t1 + 1];
                                                        			{
-                                                       static Node *__csLOCALPARAM_free_Node_n;
-tinstrPop4_0_11: IF(5,11,tinstrPop4_0_12)              __csLOCALPARAM_free_Node_n = __csLOCAL_Pop_n;
+                                                       static addr_t __csLOCALPARAM_free_Node_n;
+tinstrPop4_0_10: IF(5,10,tinstrPop4_0_11)              __csLOCALPARAM_free_Node_n = n_pop_t1;
                                                        static int __csLOCAL_free_Node_i;
-                                                       __csLOCAL_free_Node_i = nondet_int();
-tinstrPop4_0_12: IF(5,12,tinstrPop4_0_13)              __VERIFIER_assume((&nodepointers[__csLOCAL_free_Node_i]) == __csLOCALPARAM_free_Node_n);
-tinstrPop4_0_13: IF(5,13,tinstrPop4_0_14)              allocated[__csLOCAL_free_Node_i] = 0;
-                                                       				__exit__free_Node_2: GUARD(5,14)
+                                                       __csLOCAL_free_Node_i = __VERIFIER_nondet_int();
+tinstrPop4_0_11: IF(5,11,tinstrPop4_0_12)              __VERIFIER_assume((2 + (__csLOCAL_free_Node_i * 2)) == __csLOCALPARAM_free_Node_n);
+tinstrPop4_0_12: IF(5,12,tinstrPop4_0_13)              MEM_VALUE[6 + __csLOCAL_free_Node_i] = 0;
+                                                       				__exit__free_Node_2: GUARD(5,13)
                                                        ;
                                                        			};
                                                        0;
-                                                       __retval__Pop_2 = __csLOCAL_Pop_v;
-                                                       goto __exit__Pop_2;
+                                                       __retval__Pop_t1_1 = __csLOCAL_Pop_t1_v;
+                                                       goto __exit__Pop_t1_1;
                                                        		}
-                                                       		GUARD(5,14);
-                                                       		__exit__Pop_2: GUARD(5,14)
+                                                       		GUARD(5,13);
+                                                       		__exit__Pop_t1_1: GUARD(5,13)
                                                        ;
                                                        	};
-                                                       __csLOCAL_instrPop4_localPop_ret = __retval__Pop_2;
-tinstrPop4_0_14: IF(5,14,tinstrPop4_0_15)              __CS_atomic_atomicDecrIncr_Pop(__csLOCAL_instrPop4_localPop_ret);
+                                                       __csLOCAL_instrPop4_localPop_ret = __retval__Pop_t1_1;
+tinstrPop4_0_13: IF(5,13,tinstrPop4_0_14)              __CS_atomic_atomicDecrIncr_Pop(__csLOCAL_instrPop4_localPop_ret);
                                                        goto __exit_instrPop4;
-                                                       	__exit_instrPop4: GUARD(5,15)
+                                                       	__exit_instrPop4: GUARD(5,14)
                                                        ;
-tinstrPop4_0_15:                                       STOP_NONVOID(15);
+tinstrPop4_0_14:                                       STOP_NONVOID(14);
                                                        }
                                                        
                                                        
@@ -516,68 +521,65 @@ tinstrPop4_0_15:                                       STOP_NONVOID(15);
                                                        {
 IF(6,0,tinstrPop5_0_1)                                 __CS_atomic_atomicIncr_Pop();
                                                        static int __csLOCAL_instrPop5_localPop_ret;
-                                                       static int __retval__Pop_3;
+                                                       static int __retval__Pop_t2_1;
                                                        	{
-                                                       static Node *__csLOCAL_Pop_n;
-                                                       static Node *__retval__pop_aux_3;
+                                                       static addr_t __retval__pop_aux_t2_1;
                                                        		{
-                                                       static Node *__csLOCAL_pop_aux_oldtop;
-                                                       static Node *__csLOCAL_pop_aux_next;
-tinstrPop5_0_1: IF(6,1,tinstrPop5_0_2)                 __csLOCAL_pop_aux_oldtop = gstack.top;
-tinstrPop5_0_2: IF(6,2,tinstrPop5_0_3)                 if (__csLOCAL_pop_aux_oldtop == 0)
+tinstrPop5_0_1: IF(6,1,tinstrPop5_0_2)                 MEM_VALUE[15] = MEM_VALUE[1];
+tinstrPop5_0_2: IF(6,2,tinstrPop5_0_3)                 if (MEM_VALUE[15] == 0)
                                                        			{
-tinstrPop5_0_3: IF(6,3,tinstrPop5_0_4)                 __retval__pop_aux_3 = 0;
-                                                       goto __exit__pop_aux_3;
+                                                       __retval__pop_aux_t2_1 = 0;
+                                                       goto __exit__pop_aux_t2_1;
                                                        			}
-                                                       			GUARD(6,4);
-tinstrPop5_0_4: IF(6,4,tinstrPop5_0_5)                 __csLOCAL_pop_aux_next = (*__csLOCAL_pop_aux_oldtop).next;
+                                                       			;
+tinstrPop5_0_3: IF(6,3,tinstrPop5_0_4)                 MEM_VALUE[16] = MEM_VALUE[MEM_VALUE[15]];
                                                        ;
-                                                       static _Bool __csLOCAL_pop_aux___if_cond_1;
-tinstrPop5_0_5: IF(6,5,tinstrPop5_0_6)                 __csLOCAL_pop_aux___if_cond_1 = __CS_atomic_CAS(&gstack.top, __csLOCAL_pop_aux_oldtop, __csLOCAL_pop_aux_next);
-                                                       if (__csLOCAL_pop_aux___if_cond_1)
+                                                       static _Bool __csLOCAL_pop_aux_t2___if_cond_5;
+tinstrPop5_0_4: IF(6,4,tinstrPop5_0_5)                 __csLOCAL_pop_aux_t2___if_cond_5 = __CS_atomic_CAS(1, MEM_VALUE[15], MEM_VALUE[16]);
+                                                       if (__csLOCAL_pop_aux_t2___if_cond_5)
                                                        			{
-tinstrPop5_0_6: IF(6,6,tinstrPop5_0_7)                 __retval__pop_aux_3 = __csLOCAL_pop_aux_oldtop;
-                                                       goto __exit__pop_aux_3;
+tinstrPop5_0_5: IF(6,5,tinstrPop5_0_6)                 __retval__pop_aux_t2_1 = MEM_VALUE[15];
+                                                       goto __exit__pop_aux_t2_1;
                                                        			}
-                                                       			GUARD(6,7);
-tinstrPop5_0_7: IF(6,7,tinstrPop5_0_8)                 __VERIFIER_assume(0);
-                                                       			__exit__pop_aux_3: GUARD(6,8)
+                                                       			GUARD(6,6);
+tinstrPop5_0_6: IF(6,6,tinstrPop5_0_7)                 __VERIFIER_assume(0);
+                                                       			__exit__pop_aux_t2_1: GUARD(6,7)
                                                        ;
                                                        		};
-tinstrPop5_0_8: IF(6,8,tinstrPop5_0_9)                 __csLOCAL_Pop_n = __retval__pop_aux_3;
-tinstrPop5_0_9: IF(6,9,tinstrPop5_0_10)                if (__csLOCAL_Pop_n == 0)
+tinstrPop5_0_7: IF(6,7,tinstrPop5_0_8)                 n_pop_t2 = __retval__pop_aux_t2_1;
+tinstrPop5_0_8: IF(6,8,tinstrPop5_0_9)                 if (n_pop_t2 == 0)
                                                        		{
-                                                       __retval__Pop_3 = 2;
-                                                       goto __exit__Pop_3;
+                                                       __retval__Pop_t2_1 = 2;
+                                                       goto __exit__Pop_t2_1;
                                                        		}
                                                        		else
                                                        		{ 
-                                                       static int __csLOCAL_Pop_v;
-tinstrPop5_0_10: IF(6,10,tinstrPop5_0_11)              __csLOCAL_Pop_v = (*__csLOCAL_Pop_n).val;
+                                                       static int __csLOCAL_Pop_t2_v;
+tinstrPop5_0_9: IF(6,9,tinstrPop5_0_10)                __csLOCAL_Pop_t2_v = MEM_VALUE[n_pop_t2 + 1];
                                                        			{
-                                                       static Node *__csLOCALPARAM_free_Node_n;
-tinstrPop5_0_11: IF(6,11,tinstrPop5_0_12)              __csLOCALPARAM_free_Node_n = __csLOCAL_Pop_n;
+                                                       static addr_t __csLOCALPARAM_free_Node_n;
+tinstrPop5_0_10: IF(6,10,tinstrPop5_0_11)              __csLOCALPARAM_free_Node_n = n_pop_t2;
                                                        static int __csLOCAL_free_Node_i;
-                                                       __csLOCAL_free_Node_i = nondet_int();
-tinstrPop5_0_12: IF(6,12,tinstrPop5_0_13)              __VERIFIER_assume((&nodepointers[__csLOCAL_free_Node_i]) == __csLOCALPARAM_free_Node_n);
-tinstrPop5_0_13: IF(6,13,tinstrPop5_0_14)              allocated[__csLOCAL_free_Node_i] = 0;
-                                                       				__exit__free_Node_3: GUARD(6,14)
+                                                       __csLOCAL_free_Node_i = __VERIFIER_nondet_int();
+tinstrPop5_0_11: IF(6,11,tinstrPop5_0_12)              __VERIFIER_assume((2 + (__csLOCAL_free_Node_i * 2)) == __csLOCALPARAM_free_Node_n);
+tinstrPop5_0_12: IF(6,12,tinstrPop5_0_13)              MEM_VALUE[6 + __csLOCAL_free_Node_i] = 0;
+                                                       				__exit__free_Node_3: GUARD(6,13)
                                                        ;
                                                        			};
                                                        0;
-                                                       __retval__Pop_3 = __csLOCAL_Pop_v;
-                                                       goto __exit__Pop_3;
+                                                       __retval__Pop_t2_1 = __csLOCAL_Pop_t2_v;
+                                                       goto __exit__Pop_t2_1;
                                                        		}
-                                                       		GUARD(6,14);
-                                                       		__exit__Pop_3: GUARD(6,14)
+                                                       		GUARD(6,13);
+                                                       		__exit__Pop_t2_1: GUARD(6,13)
                                                        ;
                                                        	};
-                                                       __csLOCAL_instrPop5_localPop_ret = __retval__Pop_3;
-tinstrPop5_0_14: IF(6,14,tinstrPop5_0_15)              __CS_atomic_atomicDecrIncr_Pop(__csLOCAL_instrPop5_localPop_ret);
+                                                       __csLOCAL_instrPop5_localPop_ret = __retval__Pop_t2_1;
+tinstrPop5_0_13: IF(6,13,tinstrPop5_0_14)              __CS_atomic_atomicDecrIncr_Pop(__csLOCAL_instrPop5_localPop_ret);
                                                        goto __exit_instrPop5;
-                                                       	__exit_instrPop5: GUARD(6,15)
+                                                       	__exit_instrPop5: GUARD(6,14)
                                                        ;
-tinstrPop5_0_15:                                       STOP_NONVOID(15);
+tinstrPop5_0_14:                                       STOP_NONVOID(14);
                                                        }
                                                        
                                                        
@@ -586,68 +588,65 @@ tinstrPop5_0_15:                                       STOP_NONVOID(15);
                                                        {
 IF(7,0,tinstrPop6_0_1)                                 __CS_atomic_atomicIncr_Pop();
                                                        static int __csLOCAL_instrPop6_localPop_ret;
-                                                       static int __retval__Pop_4;
+                                                       static int __retval__Pop_t3_1;
                                                        	{
-                                                       static Node *__csLOCAL_Pop_n;
-                                                       static Node *__retval__pop_aux_4;
+                                                       static addr_t __retval__pop_aux_t3_1;
                                                        		{
-                                                       static Node *__csLOCAL_pop_aux_oldtop;
-                                                       static Node *__csLOCAL_pop_aux_next;
-tinstrPop6_0_1: IF(7,1,tinstrPop6_0_2)                 __csLOCAL_pop_aux_oldtop = gstack.top;
-tinstrPop6_0_2: IF(7,2,tinstrPop6_0_3)                 if (__csLOCAL_pop_aux_oldtop == 0)
+tinstrPop6_0_1: IF(7,1,tinstrPop6_0_2)                 MEM_VALUE[17] = MEM_VALUE[1];
+tinstrPop6_0_2: IF(7,2,tinstrPop6_0_3)                 if (MEM_VALUE[17] == 0)
                                                        			{
-tinstrPop6_0_3: IF(7,3,tinstrPop6_0_4)                 __retval__pop_aux_4 = 0;
-                                                       goto __exit__pop_aux_4;
+                                                       __retval__pop_aux_t3_1 = 0;
+                                                       goto __exit__pop_aux_t3_1;
                                                        			}
-                                                       			GUARD(7,4);
-tinstrPop6_0_4: IF(7,4,tinstrPop6_0_5)                 __csLOCAL_pop_aux_next = (*__csLOCAL_pop_aux_oldtop).next;
+                                                       			;
+tinstrPop6_0_3: IF(7,3,tinstrPop6_0_4)                 MEM_VALUE[18] = MEM_VALUE[MEM_VALUE[17]];
                                                        ;
-                                                       static _Bool __csLOCAL_pop_aux___if_cond_1;
-tinstrPop6_0_5: IF(7,5,tinstrPop6_0_6)                 __csLOCAL_pop_aux___if_cond_1 = __CS_atomic_CAS(&gstack.top, __csLOCAL_pop_aux_oldtop, __csLOCAL_pop_aux_next);
-                                                       if (__csLOCAL_pop_aux___if_cond_1)
+                                                       static _Bool __csLOCAL_pop_aux_t3___if_cond_6;
+tinstrPop6_0_4: IF(7,4,tinstrPop6_0_5)                 __csLOCAL_pop_aux_t3___if_cond_6 = __CS_atomic_CAS(1, MEM_VALUE[17], MEM_VALUE[18]);
+                                                       if (__csLOCAL_pop_aux_t3___if_cond_6)
                                                        			{
-tinstrPop6_0_6: IF(7,6,tinstrPop6_0_7)                 __retval__pop_aux_4 = __csLOCAL_pop_aux_oldtop;
-                                                       goto __exit__pop_aux_4;
+tinstrPop6_0_5: IF(7,5,tinstrPop6_0_6)                 __retval__pop_aux_t3_1 = MEM_VALUE[17];
+                                                       goto __exit__pop_aux_t3_1;
                                                        			}
-                                                       			GUARD(7,7);
-tinstrPop6_0_7: IF(7,7,tinstrPop6_0_8)                 __VERIFIER_assume(0);
-                                                       			__exit__pop_aux_4: GUARD(7,8)
+                                                       			GUARD(7,6);
+tinstrPop6_0_6: IF(7,6,tinstrPop6_0_7)                 __VERIFIER_assume(0);
+                                                       			__exit__pop_aux_t3_1: GUARD(7,7)
                                                        ;
                                                        		};
-tinstrPop6_0_8: IF(7,8,tinstrPop6_0_9)                 __csLOCAL_Pop_n = __retval__pop_aux_4;
-tinstrPop6_0_9: IF(7,9,tinstrPop6_0_10)                if (__csLOCAL_Pop_n == 0)
+tinstrPop6_0_7: IF(7,7,tinstrPop6_0_8)                 n_pop_t3 = __retval__pop_aux_t3_1;
+tinstrPop6_0_8: IF(7,8,tinstrPop6_0_9)                 if (n_pop_t3 == 0)
                                                        		{
-                                                       __retval__Pop_4 = 2;
-                                                       goto __exit__Pop_4;
+                                                       __retval__Pop_t3_1 = 2;
+                                                       goto __exit__Pop_t3_1;
                                                        		}
                                                        		else
                                                        		{ 
-                                                       static int __csLOCAL_Pop_v;
-tinstrPop6_0_10: IF(7,10,tinstrPop6_0_11)              __csLOCAL_Pop_v = (*__csLOCAL_Pop_n).val;
+                                                       static int __csLOCAL_Pop_t3_v;
+tinstrPop6_0_9: IF(7,9,tinstrPop6_0_10)                __csLOCAL_Pop_t3_v = MEM_VALUE[n_pop_t3 + 1];
                                                        			{
-                                                       static Node *__csLOCALPARAM_free_Node_n;
-tinstrPop6_0_11: IF(7,11,tinstrPop6_0_12)              __csLOCALPARAM_free_Node_n = __csLOCAL_Pop_n;
+                                                       static addr_t __csLOCALPARAM_free_Node_n;
+tinstrPop6_0_10: IF(7,10,tinstrPop6_0_11)              __csLOCALPARAM_free_Node_n = n_pop_t3;
                                                        static int __csLOCAL_free_Node_i;
-                                                       __csLOCAL_free_Node_i = nondet_int();
-tinstrPop6_0_12: IF(7,12,tinstrPop6_0_13)              __VERIFIER_assume((&nodepointers[__csLOCAL_free_Node_i]) == __csLOCALPARAM_free_Node_n);
-tinstrPop6_0_13: IF(7,13,tinstrPop6_0_14)              allocated[__csLOCAL_free_Node_i] = 0;
-                                                       				__exit__free_Node_4: GUARD(7,14)
+                                                       __csLOCAL_free_Node_i = __VERIFIER_nondet_int();
+tinstrPop6_0_11: IF(7,11,tinstrPop6_0_12)              __VERIFIER_assume((2 + (__csLOCAL_free_Node_i * 2)) == __csLOCALPARAM_free_Node_n);
+tinstrPop6_0_12: IF(7,12,tinstrPop6_0_13)              MEM_VALUE[6 + __csLOCAL_free_Node_i] = 0;
+                                                       				__exit__free_Node_4: GUARD(7,13)
                                                        ;
                                                        			};
                                                        0;
-                                                       __retval__Pop_4 = __csLOCAL_Pop_v;
-                                                       goto __exit__Pop_4;
+                                                       __retval__Pop_t3_1 = __csLOCAL_Pop_t3_v;
+                                                       goto __exit__Pop_t3_1;
                                                        		}
-                                                       		GUARD(7,14);
-                                                       		__exit__Pop_4: GUARD(7,14)
+                                                       		GUARD(7,13);
+                                                       		__exit__Pop_t3_1: GUARD(7,13)
                                                        ;
                                                        	};
-                                                       __csLOCAL_instrPop6_localPop_ret = __retval__Pop_4;
-tinstrPop6_0_14: IF(7,14,tinstrPop6_0_15)              __CS_atomic_atomicDecrIncr_Pop(__csLOCAL_instrPop6_localPop_ret);
+                                                       __csLOCAL_instrPop6_localPop_ret = __retval__Pop_t3_1;
+tinstrPop6_0_13: IF(7,13,tinstrPop6_0_14)              __CS_atomic_atomicDecrIncr_Pop(__csLOCAL_instrPop6_localPop_ret);
                                                        goto __exit_instrPop6;
-                                                       	__exit_instrPop6: GUARD(7,15)
+                                                       	__exit_instrPop6: GUARD(7,14)
                                                        ;
-tinstrPop6_0_15:                                       STOP_NONVOID(15);
+tinstrPop6_0_14:                                       STOP_NONVOID(14);
                                                        }
                                                        
                                                        
@@ -655,6 +654,7 @@ tinstrPop6_0_15:                                       STOP_NONVOID(15);
                                                        int main_thread(void)
                                                        {
 IF(0,0,tmain_1)                                        	{
+                                                       __CS_atomic_init_MEMORY();
                                                        		__exit__Init_1: GUARD(0,1)
                                                        ;
                                                        	};
@@ -722,7 +722,7 @@ tmain_7:                                               STOP_NONVOID(7);
                                                                  thread_index = 4;
                                                                  if (active_thread[4] == 1) { /** instrPop3_0 **/
                                                                     pc_cs = pc[4] + guess_pc();
-                                                                    assume((pc_cs >= 0) && (pc_cs <= 15));
+                                                                    assume((pc_cs >= 0) && (pc_cs <= 14));
                                                                     instrPop3_0(threadargs[4]);
                                                                     pc[4] = pc_cs;
                                                                  }
@@ -730,7 +730,7 @@ tmain_7:                                               STOP_NONVOID(7);
                                                                  thread_index = 5;
                                                                  if (active_thread[5] == 1) { /** instrPop4_0 **/
                                                                     pc_cs = pc[5] + guess_pc();
-                                                                    assume((pc_cs >= 0) && (pc_cs <= 15));
+                                                                    assume((pc_cs >= 0) && (pc_cs <= 14));
                                                                     instrPop4_0(threadargs[5]);
                                                                     pc[5] = pc_cs;
                                                                  }
@@ -738,7 +738,7 @@ tmain_7:                                               STOP_NONVOID(7);
                                                                  thread_index = 6;
                                                                  if (active_thread[6] == 1) { /** instrPop5_0 **/
                                                                     pc_cs = pc[6] + guess_pc();
-                                                                    assume((pc_cs >= 0) && (pc_cs <= 15));
+                                                                    assume((pc_cs >= 0) && (pc_cs <= 14));
                                                                     instrPop5_0(threadargs[6]);
                                                                     pc[6] = pc_cs;
                                                                  }
@@ -746,7 +746,7 @@ tmain_7:                                               STOP_NONVOID(7);
                                                                  thread_index = 7;
                                                                  if (active_thread[7] == 1) { /** instrPop6_0 **/
                                                                     pc_cs = pc[7] + guess_pc();
-                                                                    assume((pc_cs >= 0) && (pc_cs <= 15));
+                                                                    assume((pc_cs >= 0) && (pc_cs <= 14));
                                                                     instrPop6_0(threadargs[7]);
                                                                     pc[7] = pc_cs;
                                                                  }
@@ -787,7 +787,7 @@ tmain_7:                                               STOP_NONVOID(7);
                                                                  thread_index = 4;
                                                                  if (active_thread[4] == 1) { /** instrPop3_0 **/
                                                                     pc_cs = pc[4] + guess_pc();
-                                                                    assume((pc_cs >= pc[4]) && (pc_cs <= 15));
+                                                                    assume((pc_cs >= pc[4]) && (pc_cs <= 14));
                                                                     instrPop3_0(threadargs[4]);
                                                                     pc[4] = pc_cs;
                                                                  }
@@ -795,7 +795,7 @@ tmain_7:                                               STOP_NONVOID(7);
                                                                  thread_index = 5;
                                                                  if (active_thread[5] == 1) { /** instrPop4_0 **/
                                                                     pc_cs = pc[5] + guess_pc();
-                                                                    assume((pc_cs >= pc[5]) && (pc_cs <= 15));
+                                                                    assume((pc_cs >= pc[5]) && (pc_cs <= 14));
                                                                     instrPop4_0(threadargs[5]);
                                                                     pc[5] = pc_cs;
                                                                  }
@@ -803,7 +803,7 @@ tmain_7:                                               STOP_NONVOID(7);
                                                                  thread_index = 6;
                                                                  if (active_thread[6] == 1) { /** instrPop5_0 **/
                                                                     pc_cs = pc[6] + guess_pc();
-                                                                    assume((pc_cs >= pc[6]) && (pc_cs <= 15));
+                                                                    assume((pc_cs >= pc[6]) && (pc_cs <= 14));
                                                                     instrPop5_0(threadargs[6]);
                                                                     pc[6] = pc_cs;
                                                                  }
@@ -811,7 +811,7 @@ tmain_7:                                               STOP_NONVOID(7);
                                                                  thread_index = 7;
                                                                  if (active_thread[7] == 1) { /** instrPop6_0 **/
                                                                     pc_cs = pc[7] + guess_pc();
-                                                                    assume((pc_cs >= pc[7]) && (pc_cs <= 15));
+                                                                    assume((pc_cs >= pc[7]) && (pc_cs <= 14));
                                                                     instrPop6_0(threadargs[7]);
                                                                     pc[7] = pc_cs;
                                                                  }
@@ -852,7 +852,7 @@ tmain_7:                                               STOP_NONVOID(7);
                                                                  thread_index = 4;
                                                                  if (active_thread[4] == 1) { /** instrPop3_0 **/
                                                                     pc_cs = pc[4] + guess_pc();
-                                                                    assume((pc_cs >= pc[4]) && (pc_cs <= 15));
+                                                                    assume((pc_cs >= pc[4]) && (pc_cs <= 14));
                                                                     instrPop3_0(threadargs[4]);
                                                                     pc[4] = pc_cs;
                                                                  }
@@ -860,7 +860,7 @@ tmain_7:                                               STOP_NONVOID(7);
                                                                  thread_index = 5;
                                                                  if (active_thread[5] == 1) { /** instrPop4_0 **/
                                                                     pc_cs = pc[5] + guess_pc();
-                                                                    assume((pc_cs >= pc[5]) && (pc_cs <= 15));
+                                                                    assume((pc_cs >= pc[5]) && (pc_cs <= 14));
                                                                     instrPop4_0(threadargs[5]);
                                                                     pc[5] = pc_cs;
                                                                  }
@@ -868,7 +868,7 @@ tmain_7:                                               STOP_NONVOID(7);
                                                                  thread_index = 6;
                                                                  if (active_thread[6] == 1) { /** instrPop5_0 **/
                                                                     pc_cs = pc[6] + guess_pc();
-                                                                    assume((pc_cs >= pc[6]) && (pc_cs <= 15));
+                                                                    assume((pc_cs >= pc[6]) && (pc_cs <= 14));
                                                                     instrPop5_0(threadargs[6]);
                                                                     pc[6] = pc_cs;
                                                                  }
@@ -876,7 +876,7 @@ tmain_7:                                               STOP_NONVOID(7);
                                                                  thread_index = 7;
                                                                  if (active_thread[7] == 1) { /** instrPop6_0 **/
                                                                     pc_cs = pc[7] + guess_pc();
-                                                                    assume((pc_cs >= pc[7]) && (pc_cs <= 15));
+                                                                    assume((pc_cs >= pc[7]) && (pc_cs <= 14));
                                                                     instrPop6_0(threadargs[7]);
                                                                     pc[7] = pc_cs;
                                                                  }

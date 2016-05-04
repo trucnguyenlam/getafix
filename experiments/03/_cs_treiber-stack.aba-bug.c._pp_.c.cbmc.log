@@ -8,15 +8,1290 @@ Function Pointer Removal
 Partial Inlining
 Generic Property Instrumentation
 Starting Bounded Model Checking
-size of program expression: 4126 steps
-simple slicing removed 300 assignments
-Generated 14 VCC(s), 14 remaining after simplification
+size of program expression: 5365 steps
+simple slicing removed 295 assignments
+Generated 21 VCC(s), 21 remaining after simplification
 Passing problem to propositional reduction
 converting SSA
 Running propositional reduction
 Post-processing
 Solving with MiniSAT 2.2.1 with simplifier
-123951 variables, 423688 clauses
-SAT checker: instance is UNSATISFIABLE
-Runtime decision procedure: 4.174s
-VERIFICATION SUCCESSFUL
+175663 variables, 630703 clauses
+SAT checker: instance is SATISFIABLE
+Runtime decision procedure: 4.166s
+Building error trace
+
+Counterexample:
+
+State 105 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 692 function main thread 0
+----------------------------------------------------
+  thread_index=0 (00000000000000000000000000000000)
+
+State 109 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=7 (0111)
+
+State 114 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 693 function main thread 0
+----------------------------------------------------
+  pc_cs=7 (00111)
+
+State 122 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 663 function main_thread thread 0
+----------------------------------------------------
+  var=&__csLOCAL_main_tid1 (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 123 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 663 function main_thread thread 0
+----------------------------------------------------
+  size=4 (0000000000000000000000000000000000000000000000000000000000000100)
+
+State 125 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 132 function __cs_init_scalar thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid1=0 (00000000000000000000000000000000)
+
+State 130 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 665 function main_thread thread 0
+----------------------------------------------------
+  var=&__csLOCAL_main_tid2 (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 131 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 665 function main_thread thread 0
+----------------------------------------------------
+  size=4 (0000000000000000000000000000000000000000000000000000000000000100)
+
+State 133 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 132 function __cs_init_scalar thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid2=0 (00000000000000000000000000000000)
+
+State 138 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 667 function main_thread thread 0
+----------------------------------------------------
+  var=&__csLOCAL_main_tid3 (0000010100000000000000000000000000000000000000000000000000000000)
+
+State 139 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 667 function main_thread thread 0
+----------------------------------------------------
+  size=4 (0000000000000000000000000000000000000000000000000000000000000100)
+
+State 141 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 132 function __cs_init_scalar thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid3=0 (00000000000000000000000000000000)
+
+State 146 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 669 function main_thread thread 0
+----------------------------------------------------
+  var=&__csLOCAL_main_tid4 (0000011000000000000000000000000000000000000000000000000000000000)
+
+State 147 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 669 function main_thread thread 0
+----------------------------------------------------
+  size=4 (0000000000000000000000000000000000000000000000000000000000000100)
+
+State 149 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 132 function __cs_init_scalar thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid4=0 (00000000000000000000000000000000)
+
+State 154 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 671 function main_thread thread 0
+----------------------------------------------------
+  var=&__csLOCAL_main_tid5 (0000011100000000000000000000000000000000000000000000000000000000)
+
+State 155 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 671 function main_thread thread 0
+----------------------------------------------------
+  size=4 (0000000000000000000000000000000000000000000000000000000000000100)
+
+State 157 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 132 function __cs_init_scalar thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid5=0 (00000000000000000000000000000000)
+
+State 162 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 673 function main_thread thread 0
+----------------------------------------------------
+  var=&__csLOCAL_main_tid6 (0000100000000000000000000000000000000000000000000000000000000000)
+
+State 163 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 673 function main_thread thread 0
+----------------------------------------------------
+  size=4 (0000000000000000000000000000000000000000000000000000000000000100)
+
+State 165 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 132 function __cs_init_scalar thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid6=0 (00000000000000000000000000000000)
+
+State 170 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 675 function main_thread thread 0
+----------------------------------------------------
+  var=&__csLOCAL_main_tid7 (0000100100000000000000000000000000000000000000000000000000000000)
+
+State 171 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 675 function main_thread thread 0
+----------------------------------------------------
+  size=4 (0000000000000000000000000000000000000000000000000000000000000100)
+
+State 173 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 132 function __cs_init_scalar thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid7=0 (00000000000000000000000000000000)
+
+State 178 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 676 function main_thread thread 0
+----------------------------------------------------
+  id=&__csLOCAL_main_tid1 (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 179 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 676 function main_thread thread 0
+----------------------------------------------------
+  attr=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 180 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 676 function main_thread thread 0
+----------------------------------------------------
+  t=instrPush0_0 (0000101000000000000000000000000000000000000000000000000000000000)
+
+State 181 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 676 function main_thread thread 0
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 182 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 676 function main_thread thread 0
+----------------------------------------------------
+  threadID=1 (00000000000000000000000000000001)
+
+State 184 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid1=1 (00000000000000000000000000000001)
+
+State 185 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  active_thread[1]=1 (1)
+
+State 186 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  threadargs[1]=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 192 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 677 function main_thread thread 0
+----------------------------------------------------
+  id=&__csLOCAL_main_tid2 (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 193 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 677 function main_thread thread 0
+----------------------------------------------------
+  attr=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 194 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 677 function main_thread thread 0
+----------------------------------------------------
+  t=instrPush1_0 (0000101100000000000000000000000000000000000000000000000000000000)
+
+State 195 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 677 function main_thread thread 0
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 196 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 677 function main_thread thread 0
+----------------------------------------------------
+  threadID=2 (00000000000000000000000000000010)
+
+State 198 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid2=2 (00000000000000000000000000000010)
+
+State 199 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  active_thread[2]=1 (1)
+
+State 200 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  threadargs[2]=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 206 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 678 function main_thread thread 0
+----------------------------------------------------
+  id=&__csLOCAL_main_tid3 (0000010100000000000000000000000000000000000000000000000000000000)
+
+State 207 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 678 function main_thread thread 0
+----------------------------------------------------
+  attr=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 208 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 678 function main_thread thread 0
+----------------------------------------------------
+  t=instrPush2_0 (0000110000000000000000000000000000000000000000000000000000000000)
+
+State 209 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 678 function main_thread thread 0
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 210 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 678 function main_thread thread 0
+----------------------------------------------------
+  threadID=3 (00000000000000000000000000000011)
+
+State 212 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid3=3 (00000000000000000000000000000011)
+
+State 213 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  active_thread[3]=1 (1)
+
+State 214 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  threadargs[3]=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 220 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 679 function main_thread thread 0
+----------------------------------------------------
+  id=&__csLOCAL_main_tid4 (0000011000000000000000000000000000000000000000000000000000000000)
+
+State 221 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 679 function main_thread thread 0
+----------------------------------------------------
+  attr=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 222 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 679 function main_thread thread 0
+----------------------------------------------------
+  t=instrPop3_0 (0000110100000000000000000000000000000000000000000000000000000000)
+
+State 223 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 679 function main_thread thread 0
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 224 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 679 function main_thread thread 0
+----------------------------------------------------
+  threadID=4 (00000000000000000000000000000100)
+
+State 226 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid4=4 (00000000000000000000000000000100)
+
+State 227 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  active_thread[4]=1 (1)
+
+State 228 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  threadargs[4]=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 234 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 680 function main_thread thread 0
+----------------------------------------------------
+  id=&__csLOCAL_main_tid5 (0000011100000000000000000000000000000000000000000000000000000000)
+
+State 235 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 680 function main_thread thread 0
+----------------------------------------------------
+  attr=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 236 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 680 function main_thread thread 0
+----------------------------------------------------
+  t=instrPop4_0 (0000111000000000000000000000000000000000000000000000000000000000)
+
+State 237 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 680 function main_thread thread 0
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 238 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 680 function main_thread thread 0
+----------------------------------------------------
+  threadID=5 (00000000000000000000000000000101)
+
+State 240 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid5=5 (00000000000000000000000000000101)
+
+State 241 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  active_thread[5]=1 (1)
+
+State 242 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  threadargs[5]=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 248 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 681 function main_thread thread 0
+----------------------------------------------------
+  id=&__csLOCAL_main_tid6 (0000100000000000000000000000000000000000000000000000000000000000)
+
+State 249 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 681 function main_thread thread 0
+----------------------------------------------------
+  attr=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 250 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 681 function main_thread thread 0
+----------------------------------------------------
+  t=instrPop5_0 (0000111100000000000000000000000000000000000000000000000000000000)
+
+State 251 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 681 function main_thread thread 0
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 252 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 681 function main_thread thread 0
+----------------------------------------------------
+  threadID=6 (00000000000000000000000000000110)
+
+State 254 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid6=6 (00000000000000000000000000000110)
+
+State 255 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  active_thread[6]=1 (1)
+
+State 256 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  threadargs[6]=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 262 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 682 function main_thread thread 0
+----------------------------------------------------
+  id=&__csLOCAL_main_tid7 (0000100100000000000000000000000000000000000000000000000000000000)
+
+State 263 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 682 function main_thread thread 0
+----------------------------------------------------
+  attr=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 264 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 682 function main_thread thread 0
+----------------------------------------------------
+  t=instrPop6_0 (0001000000000000000000000000000000000000000000000000000000000000)
+
+State 265 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 682 function main_thread thread 0
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 266 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 682 function main_thread thread 0
+----------------------------------------------------
+  threadID=7 (00000000000000000000000000000111)
+
+State 268 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid7=7 (00000000000000000000000000000111)
+
+State 269 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  active_thread[7]=1 (1)
+
+State 270 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  threadargs[7]=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 277 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 696 function main thread 0
+----------------------------------------------------
+  pc[0]=7 (0111)
+
+State 278 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 698 function main thread 0
+----------------------------------------------------
+  thread_index=1 (00000000000000000000000000000001)
+
+State 283 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=10 (1010)
+
+State 288 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 700 function main thread 0
+----------------------------------------------------
+  pc_cs=10 (01010)
+
+State 292 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 702 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPush0_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 296 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 233 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_atomicIncr_Push_localPush1=1 (00000000000000000000000000000001)
+
+State 297 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 197 function __CS_atomic_atomicIncr_Push thread 0
+----------------------------------------------------
+  PushOpen[1]=1 (00000000000000000000000000000001)
+
+State 299 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 236 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_Push_i=1 (00000000000000000000000000000001)
+
+State 303 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 176 function __CS_atomic_malloc_Node thread 0
+----------------------------------------------------
+  __csLOCAL___CS_atomic_malloc_Node_i=1 (00000000000000000000000000000001)
+
+State 306 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 179 function __CS_atomic_malloc_Node thread 0
+----------------------------------------------------
+  allocated[1]=1 (00000000000000000000000000000001)
+
+State 309 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 240 function instrPush0_0 thread 0
+----------------------------------------------------
+  __retval__malloc_Node_1=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 312 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 245 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Push_n=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 314 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 246 function instrPush0_0 thread 0
+----------------------------------------------------
+  nodepointers[POINTER_OFFSET(__csLOCAL_Push_n) / 16].val={ { .next=((struct Node *)NULL), .val=0, .$pad0=0 }, 
+    { .next=((struct Node *)NULL), .val=1, .$pad0=0 } }[POINTER_OFFSET(&nodepointers[1].next) / 16].val (?)
+
+State 316 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 249 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_push_aux_n=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 318 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 251 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCAL_push_aux_oldtop=((struct Node { struct Node *next; int val; unsigned int $pad0; } *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 320 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 252 function instrPush0_0 thread 0
+----------------------------------------------------
+  nodepointers[POINTER_OFFSET(__csLOCALPARAM_push_aux_n) / 16].next={ { .next=((struct Node *)NULL), .val=0, .$pad0=0 }, 
+    { .next=((struct Node *)NULL), .val=1, .$pad0=0 } }[POINTER_OFFSET(&nodepointers[1].next) / 16].next (?)
+
+State 325 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 255 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_address=&gstack.top (0001000100000000000000000000000000000000000000000000000000000000)
+
+State 326 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 255 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_old_value=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 327 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 255 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_new_value=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 329 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 151 function __CS_atomic_CAS thread 0
+----------------------------------------------------
+  gstack={ .top=&nodepointers[1].next } ({ 0000001000000000000000000000000000000000000000000000000000010000 })
+
+State 334 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 255 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCAL_push_aux___if_cond_0=TRUE (00000001)
+
+State 341 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 270 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_atomicDecrIncr_Push_localPush1=1 (00000000000000000000000000000001)
+
+State 342 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 202 function __CS_atomic_atomicDecrIncr_Push thread 0
+----------------------------------------------------
+  PushOpen[1]=0 (00000000000000000000000000000000)
+
+State 343 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 203 function __CS_atomic_atomicDecrIncr_Push thread 0
+----------------------------------------------------
+  PushDone[1]=1 (00000000000000000000000000000001)
+
+State 355 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 703 function main thread 0
+----------------------------------------------------
+  pc[1]=10 (1010)
+
+State 356 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 706 function main thread 0
+----------------------------------------------------
+  thread_index=2 (00000000000000000000000000000010)
+
+State 361 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=9 (1001)
+
+State 366 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 708 function main thread 0
+----------------------------------------------------
+  pc_cs=9 (01001)
+
+State 370 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 710 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPush1_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 374 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 281 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_atomicIncr_Push_localPush1=1 (00000000000000000000000000000001)
+
+State 375 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 197 function __CS_atomic_atomicIncr_Push thread 0
+----------------------------------------------------
+  PushOpen[1]=1 (00000000000000000000000000000001)
+
+State 377 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 284 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_Push_i=1 (00000000000000000000000000000001)
+
+State 381 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 176 function __CS_atomic_malloc_Node thread 0
+----------------------------------------------------
+  __csLOCAL___CS_atomic_malloc_Node_i=0 (00000000000000000000000000000000)
+
+State 384 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 179 function __CS_atomic_malloc_Node thread 0
+----------------------------------------------------
+  allocated[0]=1 (00000000000000000000000000000001)
+
+State 387 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 288 function instrPush1_0 thread 0
+----------------------------------------------------
+  __retval__malloc_Node_2=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 390 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 293 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Push_n=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 392 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 294 function instrPush1_0 thread 0
+----------------------------------------------------
+  nodepointers[POINTER_OFFSET(__csLOCAL_Push_n) / 16].val={ { .next=((struct Node *)NULL), .val=1, .$pad0=0 }, 
+    { .next=((struct Node *)NULL), .val=1, .$pad0=0 } }[POINTER_OFFSET(&nodepointers[0].next) / 16].val (?)
+
+State 394 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 297 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_push_aux_n=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 396 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 299 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCAL_push_aux_oldtop=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 398 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 300 function instrPush1_0 thread 0
+----------------------------------------------------
+  nodepointers[POINTER_OFFSET(__csLOCALPARAM_push_aux_n) / 16].next={ { .next=&nodepointers[1].next, .val=1, .$pad0=0 }, 
+    { .next=((struct Node *)NULL), .val=1, .$pad0=0 } }[POINTER_OFFSET(&nodepointers[0].next) / 16].next (?)
+
+State 403 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 303 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_address=&gstack.top (0001000100000000000000000000000000000000000000000000000000000000)
+
+State 404 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 303 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_old_value=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 405 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 303 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_new_value=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 407 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 151 function __CS_atomic_CAS thread 0
+----------------------------------------------------
+  gstack={ .top=&nodepointers[0].next } ({ 0000001000000000000000000000000000000000000000000000000000000000 })
+
+State 412 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 303 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCAL_push_aux___if_cond_0=TRUE (00000001)
+
+State 420 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 711 function main thread 0
+----------------------------------------------------
+  pc[2]=9 (1001)
+
+State 421 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 714 function main thread 0
+----------------------------------------------------
+  thread_index=3 (00000000000000000000000000000011)
+
+State 426 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=0 (0000)
+
+State 431 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 716 function main thread 0
+----------------------------------------------------
+  pc_cs=0 (00000)
+
+State 435 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 718 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPush2_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 449 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 719 function main thread 0
+----------------------------------------------------
+  pc[3]=0 (0000)
+
+State 450 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 722 function main thread 0
+----------------------------------------------------
+  thread_index=4 (00000000000000000000000000000100)
+
+State 455 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=5 (0101)
+
+State 460 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 724 function main thread 0
+----------------------------------------------------
+  pc_cs=5 (00101)
+
+State 464 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 726 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop3_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 468 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 215 function __CS_atomic_atomicIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=1 (00000000000000000000000000000001)
+
+State 471 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 386 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCAL_pop_aux_oldtop=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 476 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 393 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCAL_pop_aux_next=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 490 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 727 function main thread 0
+----------------------------------------------------
+  pc[4]=5 (0101)
+
+State 491 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 730 function main thread 0
+----------------------------------------------------
+  thread_index=5 (00000000000000000000000000000101)
+
+State 496 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=1 (0001)
+
+State 501 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 732 function main thread 0
+----------------------------------------------------
+  pc_cs=1 (00001)
+
+State 505 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 734 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop4_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 509 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 215 function __CS_atomic_atomicIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=2 (00000000000000000000000000000010)
+
+State 528 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 735 function main thread 0
+----------------------------------------------------
+  pc[5]=1 (0001)
+
+State 529 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 738 function main thread 0
+----------------------------------------------------
+  thread_index=6 (00000000000000000000000000000110)
+
+State 534 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=1 (0001)
+
+State 539 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 740 function main thread 0
+----------------------------------------------------
+  pc_cs=1 (00001)
+
+State 543 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 742 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop5_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 547 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 215 function __CS_atomic_atomicIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=3 (00000000000000000000000000000011)
+
+State 566 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 743 function main thread 0
+----------------------------------------------------
+  pc[6]=1 (0001)
+
+State 567 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 746 function main thread 0
+----------------------------------------------------
+  thread_index=7 (00000000000000000000000000000111)
+
+State 572 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=6 (0110)
+
+State 577 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 748 function main thread 0
+----------------------------------------------------
+  pc_cs=6 (00110)
+
+State 581 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 750 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop6_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 585 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 215 function __CS_atomic_atomicIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=4 (00000000000000000000000000000100)
+
+State 588 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 596 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCAL_pop_aux_oldtop=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 593 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 603 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCAL_pop_aux_next=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 598 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 606 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_address=&gstack.top (0001000100000000000000000000000000000000000000000000000000000000)
+
+State 599 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 606 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_old_value=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 600 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 606 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_new_value=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 602 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 151 function __CS_atomic_CAS thread 0
+----------------------------------------------------
+  gstack={ .top=&nodepointers[1].next } ({ 0000001000000000000000000000000000000000000000000000000000010000 })
+
+State 607 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 606 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCAL_pop_aux___if_cond_1=TRUE (00000001)
+
+State 621 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 751 function main thread 0
+----------------------------------------------------
+  pc[7]=6 (0110)
+
+State 622 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 755 function main thread 0
+----------------------------------------------------
+  thread_index=0 (00000000000000000000000000000000)
+
+State 627 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=0 (0000)
+
+State 632 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 757 function main thread 0
+----------------------------------------------------
+  pc_cs=7 (00111)
+
+State 646 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 760 function main thread 0
+----------------------------------------------------
+  pc[0]=7 (0111)
+
+State 647 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 763 function main thread 0
+----------------------------------------------------
+  thread_index=1 (00000000000000000000000000000001)
+
+State 652 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=0 (0000)
+
+State 657 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 765 function main thread 0
+----------------------------------------------------
+  pc_cs=10 (01010)
+
+State 661 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 767 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPush0_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 675 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 768 function main thread 0
+----------------------------------------------------
+  pc[1]=10 (1010)
+
+State 676 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 771 function main thread 0
+----------------------------------------------------
+  thread_index=2 (00000000000000000000000000000010)
+
+State 681 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=0 (0000)
+
+State 686 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 773 function main thread 0
+----------------------------------------------------
+  pc_cs=9 (01001)
+
+State 690 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 775 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPush1_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 704 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 776 function main thread 0
+----------------------------------------------------
+  pc[2]=9 (1001)
+
+State 705 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 779 function main thread 0
+----------------------------------------------------
+  thread_index=3 (00000000000000000000000000000011)
+
+State 710 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=0 (0000)
+
+State 715 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 781 function main thread 0
+----------------------------------------------------
+  pc_cs=0 (00000)
+
+State 719 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 783 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPush2_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 733 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 784 function main thread 0
+----------------------------------------------------
+  pc[3]=0 (0000)
+
+State 734 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 787 function main thread 0
+----------------------------------------------------
+  thread_index=4 (00000000000000000000000000000100)
+
+State 739 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=0 (0000)
+
+State 744 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 789 function main thread 0
+----------------------------------------------------
+  pc_cs=5 (00101)
+
+State 748 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 791 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop3_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 767 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 792 function main thread 0
+----------------------------------------------------
+  pc[4]=5 (0101)
+
+State 768 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 795 function main thread 0
+----------------------------------------------------
+  thread_index=5 (00000000000000000000000000000101)
+
+State 773 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=1 (0001)
+
+State 778 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 797 function main thread 0
+----------------------------------------------------
+  pc_cs=2 (00010)
+
+State 782 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 799 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop4_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 785 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 456 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCAL_pop_aux_oldtop=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 802 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 800 function main thread 0
+----------------------------------------------------
+  pc[5]=2 (0010)
+
+State 803 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 803 function main thread 0
+----------------------------------------------------
+  thread_index=6 (00000000000000000000000000000110)
+
+State 808 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=12 (1100)
+
+State 813 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 805 function main thread 0
+----------------------------------------------------
+  pc_cs=13 (01101)
+
+State 817 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 807 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop5_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 820 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 526 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCAL_pop_aux_oldtop=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 825 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 533 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCAL_pop_aux_next=((struct Node { struct Node *next; int val; unsigned int $pad0; } *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 830 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 536 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_address=&gstack.top (0001000100000000000000000000000000000000000000000000000000000000)
+
+State 831 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 536 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_old_value=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 832 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 536 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_new_value=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 834 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 151 function __CS_atomic_CAS thread 0
+----------------------------------------------------
+  gstack={ .top=((struct Node *)NULL) } ({ 0000000000000000000000000000000000000000000000000000000000000000 })
+
+State 839 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 536 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCAL_pop_aux___if_cond_1=TRUE (00000001)
+
+State 842 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 539 function instrPop5_0 thread 0
+----------------------------------------------------
+  __retval__pop_aux_3=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 846 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 547 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_n=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 850 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 556 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_v=1 (00000000000000000000000000000001)
+
+State 852 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 559 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_free_Node_n=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 853 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 561 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCAL_free_Node_i=1 (00000000000000000000000000000001)
+
+State 861 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 808 function main thread 0
+----------------------------------------------------
+  pc[6]=13 (1101)
+
+State 862 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 811 function main thread 0
+----------------------------------------------------
+  thread_index=7 (00000000000000000000000000000111)
+
+State 867 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=9 (1001)
+
+State 872 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 813 function main thread 0
+----------------------------------------------------
+  pc_cs=15 (01111)
+
+State 876 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 815 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop6_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 884 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 609 function instrPop6_0 thread 0
+----------------------------------------------------
+  __retval__pop_aux_4=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 888 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 617 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_n=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 892 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 626 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_v=1 (00000000000000000000000000000001)
+
+State 894 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 629 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_free_Node_n=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 895 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 631 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCAL_free_Node_i=0 (00000000000000000000000000000000)
+
+State 899 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 633 function instrPop6_0 thread 0
+----------------------------------------------------
+  allocated[0]=0 (00000000000000000000000000000000)
+
+State 901 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 638 function instrPop6_0 thread 0
+----------------------------------------------------
+  __retval__Pop_4=1 (00000000000000000000000000000001)
+
+State 904 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 645 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCAL_instrPop6_localPop_ret=1 (00000000000000000000000000000001)
+
+State 908 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 646 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_atomicDecrIncr_Pop_localPop_ret=1 (00000000000000000000000000000001)
+
+State 909 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 220 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=3 (00000000000000000000000000000011)
+
+State 910 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 221 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopDone[1]=1 (00000000000000000000000000000001)
+
+State 922 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 816 function main thread 0
+----------------------------------------------------
+  pc[7]=15 (1111)
+
+State 923 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 820 function main thread 0
+----------------------------------------------------
+  thread_index=0 (00000000000000000000000000000000)
+
+State 928 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=0 (0000)
+
+State 933 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 822 function main thread 0
+----------------------------------------------------
+  pc_cs=7 (00111)
+
+State 947 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 825 function main thread 0
+----------------------------------------------------
+  pc[0]=7 (0111)
+
+State 948 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 828 function main thread 0
+----------------------------------------------------
+  thread_index=1 (00000000000000000000000000000001)
+
+State 953 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=0 (0000)
+
+State 958 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 830 function main thread 0
+----------------------------------------------------
+  pc_cs=10 (01010)
+
+State 962 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 832 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPush0_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 976 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 833 function main thread 0
+----------------------------------------------------
+  pc[1]=10 (1010)
+
+State 977 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 836 function main thread 0
+----------------------------------------------------
+  thread_index=2 (00000000000000000000000000000010)
+
+State 982 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=0 (0000)
+
+State 987 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 838 function main thread 0
+----------------------------------------------------
+  pc_cs=9 (01001)
+
+State 991 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 840 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPush1_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1005 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 841 function main thread 0
+----------------------------------------------------
+  pc[2]=9 (1001)
+
+State 1006 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 844 function main thread 0
+----------------------------------------------------
+  thread_index=3 (00000000000000000000000000000011)
+
+State 1011 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=9 (1001)
+
+State 1016 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 846 function main thread 0
+----------------------------------------------------
+  pc_cs=9 (01001)
+
+State 1020 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 848 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPush2_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1024 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 329 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_atomicIncr_Push_localPush1=1 (00000000000000000000000000000001)
+
+State 1025 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 197 function __CS_atomic_atomicIncr_Push thread 0
+----------------------------------------------------
+  PushOpen[1]=2 (00000000000000000000000000000010)
+
+State 1027 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 332 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_Push_i=1 (00000000000000000000000000000001)
+
+State 1031 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 176 function __CS_atomic_malloc_Node thread 0
+----------------------------------------------------
+  __csLOCAL___CS_atomic_malloc_Node_i=0 (00000000000000000000000000000000)
+
+State 1034 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 179 function __CS_atomic_malloc_Node thread 0
+----------------------------------------------------
+  allocated[0]=1 (00000000000000000000000000000001)
+
+State 1037 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 336 function instrPush2_0 thread 0
+----------------------------------------------------
+  __retval__malloc_Node_3=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 1040 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 341 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Push_n=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 1042 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 342 function instrPush2_0 thread 0
+----------------------------------------------------
+  nodepointers[POINTER_OFFSET(__csLOCAL_Push_n) / 16].val={ { .next=&nodepointers[1].next, .val=1, .$pad0=0 }, 
+    { .next=((struct Node *)NULL), .val=1, .$pad0=0 } }[POINTER_OFFSET(&nodepointers[0].next) / 16].val (?)
+
+State 1044 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 345 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_push_aux_n=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 1046 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 347 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCAL_push_aux_oldtop=((struct Node { struct Node *next; int val; unsigned int $pad0; } *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1048 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 348 function instrPush2_0 thread 0
+----------------------------------------------------
+  nodepointers[POINTER_OFFSET(__csLOCALPARAM_push_aux_n) / 16].next={ { .next=((struct Node *)NULL), .val=1, .$pad0=0 }, 
+    { .next=((struct Node *)NULL), .val=1, .$pad0=0 } }[POINTER_OFFSET(&nodepointers[0].next) / 16].next (?)
+
+State 1053 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 351 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_address=&gstack.top (0001000100000000000000000000000000000000000000000000000000000000)
+
+State 1054 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 351 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_old_value=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1055 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 351 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_new_value=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 1057 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 151 function __CS_atomic_CAS thread 0
+----------------------------------------------------
+  gstack={ .top=&nodepointers[0].next } ({ 0000001000000000000000000000000000000000000000000000000000000000 })
+
+State 1062 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 351 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCAL_push_aux___if_cond_0=TRUE (00000001)
+
+State 1070 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 849 function main thread 0
+----------------------------------------------------
+  pc[3]=9 (1001)
+
+State 1071 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 852 function main thread 0
+----------------------------------------------------
+  thread_index=4 (00000000000000000000000000000100)
+
+State 1076 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=10 (1010)
+
+State 1081 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 854 function main thread 0
+----------------------------------------------------
+  pc_cs=15 (01111)
+
+State 1085 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 856 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop3_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1095 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 396 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_address=&gstack.top (0001000100000000000000000000000000000000000000000000000000000000)
+
+State 1096 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 396 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_old_value=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 1097 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 396 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_new_value=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 1099 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 151 function __CS_atomic_CAS thread 0
+----------------------------------------------------
+  gstack={ .top=&nodepointers[1].next } ({ 0000001000000000000000000000000000000000000000000000000000010000 })
+
+State 1104 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 396 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCAL_pop_aux___if_cond_1=TRUE (00000001)
+
+State 1107 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 399 function instrPop3_0 thread 0
+----------------------------------------------------
+  __retval__pop_aux_1=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 1111 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 407 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_n=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 1115 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 416 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_v=1 (00000000000000000000000000000001)
+
+State 1117 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 419 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_free_Node_n=&nodepointers[0].next (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 1118 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 421 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCAL_free_Node_i=0 (00000000000000000000000000000000)
+
+State 1122 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 423 function instrPop3_0 thread 0
+----------------------------------------------------
+  allocated[0]=0 (00000000000000000000000000000000)
+
+State 1124 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 428 function instrPop3_0 thread 0
+----------------------------------------------------
+  __retval__Pop_1=1 (00000000000000000000000000000001)
+
+State 1127 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 435 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCAL_instrPop3_localPop_ret=1 (00000000000000000000000000000001)
+
+State 1131 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 436 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_atomicDecrIncr_Pop_localPop_ret=1 (00000000000000000000000000000001)
+
+State 1132 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 220 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=2 (00000000000000000000000000000010)
+
+State 1133 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 221 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopDone[1]=2 (00000000000000000000000000000010)
+
+State 1145 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 857 function main thread 0
+----------------------------------------------------
+  pc[4]=15 (1111)
+
+State 1146 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 860 function main thread 0
+----------------------------------------------------
+  thread_index=5 (00000000000000000000000000000101)
+
+State 1151 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=13 (1101)
+
+State 1156 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 862 function main thread 0
+----------------------------------------------------
+  pc_cs=15 (01111)
+
+State 1160 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 864 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop4_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1167 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 463 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCAL_pop_aux_next=((struct Node { struct Node *next; int val; unsigned int $pad0; } *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1172 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 466 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_address=&gstack.top (0001000100000000000000000000000000000000000000000000000000000000)
+
+State 1173 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 466 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_old_value=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 1174 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 466 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_CAS_new_value=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1176 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 151 function __CS_atomic_CAS thread 0
+----------------------------------------------------
+  gstack={ .top=((struct Node *)NULL) } ({ 0000000000000000000000000000000000000000000000000000000000000000 })
+
+State 1181 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 466 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCAL_pop_aux___if_cond_1=TRUE (00000001)
+
+State 1184 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 469 function instrPop4_0 thread 0
+----------------------------------------------------
+  __retval__pop_aux_2=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 1188 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 477 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_n=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 1192 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 486 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_v=1 (00000000000000000000000000000001)
+
+State 1194 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 489 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_free_Node_n=&nodepointers[1].next (0000001000000000000000000000000000000000000000000000000000010000)
+
+State 1195 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 491 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCAL_free_Node_i=1 (00000000000000000000000000000001)
+
+State 1199 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 493 function instrPop4_0 thread 0
+----------------------------------------------------
+  allocated[1]=0 (00000000000000000000000000000000)
+
+State 1201 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 498 function instrPop4_0 thread 0
+----------------------------------------------------
+  __retval__Pop_2=1 (00000000000000000000000000000001)
+
+State 1204 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 505 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCAL_instrPop4_localPop_ret=1 (00000000000000000000000000000001)
+
+State 1208 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 506 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_atomicDecrIncr_Pop_localPop_ret=1 (00000000000000000000000000000001)
+
+State 1209 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 220 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=1 (00000000000000000000000000000001)
+
+State 1210 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 221 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopDone[1]=3 (00000000000000000000000000000011)
+
+State 1222 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 865 function main thread 0
+----------------------------------------------------
+  pc[5]=15 (1111)
+
+State 1223 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 868 function main thread 0
+----------------------------------------------------
+  thread_index=6 (00000000000000000000000000000110)
+
+State 1228 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=2 (0010)
+
+State 1233 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 870 function main thread 0
+----------------------------------------------------
+  pc_cs=15 (01111)
+
+State 1237 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 872 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop5_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1252 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 563 function instrPop5_0 thread 0
+----------------------------------------------------
+  allocated[1]=0 (00000000000000000000000000000000)
+
+State 1254 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 568 function instrPop5_0 thread 0
+----------------------------------------------------
+  __retval__Pop_3=1 (00000000000000000000000000000001)
+
+State 1257 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 575 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCAL_instrPop5_localPop_ret=1 (00000000000000000000000000000001)
+
+State 1261 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 576 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_atomicDecrIncr_Pop_localPop_ret=1 (00000000000000000000000000000001)
+
+State 1262 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 220 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=0 (00000000000000000000000000000000)
+
+State 1263 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 221 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopDone[1]=4 (00000000000000000000000000000100)
+
+Violated property:
+  file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/_cs_treiber-stack.aba-bug.c._pp_.c line 223 function __CS_atomic_atomicDecrIncr_Pop
+  assertion tmp_if_expr$1
+  tmp_if_expr$1
+
+VERIFICATION FAILED

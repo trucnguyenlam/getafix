@@ -1,203 +1,38 @@
-# 1 "<stdin>"
-# 1 "<built-in>"
-# 1 "<command-line>"
-# 1 "/usr/include/stdc-predef.h" 1 3 4
-# 1 "<command-line>" 2
-# 1 "<stdin>"
-# 1 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.empty-bug.c"
-# 1 "<built-in>"
-# 1 "<command-line>"
-# 1 "/usr/include/stdc-predef.h" 1 3 4
-# 1 "<command-line>" 2
-# 1 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.empty-bug.c"
-# 1 "./preprocessor/ccpp-0.1/fake_include/stdlib.h" 1
-# 1 "./preprocessor/ccpp-0.1/fake_include/_fake_defines.h" 1
-# 2 "./preprocessor/ccpp-0.1/fake_include/stdlib.h" 2
-# 1 "./preprocessor/ccpp-0.1/fake_include/_fake_typedefs.h" 1
+#include <stdlib.h>
+#include <stdio.h>
+#include <pthread.h>
+#include <assert.h>
 
+#define CASDEF(t,ty) \
+    int __VERIFIER_atomic ## t ## _cas(ty *p, ty cmp, ty new) { \
+        if (*p == cmp) { \
+            *p = new; \
+            return 1; \
+        } \
+        else \
+            return 0; \
+    }
+#define CAS(t,x,y,z) __VERIFIER_atomic ## t ## _cas(x,y,z)
 
+#define LOCATION_ARRAY_SIZE 2
+#define COLLISION_ARRAY_SIZE 1
 
-typedef int _____STARTSTRIPPINGFROMHERE_____;
+#define POP 0
+#define PUSH 1
+#define TRUE 1
+#define FALSE 0
 
-typedef int __cs_t;
-typedef int __cs_attr_t;
-typedef int __cs_mutex_t;
-typedef int __cs_mutexattr_t;
-typedef int __cs_cond_t;
-typedef int __cs_condattr_t;
-typedef int __cs_key_t;
-typedef int __cs_once_t;
-typedef int __cs_rwlock_t;
-typedef int __cs_rwlockattr_t;
-typedef int __cs_spinlock_t;
-typedef int __cs_barrier_t;
-typedef int __cs_barrierattr_t;
-
-typedef int size_t;
-typedef int __builtin_va_list;
-typedef int __gnuc_va_list;
-typedef int __int8_t;
-typedef int __uint8_t;
-typedef int __int16_t;
-typedef int __uint16_t;
-typedef int __int_least16_t;
-typedef int __uint_least16_t;
-typedef int __int32_t;
-typedef int __uint32_t;
-typedef int __int64_t;
-typedef int __uint64_t;
-typedef int __int_least32_t;
-typedef int __uint_least32_t;
-typedef int _LOCK_T;
-typedef int _LOCK_RECURSIVE_T;
-typedef int _off_t;
-typedef int __dev_t;
-typedef int __uid_t;
-typedef int __gid_t;
-typedef int _off64_t;
-typedef int _fpos_t;
-typedef int _ssize_t;
-typedef int wint_t;
-typedef int _mbstate_t;
-typedef int _flock_t;
-typedef int _iconv_t;
-typedef int __ULong;
-typedef int __FILE;
-typedef int ptrdiff_t;
-typedef int wchar_t;
-typedef int __off_t;
-typedef int __pid_t;
-typedef int __loff_t;
-typedef int u_char;
-typedef int u_short;
-typedef int u_int;
-typedef int u_long;
-typedef int ushort;
-typedef int uint;
-typedef int clock_t;
-typedef int time_t;
-typedef int daddr_t;
-typedef int caddr_t;
-typedef int ino_t;
-typedef int off_t;
-typedef int dev_t;
-typedef int uid_t;
-typedef int gid_t;
-typedef int pid_t;
-typedef int key_t;
-typedef int ssize_t;
-typedef int mode_t;
-typedef int nlink_t;
-typedef int fd_mask;
-typedef int _types_fd_set;
-typedef int clockid_t;
-typedef int timer_t;
-typedef int useconds_t;
-typedef int suseconds_t;
-typedef int FILE;
-typedef int fpos_t;
-typedef int cookie_read_function_t;
-typedef int cookie_write_function_t;
-typedef int cookie_seek_function_t;
-typedef int cookie_close_function_t;
-typedef int cookie_io_functions_t;
-typedef int div_t;
-typedef int ldiv_t;
-typedef int lldiv_t;
-typedef int sigset_t;
-typedef int __sigset_t;
-typedef int _sig_func_ptr;
-typedef int sig_atomic_t;
-typedef int __tzrule_type;
-typedef int __tzinfo_type;
-typedef int mbstate_t;
-typedef int sem_t;
-typedef int pthread_t;
-typedef int pthread_attr_t;
-typedef int pthread_mutex_t;
-typedef int pthread_mutexattr_t;
-typedef int pthread_cond_t;
-typedef int pthread_condattr_t;
-typedef int pthread_key_t;
-typedef int pthread_once_t;
-typedef int pthread_rwlock_t;
-typedef int pthread_rwlockattr_t;
-typedef int pthread_spinlock_t;
-typedef int pthread_barrier_t;
-typedef int pthread_barrierattr_t;
-typedef int jmp_buf;
-typedef int rlim_t;
-typedef int sigjmp_buf;
-typedef int stack_t;
-typedef int siginfo_t;
-typedef int z_stream;
-
-
-typedef int int8_t;
-typedef int uint8_t;
-typedef int int16_t;
-typedef int uint16_t;
-typedef int int32_t;
-typedef int uint32_t;
-typedef int int64_t;
-typedef int uint64_t;
-
-
-typedef int int_least8_t;
-typedef int uint_least8_t;
-typedef int int_least16_t;
-typedef int uint_least16_t;
-typedef int int_least32_t;
-typedef int uint_least32_t;
-typedef int int_least64_t;
-typedef int uint_least64_t;
-
-
-typedef int int_fast8_t;
-typedef int uint_fast8_t;
-typedef int int_fast16_t;
-typedef int uint_fast16_t;
-typedef int int_fast32_t;
-typedef int uint_fast32_t;
-typedef int int_fast64_t;
-typedef int uint_fast64_t;
-
-
-typedef int intptr_t;
-typedef int uintptr_t;
-
-
-typedef int intmax_t;
-typedef int uintmax_t;
-
-
-typedef _Bool bool;
-
-typedef int va_list;
-
-typedef int fd_set;
-
-typedef int _____STOPSTRIPPINGFROMHERE_____;
-# 2 "./preprocessor/ccpp-0.1/fake_include/stdlib.h" 2
-# 2 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.empty-bug.c" 2
-# 1 "./preprocessor/ccpp-0.1/fake_include/stdio.h" 1
-# 3 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.empty-bug.c" 2
-# 1 "./preprocessor/ccpp-0.1/fake_include/pthread.h" 1
-# 4 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.empty-bug.c" 2
-# 1 "./preprocessor/ccpp-0.1/fake_include/assert.h" 1
-# 5 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.empty-bug.c" 2
-# 25 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.empty-bug.c"
 typedef struct Cell Cell;
 struct Cell {
-    Cell *pnext;
-    int pdata;
+    Cell        *pnext;
+    int         pdata;
 };
 
 typedef struct ThreadInfo ThreadInfo;
 struct ThreadInfo {
-    unsigned int id;
-    int op;
-    Cell cell;
+    unsigned int  id;
+    int           op;
+    Cell           cell;
 };
 
 typedef struct Simple_Stack Simple_Stack;
@@ -207,44 +42,62 @@ struct Simple_Stack {
 
 
 Simple_Stack S;
-ThreadInfo *location[2];
+ThreadInfo *location[LOCATION_ARRAY_SIZE];
 int collision;
 
-
+// int unique_id = 0;
 void StackOp(ThreadInfo *p);
 int TryPerformStackOp(ThreadInfo *p);
 
-int __VERIFIER_atomicint_cas(int *p, int cmp, int new) { if (*p == cmp) { *p = new; return 1; } else return 0; }
-int __VERIFIER_atomicti_cas(ThreadInfo* *p, ThreadInfo* cmp, ThreadInfo* new) { if (*p == cmp) { *p = new; return 1; } else return 0; }
-int __VERIFIER_atomicc_cas(Cell* *p, Cell* cmp, Cell* new) { if (*p == cmp) { *p = new; return 1; } else return 0; }
+CASDEF(int, int)
+CASDEF(ti, ThreadInfo*)
+CASDEF(c, Cell*)
 
+/**
+ * THREADS and STUFF
+ */
 
-
-
-
-int taken_ids[2];
+int taken_ids[LOCATION_ARRAY_SIZE];
 
 int __VERIFIER_atomic_chooseUniqueId() {
     int i = nondet_int();
-    __VERIFIER_assume(1 <= i && i <= 2);
+    __VERIFIER_assume(1 <= i && i <= LOCATION_ARRAY_SIZE);
     __VERIFIER_assume(!taken_ids[i - 1]);
     taken_ids[i - 1] = 1;
     return i;
 }
-# 88 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.empty-bug.c"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ *  ALGORITHM
+ */
 void LesOP(ThreadInfo *p) {
     p->id = __VERIFIER_atomic_chooseUniqueId();
-
+    // {
         int mypid = p->id;
         location[mypid - 1] = p;
         int him = collision;
 
-        __VERIFIER_assume (__VERIFIER_atomicint_cas(&collision,him,mypid));
+        __VERIFIER_assume (CAS(int, &collision, him, mypid));
 
         if (him > 0) {
             ThreadInfo* q = location[him - 1];
-            if (q != 0 && q->id == him && q->op != p->op) {
-                if (__VERIFIER_atomicti_cas(&location[mypid - 1],p,0)) {
+            if (q != NULL && q->id == him && q->op != p->op) {
+                if (CAS(ti, &location[mypid - 1], p, NULL)) {
                     if (__VERIFIER_atomic_TryCollision(p, q, him)) {
                         return;
                     } else {
@@ -257,97 +110,112 @@ void LesOP(ThreadInfo *p) {
                 }
             }
         }
-
-        if (!__VERIFIER_atomicti_cas(&location[mypid - 1],p,0)) {
+        // delay (p->spin);
+        if (!CAS(ti, &location[mypid - 1], p, NULL)) {
             __VERIFIER_atomic_FinishCollision(p);
             return;
         }
 stack:
-        if (TryPerformStackOp(p) == 1) {
+        if (TryPerformStackOp(p) == TRUE) {
             return;
         }
-
+    // }
     __VERIFIER_assume(0);
 }
 
 int TryPerformStackOp(ThreadInfo* p) {
     Cell *thead, *tnext;
-    if (p->op == 1) {
+    if (p->op == PUSH) {
         thead = S.ptop;
         p->cell.pnext = thead;
-        return __VERIFIER_atomicc_cas(&S.ptop,thead,&p->cell);
+        return CAS(c, &S.ptop, thead, &p->cell);
     }
 
 
 
 
-    if (p->op == 0) {
+    if (p->op == POP) {
         thead = S.ptop;
-        if (thead == 0) {
-
-            p->cell.pnext = 0; p->cell.pdata = 2;
-            return 1;
+        if (thead == NULL) {
+            // p->cell = EMPTY;  //Original code
+            p->cell.pnext = 0; p->cell.pdata = 2;    // 2 means EMPTY
+            return TRUE;
         }
         tnext = thead->pnext;
-        if (__VERIFIER_atomicc_cas(&S.ptop,thead,tnext)) {
-
+        if (CAS(c, &S.ptop, thead, tnext)) {
+            // p->cell.pdata = thead->pdata;  // Jad Injected code
             p->cell = *thead;
-# 157 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.empty-bug.c"
-            return 1;
+
+
+
+
+
+
+
+
+
+            return TRUE;
         }
         else {
-
-            p->cell.pnext = 0; p->cell.pdata = 2;
-            return 0;
+            // p->cell = EMPTY;
+            p->cell.pnext = 0; p->cell.pdata = 2;    // 2 means EMPTY
+            return FALSE;
         }
     }
 }
 
 void __VERIFIER_atomic_FinishCollision(ThreadInfo *p) {
-    if (p->op == 0) {
+    if (p->op == POP) {
     int mypid = p->id;
-
-
-        location[mypid - 1] = 0;
+        // BUG commented for 'empty' bug
+        // p->cell = location[mypid-1]->cell;
+        location[mypid - 1] = NULL;
     }
 }
 
 int __VERIFIER_atomic_TryCollision(ThreadInfo *p, ThreadInfo *q, int him) {
     int mypid = p->id;
-    if (p->op == 1) {
-        return __VERIFIER_atomicti_cas(&location[him - 1],q,p);
+    if (p->op == PUSH) {
+        return CAS(ti, &location[him - 1], q, p);
     }
 
 
 
 
-    if (p->op == 0) {
-        if (__VERIFIER_atomicti_cas(&location[him - 1],q,0)) {
-
-
-            location[mypid - 1] = 0;
-            return 1;
+    if (p->op == POP) {
+        if (CAS(ti, &location[him - 1], q, NULL)) {
+            // BUG commented for 'empty' bug
+            // p->cell = q->cell;
+            location[mypid - 1] = NULL;
+            return TRUE;
         }
         else {
-            return 0;
+            return FALSE;
         }
     }
-    return 0;
+    return FALSE;
 }
 
 
-
-
-
+/**
+ * Injected code
+ */
 
 void Init() {
-    S.ptop = 0;
+    S.ptop = NULL;
 }
-# 215 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.empty-bug.c"
+
+// Derive from
+// void StackOp (ThreadInfo * pInfo) {
+//     if (TryPerformStackOp (p) == FALSE)
+//         LesOP (p);
+//     return;
+// }
+
 void Push(int x) {
     ThreadInfo *ti = malloc(sizeof(*ti));
 
-    ti->op = 1;
+    ti->op = PUSH;
     ti->cell.pdata = x;
 
     if (!TryPerformStackOp(ti)) {
@@ -360,7 +228,7 @@ void Push(int x) {
 int Pop() {
     ThreadInfo *ti = malloc(sizeof(*ti));
 
-    ti->op = 0;
+    ti->op = POP;
 
     if (!TryPerformStackOp(ti)) {
         LesOP(ti);
@@ -374,13 +242,13 @@ int Pop() {
 
 int tick = 0;
 int tickBound = 1;
+#define PushArg0Max 2
+int PushOpen[2][PushArg0Max];
+int PushDone[2][2][PushArg0Max];
 
-int PushOpen[2][2];
-int PushDone[2][2][2];
-
-
+#define PopRetMax 3
 int PopOpen[2];
-int PopDone[2][2][3];
+int PopDone[2][2][PopRetMax];
 
 void checkInvariant() {
     assert
@@ -526,7 +394,7 @@ void* instrPush0(void* unused) {
     __VERIFIER_atomic_atomicIncr_Push(tickStart, 1);
     Push(1);
     __VERIFIER_atomic_atomicDecrIncr_Push(tickStart, tick, 1);
-    return 0;
+    return NULL;
 }
 
 void* instrPush1(void* unused) {
@@ -534,7 +402,7 @@ void* instrPush1(void* unused) {
     __VERIFIER_atomic_atomicIncr_Push(tickStart, 1);
     Push(1);
     __VERIFIER_atomic_atomicDecrIncr_Push(tickStart, tick, 1);
-    return 0;
+    return NULL;
 }
 
 void* instrPush2(void* unused) {
@@ -542,7 +410,7 @@ void* instrPush2(void* unused) {
     __VERIFIER_atomic_atomicIncr_Push(tickStart, 1);
     Push(1);
     __VERIFIER_atomic_atomicDecrIncr_Push(tickStart, tick, 1);
-    return 0;
+    return NULL;
 }
 
 void* instrPop3(void* unused) {
@@ -550,7 +418,7 @@ void* instrPop3(void* unused) {
     __VERIFIER_atomic_atomicIncr_Pop(tickStart);
     int localPop_ret = Pop();
     __VERIFIER_atomic_atomicDecrIncr_Pop(tickStart, tick, localPop_ret);
-    return 0;
+    return NULL;
 }
 
 
@@ -559,10 +427,10 @@ int main() {
     Init();
     pthread_t tid1, tid2, tid3, tid4;
 
-    pthread_create(&tid1, 0, &instrPush0, 0);
-    pthread_create(&tid2, 0, &instrPush1, 0);
-    pthread_create(&tid3, 0, &instrPush2, 0);
-    pthread_create(&tid4, 0, &instrPop3, 0);
+    pthread_create(&tid1, NULL, &instrPush0, NULL);
+    pthread_create(&tid2, NULL, &instrPush1, NULL);
+    pthread_create(&tid3, NULL, &instrPush2, NULL);
+    pthread_create(&tid4, NULL, &instrPop3, NULL);
     while (tick < tickBound) {
         tick++;
     }

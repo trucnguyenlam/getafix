@@ -3,6 +3,10 @@
 #include <pthread.h>
 #include <assert.h>
 
+/**
+ * This version try to simulate the bug
+ */
+
 #define CASDEF(t,ty) \
     int __VERIFIER_atomic ## t ## _cas(ty *p, ty cmp, ty new) { \
         if (*p == cmp) { \
@@ -15,7 +19,7 @@
 
 #define CAS(t,x,y,z) __VERIFIER_atomic ## t ## _cas(x,y,z)
 
-#define LOCATION_ARRAY_SIZE 8
+#define LOCATION_ARRAY_SIZE 8 // 8 is original number
 #define COLLISION_ARRAY_SIZE 1
 
 #define POP 0
@@ -44,7 +48,7 @@ struct Simple_Stack {
 
 Simple_Stack S;
 ThreadInfo *location[LOCATION_ARRAY_SIZE];
-int collision[COLLISION_ARRAY_SIZE];
+int collision;
 
 int unique_id = 0;
 void StackOp(ThreadInfo *p);
@@ -83,43 +87,42 @@ void __VERIFIER_atomic_free_ThreadInfo(ThreadInfo* ti) {
 
 
 
-
 /**
  *  ALGORITHM
  */
 void LesOP(ThreadInfo *p) {
     // {
-        int mypid = p->id;
-        location[mypid] = p;
-        int him = collision[0];   // GetPosition(p) = pos = 0;
+    int mypid = p->id;
+    location[mypid] = p;
+    int him = collision;   // GetPosition(p) = pos = 0;
 
-        __VERIFIER_assume (CAS(int, &collision, him, mypid));
+    __VERIFIER_assume (CAS(int, &collision, him, mypid));
 
-        if (him > 0) {
-            ThreadInfo* q = location[him];
-            if (q != NULL && q->id == him && q->op != p->op) {
-                if (CAS(ti, &location[mypid], p, NULL)) {
-                    if (__VERIFIER_atomic_TryCollision(p, q, him) == TRUE) {
-                        return;
-                    } else {
-                        goto stack;
-                    }
-                }
-                else {
-                    __VERIFIER_atomic_FinishCollision(p);
+    if (him > 0) {
+        ThreadInfo* q = location[him];
+        if (q != NULL && q->id == him && q->op != p->op) {
+            if (CAS(ti, &location[mypid], p, NULL)) {
+                if (__VERIFIER_atomic_TryCollision(p, q, him) == TRUE) {
                     return;
+                } else {
+                    goto stack;
                 }
             }
+            else {
+                __VERIFIER_atomic_FinishCollision(p);
+                return;
+            }
         }
-        // delay (p->spin);
-        if (!CAS(ti, &location[mypid], p, NULL)) {
-            __VERIFIER_atomic_FinishCollision(p);
-            return;
-        }
+    }
+    // delay (p->spin);
+    if (!CAS(ti, &location[mypid], p, NULL)) {
+        __VERIFIER_atomic_FinishCollision(p);
+        return;
+    }
 stack:
-        if (TryPerformStackOp(p) == TRUE) {
-            return;
-        }
+    if (TryPerformStackOp(p) == TRUE) {
+        return;
+    }
     // }
     __VERIFIER_assume(0);  // One loop is enough to simulate the bug
 }
@@ -144,14 +147,19 @@ int TryPerformStackOp(ThreadInfo * p) {
         }
         pnext = phead->pnext;
         if (CAS(c, &S.ptop, phead, pnext)) {
-            p->cell.pdata = phead->pdata;  // Jad Injected code
-            // p->cell = *phead;
+            // p->cell.pdata = phead->pdata;  // Jad Injected code
+            p->cell = *phead;
             // Injected code
-            //
-            //
-            ThreadInfo *oldti;
-            __VERIFIER_assume(&oldti->cell == phead);
-            __VERIFIER_atomic_free_ThreadInfo(oldti);
+            __VERIFIER_atomic_begin();
+            int i = __VERIFIER_nondet_int();
+            __VERIFIER_assume(0 <= i && i < NUM_THREADS);
+            __VERIFIER_assume(&threads[i].cell == phead);
+            allocated[i] = 0;
+            __VERIFIER_atomic_end();
+            // ThreadInfo *oldti;
+            // __VERIFIER_assume(&oldti->cell == phead);
+            // __VERIFIER_atomic_free_ThreadInfo(oldti);
+            // assert(0);
             // END: Injected code
             //
             //
@@ -169,8 +177,8 @@ int TryPerformStackOp(ThreadInfo * p) {
 void __VERIFIER_atomic_FinishCollision(ThreadInfo * p) {
     if (p->op == POP) {
         int mypid = p->id;
-        p->cell.pdata = location[mypid]->cell.pdata;  // Jad injected code
-        // p->cell = location[mypid]->cell;
+        // p->cell.pdata = location[mypid]->cell.pdata;  // Jad injected code
+        p->cell = location[mypid]->cell;
         location[mypid] = NULL;
     }
 }
@@ -187,8 +195,8 @@ int __VERIFIER_atomic_TryCollision(ThreadInfo * p, ThreadInfo * q, int him) {
     }
     if (p->op == POP) {
         if (CAS(ti, &location[him], q, NULL)) {
-            p->cell.pdata = q->cell.pdata;   // Jad injected code
-            // p->cell = q->cell;
+            // p->cell.pdata = q->cell.pdata;   // Jad injected code
+            p->cell = q->cell;
             location[mypid] = NULL;
             return TRUE;
         }
@@ -217,7 +225,6 @@ void Init() {
 
 void Push(int x) {
     ThreadInfo *ti = __VERIFIER_atomic_malloc_ThreadInfo();
-
     // Initialize threads
     ti->id = ++unique_id;
     ti->op = PUSH;

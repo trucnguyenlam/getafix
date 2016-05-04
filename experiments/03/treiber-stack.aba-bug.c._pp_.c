@@ -193,15 +193,7 @@ int __VERIFIER_atomic_CAS(void **address, void *old_value, void *new_value)
     }
     return 0;
 }
-
-int CAS(void **address, void *old_value, void *new_value)
-{
-    return __VERIFIER_atomic_CAS(address, old_value, new_value);
-}
-
-
-
-
+# 22 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/treiber-stack.aba-bug.c"
 typedef struct Node Node;
 typedef struct Node {
     Node *next;
@@ -217,12 +209,12 @@ Stack gstack;
 
 
 
-Node nodepointers[1];
-int allocated[1];
+Node nodepointers[2];
+int allocated[2];
 
 Node* __VERIFIER_atomic_malloc_Node() {
     int i;
-    __VERIFIER_assume(0 <= i && i < 1);
+    __VERIFIER_assume(0 <= i && i < 2);
     __VERIFIER_assume(!allocated[i]);
     allocated[i] = 1;
     return &nodepointers[i];
@@ -241,27 +233,29 @@ void free_Node(Node* n) {
 
 void push_aux(Node *n) {
     Node *oldtop;
-    while (1) {
+
         oldtop = gstack.top;
         n->next = oldtop;
-        if (CAS(&gstack.top, oldtop, n)){
+        if (__VERIFIER_atomic_CAS(&gstack.top, oldtop, n)){
             return;
         }
-    }
+
+    __VERIFIER_assume(0);
 }
 
 Node *pop_aux() {
     Node *oldtop, *next;
 
-    while (1) {
+
         oldtop = gstack.top;
         if (oldtop == 0)
             return 0;
         next = oldtop->next;
-        if (CAS(&gstack.top, oldtop, next)) {
+        if (__VERIFIER_atomic_CAS(&gstack.top, oldtop, next)) {
             return oldtop;
         }
-    }
+
+    __VERIFIER_assume(0);
 }
 
 void Push(int i) {
@@ -283,7 +277,7 @@ int Pop() {
 void Init() {
 
 }
-# 111 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/treiber-stack.aba-bug.c"
+# 113 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/treiber-stack.aba-bug.c"
 int PushOpen[2];
 int PushDone[2];
 

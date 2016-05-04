@@ -11,10 +11,10 @@ int __VERIFIER_atomic_CAS(void **address, void *old_value, void *new_value)
     return 0;
 }
 
-int CAS(void **address, void *old_value, void *new_value)
-{
-    return __VERIFIER_atomic_CAS(address, old_value, new_value);
-}
+// int CAS(void **address, void *old_value, void *new_value)
+// {
+//     return __VERIFIER_atomic_CAS(address, old_value, new_value);
+// }
 
 /**
  * Data structure
@@ -32,7 +32,7 @@ typedef struct Stack {
 // Global stack
 Stack gstack;
 
-#define MEMORYSIZE 2
+#define MEMORYSIZE 2  // Original 10 but 2 is already enough
 
 Node nodepointers[MEMORYSIZE];
 int allocated[MEMORYSIZE];
@@ -58,27 +58,30 @@ void free_Node(Node* n) {
 
 void push_aux(Node *n) {
     Node *oldtop;
-    while (1) {
+    // while (1) {
         oldtop = gstack.top;
         n->next = oldtop;
-        if (CAS(&gstack.top, oldtop, n)){
+        if (__VERIFIER_atomic_CAS(&gstack.top, oldtop, n)){
             return;
         }
-    }
+    // }
+    __VERIFIER_assume(0);
 }
 
 Node *pop_aux() {
     Node *oldtop, *next;
 
-    while (1) {
+    // while (1) {
         oldtop = gstack.top;
-        if (oldtop == NULL)
+        if (oldtop == NULL){
             return NULL;
+        }
         next = oldtop->next;
-        if (CAS(&gstack.top, oldtop, next)) {
+        if (__VERIFIER_atomic_CAS(&gstack.top, oldtop, next)) {
             return oldtop;
         }
-    }
+    // }
+    __VERIFIER_assume(0);
 }
 
 void Push(int i) {
@@ -89,7 +92,9 @@ void Push(int i) {
 
 int Pop() {
     Node *n = pop_aux();
-    if (n == NULL) return 2; // 2 mean empty
+    if (n == NULL) {
+        return 2; // 2 mean empty
+    }
     else {
         int v = n->val;
         free_Node (n);

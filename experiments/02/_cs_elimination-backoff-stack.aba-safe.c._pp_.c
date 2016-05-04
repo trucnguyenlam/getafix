@@ -1,4 +1,4 @@
-/*  Generated 0.0.0.0.0.0 (-t7 -r2 -u1 -bcbmc) 2016-05-02 16:06:54  */
+/*  Generated 0.0.0.0.0.0 (-t7 -r2 -u1 -bcbmc) 2016-04-27 12:16:13  */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -210,13 +210,13 @@ typedef struct Simple_Stack Simple_Stack;
                                                        
                                                        }
                                                        
-                                                       ThreadInfo threads[4];
-                                                       int allocated[4];
+                                                       ThreadInfo threads[3];
+                                                       int allocated[3];
                                                        ThreadInfo *__CS_atomic_malloc_ThreadInfo()
                                                        {
                                                          static int __csLOCAL___CS_atomic_malloc_ThreadInfo_i;
                                                          __csLOCAL___CS_atomic_malloc_ThreadInfo_i = nondet_int();
-                                                         __VERIFIER_assume((0 <= __csLOCAL___CS_atomic_malloc_ThreadInfo_i) && (__csLOCAL___CS_atomic_malloc_ThreadInfo_i < 4));
+                                                         __VERIFIER_assume((0 <= __csLOCAL___CS_atomic_malloc_ThreadInfo_i) && (__csLOCAL___CS_atomic_malloc_ThreadInfo_i < 3));
                                                          __VERIFIER_assume(!allocated[__csLOCAL___CS_atomic_malloc_ThreadInfo_i]);
                                                          allocated[__csLOCAL___CS_atomic_malloc_ThreadInfo_i] = 1;
                                                          return &threads[__csLOCAL___CS_atomic_malloc_ThreadInfo_i];
@@ -226,7 +226,7 @@ typedef struct Simple_Stack Simple_Stack;
                                                        {
                                                          static int __csLOCAL___CS_atomic_free_ThreadInfo_i;
                                                          __csLOCAL___CS_atomic_free_ThreadInfo_i = nondet_int();
-                                                         __VERIFIER_assume((0 <= __csLOCAL___CS_atomic_free_ThreadInfo_i) && (__csLOCAL___CS_atomic_free_ThreadInfo_i < 4));
+                                                         __VERIFIER_assume((0 <= __csLOCAL___CS_atomic_free_ThreadInfo_i) && (__csLOCAL___CS_atomic_free_ThreadInfo_i < 3));
                                                          __VERIFIER_assume((&threads[__csLOCAL___CS_atomic_free_ThreadInfo_i]) == __csLOCALPARAM___CS_atomic_free_ThreadInfo_ti);
                                                          allocated[__csLOCAL___CS_atomic_free_ThreadInfo_i] = 0;
                                                        }
@@ -390,7 +390,7 @@ tinstrPush0_0_17: IF(1,17,tinstrPush0_0_18)            (*__csLOCALPARAM_TryPerfo
 tinstrPush0_0_18: IF(1,18,tinstrPush0_0_19)            //__CS_atomic_begin;
                                                        static int __csLOCAL_TryPerformStackOp_i;
                                                        __csLOCAL_TryPerformStackOp_i = __VERIFIER_nondet_int();
-                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 4));
+                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 3));
                                                        __VERIFIER_assume((&threads[__csLOCAL_TryPerformStackOp_i].cell) == __csLOCAL_TryPerformStackOp_phead);
                                                        allocated[__csLOCAL_TryPerformStackOp_i] = 0;
                                                        //__CS_atomic_end;
@@ -515,7 +515,7 @@ tinstrPush0_0_45: IF(1,45,tinstrPush0_0_46)            (*__csLOCALPARAM_TryPerfo
 tinstrPush0_0_46: IF(1,46,tinstrPush0_0_47)            //__CS_atomic_begin;
                                                        static int __csLOCAL_TryPerformStackOp_i;
                                                        __csLOCAL_TryPerformStackOp_i = __VERIFIER_nondet_int();
-                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 4));
+                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 3));
                                                        __VERIFIER_assume((&threads[__csLOCAL_TryPerformStackOp_i].cell) == __csLOCAL_TryPerformStackOp_phead);
                                                        allocated[__csLOCAL_TryPerformStackOp_i] = 0;
                                                        //__CS_atomic_end;
@@ -621,7 +621,7 @@ tinstrPush1_0_17: IF(2,17,tinstrPush1_0_18)            (*__csLOCALPARAM_TryPerfo
 tinstrPush1_0_18: IF(2,18,tinstrPush1_0_19)            //__CS_atomic_begin;
                                                        static int __csLOCAL_TryPerformStackOp_i;
                                                        __csLOCAL_TryPerformStackOp_i = __VERIFIER_nondet_int();
-                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 4));
+                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 3));
                                                        __VERIFIER_assume((&threads[__csLOCAL_TryPerformStackOp_i].cell) == __csLOCAL_TryPerformStackOp_phead);
                                                        allocated[__csLOCAL_TryPerformStackOp_i] = 0;
                                                        //__CS_atomic_end;
@@ -746,7 +746,7 @@ tinstrPush1_0_45: IF(2,45,tinstrPush1_0_46)            (*__csLOCALPARAM_TryPerfo
 tinstrPush1_0_46: IF(2,46,tinstrPush1_0_47)            //__CS_atomic_begin;
                                                        static int __csLOCAL_TryPerformStackOp_i;
                                                        __csLOCAL_TryPerformStackOp_i = __VERIFIER_nondet_int();
-                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 4));
+                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 3));
                                                        __VERIFIER_assume((&threads[__csLOCAL_TryPerformStackOp_i].cell) == __csLOCAL_TryPerformStackOp_phead);
                                                        allocated[__csLOCAL_TryPerformStackOp_i] = 0;
                                                        //__CS_atomic_end;
@@ -852,7 +852,7 @@ tinstrPush2_0_17: IF(3,17,tinstrPush2_0_18)            (*__csLOCALPARAM_TryPerfo
 tinstrPush2_0_18: IF(3,18,tinstrPush2_0_19)            //__CS_atomic_begin;
                                                        static int __csLOCAL_TryPerformStackOp_i;
                                                        __csLOCAL_TryPerformStackOp_i = __VERIFIER_nondet_int();
-                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 4));
+                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 3));
                                                        __VERIFIER_assume((&threads[__csLOCAL_TryPerformStackOp_i].cell) == __csLOCAL_TryPerformStackOp_phead);
                                                        allocated[__csLOCAL_TryPerformStackOp_i] = 0;
                                                        //__CS_atomic_end;
@@ -977,7 +977,7 @@ tinstrPush2_0_45: IF(3,45,tinstrPush2_0_46)            (*__csLOCALPARAM_TryPerfo
 tinstrPush2_0_46: IF(3,46,tinstrPush2_0_47)            //__CS_atomic_begin;
                                                        static int __csLOCAL_TryPerformStackOp_i;
                                                        __csLOCAL_TryPerformStackOp_i = __VERIFIER_nondet_int();
-                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 4));
+                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 3));
                                                        __VERIFIER_assume((&threads[__csLOCAL_TryPerformStackOp_i].cell) == __csLOCAL_TryPerformStackOp_phead);
                                                        allocated[__csLOCAL_TryPerformStackOp_i] = 0;
                                                        //__CS_atomic_end;
@@ -1082,7 +1082,7 @@ tinstrPop3_0_16: IF(4,16,tinstrPop3_0_17)              (*__csLOCALPARAM_TryPerfo
 tinstrPop3_0_17: IF(4,17,tinstrPop3_0_18)              //__CS_atomic_begin;
                                                        static int __csLOCAL_TryPerformStackOp_i;
                                                        __csLOCAL_TryPerformStackOp_i = __VERIFIER_nondet_int();
-                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 4));
+                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 3));
                                                        __VERIFIER_assume((&threads[__csLOCAL_TryPerformStackOp_i].cell) == __csLOCAL_TryPerformStackOp_phead);
                                                        allocated[__csLOCAL_TryPerformStackOp_i] = 0;
                                                        //__CS_atomic_end;
@@ -1207,7 +1207,7 @@ tinstrPop3_0_44: IF(4,44,tinstrPop3_0_45)              (*__csLOCALPARAM_TryPerfo
 tinstrPop3_0_45: IF(4,45,tinstrPop3_0_46)              //__CS_atomic_begin;
                                                        static int __csLOCAL_TryPerformStackOp_i;
                                                        __csLOCAL_TryPerformStackOp_i = __VERIFIER_nondet_int();
-                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 4));
+                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 3));
                                                        __VERIFIER_assume((&threads[__csLOCAL_TryPerformStackOp_i].cell) == __csLOCAL_TryPerformStackOp_phead);
                                                        allocated[__csLOCAL_TryPerformStackOp_i] = 0;
                                                        //__CS_atomic_end;
@@ -1317,7 +1317,7 @@ tinstrPop4_0_16: IF(5,16,tinstrPop4_0_17)              (*__csLOCALPARAM_TryPerfo
 tinstrPop4_0_17: IF(5,17,tinstrPop4_0_18)              //__CS_atomic_begin;
                                                        static int __csLOCAL_TryPerformStackOp_i;
                                                        __csLOCAL_TryPerformStackOp_i = __VERIFIER_nondet_int();
-                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 4));
+                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 3));
                                                        __VERIFIER_assume((&threads[__csLOCAL_TryPerformStackOp_i].cell) == __csLOCAL_TryPerformStackOp_phead);
                                                        allocated[__csLOCAL_TryPerformStackOp_i] = 0;
                                                        //__CS_atomic_end;
@@ -1442,7 +1442,7 @@ tinstrPop4_0_44: IF(5,44,tinstrPop4_0_45)              (*__csLOCALPARAM_TryPerfo
 tinstrPop4_0_45: IF(5,45,tinstrPop4_0_46)              //__CS_atomic_begin;
                                                        static int __csLOCAL_TryPerformStackOp_i;
                                                        __csLOCAL_TryPerformStackOp_i = __VERIFIER_nondet_int();
-                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 4));
+                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 3));
                                                        __VERIFIER_assume((&threads[__csLOCAL_TryPerformStackOp_i].cell) == __csLOCAL_TryPerformStackOp_phead);
                                                        allocated[__csLOCAL_TryPerformStackOp_i] = 0;
                                                        //__CS_atomic_end;
@@ -1552,7 +1552,7 @@ tinstrPop5_0_16: IF(6,16,tinstrPop5_0_17)              (*__csLOCALPARAM_TryPerfo
 tinstrPop5_0_17: IF(6,17,tinstrPop5_0_18)              //__CS_atomic_begin;
                                                        static int __csLOCAL_TryPerformStackOp_i;
                                                        __csLOCAL_TryPerformStackOp_i = __VERIFIER_nondet_int();
-                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 4));
+                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 3));
                                                        __VERIFIER_assume((&threads[__csLOCAL_TryPerformStackOp_i].cell) == __csLOCAL_TryPerformStackOp_phead);
                                                        allocated[__csLOCAL_TryPerformStackOp_i] = 0;
                                                        //__CS_atomic_end;
@@ -1677,7 +1677,7 @@ tinstrPop5_0_44: IF(6,44,tinstrPop5_0_45)              (*__csLOCALPARAM_TryPerfo
 tinstrPop5_0_45: IF(6,45,tinstrPop5_0_46)              //__CS_atomic_begin;
                                                        static int __csLOCAL_TryPerformStackOp_i;
                                                        __csLOCAL_TryPerformStackOp_i = __VERIFIER_nondet_int();
-                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 4));
+                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 3));
                                                        __VERIFIER_assume((&threads[__csLOCAL_TryPerformStackOp_i].cell) == __csLOCAL_TryPerformStackOp_phead);
                                                        allocated[__csLOCAL_TryPerformStackOp_i] = 0;
                                                        //__CS_atomic_end;
@@ -1787,7 +1787,7 @@ tinstrPop6_0_16: IF(7,16,tinstrPop6_0_17)              (*__csLOCALPARAM_TryPerfo
 tinstrPop6_0_17: IF(7,17,tinstrPop6_0_18)              //__CS_atomic_begin;
                                                        static int __csLOCAL_TryPerformStackOp_i;
                                                        __csLOCAL_TryPerformStackOp_i = __VERIFIER_nondet_int();
-                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 4));
+                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 3));
                                                        __VERIFIER_assume((&threads[__csLOCAL_TryPerformStackOp_i].cell) == __csLOCAL_TryPerformStackOp_phead);
                                                        allocated[__csLOCAL_TryPerformStackOp_i] = 0;
                                                        //__CS_atomic_end;
@@ -1912,7 +1912,7 @@ tinstrPop6_0_44: IF(7,44,tinstrPop6_0_45)              (*__csLOCALPARAM_TryPerfo
 tinstrPop6_0_45: IF(7,45,tinstrPop6_0_46)              //__CS_atomic_begin;
                                                        static int __csLOCAL_TryPerformStackOp_i;
                                                        __csLOCAL_TryPerformStackOp_i = __VERIFIER_nondet_int();
-                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 4));
+                                                       __VERIFIER_assume((0 <= __csLOCAL_TryPerformStackOp_i) && (__csLOCAL_TryPerformStackOp_i < 3));
                                                        __VERIFIER_assume((&threads[__csLOCAL_TryPerformStackOp_i].cell) == __csLOCAL_TryPerformStackOp_phead);
                                                        allocated[__csLOCAL_TryPerformStackOp_i] = 0;
                                                        //__CS_atomic_end;

@@ -3,19 +3,23 @@
 #include <pthread.h>
 #include <assert.h>
 
+/**
+ * This version try to simulate the bug
+ */
 
+#define CASDEF(t,ty) \
+    int __VERIFIER_atomic ## t ## _cas(ty *p, ty cmp, ty new) { \
+        if (*p == cmp) { \
+            *p = new; \
+            return 1; \
+        } \
+        else \
+            return 0; \
+    }
 
+#define CAS(t,x,y,z) __VERIFIER_atomic ## t ## _cas(x,y,z)
 
-
-
-
-
-
-
-
-
-
-#define LOCATION_ARRAY_SIZE 8
+#define LOCATION_ARRAY_SIZE 8  // 8 is in the original
 #define COLLISION_ARRAY_SIZE 1
 
 #define POP 0
@@ -44,15 +48,15 @@ struct Simple_Stack {
 
 Simple_Stack S;
 ThreadInfo *location[LOCATION_ARRAY_SIZE];
-int collision[COLLISION_ARRAY_SIZE];
+int collision;
 
 int unique_id = 0;
 void StackOp(ThreadInfo *p);
 int TryPerformStackOp(ThreadInfo *p);
-void __VERIFIER_atomic_FinishCollision(ThreadInfo *p);
-int __VERIFIER_atomic_TryCollision(ThreadInfo *, ThreadInfo *, int);
 
-
+CASDEF(int, int)
+CASDEF(ti, ThreadInfo*)
+CASDEF(c, Cell*)
 
 /**
  * THREADS and STUFF
@@ -61,72 +65,66 @@ int __VERIFIER_atomic_TryCollision(ThreadInfo *, ThreadInfo *, int);
 #define NUM_THREADS 4      //
 ThreadInfo threads[NUM_THREADS];
 int allocated[NUM_THREADS];
-pthread_mutex_t mutex;
 
 ThreadInfo* __VERIFIER_atomic_malloc_ThreadInfo() {
-    pthread_mutex_lock(&mutex);
-    while (1)
-    {
-        for (int i = 0; i < NUM_THREADS; ++i) {
-            if (!allocated[i]) {
-                allocated[i] = 1;
-                pthread_mutex_unlock(&mutex);
-                return &threads[i];
-            }
-        }
-    }
+    int i;
+    __VERIFIER_assume(0 <= i && i < NUM_THREADS);
+    __VERIFIER_assume(!allocated[i]);
+    allocated[i] = 1;
+    return &threads[i];
 }
+
+
+
+
 void __VERIFIER_atomic_free_ThreadInfo(ThreadInfo* ti) {
-    pthread_mutex_lock(&mutex);
-    while (1)
-    {
-        for (int i = 0; i < NUM_THREADS; ++i) {
-            if (&threads[i] == ti) {
-                allocated[i] = 0; // BUG Free the memory to witness the ABA bug
-                pthread_mutex_unlock(&mutex);
-                return;
-            }
-        }
-    }
+    int i;
+    __VERIFIER_assume(0 <= i && i < NUM_THREADS);
+    __VERIFIER_assume(&threads[i] == ti);
+    allocated[i] = 0; // BUG Free the memory to witness the ABA bug
 }
+
+
+
 
 /**
  *  ALGORITHM
  */
 void LesOP(ThreadInfo *p) {
-    while (1) {
-        int mypid = p->id;
-        location[mypid] = p;
-        int him = collision[0];   // GetPosition(p) = pos = 0;
-        while (!__sync_bool_compare_and_swap(&collision[0], him, mypid)) {
-            him = collision[0];
-        }
-        if (him > 0) {
-            ThreadInfo* q = location[him];
-            if (q != NULL && q->id == him && q->op != p->op) {
-                if (__sync_bool_compare_and_swap(&location[mypid], p, NULL)) {
-                    if (__VERIFIER_atomic_TryCollision(p, q, him) == TRUE) {
-                        return;
-                    } else {
-                        goto stack;
-                    }
-                }
-                else {
-                    __VERIFIER_atomic_FinishCollision(p);
+    // {
+    int mypid = p->id;
+    location[mypid] = p;
+    int him = collision;   // GetPosition(p) = pos = 0;
+
+    __VERIFIER_assume (CAS(int, &collision, him, mypid));
+
+    if (him > 0) {
+        ThreadInfo* q = location[him];
+        if (q != NULL && q->id == him && q->op != p->op) {
+            if (CAS(ti, &location[mypid], p, NULL)) {
+                if (__VERIFIER_atomic_TryCollision(p, q, him) == TRUE) {
                     return;
+                } else {
+                    goto stack;
                 }
             }
-        }
-        // delay (p->spin);
-        if (!__sync_bool_compare_and_swap(&location[mypid], p, NULL)) {
-            __VERIFIER_atomic_FinishCollision(p);
-            return;
-        }
-stack:
-        if (TryPerformStackOp(p) == TRUE) {
-            return;
+            else {
+                __VERIFIER_atomic_FinishCollision(p);
+                return;
+            }
         }
     }
+    // delay (p->spin);
+    if (!CAS(ti, &location[mypid], p, NULL)) {
+        __VERIFIER_atomic_FinishCollision(p);
+        return;
+    }
+stack:
+    if (TryPerformStackOp(p) == TRUE) {
+        return;
+    }
+    // }
+    __VERIFIER_assume(0);  // One loop is enough to simulate the bug
 }
 
 int TryPerformStackOp(ThreadInfo * p) {
@@ -134,7 +132,7 @@ int TryPerformStackOp(ThreadInfo * p) {
     if (p->op == PUSH) {
         phead = S.ptop;
         p->cell.pnext = phead;
-        if (__sync_bool_compare_and_swap(&S.ptop, phead, &p->cell)) {
+        if (CAS(c, &S.ptop, phead, &p->cell)) {
             return TRUE;
         } else {
             return FALSE;
@@ -148,23 +146,23 @@ int TryPerformStackOp(ThreadInfo * p) {
             return TRUE;
         }
         pnext = phead->pnext;
-        if (__sync_bool_compare_and_swap(&S.ptop, phead, pnext)) {
-            // p->cell.pdata = phead->pdata;  //Injected code
+        if (CAS(c, &S.ptop, phead, pnext)) {
+            // p->cell.pdata = phead->pdata;  // Jad Injected code
             p->cell = *phead;
             // Injected code
-            pthread_mutex_lock(&mutex);
-            while (1) {
-                for (int i = 0; i < NUM_THREADS; ++i) {
-                    ThreadInfo *oldti = &threads[i];
-                    if (&oldti->cell == phead) {
-                        allocated[i] = 0;
-                        goto EXIT;
-                    }
-                }
-            }
-EXIT:
-            pthread_mutex_unlock(&mutex);
+            __VERIFIER_atomic_begin();
+            int i = __VERIFIER_nondet_int();
+            __VERIFIER_assume(0 <= i && i < NUM_THREADS);
+            __VERIFIER_assume(&threads[i].cell == phead);
+            allocated[i] = 0;
+            __VERIFIER_atomic_end();
+            // ThreadInfo *oldti;
+            // __VERIFIER_assume(&oldti->cell == phead);
+            // __VERIFIER_atomic_free_ThreadInfo(oldti);
+            // assert(0);
             // END: Injected code
+            //
+            //
             return TRUE;
         }
         else {
@@ -177,41 +175,35 @@ EXIT:
 
 
 void __VERIFIER_atomic_FinishCollision(ThreadInfo * p) {
-    pthread_mutex_lock(&mutex);
     if (p->op == POP) {
         int mypid = p->id;
+        // p->cell.pdata = location[mypid]->cell.pdata;  // Jad injected code
         p->cell = location[mypid]->cell;
         location[mypid] = NULL;
     }
-    pthread_mutex_unlock(&mutex);
 }
 
 int __VERIFIER_atomic_TryCollision(ThreadInfo * p, ThreadInfo * q, int him) {
-    pthread_mutex_lock(&mutex);
     int mypid = p->id;
     if (p->op == PUSH) {
-        if (__sync_bool_compare_and_swap(&location[him], q, p)) {
-            pthread_mutex_unlock(&mutex);
+        if (CAS(ti, &location[him], q, p)) {
             return TRUE;
         }
         else {
-            pthread_mutex_unlock(&mutex);
             return FALSE;
         }
     }
     if (p->op == POP) {
-        if (__sync_bool_compare_and_swap(&location[him], q, NULL)) {
+        if (CAS(ti, &location[him], q, NULL)) {
+            // p->cell.pdata = q->cell.pdata;   // Jad injected code
             p->cell = q->cell;
             location[mypid] = NULL;
-            pthread_mutex_unlock(&mutex);
             return TRUE;
         }
         else {
-            pthread_mutex_unlock(&mutex);
             return FALSE;
         }
     }
-    pthread_mutex_unlock(&mutex);
     return FALSE;
 }
 
@@ -233,7 +225,6 @@ void Init() {
 
 void Push(int x) {
     ThreadInfo *ti = __VERIFIER_atomic_malloc_ThreadInfo();
-
     // Initialize threads
     ti->id = ++unique_id;
     ti->op = PUSH;
@@ -275,31 +266,23 @@ void checkInvariant()
 }
 
 void __VERIFIER_atomic_atomicIncr_Push(int localPush1) {
-    pthread_mutex_lock(&mutex);
     PushOpen[localPush1]++;
-    pthread_mutex_unlock(&mutex);
 }
 
 void __VERIFIER_atomic_atomicDecrIncr_Push(int localPush1) {
-    pthread_mutex_lock(&mutex);
     PushOpen[localPush1]--;
     PushDone[localPush1]++;
     checkInvariant();
-    pthread_mutex_unlock(&mutex);
 }
 
 void __VERIFIER_atomic_atomicIncr_Pop() {
-    pthread_mutex_lock(&mutex);
     PopOpen++;
-    pthread_mutex_unlock(&mutex);
 }
 
 void __VERIFIER_atomic_atomicDecrIncr_Pop(int localPop_ret) {
-    pthread_mutex_lock(&mutex);
     PopOpen--;
     PopDone[localPop_ret]++;
     checkInvariant();
-    pthread_mutex_unlock(&mutex);
 }
 
 
@@ -358,7 +341,7 @@ void* instrPop6(void* unused) {
 
 int main(void) {
     Init();
-    pthread_mutex_init(&mutex, 0);
+
     pthread_t tid1, tid2, tid3, tid4, tid5, tid6, tid7;
 
     pthread_create(&tid1, NULL, &instrPush0, NULL);

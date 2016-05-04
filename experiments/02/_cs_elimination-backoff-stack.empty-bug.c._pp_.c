@@ -1,4 +1,4 @@
-/*  Generated 0.0.0.0.0.0 (-t4 -r3 -u1 -bcbmc) 2016-04-07 09:56:15  */
+/*  Generated 0.0.0.0.0.0 (-t4 -r3 -u1 -bcbmc) 2016-04-15 13:28:50  */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -378,7 +378,6 @@ tinstrPush0_0_19: IF(1,19,tinstrPush0_0_20)            (*__csLOCALPARAM_TryPerfo
                                                        static ThreadInfo *__csLOCALPARAM_LesOP_p;
 tinstrPush0_0_20: IF(1,20,tinstrPush0_0_21)            __csLOCALPARAM_LesOP_p = __csLOCAL_Push_ti;
 tinstrPush0_0_21: IF(1,21,tinstrPush0_0_22)            (*__csLOCALPARAM_LesOP_p).id = __CS_atomic_chooseUniqueId();
-                                                       				{
                                                        static int __csLOCAL_LesOP_mypid;
 tinstrPush0_0_22: IF(1,22,tinstrPush0_0_23)            __csLOCAL_LesOP_mypid = (*__csLOCALPARAM_LesOP_p).id;
 tinstrPush0_0_23: IF(1,23,tinstrPush0_0_24)            location[__csLOCAL_LesOP_mypid - 1] = __csLOCALPARAM_LesOP_p;
@@ -386,106 +385,105 @@ tinstrPush0_0_23: IF(1,23,tinstrPush0_0_24)            location[__csLOCAL_LesOP_
 tinstrPush0_0_24: IF(1,24,tinstrPush0_0_25)            __csLOCAL_LesOP_him = collision;
 tinstrPush0_0_25: IF(1,25,tinstrPush0_0_26)            __VERIFIER_assume(__CS_atomicint_cas(&collision, __csLOCAL_LesOP_him, __csLOCAL_LesOP_mypid));
                                                        if (__csLOCAL_LesOP_him > 0)
-                                                       					{
+                                                       				{
                                                        static ThreadInfo *__csLOCAL_LesOP_q;
 tinstrPush0_0_26: IF(1,26,tinstrPush0_0_27)            __csLOCAL_LesOP_q = location[__csLOCAL_LesOP_him - 1];
 tinstrPush0_0_27: IF(1,27,tinstrPush0_0_28)            if (((__csLOCAL_LesOP_q != 0) && ((*__csLOCAL_LesOP_q).id == __csLOCAL_LesOP_him)) && ((*__csLOCAL_LesOP_q).op != (*__csLOCALPARAM_LesOP_p).op))
-                                                       						{
+                                                       					{
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_0;
 tinstrPush0_0_28: IF(1,28,tinstrPush0_0_29)            __csLOCAL_LesOP___if_cond_0 = __CS_atomicti_cas(&location[__csLOCAL_LesOP_mypid - 1], __csLOCALPARAM_LesOP_p, 0);
                                                        if (__csLOCAL_LesOP___if_cond_0)
-                                                       							{
+                                                       						{
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_1;
 tinstrPush0_0_29: IF(1,29,tinstrPush0_0_30)            __csLOCAL_LesOP___if_cond_1 = __CS_atomic_TryCollision(__csLOCALPARAM_LesOP_p, __csLOCAL_LesOP_q, __csLOCAL_LesOP_him);
                                                        if (__csLOCAL_LesOP___if_cond_1)
-                                                       								{
+                                                       							{
                                                        goto __exit__LesOP_1;
-                                                       								}
-                                                       								else
-                                                       								{ 
-                                                       goto stack;
-                                                       								}
-                                                       								;
                                                        							}
                                                        							else
-                                                       							{ GUARD(1,30)
+                                                       							{ 
+                                                       goto stack;
+                                                       							}
+                                                       							;
+                                                       						}
+                                                       						else
+                                                       						{ GUARD(1,30)
 tinstrPush0_0_30: IF(1,30,tinstrPush0_0_31)            __CS_atomic_FinishCollision(__csLOCALPARAM_LesOP_p);
                                                        goto __exit__LesOP_1;
-                                                       							}
-                                                       							GUARD(1,31);
                                                        						}
                                                        						GUARD(1,31);
                                                        					}
                                                        					GUARD(1,31);
+                                                       				}
+                                                       				GUARD(1,31);
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_2;
 tinstrPush0_0_31: IF(1,31,tinstrPush0_0_32)            __csLOCAL_LesOP___if_cond_2 = !__CS_atomicti_cas(&location[__csLOCAL_LesOP_mypid - 1], __csLOCALPARAM_LesOP_p, 0);
                                                        if (__csLOCAL_LesOP___if_cond_2)
-                                                       					{
+                                                       				{
 tinstrPush0_0_32: IF(1,32,tinstrPush0_0_33)            __CS_atomic_FinishCollision(__csLOCALPARAM_LesOP_p);
                                                        goto __exit__LesOP_1;
-                                                       					}
-                                                       					GUARD(1,33);
-                                                       					stack: GUARD(1,33)
+                                                       				}
+                                                       				GUARD(1,33);
+                                                       				stack: GUARD(1,33)
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_3;
                                                        static int __retval__TryPerformStackOp_2;
-                                                       					{
+                                                       				{
                                                        static ThreadInfo *__csLOCALPARAM_TryPerformStackOp_p;
 tinstrPush0_0_33: IF(1,33,tinstrPush0_0_34)            __csLOCALPARAM_TryPerformStackOp_p = __csLOCALPARAM_LesOP_p;
                                                        static Cell *__csLOCAL_TryPerformStackOp_thead;
                                                        static Cell *__csLOCAL_TryPerformStackOp_tnext;
 tinstrPush0_0_34: IF(1,34,tinstrPush0_0_35)            if ((*__csLOCALPARAM_TryPerformStackOp_p).op == 1)
-                                                       						{
+                                                       					{
 tinstrPush0_0_35: IF(1,35,tinstrPush0_0_36)            __csLOCAL_TryPerformStackOp_thead = S.ptop;
 tinstrPush0_0_36: IF(1,36,tinstrPush0_0_37)            (*__csLOCALPARAM_TryPerformStackOp_p).cell.pnext = __csLOCAL_TryPerformStackOp_thead;
 tinstrPush0_0_37: IF(1,37,tinstrPush0_0_38)            __retval__TryPerformStackOp_2 = __CS_atomicc_cas(&S.ptop, __csLOCAL_TryPerformStackOp_thead, &(*__csLOCALPARAM_TryPerformStackOp_p).cell);
                                                        goto __exit__TryPerformStackOp_2;
-                                                       						}
-                                                       						GUARD(1,38);
+                                                       					}
+                                                       					GUARD(1,38);
 tinstrPush0_0_38: IF(1,38,tinstrPush0_0_39)            if ((*__csLOCALPARAM_TryPerformStackOp_p).op == 0)
-                                                       						{
+                                                       					{
 tinstrPush0_0_39: IF(1,39,tinstrPush0_0_40)            __csLOCAL_TryPerformStackOp_thead = S.ptop;
 tinstrPush0_0_40: IF(1,40,tinstrPush0_0_41)            if (__csLOCAL_TryPerformStackOp_thead == 0)
-                                                       							{
+                                                       						{
 tinstrPush0_0_41: IF(1,41,tinstrPush0_0_42)            (*__csLOCALPARAM_TryPerformStackOp_p).cell.pnext = 0;
 tinstrPush0_0_42: IF(1,42,tinstrPush0_0_43)            (*__csLOCALPARAM_TryPerformStackOp_p).cell.pdata = 2;
                                                        __retval__TryPerformStackOp_2 = 1;
                                                        goto __exit__TryPerformStackOp_2;
-                                                       							}
-                                                       							GUARD(1,43);
+                                                       						}
+                                                       						GUARD(1,43);
 tinstrPush0_0_43: IF(1,43,tinstrPush0_0_44)            __csLOCAL_TryPerformStackOp_tnext = (*__csLOCAL_TryPerformStackOp_thead).pnext;
                                                        ;
                                                        static _Bool __csLOCAL_TryPerformStackOp___if_cond_4;
 tinstrPush0_0_44: IF(1,44,tinstrPush0_0_45)            __csLOCAL_TryPerformStackOp___if_cond_4 = __CS_atomicc_cas(&S.ptop, __csLOCAL_TryPerformStackOp_thead, __csLOCAL_TryPerformStackOp_tnext);
                                                        if (__csLOCAL_TryPerformStackOp___if_cond_4)
-                                                       							{
+                                                       						{
 tinstrPush0_0_45: IF(1,45,tinstrPush0_0_46)            (*__csLOCALPARAM_TryPerformStackOp_p).cell = *__csLOCAL_TryPerformStackOp_thead;
                                                        __retval__TryPerformStackOp_2 = 1;
                                                        goto __exit__TryPerformStackOp_2;
-                                                       							}
-                                                       							else
-                                                       							{ GUARD(1,46)
+                                                       						}
+                                                       						else
+                                                       						{ GUARD(1,46)
 tinstrPush0_0_46: IF(1,46,tinstrPush0_0_47)            (*__csLOCALPARAM_TryPerformStackOp_p).cell.pnext = 0;
 tinstrPush0_0_47: IF(1,47,tinstrPush0_0_48)            (*__csLOCALPARAM_TryPerformStackOp_p).cell.pdata = 2;
                                                        __retval__TryPerformStackOp_2 = 0;
                                                        goto __exit__TryPerformStackOp_2;
-                                                       							}
-                                                       							GUARD(1,48);
                                                        						}
                                                        						GUARD(1,48);
-                                                       						__exit__TryPerformStackOp_2: GUARD(1,48)
+                                                       					}
+                                                       					GUARD(1,48);
+                                                       					__exit__TryPerformStackOp_2: GUARD(1,48)
                                                        ;
-                                                       					};
+                                                       				};
                                                        __csLOCAL_LesOP___if_cond_3 = __retval__TryPerformStackOp_2 == 1;
                                                        if (__csLOCAL_LesOP___if_cond_3)
-                                                       					{
+                                                       				{
                                                        goto __exit__LesOP_1;
-                                                       					}
-                                                       					;
-                                                       				};
+                                                       				}
+                                                       				;
 tinstrPush0_0_48: IF(1,48,tinstrPush0_0_49)            __VERIFIER_assume(0);
                                                        				__exit__LesOP_1: GUARD(1,49)
                                                        ;
@@ -576,7 +574,6 @@ tinstrPush1_0_19: IF(2,19,tinstrPush1_0_20)            (*__csLOCALPARAM_TryPerfo
                                                        static ThreadInfo *__csLOCALPARAM_LesOP_p;
 tinstrPush1_0_20: IF(2,20,tinstrPush1_0_21)            __csLOCALPARAM_LesOP_p = __csLOCAL_Push_ti;
 tinstrPush1_0_21: IF(2,21,tinstrPush1_0_22)            (*__csLOCALPARAM_LesOP_p).id = __CS_atomic_chooseUniqueId();
-                                                       				{
                                                        static int __csLOCAL_LesOP_mypid;
 tinstrPush1_0_22: IF(2,22,tinstrPush1_0_23)            __csLOCAL_LesOP_mypid = (*__csLOCALPARAM_LesOP_p).id;
 tinstrPush1_0_23: IF(2,23,tinstrPush1_0_24)            location[__csLOCAL_LesOP_mypid - 1] = __csLOCALPARAM_LesOP_p;
@@ -584,106 +581,105 @@ tinstrPush1_0_23: IF(2,23,tinstrPush1_0_24)            location[__csLOCAL_LesOP_
 tinstrPush1_0_24: IF(2,24,tinstrPush1_0_25)            __csLOCAL_LesOP_him = collision;
 tinstrPush1_0_25: IF(2,25,tinstrPush1_0_26)            __VERIFIER_assume(__CS_atomicint_cas(&collision, __csLOCAL_LesOP_him, __csLOCAL_LesOP_mypid));
                                                        if (__csLOCAL_LesOP_him > 0)
-                                                       					{
+                                                       				{
                                                        static ThreadInfo *__csLOCAL_LesOP_q;
 tinstrPush1_0_26: IF(2,26,tinstrPush1_0_27)            __csLOCAL_LesOP_q = location[__csLOCAL_LesOP_him - 1];
 tinstrPush1_0_27: IF(2,27,tinstrPush1_0_28)            if (((__csLOCAL_LesOP_q != 0) && ((*__csLOCAL_LesOP_q).id == __csLOCAL_LesOP_him)) && ((*__csLOCAL_LesOP_q).op != (*__csLOCALPARAM_LesOP_p).op))
-                                                       						{
+                                                       					{
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_0;
 tinstrPush1_0_28: IF(2,28,tinstrPush1_0_29)            __csLOCAL_LesOP___if_cond_0 = __CS_atomicti_cas(&location[__csLOCAL_LesOP_mypid - 1], __csLOCALPARAM_LesOP_p, 0);
                                                        if (__csLOCAL_LesOP___if_cond_0)
-                                                       							{
+                                                       						{
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_1;
 tinstrPush1_0_29: IF(2,29,tinstrPush1_0_30)            __csLOCAL_LesOP___if_cond_1 = __CS_atomic_TryCollision(__csLOCALPARAM_LesOP_p, __csLOCAL_LesOP_q, __csLOCAL_LesOP_him);
                                                        if (__csLOCAL_LesOP___if_cond_1)
-                                                       								{
+                                                       							{
                                                        goto __exit__LesOP_2;
-                                                       								}
-                                                       								else
-                                                       								{ 
-                                                       goto stack;
-                                                       								}
-                                                       								;
                                                        							}
                                                        							else
-                                                       							{ GUARD(2,30)
+                                                       							{ 
+                                                       goto stack;
+                                                       							}
+                                                       							;
+                                                       						}
+                                                       						else
+                                                       						{ GUARD(2,30)
 tinstrPush1_0_30: IF(2,30,tinstrPush1_0_31)            __CS_atomic_FinishCollision(__csLOCALPARAM_LesOP_p);
                                                        goto __exit__LesOP_2;
-                                                       							}
-                                                       							GUARD(2,31);
                                                        						}
                                                        						GUARD(2,31);
                                                        					}
                                                        					GUARD(2,31);
+                                                       				}
+                                                       				GUARD(2,31);
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_2;
 tinstrPush1_0_31: IF(2,31,tinstrPush1_0_32)            __csLOCAL_LesOP___if_cond_2 = !__CS_atomicti_cas(&location[__csLOCAL_LesOP_mypid - 1], __csLOCALPARAM_LesOP_p, 0);
                                                        if (__csLOCAL_LesOP___if_cond_2)
-                                                       					{
+                                                       				{
 tinstrPush1_0_32: IF(2,32,tinstrPush1_0_33)            __CS_atomic_FinishCollision(__csLOCALPARAM_LesOP_p);
                                                        goto __exit__LesOP_2;
-                                                       					}
-                                                       					GUARD(2,33);
-                                                       					stack: GUARD(2,33)
+                                                       				}
+                                                       				GUARD(2,33);
+                                                       				stack: GUARD(2,33)
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_3;
                                                        static int __retval__TryPerformStackOp_4;
-                                                       					{
+                                                       				{
                                                        static ThreadInfo *__csLOCALPARAM_TryPerformStackOp_p;
 tinstrPush1_0_33: IF(2,33,tinstrPush1_0_34)            __csLOCALPARAM_TryPerformStackOp_p = __csLOCALPARAM_LesOP_p;
                                                        static Cell *__csLOCAL_TryPerformStackOp_thead;
                                                        static Cell *__csLOCAL_TryPerformStackOp_tnext;
 tinstrPush1_0_34: IF(2,34,tinstrPush1_0_35)            if ((*__csLOCALPARAM_TryPerformStackOp_p).op == 1)
-                                                       						{
+                                                       					{
 tinstrPush1_0_35: IF(2,35,tinstrPush1_0_36)            __csLOCAL_TryPerformStackOp_thead = S.ptop;
 tinstrPush1_0_36: IF(2,36,tinstrPush1_0_37)            (*__csLOCALPARAM_TryPerformStackOp_p).cell.pnext = __csLOCAL_TryPerformStackOp_thead;
 tinstrPush1_0_37: IF(2,37,tinstrPush1_0_38)            __retval__TryPerformStackOp_4 = __CS_atomicc_cas(&S.ptop, __csLOCAL_TryPerformStackOp_thead, &(*__csLOCALPARAM_TryPerformStackOp_p).cell);
                                                        goto __exit__TryPerformStackOp_4;
-                                                       						}
-                                                       						GUARD(2,38);
+                                                       					}
+                                                       					GUARD(2,38);
 tinstrPush1_0_38: IF(2,38,tinstrPush1_0_39)            if ((*__csLOCALPARAM_TryPerformStackOp_p).op == 0)
-                                                       						{
+                                                       					{
 tinstrPush1_0_39: IF(2,39,tinstrPush1_0_40)            __csLOCAL_TryPerformStackOp_thead = S.ptop;
 tinstrPush1_0_40: IF(2,40,tinstrPush1_0_41)            if (__csLOCAL_TryPerformStackOp_thead == 0)
-                                                       							{
+                                                       						{
 tinstrPush1_0_41: IF(2,41,tinstrPush1_0_42)            (*__csLOCALPARAM_TryPerformStackOp_p).cell.pnext = 0;
 tinstrPush1_0_42: IF(2,42,tinstrPush1_0_43)            (*__csLOCALPARAM_TryPerformStackOp_p).cell.pdata = 2;
                                                        __retval__TryPerformStackOp_4 = 1;
                                                        goto __exit__TryPerformStackOp_4;
-                                                       							}
-                                                       							GUARD(2,43);
+                                                       						}
+                                                       						GUARD(2,43);
 tinstrPush1_0_43: IF(2,43,tinstrPush1_0_44)            __csLOCAL_TryPerformStackOp_tnext = (*__csLOCAL_TryPerformStackOp_thead).pnext;
                                                        ;
                                                        static _Bool __csLOCAL_TryPerformStackOp___if_cond_4;
 tinstrPush1_0_44: IF(2,44,tinstrPush1_0_45)            __csLOCAL_TryPerformStackOp___if_cond_4 = __CS_atomicc_cas(&S.ptop, __csLOCAL_TryPerformStackOp_thead, __csLOCAL_TryPerformStackOp_tnext);
                                                        if (__csLOCAL_TryPerformStackOp___if_cond_4)
-                                                       							{
+                                                       						{
 tinstrPush1_0_45: IF(2,45,tinstrPush1_0_46)            (*__csLOCALPARAM_TryPerformStackOp_p).cell = *__csLOCAL_TryPerformStackOp_thead;
                                                        __retval__TryPerformStackOp_4 = 1;
                                                        goto __exit__TryPerformStackOp_4;
-                                                       							}
-                                                       							else
-                                                       							{ GUARD(2,46)
+                                                       						}
+                                                       						else
+                                                       						{ GUARD(2,46)
 tinstrPush1_0_46: IF(2,46,tinstrPush1_0_47)            (*__csLOCALPARAM_TryPerformStackOp_p).cell.pnext = 0;
 tinstrPush1_0_47: IF(2,47,tinstrPush1_0_48)            (*__csLOCALPARAM_TryPerformStackOp_p).cell.pdata = 2;
                                                        __retval__TryPerformStackOp_4 = 0;
                                                        goto __exit__TryPerformStackOp_4;
-                                                       							}
-                                                       							GUARD(2,48);
                                                        						}
                                                        						GUARD(2,48);
-                                                       						__exit__TryPerformStackOp_4: GUARD(2,48)
+                                                       					}
+                                                       					GUARD(2,48);
+                                                       					__exit__TryPerformStackOp_4: GUARD(2,48)
                                                        ;
-                                                       					};
+                                                       				};
                                                        __csLOCAL_LesOP___if_cond_3 = __retval__TryPerformStackOp_4 == 1;
                                                        if (__csLOCAL_LesOP___if_cond_3)
-                                                       					{
+                                                       				{
                                                        goto __exit__LesOP_2;
-                                                       					}
-                                                       					;
-                                                       				};
+                                                       				}
+                                                       				;
 tinstrPush1_0_48: IF(2,48,tinstrPush1_0_49)            __VERIFIER_assume(0);
                                                        				__exit__LesOP_2: GUARD(2,49)
                                                        ;
@@ -774,7 +770,6 @@ tinstrPush2_0_19: IF(3,19,tinstrPush2_0_20)            (*__csLOCALPARAM_TryPerfo
                                                        static ThreadInfo *__csLOCALPARAM_LesOP_p;
 tinstrPush2_0_20: IF(3,20,tinstrPush2_0_21)            __csLOCALPARAM_LesOP_p = __csLOCAL_Push_ti;
 tinstrPush2_0_21: IF(3,21,tinstrPush2_0_22)            (*__csLOCALPARAM_LesOP_p).id = __CS_atomic_chooseUniqueId();
-                                                       				{
                                                        static int __csLOCAL_LesOP_mypid;
 tinstrPush2_0_22: IF(3,22,tinstrPush2_0_23)            __csLOCAL_LesOP_mypid = (*__csLOCALPARAM_LesOP_p).id;
 tinstrPush2_0_23: IF(3,23,tinstrPush2_0_24)            location[__csLOCAL_LesOP_mypid - 1] = __csLOCALPARAM_LesOP_p;
@@ -782,106 +777,105 @@ tinstrPush2_0_23: IF(3,23,tinstrPush2_0_24)            location[__csLOCAL_LesOP_
 tinstrPush2_0_24: IF(3,24,tinstrPush2_0_25)            __csLOCAL_LesOP_him = collision;
 tinstrPush2_0_25: IF(3,25,tinstrPush2_0_26)            __VERIFIER_assume(__CS_atomicint_cas(&collision, __csLOCAL_LesOP_him, __csLOCAL_LesOP_mypid));
                                                        if (__csLOCAL_LesOP_him > 0)
-                                                       					{
+                                                       				{
                                                        static ThreadInfo *__csLOCAL_LesOP_q;
 tinstrPush2_0_26: IF(3,26,tinstrPush2_0_27)            __csLOCAL_LesOP_q = location[__csLOCAL_LesOP_him - 1];
 tinstrPush2_0_27: IF(3,27,tinstrPush2_0_28)            if (((__csLOCAL_LesOP_q != 0) && ((*__csLOCAL_LesOP_q).id == __csLOCAL_LesOP_him)) && ((*__csLOCAL_LesOP_q).op != (*__csLOCALPARAM_LesOP_p).op))
-                                                       						{
+                                                       					{
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_0;
 tinstrPush2_0_28: IF(3,28,tinstrPush2_0_29)            __csLOCAL_LesOP___if_cond_0 = __CS_atomicti_cas(&location[__csLOCAL_LesOP_mypid - 1], __csLOCALPARAM_LesOP_p, 0);
                                                        if (__csLOCAL_LesOP___if_cond_0)
-                                                       							{
+                                                       						{
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_1;
 tinstrPush2_0_29: IF(3,29,tinstrPush2_0_30)            __csLOCAL_LesOP___if_cond_1 = __CS_atomic_TryCollision(__csLOCALPARAM_LesOP_p, __csLOCAL_LesOP_q, __csLOCAL_LesOP_him);
                                                        if (__csLOCAL_LesOP___if_cond_1)
-                                                       								{
+                                                       							{
                                                        goto __exit__LesOP_3;
-                                                       								}
-                                                       								else
-                                                       								{ 
-                                                       goto stack;
-                                                       								}
-                                                       								;
                                                        							}
                                                        							else
-                                                       							{ GUARD(3,30)
+                                                       							{ 
+                                                       goto stack;
+                                                       							}
+                                                       							;
+                                                       						}
+                                                       						else
+                                                       						{ GUARD(3,30)
 tinstrPush2_0_30: IF(3,30,tinstrPush2_0_31)            __CS_atomic_FinishCollision(__csLOCALPARAM_LesOP_p);
                                                        goto __exit__LesOP_3;
-                                                       							}
-                                                       							GUARD(3,31);
                                                        						}
                                                        						GUARD(3,31);
                                                        					}
                                                        					GUARD(3,31);
+                                                       				}
+                                                       				GUARD(3,31);
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_2;
 tinstrPush2_0_31: IF(3,31,tinstrPush2_0_32)            __csLOCAL_LesOP___if_cond_2 = !__CS_atomicti_cas(&location[__csLOCAL_LesOP_mypid - 1], __csLOCALPARAM_LesOP_p, 0);
                                                        if (__csLOCAL_LesOP___if_cond_2)
-                                                       					{
+                                                       				{
 tinstrPush2_0_32: IF(3,32,tinstrPush2_0_33)            __CS_atomic_FinishCollision(__csLOCALPARAM_LesOP_p);
                                                        goto __exit__LesOP_3;
-                                                       					}
-                                                       					GUARD(3,33);
-                                                       					stack: GUARD(3,33)
+                                                       				}
+                                                       				GUARD(3,33);
+                                                       				stack: GUARD(3,33)
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_3;
                                                        static int __retval__TryPerformStackOp_6;
-                                                       					{
+                                                       				{
                                                        static ThreadInfo *__csLOCALPARAM_TryPerformStackOp_p;
 tinstrPush2_0_33: IF(3,33,tinstrPush2_0_34)            __csLOCALPARAM_TryPerformStackOp_p = __csLOCALPARAM_LesOP_p;
                                                        static Cell *__csLOCAL_TryPerformStackOp_thead;
                                                        static Cell *__csLOCAL_TryPerformStackOp_tnext;
 tinstrPush2_0_34: IF(3,34,tinstrPush2_0_35)            if ((*__csLOCALPARAM_TryPerformStackOp_p).op == 1)
-                                                       						{
+                                                       					{
 tinstrPush2_0_35: IF(3,35,tinstrPush2_0_36)            __csLOCAL_TryPerformStackOp_thead = S.ptop;
 tinstrPush2_0_36: IF(3,36,tinstrPush2_0_37)            (*__csLOCALPARAM_TryPerformStackOp_p).cell.pnext = __csLOCAL_TryPerformStackOp_thead;
 tinstrPush2_0_37: IF(3,37,tinstrPush2_0_38)            __retval__TryPerformStackOp_6 = __CS_atomicc_cas(&S.ptop, __csLOCAL_TryPerformStackOp_thead, &(*__csLOCALPARAM_TryPerformStackOp_p).cell);
                                                        goto __exit__TryPerformStackOp_6;
-                                                       						}
-                                                       						GUARD(3,38);
+                                                       					}
+                                                       					GUARD(3,38);
 tinstrPush2_0_38: IF(3,38,tinstrPush2_0_39)            if ((*__csLOCALPARAM_TryPerformStackOp_p).op == 0)
-                                                       						{
+                                                       					{
 tinstrPush2_0_39: IF(3,39,tinstrPush2_0_40)            __csLOCAL_TryPerformStackOp_thead = S.ptop;
 tinstrPush2_0_40: IF(3,40,tinstrPush2_0_41)            if (__csLOCAL_TryPerformStackOp_thead == 0)
-                                                       							{
+                                                       						{
 tinstrPush2_0_41: IF(3,41,tinstrPush2_0_42)            (*__csLOCALPARAM_TryPerformStackOp_p).cell.pnext = 0;
 tinstrPush2_0_42: IF(3,42,tinstrPush2_0_43)            (*__csLOCALPARAM_TryPerformStackOp_p).cell.pdata = 2;
                                                        __retval__TryPerformStackOp_6 = 1;
                                                        goto __exit__TryPerformStackOp_6;
-                                                       							}
-                                                       							GUARD(3,43);
+                                                       						}
+                                                       						GUARD(3,43);
 tinstrPush2_0_43: IF(3,43,tinstrPush2_0_44)            __csLOCAL_TryPerformStackOp_tnext = (*__csLOCAL_TryPerformStackOp_thead).pnext;
                                                        ;
                                                        static _Bool __csLOCAL_TryPerformStackOp___if_cond_4;
 tinstrPush2_0_44: IF(3,44,tinstrPush2_0_45)            __csLOCAL_TryPerformStackOp___if_cond_4 = __CS_atomicc_cas(&S.ptop, __csLOCAL_TryPerformStackOp_thead, __csLOCAL_TryPerformStackOp_tnext);
                                                        if (__csLOCAL_TryPerformStackOp___if_cond_4)
-                                                       							{
+                                                       						{
 tinstrPush2_0_45: IF(3,45,tinstrPush2_0_46)            (*__csLOCALPARAM_TryPerformStackOp_p).cell = *__csLOCAL_TryPerformStackOp_thead;
                                                        __retval__TryPerformStackOp_6 = 1;
                                                        goto __exit__TryPerformStackOp_6;
-                                                       							}
-                                                       							else
-                                                       							{ GUARD(3,46)
+                                                       						}
+                                                       						else
+                                                       						{ GUARD(3,46)
 tinstrPush2_0_46: IF(3,46,tinstrPush2_0_47)            (*__csLOCALPARAM_TryPerformStackOp_p).cell.pnext = 0;
 tinstrPush2_0_47: IF(3,47,tinstrPush2_0_48)            (*__csLOCALPARAM_TryPerformStackOp_p).cell.pdata = 2;
                                                        __retval__TryPerformStackOp_6 = 0;
                                                        goto __exit__TryPerformStackOp_6;
-                                                       							}
-                                                       							GUARD(3,48);
                                                        						}
                                                        						GUARD(3,48);
-                                                       						__exit__TryPerformStackOp_6: GUARD(3,48)
+                                                       					}
+                                                       					GUARD(3,48);
+                                                       					__exit__TryPerformStackOp_6: GUARD(3,48)
                                                        ;
-                                                       					};
+                                                       				};
                                                        __csLOCAL_LesOP___if_cond_3 = __retval__TryPerformStackOp_6 == 1;
                                                        if (__csLOCAL_LesOP___if_cond_3)
-                                                       					{
+                                                       				{
                                                        goto __exit__LesOP_3;
-                                                       					}
-                                                       					;
-                                                       				};
+                                                       				}
+                                                       				;
 tinstrPush2_0_48: IF(3,48,tinstrPush2_0_49)            __VERIFIER_assume(0);
                                                        				__exit__LesOP_3: GUARD(3,49)
                                                        ;
@@ -971,7 +965,6 @@ tinstrPop3_0_18: IF(4,18,tinstrPop3_0_19)              (*__csLOCALPARAM_TryPerfo
                                                        static ThreadInfo *__csLOCALPARAM_LesOP_p;
 tinstrPop3_0_19: IF(4,19,tinstrPop3_0_20)              __csLOCALPARAM_LesOP_p = __csLOCAL_Pop_ti;
 tinstrPop3_0_20: IF(4,20,tinstrPop3_0_21)              (*__csLOCALPARAM_LesOP_p).id = __CS_atomic_chooseUniqueId();
-                                                       				{
                                                        static int __csLOCAL_LesOP_mypid;
 tinstrPop3_0_21: IF(4,21,tinstrPop3_0_22)              __csLOCAL_LesOP_mypid = (*__csLOCALPARAM_LesOP_p).id;
 tinstrPop3_0_22: IF(4,22,tinstrPop3_0_23)              location[__csLOCAL_LesOP_mypid - 1] = __csLOCALPARAM_LesOP_p;
@@ -979,106 +972,105 @@ tinstrPop3_0_22: IF(4,22,tinstrPop3_0_23)              location[__csLOCAL_LesOP_
 tinstrPop3_0_23: IF(4,23,tinstrPop3_0_24)              __csLOCAL_LesOP_him = collision;
 tinstrPop3_0_24: IF(4,24,tinstrPop3_0_25)              __VERIFIER_assume(__CS_atomicint_cas(&collision, __csLOCAL_LesOP_him, __csLOCAL_LesOP_mypid));
                                                        if (__csLOCAL_LesOP_him > 0)
-                                                       					{
+                                                       				{
                                                        static ThreadInfo *__csLOCAL_LesOP_q;
 tinstrPop3_0_25: IF(4,25,tinstrPop3_0_26)              __csLOCAL_LesOP_q = location[__csLOCAL_LesOP_him - 1];
 tinstrPop3_0_26: IF(4,26,tinstrPop3_0_27)              if (((__csLOCAL_LesOP_q != 0) && ((*__csLOCAL_LesOP_q).id == __csLOCAL_LesOP_him)) && ((*__csLOCAL_LesOP_q).op != (*__csLOCALPARAM_LesOP_p).op))
-                                                       						{
+                                                       					{
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_0;
 tinstrPop3_0_27: IF(4,27,tinstrPop3_0_28)              __csLOCAL_LesOP___if_cond_0 = __CS_atomicti_cas(&location[__csLOCAL_LesOP_mypid - 1], __csLOCALPARAM_LesOP_p, 0);
                                                        if (__csLOCAL_LesOP___if_cond_0)
-                                                       							{
+                                                       						{
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_1;
 tinstrPop3_0_28: IF(4,28,tinstrPop3_0_29)              __csLOCAL_LesOP___if_cond_1 = __CS_atomic_TryCollision(__csLOCALPARAM_LesOP_p, __csLOCAL_LesOP_q, __csLOCAL_LesOP_him);
                                                        if (__csLOCAL_LesOP___if_cond_1)
-                                                       								{
+                                                       							{
                                                        goto __exit__LesOP_4;
-                                                       								}
-                                                       								else
-                                                       								{ 
-                                                       goto stack;
-                                                       								}
-                                                       								;
                                                        							}
                                                        							else
-                                                       							{ GUARD(4,29)
+                                                       							{ 
+                                                       goto stack;
+                                                       							}
+                                                       							;
+                                                       						}
+                                                       						else
+                                                       						{ GUARD(4,29)
 tinstrPop3_0_29: IF(4,29,tinstrPop3_0_30)              __CS_atomic_FinishCollision(__csLOCALPARAM_LesOP_p);
                                                        goto __exit__LesOP_4;
-                                                       							}
-                                                       							GUARD(4,30);
                                                        						}
                                                        						GUARD(4,30);
                                                        					}
                                                        					GUARD(4,30);
+                                                       				}
+                                                       				GUARD(4,30);
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_2;
 tinstrPop3_0_30: IF(4,30,tinstrPop3_0_31)              __csLOCAL_LesOP___if_cond_2 = !__CS_atomicti_cas(&location[__csLOCAL_LesOP_mypid - 1], __csLOCALPARAM_LesOP_p, 0);
                                                        if (__csLOCAL_LesOP___if_cond_2)
-                                                       					{
+                                                       				{
 tinstrPop3_0_31: IF(4,31,tinstrPop3_0_32)              __CS_atomic_FinishCollision(__csLOCALPARAM_LesOP_p);
                                                        goto __exit__LesOP_4;
-                                                       					}
-                                                       					GUARD(4,32);
-                                                       					stack: GUARD(4,32)
+                                                       				}
+                                                       				GUARD(4,32);
+                                                       				stack: GUARD(4,32)
                                                        ;
                                                        static _Bool __csLOCAL_LesOP___if_cond_3;
                                                        static int __retval__TryPerformStackOp_8;
-                                                       					{
+                                                       				{
                                                        static ThreadInfo *__csLOCALPARAM_TryPerformStackOp_p;
 tinstrPop3_0_32: IF(4,32,tinstrPop3_0_33)              __csLOCALPARAM_TryPerformStackOp_p = __csLOCALPARAM_LesOP_p;
                                                        static Cell *__csLOCAL_TryPerformStackOp_thead;
                                                        static Cell *__csLOCAL_TryPerformStackOp_tnext;
 tinstrPop3_0_33: IF(4,33,tinstrPop3_0_34)              if ((*__csLOCALPARAM_TryPerformStackOp_p).op == 1)
-                                                       						{
+                                                       					{
 tinstrPop3_0_34: IF(4,34,tinstrPop3_0_35)              __csLOCAL_TryPerformStackOp_thead = S.ptop;
 tinstrPop3_0_35: IF(4,35,tinstrPop3_0_36)              (*__csLOCALPARAM_TryPerformStackOp_p).cell.pnext = __csLOCAL_TryPerformStackOp_thead;
 tinstrPop3_0_36: IF(4,36,tinstrPop3_0_37)              __retval__TryPerformStackOp_8 = __CS_atomicc_cas(&S.ptop, __csLOCAL_TryPerformStackOp_thead, &(*__csLOCALPARAM_TryPerformStackOp_p).cell);
                                                        goto __exit__TryPerformStackOp_8;
-                                                       						}
-                                                       						GUARD(4,37);
+                                                       					}
+                                                       					GUARD(4,37);
 tinstrPop3_0_37: IF(4,37,tinstrPop3_0_38)              if ((*__csLOCALPARAM_TryPerformStackOp_p).op == 0)
-                                                       						{
+                                                       					{
 tinstrPop3_0_38: IF(4,38,tinstrPop3_0_39)              __csLOCAL_TryPerformStackOp_thead = S.ptop;
 tinstrPop3_0_39: IF(4,39,tinstrPop3_0_40)              if (__csLOCAL_TryPerformStackOp_thead == 0)
-                                                       							{
+                                                       						{
 tinstrPop3_0_40: IF(4,40,tinstrPop3_0_41)              (*__csLOCALPARAM_TryPerformStackOp_p).cell.pnext = 0;
 tinstrPop3_0_41: IF(4,41,tinstrPop3_0_42)              (*__csLOCALPARAM_TryPerformStackOp_p).cell.pdata = 2;
                                                        __retval__TryPerformStackOp_8 = 1;
                                                        goto __exit__TryPerformStackOp_8;
-                                                       							}
-                                                       							GUARD(4,42);
+                                                       						}
+                                                       						GUARD(4,42);
 tinstrPop3_0_42: IF(4,42,tinstrPop3_0_43)              __csLOCAL_TryPerformStackOp_tnext = (*__csLOCAL_TryPerformStackOp_thead).pnext;
                                                        ;
                                                        static _Bool __csLOCAL_TryPerformStackOp___if_cond_4;
 tinstrPop3_0_43: IF(4,43,tinstrPop3_0_44)              __csLOCAL_TryPerformStackOp___if_cond_4 = __CS_atomicc_cas(&S.ptop, __csLOCAL_TryPerformStackOp_thead, __csLOCAL_TryPerformStackOp_tnext);
                                                        if (__csLOCAL_TryPerformStackOp___if_cond_4)
-                                                       							{
+                                                       						{
 tinstrPop3_0_44: IF(4,44,tinstrPop3_0_45)              (*__csLOCALPARAM_TryPerformStackOp_p).cell = *__csLOCAL_TryPerformStackOp_thead;
                                                        __retval__TryPerformStackOp_8 = 1;
                                                        goto __exit__TryPerformStackOp_8;
-                                                       							}
-                                                       							else
-                                                       							{ GUARD(4,45)
+                                                       						}
+                                                       						else
+                                                       						{ GUARD(4,45)
 tinstrPop3_0_45: IF(4,45,tinstrPop3_0_46)              (*__csLOCALPARAM_TryPerformStackOp_p).cell.pnext = 0;
 tinstrPop3_0_46: IF(4,46,tinstrPop3_0_47)              (*__csLOCALPARAM_TryPerformStackOp_p).cell.pdata = 2;
                                                        __retval__TryPerformStackOp_8 = 0;
                                                        goto __exit__TryPerformStackOp_8;
-                                                       							}
-                                                       							GUARD(4,47);
                                                        						}
                                                        						GUARD(4,47);
-                                                       						__exit__TryPerformStackOp_8: GUARD(4,47)
+                                                       					}
+                                                       					GUARD(4,47);
+                                                       					__exit__TryPerformStackOp_8: GUARD(4,47)
                                                        ;
-                                                       					};
+                                                       				};
                                                        __csLOCAL_LesOP___if_cond_3 = __retval__TryPerformStackOp_8 == 1;
                                                        if (__csLOCAL_LesOP___if_cond_3)
-                                                       					{
+                                                       				{
                                                        goto __exit__LesOP_4;
-                                                       					}
-                                                       					;
-                                                       				};
+                                                       				}
+                                                       				;
 tinstrPop3_0_47: IF(4,47,tinstrPop3_0_48)              __VERIFIER_assume(0);
                                                        				__exit__LesOP_4: GUARD(4,48)
                                                        ;

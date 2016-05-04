@@ -4,12 +4,12 @@
 # 1 "/usr/include/stdc-predef.h" 1 3 4
 # 1 "<command-line>" 2
 # 1 "<stdin>"
-# 1 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c"
+# 1 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/treiber-stack.aba-bug.mem_v1.c"
 # 1 "<built-in>"
 # 1 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
 # 1 "<command-line>" 2
-# 1 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c"
+# 1 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/treiber-stack.aba-bug.mem_v1.c"
 # 1 "./preprocessor/ccpp-0.1/fake_include/stdlib.h" 1
 # 1 "./preprocessor/ccpp-0.1/fake_include/_fake_defines.h" 1
 # 2 "./preprocessor/ccpp-0.1/fake_include/stdlib.h" 2
@@ -179,236 +179,248 @@ typedef int fd_set;
 
 typedef int _____STOPSTRIPPINGFROMHERE_____;
 # 2 "./preprocessor/ccpp-0.1/fake_include/stdlib.h" 2
-# 2 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c" 2
+# 2 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/treiber-stack.aba-bug.mem_v1.c" 2
 # 1 "./preprocessor/ccpp-0.1/fake_include/stdio.h" 1
-# 3 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c" 2
+# 3 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/treiber-stack.aba-bug.mem_v1.c" 2
 # 1 "./preprocessor/ccpp-0.1/fake_include/pthread.h" 1
-# 4 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c" 2
-# 1 "./preprocessor/ccpp-0.1/fake_include/assert.h" 1
-# 5 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c" 2
-# 30 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c"
-typedef struct Cell Cell;
-struct Cell {
-    Cell *pnext;
-    int pdata;
-};
-
-typedef struct ThreadInfo ThreadInfo;
-struct ThreadInfo {
-    unsigned int id;
-    int op;
-    Cell cell;
-};
-
-typedef struct Simple_Stack Simple_Stack;
-struct Simple_Stack {
-    Cell *ptop;
-};
-
-
-Simple_Stack S;
-ThreadInfo *location[8];
-int collision;
-
-int unique_id = 0;
-void StackOp(ThreadInfo *p);
-int TryPerformStackOp(ThreadInfo *p);
-
-int __VERIFIER_atomicint_cas(int *p, int cmp, int new) { if (*p == cmp) { *p = new; return 1; } else return 0; }
-int __VERIFIER_atomicti_cas(ThreadInfo* *p, ThreadInfo* cmp, ThreadInfo* new) { if (*p == cmp) { *p = new; return 1; } else return 0; }
-int __VERIFIER_atomicc_cas(Cell* *p, Cell* cmp, Cell* new) { if (*p == cmp) { *p = new; return 1; } else return 0; }
+# 4 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/treiber-stack.aba-bug.mem_v1.c" 2
+# 1 "./preprocessor/ccpp-0.1/fake_include/stdint.h" 1
+# 5 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/treiber-stack.aba-bug.mem_v1.c" 2
 
 
 
+typedef int val_t;
+typedef int addr_t;
 
 
 
-ThreadInfo threads[4];
-int allocated[4];
-
-ThreadInfo* __VERIFIER_atomic_malloc_ThreadInfo() {
-    int i;
-    __VERIFIER_assume(0 <= i && i < 4);
-    __VERIFIER_assume(!allocated[i]);
-    allocated[i] = 1;
-    return &threads[i];
+val_t MEM_VALUE[25];
+# 29 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/03/treiber-stack.aba-bug.mem_v1.c"
+void __VERIFIER_atomic_init_MEMORY(void)
+{
+    MEM_VALUE[1] = 0;
+    MEM_VALUE[2 + 0] = 0;
+    MEM_VALUE[2 + 1] = 0;
+    MEM_VALUE[2 + 2] = 0;
+    MEM_VALUE[2 + 3] = 0;
+    MEM_VALUE[6] = 0;
+    MEM_VALUE[6 + 1] = 0;
 }
 
-
-
-
-void __VERIFIER_atomic_free_ThreadInfo(ThreadInfo* ti) {
-    int i;
-    __VERIFIER_assume(0 <= i && i < 4);
-    __VERIFIER_assume(&threads[i] == ti);
-    allocated[i] = 0;
+addr_t __VERIFIER_atomic_malloc_Node() {
+    int i = __VERIFIER_nondet_int();
+    __VERIFIER_assume(0 <= i && i < 2);
+    __VERIFIER_assume(!MEM_VALUE[6 + i]);
+    MEM_VALUE[6 + i] = 1;
+    return (2 + i*2);
 }
 
-
-
-
-
-
-
-void LesOP(ThreadInfo *p) {
-
-    int mypid = p->id;
-    location[mypid] = p;
-    int him = collision;
-
-    __VERIFIER_assume (__VERIFIER_atomicint_cas(&collision,him,mypid));
-
-    if (him > 0) {
-        ThreadInfo* q = location[him];
-        if (q != 0 && q->id == him && q->op != p->op) {
-            if (__VERIFIER_atomicti_cas(&location[mypid],p,0)) {
-                if (__VERIFIER_atomic_TryCollision(p, q, him) == 1) {
-                    return;
-                } else {
-                    goto stack;
-                }
-            }
-            else {
-                __VERIFIER_atomic_FinishCollision(p);
-                return;
-            }
-        }
-    }
-
-    if (!__VERIFIER_atomicti_cas(&location[mypid],p,0)) {
-        __VERIFIER_atomic_FinishCollision(p);
-        return;
-    }
-stack:
-    if (TryPerformStackOp(p) == 1) {
-        return;
-    }
-
-    __VERIFIER_assume(0);
+addr_t malloc_Node() {
+    return __VERIFIER_atomic_malloc_Node();
 }
 
-int TryPerformStackOp(ThreadInfo * p) {
-    Cell *phead, *pnext;
-    if (p->op == 1) {
-        phead = S.ptop;
-        p->cell.pnext = phead;
-        if (__VERIFIER_atomicc_cas(&S.ptop,phead,&p->cell)) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-    if (p->op == 0) {
-        phead = S.ptop;
-        if (phead == 0) {
-
-            p->cell.pnext = 0; p->cell.pdata = 2;
-            return 1;
-        }
-        pnext = phead->pnext;
-        if (__VERIFIER_atomicc_cas(&S.ptop,phead,pnext)) {
-
-            p->cell = *phead;
-
-            __VERIFIER_atomic_begin();
-            int i = __VERIFIER_nondet_int();
-            __VERIFIER_assume(0 <= i && i < 4);
-            __VERIFIER_assume(&threads[i].cell == phead);
-            allocated[i] = 0;
-            __VERIFIER_atomic_end();
-
-
-
-
-
-
-
-            return 1;
-        }
-        else {
-
-            p->cell.pnext = 0; p->cell.pdata = 2;
-            return 0;
-        }
-    }
+void free_Node(addr_t n) {
+    int i = __VERIFIER_nondet_int();
+    __VERIFIER_assume(2 + i*2 == n);
+    MEM_VALUE[6 + i] = 0;
 }
 
-
-void __VERIFIER_atomic_FinishCollision(ThreadInfo * p) {
-    if (p->op == 0) {
-        int mypid = p->id;
-
-        p->cell = location[mypid]->cell;
-        location[mypid] = 0;
-    }
-}
-
-int __VERIFIER_atomic_TryCollision(ThreadInfo * p, ThreadInfo * q, int him) {
-    int mypid = p->id;
-    if (p->op == 1) {
-        if (__VERIFIER_atomicti_cas(&location[him],q,p)) {
-            return 1;
-        }
-        else {
-            return 0;
-        }
-    }
-    if (p->op == 0) {
-        if (__VERIFIER_atomicti_cas(&location[him],q,0)) {
-
-            p->cell = q->cell;
-            location[mypid] = 0;
-            return 1;
-        }
-        else {
-            return 0;
-        }
+_Bool __VERIFIER_atomic_CAS(addr_t address_ptr, addr_t old_address, addr_t new_address)
+{
+    if (MEM_VALUE[address_ptr] == old_address)
+    {
+        MEM_VALUE[address_ptr] = new_address;
+        return 1;
     }
     return 0;
 }
 
 
 
+void push_aux_t0(addr_t n) {
 
+        MEM_VALUE[8] = MEM_VALUE[1];
+        MEM_VALUE[n + 0] = MEM_VALUE[8];
+        if (__VERIFIER_atomic_CAS(1, MEM_VALUE[8], n)){
+            return;
+        }
+
+    __VERIFIER_assume(0);
+}
+
+addr_t n_push_t0;
+void Push_t0(int i) {
+    n_push_t0 = malloc_Node();
+    MEM_VALUE[n_push_t0 + 1] = i;
+    push_aux_t0(n_push_t0);
+}
+
+
+void push_aux_t1(addr_t n) {
+
+        MEM_VALUE[9] = MEM_VALUE[1];
+        MEM_VALUE[n + 0] = MEM_VALUE[9];
+        if (__VERIFIER_atomic_CAS(1, MEM_VALUE[9], n)){
+            return;
+        }
+
+    __VERIFIER_assume(0);
+}
+
+addr_t n_push_t1;
+void Push_t1(int i) {
+    n_push_t1 = malloc_Node();
+    MEM_VALUE[n_push_t1 + 1] = i;
+    push_aux_t1(n_push_t1);
+}
+
+
+
+
+void push_aux_t2(addr_t n) {
+
+        MEM_VALUE[10] = MEM_VALUE[1];
+        MEM_VALUE[n + 0] = MEM_VALUE[10];
+        if (__VERIFIER_atomic_CAS(1, MEM_VALUE[10], n)){
+            return;
+        }
+
+    __VERIFIER_assume(0);
+}
+
+addr_t n_push_t2;
+void Push_t2(int i) {
+    n_push_t2 = malloc_Node();
+    MEM_VALUE[n_push_t2 + 1] = i;
+    push_aux_t2(n_push_t2);
+}
+
+
+
+
+
+addr_t pop_aux_t0() {
+
+        MEM_VALUE[11] = MEM_VALUE[1];
+        if (MEM_VALUE[11] == 0) {
+            return 0;
+        }
+        MEM_VALUE[12] = MEM_VALUE[MEM_VALUE[11]];
+        if (__VERIFIER_atomic_CAS(1, MEM_VALUE[11], MEM_VALUE[12])) {
+            return MEM_VALUE[11];
+        }
+
+    __VERIFIER_assume(0);
+}
+
+addr_t n_pop_t0;
+int Pop_t0() {
+    n_pop_t0 = pop_aux_t0();
+    if (n_pop_t0 == 0) return 2;
+    else {
+        int v = MEM_VALUE[n_pop_t0 + 1];
+        free_Node (n_pop_t0);
+        return v;
+    }
+}
+
+
+
+addr_t pop_aux_t1() {
+
+        MEM_VALUE[13] = MEM_VALUE[1];
+        if (MEM_VALUE[13] == 0) {
+            return 0;
+        }
+        MEM_VALUE[14] = MEM_VALUE[MEM_VALUE[13]];
+        if (__VERIFIER_atomic_CAS(1, MEM_VALUE[13], MEM_VALUE[14])) {
+            return MEM_VALUE[13];
+        }
+
+    __VERIFIER_assume(0);
+}
+
+addr_t n_pop_t1;
+int Pop_t1() {
+    n_pop_t1 = pop_aux_t1();
+    if (n_pop_t1 == 0) return 2;
+    else {
+        int v = MEM_VALUE[n_pop_t1 + 1];
+        free_Node (n_pop_t1);
+        return v;
+    }
+}
+
+
+
+addr_t pop_aux_t2() {
+
+        MEM_VALUE[15] = MEM_VALUE[1];
+        if (MEM_VALUE[15] == 0) {
+            return 0;
+        }
+        MEM_VALUE[16] = MEM_VALUE[MEM_VALUE[15]];
+        if (__VERIFIER_atomic_CAS(1, MEM_VALUE[15], MEM_VALUE[16])) {
+            return MEM_VALUE[15];
+        }
+
+    __VERIFIER_assume(0);
+}
+
+addr_t n_pop_t2;
+int Pop_t2() {
+    n_pop_t2 = pop_aux_t2();
+    if (n_pop_t2 == 0) return 2;
+    else {
+        int v = MEM_VALUE[n_pop_t2 + 1];
+        free_Node (n_pop_t2);
+        return v;
+    }
+}
+
+
+
+addr_t pop_aux_t3() {
+
+        MEM_VALUE[17] = MEM_VALUE[1];
+        if (MEM_VALUE[17] == 0) {
+            return 0;
+        }
+        MEM_VALUE[18] = MEM_VALUE[MEM_VALUE[17]];
+        if (__VERIFIER_atomic_CAS(1, MEM_VALUE[17], MEM_VALUE[18])) {
+            return MEM_VALUE[17];
+        }
+
+    __VERIFIER_assume(0);
+}
+
+addr_t n_pop_t3;
+int Pop_t3() {
+    n_pop_t3 = pop_aux_t3();
+    if (n_pop_t3 == 0) return 2;
+    else {
+        int v = MEM_VALUE[n_pop_t3 + 1];
+        free_Node (n_pop_t3);
+        return v;
+    }
+}
 
 
 void Init() {
-    S.ptop = 0;
-}
-# 226 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c"
-void Push(int x) {
-    ThreadInfo *ti = __VERIFIER_atomic_malloc_ThreadInfo();
-
-    ti->id = ++unique_id;
-    ti->op = 1;
-    ti->cell.pdata = x;
-
-    if (TryPerformStackOp(ti) == 0) {
-        LesOP(ti);
-    }
+    __VERIFIER_atomic_init_MEMORY();
 }
 
-int Pop() {
-    ThreadInfo *ti = __VERIFIER_atomic_malloc_ThreadInfo();
-    ti->id = ++unique_id;
-    ti->op = 0;
 
-    if (TryPerformStackOp(ti) == 0) {
-        LesOP(ti);
-    }
-    int v = ti->cell.pdata;
-    __VERIFIER_atomic_free_ThreadInfo(ti);
-    return v;
-}
+
 
 
 
 int PushOpen[2];
 int PushDone[2];
 
-
 int PopOpen;
 int PopDone[3];
+
 
 void checkInvariant()
 {
@@ -438,68 +450,66 @@ void __VERIFIER_atomic_atomicDecrIncr_Pop(int localPop_ret) {
     checkInvariant();
 }
 
-
 void* instrPush0(void* unused) {
     __VERIFIER_atomic_atomicIncr_Push(1);
-    Push(1);
+    Push_t0(1);
     __VERIFIER_atomic_atomicDecrIncr_Push(1);
     return 0;
 }
 
 void* instrPush1(void* unused) {
     __VERIFIER_atomic_atomicIncr_Push(1);
-    Push(1);
+    Push_t1(1);
     __VERIFIER_atomic_atomicDecrIncr_Push(1);
     return 0;
 }
 
 void* instrPush2(void* unused) {
     __VERIFIER_atomic_atomicIncr_Push(1);
-    Push(1);
+    Push_t2(1);
     __VERIFIER_atomic_atomicDecrIncr_Push(1);
     return 0;
 }
 
-
-
-
 void* instrPop3(void* unused) {
     __VERIFIER_atomic_atomicIncr_Pop();
-    int localPop_ret = Pop();
+    int localPop_ret = Pop_t0();
     __VERIFIER_atomic_atomicDecrIncr_Pop(localPop_ret);
     return 0;
 }
 
 void* instrPop4(void* unused) {
     __VERIFIER_atomic_atomicIncr_Pop();
-    int localPop_ret = Pop();
+    int localPop_ret = Pop_t1();
     __VERIFIER_atomic_atomicDecrIncr_Pop(localPop_ret);
     return 0;
 }
 
 void* instrPop5(void* unused) {
     __VERIFIER_atomic_atomicIncr_Pop();
-    int localPop_ret = Pop();
+    int localPop_ret = Pop_t2();
     __VERIFIER_atomic_atomicDecrIncr_Pop(localPop_ret);
     return 0;
 }
 
 void* instrPop6(void* unused) {
     __VERIFIER_atomic_atomicIncr_Pop();
-    int localPop_ret = Pop();
+    int localPop_ret = Pop_t3();
     __VERIFIER_atomic_atomicDecrIncr_Pop(localPop_ret);
     return 0;
 }
 
 
-int main(void) {
-    Init();
 
+int main() {
+    Init();
     pthread_t tid1, tid2, tid3, tid4, tid5, tid6, tid7;
+
 
     pthread_create(&tid1, 0, &instrPush0, 0);
     pthread_create(&tid2, 0, &instrPush1, 0);
     pthread_create(&tid3, 0, &instrPush2, 0);
+
 
     pthread_create(&tid4, 0, &instrPop3, 0);
     pthread_create(&tid5, 0, &instrPop4, 0);

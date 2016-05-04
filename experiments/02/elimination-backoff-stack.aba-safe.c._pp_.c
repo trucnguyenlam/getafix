@@ -4,12 +4,12 @@
 # 1 "/usr/include/stdc-predef.h" 1 3 4
 # 1 "<command-line>" 2
 # 1 "<stdin>"
-# 1 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c"
+# 1 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-safe.c"
 # 1 "<built-in>"
 # 1 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
 # 1 "<command-line>" 2
-# 1 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c"
+# 1 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-safe.c"
 # 1 "./preprocessor/ccpp-0.1/fake_include/stdlib.h" 1
 # 1 "./preprocessor/ccpp-0.1/fake_include/_fake_defines.h" 1
 # 2 "./preprocessor/ccpp-0.1/fake_include/stdlib.h" 2
@@ -179,14 +179,14 @@ typedef int fd_set;
 
 typedef int _____STOPSTRIPPINGFROMHERE_____;
 # 2 "./preprocessor/ccpp-0.1/fake_include/stdlib.h" 2
-# 2 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c" 2
+# 2 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-safe.c" 2
 # 1 "./preprocessor/ccpp-0.1/fake_include/stdio.h" 1
-# 3 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c" 2
+# 3 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-safe.c" 2
 # 1 "./preprocessor/ccpp-0.1/fake_include/pthread.h" 1
-# 4 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c" 2
+# 4 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-safe.c" 2
 # 1 "./preprocessor/ccpp-0.1/fake_include/assert.h" 1
-# 5 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c" 2
-# 30 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c"
+# 5 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-safe.c" 2
+# 30 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-safe.c"
 typedef struct Cell Cell;
 struct Cell {
     Cell *pnext;
@@ -223,12 +223,12 @@ int __VERIFIER_atomicc_cas(Cell* *p, Cell* cmp, Cell* new) { if (*p == cmp) { *p
 
 
 
-ThreadInfo threads[4];
-int allocated[4];
+ThreadInfo threads[3];
+int allocated[3];
 
 ThreadInfo* __VERIFIER_atomic_malloc_ThreadInfo() {
     int i;
-    __VERIFIER_assume(0 <= i && i < 4);
+    __VERIFIER_assume(0 <= i && i < 3);
     __VERIFIER_assume(!allocated[i]);
     allocated[i] = 1;
     return &threads[i];
@@ -239,7 +239,7 @@ ThreadInfo* __VERIFIER_atomic_malloc_ThreadInfo() {
 
 void __VERIFIER_atomic_free_ThreadInfo(ThreadInfo* ti) {
     int i;
-    __VERIFIER_assume(0 <= i && i < 4);
+    __VERIFIER_assume(0 <= i && i < 3);
     __VERIFIER_assume(&threads[i] == ti);
     allocated[i] = 0;
 }
@@ -312,7 +312,7 @@ int TryPerformStackOp(ThreadInfo * p) {
 
             __VERIFIER_atomic_begin();
             int i = __VERIFIER_nondet_int();
-            __VERIFIER_assume(0 <= i && i < 4);
+            __VERIFIER_assume(0 <= i && i < 3);
             __VERIFIER_assume(&threads[i].cell == phead);
             allocated[i] = 0;
             __VERIFIER_atomic_end();
@@ -375,7 +375,7 @@ int __VERIFIER_atomic_TryCollision(ThreadInfo * p, ThreadInfo * q, int him) {
 void Init() {
     S.ptop = 0;
 }
-# 226 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-bug.c"
+# 226 "/home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/elimination-backoff-stack.aba-safe.c"
 void Push(int x) {
     ThreadInfo *ti = __VERIFIER_atomic_malloc_ThreadInfo();
 

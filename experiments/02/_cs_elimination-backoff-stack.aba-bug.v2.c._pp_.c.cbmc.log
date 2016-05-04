@@ -1,0 +1,1387 @@
+CBMC version 5.4 64-bit x86_64 linux
+Parsing /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c
+Converting
+Type-checking _cs_elimination-backoff-stack.aba-bug.v2.c._pp_
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Function Pointer Removal
+Partial Inlining
+Generic Property Instrumentation
+Starting Bounded Model Checking
+size of program expression: 20968 steps
+simple slicing removed 335 assignments
+Generated 14 VCC(s), 14 remaining after simplification
+Passing problem to propositional reduction
+converting SSA
+Running propositional reduction
+Post-processing
+Solving with MiniSAT 2.2.1 with simplifier
+3391760 variables, 14208407 clauses
+SAT checker: instance is SATISFIABLE
+Runtime decision procedure: 33777.5s
+Building error trace
+
+Counterexample:
+
+State 236 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2004 function main thread 0
+----------------------------------------------------
+  thread_index=0 (00000000000000000000000000000000)
+
+State 240 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=7 (000111)
+
+State 245 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2005 function main thread 0
+----------------------------------------------------
+  pc_cs=7 (0000111)
+
+State 250 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1969 function main_thread thread 0
+----------------------------------------------------
+  S.ptop=((struct Cell *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 254 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1975 function main_thread thread 0
+----------------------------------------------------
+  var=&__csLOCAL_main_tid1 (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 255 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1975 function main_thread thread 0
+----------------------------------------------------
+  size=4 (0000000000000000000000000000000000000000000000000000000000000100)
+
+State 257 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 132 function __cs_init_scalar thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid1=0 (00000000000000000000000000000000)
+
+State 262 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1977 function main_thread thread 0
+----------------------------------------------------
+  var=&__csLOCAL_main_tid2 (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 263 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1977 function main_thread thread 0
+----------------------------------------------------
+  size=4 (0000000000000000000000000000000000000000000000000000000000000100)
+
+State 265 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 132 function __cs_init_scalar thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid2=0 (00000000000000000000000000000000)
+
+State 270 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1979 function main_thread thread 0
+----------------------------------------------------
+  var=&__csLOCAL_main_tid3 (0000010100000000000000000000000000000000000000000000000000000000)
+
+State 271 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1979 function main_thread thread 0
+----------------------------------------------------
+  size=4 (0000000000000000000000000000000000000000000000000000000000000100)
+
+State 273 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 132 function __cs_init_scalar thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid3=0 (00000000000000000000000000000000)
+
+State 278 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1981 function main_thread thread 0
+----------------------------------------------------
+  var=&__csLOCAL_main_tid4 (0000011000000000000000000000000000000000000000000000000000000000)
+
+State 279 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1981 function main_thread thread 0
+----------------------------------------------------
+  size=4 (0000000000000000000000000000000000000000000000000000000000000100)
+
+State 281 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 132 function __cs_init_scalar thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid4=0 (00000000000000000000000000000000)
+
+State 286 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1983 function main_thread thread 0
+----------------------------------------------------
+  var=&__csLOCAL_main_tid5 (0000011100000000000000000000000000000000000000000000000000000000)
+
+State 287 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1983 function main_thread thread 0
+----------------------------------------------------
+  size=4 (0000000000000000000000000000000000000000000000000000000000000100)
+
+State 289 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 132 function __cs_init_scalar thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid5=0 (00000000000000000000000000000000)
+
+State 294 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1985 function main_thread thread 0
+----------------------------------------------------
+  var=&__csLOCAL_main_tid6 (0000100000000000000000000000000000000000000000000000000000000000)
+
+State 295 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1985 function main_thread thread 0
+----------------------------------------------------
+  size=4 (0000000000000000000000000000000000000000000000000000000000000100)
+
+State 297 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 132 function __cs_init_scalar thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid6=0 (00000000000000000000000000000000)
+
+State 302 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1987 function main_thread thread 0
+----------------------------------------------------
+  var=&__csLOCAL_main_tid7 (0000100100000000000000000000000000000000000000000000000000000000)
+
+State 303 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1987 function main_thread thread 0
+----------------------------------------------------
+  size=4 (0000000000000000000000000000000000000000000000000000000000000100)
+
+State 305 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 132 function __cs_init_scalar thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid7=0 (00000000000000000000000000000000)
+
+State 310 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1988 function main_thread thread 0
+----------------------------------------------------
+  id=&__csLOCAL_main_tid1 (0000001100000000000000000000000000000000000000000000000000000000)
+
+State 311 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1988 function main_thread thread 0
+----------------------------------------------------
+  attr=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 312 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1988 function main_thread thread 0
+----------------------------------------------------
+  t=instrPush0_0 (0000101000000000000000000000000000000000000000000000000000000000)
+
+State 313 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1988 function main_thread thread 0
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 314 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1988 function main_thread thread 0
+----------------------------------------------------
+  threadID=1 (00000000000000000000000000000001)
+
+State 316 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid1=1 (00000000000000000000000000000001)
+
+State 317 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  active_thread[1]=1 (1)
+
+State 318 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  threadargs[1]=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 324 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1989 function main_thread thread 0
+----------------------------------------------------
+  id=&__csLOCAL_main_tid2 (0000010000000000000000000000000000000000000000000000000000000000)
+
+State 325 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1989 function main_thread thread 0
+----------------------------------------------------
+  attr=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 326 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1989 function main_thread thread 0
+----------------------------------------------------
+  t=instrPush1_0 (0000101100000000000000000000000000000000000000000000000000000000)
+
+State 327 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1989 function main_thread thread 0
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 328 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1989 function main_thread thread 0
+----------------------------------------------------
+  threadID=2 (00000000000000000000000000000010)
+
+State 330 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid2=2 (00000000000000000000000000000010)
+
+State 331 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  active_thread[2]=1 (1)
+
+State 332 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  threadargs[2]=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 338 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1990 function main_thread thread 0
+----------------------------------------------------
+  id=&__csLOCAL_main_tid3 (0000010100000000000000000000000000000000000000000000000000000000)
+
+State 339 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1990 function main_thread thread 0
+----------------------------------------------------
+  attr=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 340 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1990 function main_thread thread 0
+----------------------------------------------------
+  t=instrPush2_0 (0000110000000000000000000000000000000000000000000000000000000000)
+
+State 341 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1990 function main_thread thread 0
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 342 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1990 function main_thread thread 0
+----------------------------------------------------
+  threadID=3 (00000000000000000000000000000011)
+
+State 344 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid3=3 (00000000000000000000000000000011)
+
+State 345 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  active_thread[3]=1 (1)
+
+State 346 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  threadargs[3]=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 352 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1991 function main_thread thread 0
+----------------------------------------------------
+  id=&__csLOCAL_main_tid4 (0000011000000000000000000000000000000000000000000000000000000000)
+
+State 353 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1991 function main_thread thread 0
+----------------------------------------------------
+  attr=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 354 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1991 function main_thread thread 0
+----------------------------------------------------
+  t=instrPop3_0 (0000110100000000000000000000000000000000000000000000000000000000)
+
+State 355 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1991 function main_thread thread 0
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 356 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1991 function main_thread thread 0
+----------------------------------------------------
+  threadID=4 (00000000000000000000000000000100)
+
+State 358 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid4=4 (00000000000000000000000000000100)
+
+State 359 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  active_thread[4]=1 (1)
+
+State 360 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  threadargs[4]=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 366 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1992 function main_thread thread 0
+----------------------------------------------------
+  id=&__csLOCAL_main_tid5 (0000011100000000000000000000000000000000000000000000000000000000)
+
+State 367 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1992 function main_thread thread 0
+----------------------------------------------------
+  attr=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 368 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1992 function main_thread thread 0
+----------------------------------------------------
+  t=instrPop4_0 (0000111000000000000000000000000000000000000000000000000000000000)
+
+State 369 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1992 function main_thread thread 0
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 370 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1992 function main_thread thread 0
+----------------------------------------------------
+  threadID=5 (00000000000000000000000000000101)
+
+State 372 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid5=5 (00000000000000000000000000000101)
+
+State 373 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  active_thread[5]=1 (1)
+
+State 374 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  threadargs[5]=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 380 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1993 function main_thread thread 0
+----------------------------------------------------
+  id=&__csLOCAL_main_tid6 (0000100000000000000000000000000000000000000000000000000000000000)
+
+State 381 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1993 function main_thread thread 0
+----------------------------------------------------
+  attr=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 382 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1993 function main_thread thread 0
+----------------------------------------------------
+  t=instrPop5_0 (0000111100000000000000000000000000000000000000000000000000000000)
+
+State 383 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1993 function main_thread thread 0
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 384 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1993 function main_thread thread 0
+----------------------------------------------------
+  threadID=6 (00000000000000000000000000000110)
+
+State 386 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid6=6 (00000000000000000000000000000110)
+
+State 387 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  active_thread[6]=1 (1)
+
+State 388 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  threadargs[6]=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 394 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1994 function main_thread thread 0
+----------------------------------------------------
+  id=&__csLOCAL_main_tid7 (0000100100000000000000000000000000000000000000000000000000000000)
+
+State 395 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1994 function main_thread thread 0
+----------------------------------------------------
+  attr=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 396 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1994 function main_thread thread 0
+----------------------------------------------------
+  t=instrPop6_0 (0001000000000000000000000000000000000000000000000000000000000000)
+
+State 397 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1994 function main_thread thread 0
+----------------------------------------------------
+  arg=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 398 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1994 function main_thread thread 0
+----------------------------------------------------
+  threadID=7 (00000000000000000000000000000111)
+
+State 400 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  __csLOCAL_main_tid7=7 (00000000000000000000000000000111)
+
+State 401 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  active_thread[7]=1 (1)
+
+State 402 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 87 function __cs_create thread 0
+----------------------------------------------------
+  threadargs[7]=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 409 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2008 function main thread 0
+----------------------------------------------------
+  pc[0]=7 (000111)
+
+State 410 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2010 function main thread 0
+----------------------------------------------------
+  thread_index=1 (00000000000000000000000000000001)
+
+State 415 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=50 (110010)
+
+State 420 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2012 function main thread 0
+----------------------------------------------------
+  pc_cs=50 (0110010)
+
+State 424 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2014 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPush0_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 428 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 335 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_atomicIncr_Push_localPush1=1 (00000000000000000000000000000001)
+
+State 429 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 299 function __CS_atomic_atomicIncr_Push thread 0
+----------------------------------------------------
+  PushOpen[1]=1 (00000000000000000000000000000001)
+
+State 431 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 338 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_Push_x=1 (00000000000000000000000000000001)
+
+State 435 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 218 function __CS_atomic_malloc_ThreadInfo thread 0
+----------------------------------------------------
+  __csLOCAL___CS_atomic_malloc_ThreadInfo_i=1 (00000000000000000000000000000001)
+
+State 438 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 221 function __CS_atomic_malloc_ThreadInfo thread 0
+----------------------------------------------------
+  allocated[1]=1 (00000000000000000000000000000001)
+
+State 441 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 340 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Push_ti=&threads[1].id (0000001000000000000000000000000000000000000000000000000000011000)
+
+State 443 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 341 function instrPush0_0 thread 0
+----------------------------------------------------
+  unique_id=1 (00000000000000000000000000000001)
+
+State 444 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 341 function instrPush0_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Push_ti) / 24].id={ { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=1, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[1].id) / 24].id (?)
+
+State 446 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 342 function instrPush0_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Push_ti) / 24].op={ { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[1].id) / 24].op (?)
+
+State 448 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 343 function instrPush0_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Push_ti) / 24].cell.pdata={ { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[1].id) / 24].cell.pdata (?)
+
+State 450 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 349 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_TryPerformStackOp_p=&threads[1].id (0000001000000000000000000000000000000000000000000000000000011000)
+
+State 454 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 354 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp_phead=((struct Cell { struct Cell *pnext; int pdata; unsigned int $pad0; } *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 456 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 355 function instrPush0_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCALPARAM_TryPerformStackOp_p) / 24].cell.pnext={ { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[1].id) / 24].cell.pnext (?)
+
+State 461 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 358 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_p=&S.ptop (0001000100000000000000000000000000000000000000000000000000000000)
+
+State 462 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 358 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_cmp=((struct Cell { struct Cell *pnext; int pdata; unsigned int $pad0; } *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 463 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 358 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_new=&threads[1].cell.pnext (0000001000000000000000000000000000000000000000000000000000100000)
+
+State 465 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 203 function __CS_atomicc_cas thread 0
+----------------------------------------------------
+  S={ .ptop=&threads[1].cell.pnext } ({ 0000001000000000000000000000000000000000000000000000000000100000 })
+
+State 470 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 358 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp___if_cond_4=TRUE (00000001)
+
+State 472 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 361 function instrPush0_0 thread 0
+----------------------------------------------------
+  __retval__TryPerformStackOp_1=1 (00000000000000000000000000000001)
+
+State 475 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 413 function instrPush0_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Push___if_cond_8=FALSE (00000000)
+
+State 483 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2015 function main thread 0
+----------------------------------------------------
+  pc[1]=50 (110010)
+
+State 484 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2018 function main thread 0
+----------------------------------------------------
+  thread_index=2 (00000000000000000000000000000010)
+
+State 489 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=0 (000000)
+
+State 494 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2020 function main thread 0
+----------------------------------------------------
+  pc_cs=0 (0000000)
+
+State 498 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2022 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPush1_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 553 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2023 function main thread 0
+----------------------------------------------------
+  pc[2]=0 (000000)
+
+State 554 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2026 function main thread 0
+----------------------------------------------------
+  thread_index=3 (00000000000000000000000000000011)
+
+State 559 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=50 (110010)
+
+State 564 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2028 function main thread 0
+----------------------------------------------------
+  pc_cs=50 (0110010)
+
+State 568 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2030 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPush2_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 572 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 797 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_atomicIncr_Push_localPush1=1 (00000000000000000000000000000001)
+
+State 573 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 299 function __CS_atomic_atomicIncr_Push thread 0
+----------------------------------------------------
+  PushOpen[1]=2 (00000000000000000000000000000010)
+
+State 575 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 800 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_Push_x=1 (00000000000000000000000000000001)
+
+State 579 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 218 function __CS_atomic_malloc_ThreadInfo thread 0
+----------------------------------------------------
+  __csLOCAL___CS_atomic_malloc_ThreadInfo_i=2 (00000000000000000000000000000010)
+
+State 582 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 221 function __CS_atomic_malloc_ThreadInfo thread 0
+----------------------------------------------------
+  allocated[2]=1 (00000000000000000000000000000001)
+
+State 585 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 802 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Push_ti=&threads[2].id (0000001000000000000000000000000000000000000000000000000000110000)
+
+State 587 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 803 function instrPush2_0 thread 0
+----------------------------------------------------
+  unique_id=2 (00000000000000000000000000000010)
+
+State 588 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 803 function instrPush2_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Push_ti) / 24].id={ { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=2, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[2].id) / 24].id (?)
+
+State 590 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 804 function instrPush2_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Push_ti) / 24].op={ { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=2, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[2].id) / 24].op (?)
+
+State 592 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 805 function instrPush2_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Push_ti) / 24].cell.pdata={ { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=2, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[2].id) / 24].cell.pdata (?)
+
+State 594 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 811 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_TryPerformStackOp_p=&threads[2].id (0000001000000000000000000000000000000000000000000000000000110000)
+
+State 598 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 816 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp_phead=&threads[1].cell.pnext (0000001000000000000000000000000000000000000000000000000000100000)
+
+State 600 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 817 function instrPush2_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCALPARAM_TryPerformStackOp_p) / 24].cell.pnext={ { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=2, .op=1, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[2].id) / 24].cell.pnext (?)
+
+State 605 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 820 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_p=&S.ptop (0001000100000000000000000000000000000000000000000000000000000000)
+
+State 606 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 820 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_cmp=&threads[1].cell.pnext (0000001000000000000000000000000000000000000000000000000000100000)
+
+State 607 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 820 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_new=&threads[2].cell.pnext (0000001000000000000000000000000000000000000000000000000000111000)
+
+State 609 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 203 function __CS_atomicc_cas thread 0
+----------------------------------------------------
+  S={ .ptop=&threads[2].cell.pnext } ({ 0000001000000000000000000000000000000000000000000000000000111000 })
+
+State 614 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 820 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp___if_cond_4=TRUE (00000001)
+
+State 616 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 823 function instrPush2_0 thread 0
+----------------------------------------------------
+  __retval__TryPerformStackOp_5=1 (00000000000000000000000000000001)
+
+State 619 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 875 function instrPush2_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Push___if_cond_8=FALSE (00000000)
+
+State 627 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2031 function main thread 0
+----------------------------------------------------
+  pc[3]=50 (110010)
+
+State 628 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2034 function main thread 0
+----------------------------------------------------
+  thread_index=4 (00000000000000000000000000000100)
+
+State 633 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=15 (001111)
+
+State 638 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2036 function main thread 0
+----------------------------------------------------
+  pc_cs=15 (0001111)
+
+State 642 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2038 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop3_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 646 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 317 function __CS_atomic_atomicIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=1 (00000000000000000000000000000001)
+
+State 651 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 218 function __CS_atomic_malloc_ThreadInfo thread 0
+----------------------------------------------------
+  __csLOCAL___CS_atomic_malloc_ThreadInfo_i=3 (00000000000000000000000000000011)
+
+State 654 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 221 function __CS_atomic_malloc_ThreadInfo thread 0
+----------------------------------------------------
+  allocated[3]=1 (00000000000000000000000000000001)
+
+State 657 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1033 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_ti=&threads[3].id (0000001000000000000000000000000000000000000000000000000001001000)
+
+State 659 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1034 function instrPop3_0 thread 0
+----------------------------------------------------
+  unique_id=3 (00000000000000000000000000000011)
+
+State 660 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1034 function instrPop3_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Pop_ti) / 24].id={ { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=2, .op=1, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[3].id) / 24].id (?)
+
+State 662 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1035 function instrPop3_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Pop_ti) / 24].op={ { .id=0, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=2, .op=1, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[3].id) / 24].op (?)
+
+State 664 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1041 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_TryPerformStackOp_p=&threads[3].id (0000001000000000000000000000000000000000000000000000000001001000)
+
+State 671 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1066 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp_phead=&threads[2].cell.pnext (0000001000000000000000000000000000000000000000000000000000111000)
+
+State 676 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1075 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp_pnext=&threads[1].cell.pnext (0000001000000000000000000000000000000000000000000000000000100000)
+
+State 717 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2039 function main thread 0
+----------------------------------------------------
+  pc[4]=15 (001111)
+
+State 718 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2042 function main thread 0
+----------------------------------------------------
+  thread_index=5 (00000000000000000000000000000101)
+
+State 723 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=1 (000001)
+
+State 728 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2044 function main thread 0
+----------------------------------------------------
+  pc_cs=1 (0000001)
+
+State 732 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2046 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop4_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 736 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 317 function __CS_atomic_atomicIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=2 (00000000000000000000000000000010)
+
+State 792 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2047 function main thread 0
+----------------------------------------------------
+  pc[5]=1 (000001)
+
+State 793 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2050 function main thread 0
+----------------------------------------------------
+  thread_index=6 (00000000000000000000000000000110)
+
+State 798 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=52 (110100)
+
+State 803 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2052 function main thread 0
+----------------------------------------------------
+  pc_cs=52 (0110100)
+
+State 807 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2054 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop5_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 811 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 317 function __CS_atomic_atomicIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=3 (00000000000000000000000000000011)
+
+State 816 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 218 function __CS_atomic_malloc_ThreadInfo thread 0
+----------------------------------------------------
+  __csLOCAL___CS_atomic_malloc_ThreadInfo_i=0 (00000000000000000000000000000000)
+
+State 819 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 221 function __CS_atomic_malloc_ThreadInfo thread 0
+----------------------------------------------------
+  allocated[0]=1 (00000000000000000000000000000001)
+
+State 822 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1503 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_ti=&threads[0].id (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 824 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1504 function instrPop5_0 thread 0
+----------------------------------------------------
+  unique_id=4 (00000000000000000000000000000100)
+
+State 825 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1504 function instrPop5_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Pop_ti) / 24].id={ { .id=4, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=2, .op=1, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[0].id) / 24].id (?)
+
+State 827 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1505 function instrPop5_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Pop_ti) / 24].op={ { .id=4, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=2, .op=1, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[0].id) / 24].op (?)
+
+State 829 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1511 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_TryPerformStackOp_p=&threads[0].id (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 836 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1536 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp_phead=&threads[2].cell.pnext (0000001000000000000000000000000000000000000000000000000000111000)
+
+State 841 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1545 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp_pnext=&threads[1].cell.pnext (0000001000000000000000000000000000000000000000000000000000100000)
+
+State 846 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1548 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_p=&S.ptop (0001000100000000000000000000000000000000000000000000000000000000)
+
+State 847 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1548 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_cmp=&threads[2].cell.pnext (0000001000000000000000000000000000000000000000000000000000111000)
+
+State 848 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1548 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_new=&threads[1].cell.pnext (0000001000000000000000000000000000000000000000000000000000100000)
+
+State 850 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 203 function __CS_atomicc_cas thread 0
+----------------------------------------------------
+  S={ .ptop=&threads[1].cell.pnext } ({ 0000001000000000000000000000000000000000000000000000000000100000 })
+
+State 855 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1548 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp___if_cond_5=TRUE (00000001)
+
+State 858 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1551 function instrPop5_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCALPARAM_TryPerformStackOp_p) / 24].cell={ { .id=4, .op=0, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=2, .op=1, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[0].id) / 24].cell (?)
+
+State 860 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1554 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp_i=2 (00000000000000000000000000000010)
+
+State 863 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1557 function instrPop5_0 thread 0
+----------------------------------------------------
+  allocated[2]=0 (00000000000000000000000000000000)
+
+State 864 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1559 function instrPop5_0 thread 0
+----------------------------------------------------
+  __retval__TryPerformStackOp_11=1 (00000000000000000000000000000001)
+
+State 867 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1575 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop___if_cond_9=FALSE (00000000)
+
+State 871 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1714 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_v=1 (00000000000000000000000000000001)
+
+State 875 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1715 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_free_ThreadInfo_ti=&threads[0].id (0000001000000000000000000000000000000000000000000000000000000000)
+
+State 876 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 228 function __CS_atomic_free_ThreadInfo thread 0
+----------------------------------------------------
+  __csLOCAL___CS_atomic_free_ThreadInfo_i=0 (00000000000000000000000000000000)
+
+State 879 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 231 function __CS_atomic_free_ThreadInfo thread 0
+----------------------------------------------------
+  allocated[0]=0 (00000000000000000000000000000000)
+
+State 881 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1716 function instrPop5_0 thread 0
+----------------------------------------------------
+  __retval__Pop_3=1 (00000000000000000000000000000001)
+
+State 883 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1721 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCAL_instrPop5_localPop_ret=1 (00000000000000000000000000000001)
+
+State 887 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1722 function instrPop5_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_atomicDecrIncr_Pop_localPop_ret=1 (00000000000000000000000000000001)
+
+State 888 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 322 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=2 (00000000000000000000000000000010)
+
+State 889 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 323 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopDone[1]=1 (00000000000000000000000000000001)
+
+State 901 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2055 function main thread 0
+----------------------------------------------------
+  pc[6]=52 (110100)
+
+State 902 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2058 function main thread 0
+----------------------------------------------------
+  thread_index=7 (00000000000000000000000000000111)
+
+State 907 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=52 (110100)
+
+State 912 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2060 function main thread 0
+----------------------------------------------------
+  pc_cs=52 (0110100)
+
+State 916 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2062 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop6_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 920 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 317 function __CS_atomic_atomicIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=3 (00000000000000000000000000000011)
+
+State 925 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 218 function __CS_atomic_malloc_ThreadInfo thread 0
+----------------------------------------------------
+  __csLOCAL___CS_atomic_malloc_ThreadInfo_i=2 (00000000000000000000000000000010)
+
+State 928 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 221 function __CS_atomic_malloc_ThreadInfo thread 0
+----------------------------------------------------
+  allocated[2]=1 (00000000000000000000000000000001)
+
+State 931 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1738 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_ti=&threads[2].id (0000001000000000000000000000000000000000000000000000000000110000)
+
+State 933 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1739 function instrPop6_0 thread 0
+----------------------------------------------------
+  unique_id=5 (00000000000000000000000000000101)
+
+State 934 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1739 function instrPop6_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Pop_ti) / 24].id={ { .id=4, .op=0, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=5, .op=1, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[2].id) / 24].id (?)
+
+State 936 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1740 function instrPop6_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Pop_ti) / 24].op={ { .id=4, .op=0, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=5, .op=0, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[2].id) / 24].op (?)
+
+State 938 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1746 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_TryPerformStackOp_p=&threads[2].id (0000001000000000000000000000000000000000000000000000000000110000)
+
+State 945 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1771 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp_phead=&threads[1].cell.pnext (0000001000000000000000000000000000000000000000000000000000100000)
+
+State 950 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1780 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp_pnext=((struct Cell { struct Cell *pnext; int pdata; unsigned int $pad0; } *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 955 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1783 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_p=&S.ptop (0001000100000000000000000000000000000000000000000000000000000000)
+
+State 956 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1783 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_cmp=&threads[1].cell.pnext (0000001000000000000000000000000000000000000000000000000000100000)
+
+State 957 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1783 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_new=((struct Cell { struct Cell *pnext; int pdata; unsigned int $pad0; } *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 959 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 203 function __CS_atomicc_cas thread 0
+----------------------------------------------------
+  S={ .ptop=((struct Cell *)NULL) } ({ 0000000000000000000000000000000000000000000000000000000000000000 })
+
+State 964 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1783 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp___if_cond_5=TRUE (00000001)
+
+State 967 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1786 function instrPop6_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCALPARAM_TryPerformStackOp_p) / 24].cell={ { .id=4, .op=0, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=5, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[2].id) / 24].cell (?)
+
+State 969 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1789 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp_i=1 (00000000000000000000000000000001)
+
+State 972 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1792 function instrPop6_0 thread 0
+----------------------------------------------------
+  allocated[1]=0 (00000000000000000000000000000000)
+
+State 973 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1794 function instrPop6_0 thread 0
+----------------------------------------------------
+  __retval__TryPerformStackOp_13=1 (00000000000000000000000000000001)
+
+State 976 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1810 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop___if_cond_9=FALSE (00000000)
+
+State 980 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1949 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_v=1 (00000000000000000000000000000001)
+
+State 984 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1950 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_free_ThreadInfo_ti=&threads[2].id (0000001000000000000000000000000000000000000000000000000000110000)
+
+State 985 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 228 function __CS_atomic_free_ThreadInfo thread 0
+----------------------------------------------------
+  __csLOCAL___CS_atomic_free_ThreadInfo_i=2 (00000000000000000000000000000010)
+
+State 988 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 231 function __CS_atomic_free_ThreadInfo thread 0
+----------------------------------------------------
+  allocated[2]=0 (00000000000000000000000000000000)
+
+State 990 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1951 function instrPop6_0 thread 0
+----------------------------------------------------
+  __retval__Pop_4=1 (00000000000000000000000000000001)
+
+State 992 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1956 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCAL_instrPop6_localPop_ret=1 (00000000000000000000000000000001)
+
+State 996 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1957 function instrPop6_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_atomicDecrIncr_Pop_localPop_ret=1 (00000000000000000000000000000001)
+
+State 997 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 322 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=2 (00000000000000000000000000000010)
+
+State 998 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 323 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopDone[1]=2 (00000000000000000000000000000010)
+
+State 1010 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2063 function main thread 0
+----------------------------------------------------
+  pc[7]=52 (110100)
+
+State 1011 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2067 function main thread 0
+----------------------------------------------------
+  thread_index=0 (00000000000000000000000000000000)
+
+State 1016 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=0 (000000)
+
+State 1021 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2069 function main thread 0
+----------------------------------------------------
+  pc_cs=7 (0000111)
+
+State 1035 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2072 function main thread 0
+----------------------------------------------------
+  pc[0]=7 (000111)
+
+State 1036 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2075 function main thread 0
+----------------------------------------------------
+  thread_index=1 (00000000000000000000000000000001)
+
+State 1041 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=0 (000000)
+
+State 1046 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2077 function main thread 0
+----------------------------------------------------
+  pc_cs=50 (0110010)
+
+State 1050 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2079 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPush0_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1105 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2080 function main thread 0
+----------------------------------------------------
+  pc[1]=50 (110010)
+
+State 1106 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2083 function main thread 0
+----------------------------------------------------
+  thread_index=2 (00000000000000000000000000000010)
+
+State 1111 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=50 (110010)
+
+State 1116 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2085 function main thread 0
+----------------------------------------------------
+  pc_cs=50 (0110010)
+
+State 1120 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2087 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPush1_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1124 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 566 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_atomicIncr_Push_localPush1=1 (00000000000000000000000000000001)
+
+State 1125 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 299 function __CS_atomic_atomicIncr_Push thread 0
+----------------------------------------------------
+  PushOpen[1]=3 (00000000000000000000000000000011)
+
+State 1127 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 569 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_Push_x=1 (00000000000000000000000000000001)
+
+State 1131 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 218 function __CS_atomic_malloc_ThreadInfo thread 0
+----------------------------------------------------
+  __csLOCAL___CS_atomic_malloc_ThreadInfo_i=2 (00000000000000000000000000000010)
+
+State 1134 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 221 function __CS_atomic_malloc_ThreadInfo thread 0
+----------------------------------------------------
+  allocated[2]=1 (00000000000000000000000000000001)
+
+State 1137 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 571 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Push_ti=&threads[2].id (0000001000000000000000000000000000000000000000000000000000110000)
+
+State 1139 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 572 function instrPush1_0 thread 0
+----------------------------------------------------
+  unique_id=6 (00000000000000000000000000000110)
+
+State 1140 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 572 function instrPush1_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Push_ti) / 24].id={ { .id=4, .op=0, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=6, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[2].id) / 24].id (?)
+
+State 1142 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 573 function instrPush1_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Push_ti) / 24].op={ { .id=4, .op=0, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=6, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[2].id) / 24].op (?)
+
+State 1144 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 574 function instrPush1_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Push_ti) / 24].cell.pdata={ { .id=4, .op=0, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=6, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[2].id) / 24].cell.pdata (?)
+
+State 1146 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 580 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_TryPerformStackOp_p=&threads[2].id (0000001000000000000000000000000000000000000000000000000000110000)
+
+State 1150 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 585 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp_phead=((struct Cell { struct Cell *pnext; int pdata; unsigned int $pad0; } *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1152 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 586 function instrPush1_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCALPARAM_TryPerformStackOp_p) / 24].cell.pnext={ { .id=4, .op=0, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=6, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=0, .$pad0=0 } } }[POINTER_OFFSET(&threads[2].id) / 24].cell.pnext (?)
+
+State 1157 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 589 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_p=&S.ptop (0001000100000000000000000000000000000000000000000000000000000000)
+
+State 1158 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 589 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_cmp=((struct Cell { struct Cell *pnext; int pdata; unsigned int $pad0; } *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1159 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 589 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_new=&threads[2].cell.pnext (0000001000000000000000000000000000000000000000000000000000111000)
+
+State 1161 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 203 function __CS_atomicc_cas thread 0
+----------------------------------------------------
+  S={ .ptop=&threads[2].cell.pnext } ({ 0000001000000000000000000000000000000000000000000000000000111000 })
+
+State 1166 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 589 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp___if_cond_4=TRUE (00000001)
+
+State 1168 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 592 function instrPush1_0 thread 0
+----------------------------------------------------
+  __retval__TryPerformStackOp_3=1 (00000000000000000000000000000001)
+
+State 1171 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 644 function instrPush1_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Push___if_cond_8=FALSE (00000000)
+
+State 1179 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2088 function main thread 0
+----------------------------------------------------
+  pc[2]=50 (110010)
+
+State 1180 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2091 function main thread 0
+----------------------------------------------------
+  thread_index=3 (00000000000000000000000000000011)
+
+State 1185 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=0 (000000)
+
+State 1190 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2093 function main thread 0
+----------------------------------------------------
+  pc_cs=50 (0110010)
+
+State 1194 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2095 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPush2_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1249 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2096 function main thread 0
+----------------------------------------------------
+  pc[3]=50 (110010)
+
+State 1250 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2099 function main thread 0
+----------------------------------------------------
+  thread_index=4 (00000000000000000000000000000100)
+
+State 1255 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=37 (100101)
+
+State 1260 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2101 function main thread 0
+----------------------------------------------------
+  pc_cs=52 (0110100)
+
+State 1264 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2103 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop3_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1284 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1078 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_p=&S.ptop (0001000100000000000000000000000000000000000000000000000000000000)
+
+State 1285 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1078 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_cmp=&threads[2].cell.pnext (0000001000000000000000000000000000000000000000000000000000111000)
+
+State 1286 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1078 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_new=&threads[1].cell.pnext (0000001000000000000000000000000000000000000000000000000000100000)
+
+State 1288 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 203 function __CS_atomicc_cas thread 0
+----------------------------------------------------
+  S={ .ptop=&threads[1].cell.pnext } ({ 0000001000000000000000000000000000000000000000000000000000100000 })
+
+State 1293 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1078 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp___if_cond_5=TRUE (00000001)
+
+State 1296 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1081 function instrPop3_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCALPARAM_TryPerformStackOp_p) / 24].cell={ { .id=4, .op=0, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=6, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } } }[POINTER_OFFSET(&threads[3].id) / 24].cell (?)
+
+State 1298 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1084 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp_i=2 (00000000000000000000000000000010)
+
+State 1301 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1087 function instrPop3_0 thread 0
+----------------------------------------------------
+  allocated[2]=0 (00000000000000000000000000000000)
+
+State 1302 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1089 function instrPop3_0 thread 0
+----------------------------------------------------
+  __retval__TryPerformStackOp_7=1 (00000000000000000000000000000001)
+
+State 1305 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1105 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop___if_cond_9=FALSE (00000000)
+
+State 1309 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1244 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_v=1 (00000000000000000000000000000001)
+
+State 1313 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1245 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_free_ThreadInfo_ti=&threads[3].id (0000001000000000000000000000000000000000000000000000000001001000)
+
+State 1314 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 228 function __CS_atomic_free_ThreadInfo thread 0
+----------------------------------------------------
+  __csLOCAL___CS_atomic_free_ThreadInfo_i=3 (00000000000000000000000000000011)
+
+State 1317 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 231 function __CS_atomic_free_ThreadInfo thread 0
+----------------------------------------------------
+  allocated[3]=0 (00000000000000000000000000000000)
+
+State 1319 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1246 function instrPop3_0 thread 0
+----------------------------------------------------
+  __retval__Pop_1=1 (00000000000000000000000000000001)
+
+State 1321 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1251 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCAL_instrPop3_localPop_ret=1 (00000000000000000000000000000001)
+
+State 1325 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1252 function instrPop3_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_atomicDecrIncr_Pop_localPop_ret=1 (00000000000000000000000000000001)
+
+State 1326 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 322 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=1 (00000000000000000000000000000001)
+
+State 1327 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 323 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopDone[1]=3 (00000000000000000000000000000011)
+
+State 1339 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2104 function main thread 0
+----------------------------------------------------
+  pc[4]=52 (110100)
+
+State 1340 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2107 function main thread 0
+----------------------------------------------------
+  thread_index=5 (00000000000000000000000000000101)
+
+State 1345 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 142 function guess_pc thread 0
+----------------------------------------------------
+  i=51 (110011)
+
+State 1350 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2109 function main thread 0
+----------------------------------------------------
+  pc_cs=52 (0110100)
+
+State 1354 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 2111 function main thread 0
+----------------------------------------------------
+  __csLOCALPARAM_instrPop4_unused=NULL (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1359 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 218 function __CS_atomic_malloc_ThreadInfo thread 0
+----------------------------------------------------
+  __csLOCAL___CS_atomic_malloc_ThreadInfo_i=2 (00000000000000000000000000000010)
+
+State 1362 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 221 function __CS_atomic_malloc_ThreadInfo thread 0
+----------------------------------------------------
+  allocated[2]=1 (00000000000000000000000000000001)
+
+State 1365 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1268 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_ti=&threads[2].id (0000001000000000000000000000000000000000000000000000000000110000)
+
+State 1367 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1269 function instrPop4_0 thread 0
+----------------------------------------------------
+  unique_id=7 (00000000000000000000000000000111)
+
+State 1368 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1269 function instrPop4_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Pop_ti) / 24].id={ { .id=4, .op=0, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=7, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } } }[POINTER_OFFSET(&threads[2].id) / 24].id (?)
+
+State 1370 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1270 function instrPop4_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCAL_Pop_ti) / 24].op={ { .id=4, .op=0, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=7, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } } }[POINTER_OFFSET(&threads[2].id) / 24].op (?)
+
+State 1372 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1276 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM_TryPerformStackOp_p=&threads[2].id (0000001000000000000000000000000000000000000000000000000000110000)
+
+State 1379 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1301 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp_phead=&threads[1].cell.pnext (0000001000000000000000000000000000000000000000000000000000100000)
+
+State 1384 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1310 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp_pnext=((struct Cell { struct Cell *pnext; int pdata; unsigned int $pad0; } *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1389 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1313 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_p=&S.ptop (0001000100000000000000000000000000000000000000000000000000000000)
+
+State 1390 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1313 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_cmp=&threads[1].cell.pnext (0000001000000000000000000000000000000000000000000000000000100000)
+
+State 1391 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1313 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomicc_cas_new=((struct Cell { struct Cell *pnext; int pdata; unsigned int $pad0; } *)NULL) (0000000000000000000000000000000000000000000000000000000000000000)
+
+State 1393 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 203 function __CS_atomicc_cas thread 0
+----------------------------------------------------
+  S={ .ptop=((struct Cell *)NULL) } ({ 0000000000000000000000000000000000000000000000000000000000000000 })
+
+State 1398 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1313 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp___if_cond_5=TRUE (00000001)
+
+State 1401 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1316 function instrPop4_0 thread 0
+----------------------------------------------------
+  threads[POINTER_OFFSET(__csLOCALPARAM_TryPerformStackOp_p) / 24].cell={ { .id=4, .op=0, .cell={ .pnext=&threads[1].cell.pnext, .pdata=1, .$pad0=0 } }, 
+    { .id=1, .op=1, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=7, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } }, 
+    { .id=3, .op=0, .cell={ .pnext=((struct Cell *)NULL), .pdata=1, .$pad0=0 } } }[POINTER_OFFSET(&threads[2].id) / 24].cell (?)
+
+State 1403 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1319 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCAL_TryPerformStackOp_i=1 (00000000000000000000000000000001)
+
+State 1406 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1322 function instrPop4_0 thread 0
+----------------------------------------------------
+  allocated[1]=0 (00000000000000000000000000000000)
+
+State 1407 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1324 function instrPop4_0 thread 0
+----------------------------------------------------
+  __retval__TryPerformStackOp_9=1 (00000000000000000000000000000001)
+
+State 1410 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1340 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop___if_cond_9=FALSE (00000000)
+
+State 1414 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1479 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCAL_Pop_v=1 (00000000000000000000000000000001)
+
+State 1418 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1480 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_free_ThreadInfo_ti=&threads[2].id (0000001000000000000000000000000000000000000000000000000000110000)
+
+State 1419 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 228 function __CS_atomic_free_ThreadInfo thread 0
+----------------------------------------------------
+  __csLOCAL___CS_atomic_free_ThreadInfo_i=2 (00000000000000000000000000000010)
+
+State 1422 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 231 function __CS_atomic_free_ThreadInfo thread 0
+----------------------------------------------------
+  allocated[2]=0 (00000000000000000000000000000000)
+
+State 1424 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1481 function instrPop4_0 thread 0
+----------------------------------------------------
+  __retval__Pop_2=1 (00000000000000000000000000000001)
+
+State 1426 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1486 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCAL_instrPop4_localPop_ret=1 (00000000000000000000000000000001)
+
+State 1430 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 1487 function instrPop4_0 thread 0
+----------------------------------------------------
+  __csLOCALPARAM___CS_atomic_atomicDecrIncr_Pop_localPop_ret=1 (00000000000000000000000000000001)
+
+State 1431 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 322 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopOpen=0 (00000000000000000000000000000000)
+
+State 1432 file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 323 function __CS_atomic_atomicDecrIncr_Pop thread 0
+----------------------------------------------------
+  PopDone[1]=4 (00000000000000000000000000000100)
+
+Violated property:
+  file /home/trucnguyenlam/Development/getafix/getafix-concurrent/experiments/02/_cs_elimination-backoff-stack.aba-bug.v2.c._pp_.c line 325 function __CS_atomic_atomicDecrIncr_Pop
+  assertion tmp_if_expr$1
+  tmp_if_expr$1
+
+VERIFICATION FAILED
