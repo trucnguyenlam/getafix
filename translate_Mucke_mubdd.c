@@ -11,9 +11,11 @@
 /**
  * Conversion from Concurrent Boolean Program into Mucke
  *
+   TODO:
+     - atomic variable handling
+
  * ChangeLog:
- *     2016.08.02   Add optional option to treat read and write to global variables differently
- *     2016.02.06   Add function call (atomic) to the translation
+ *     2016.08.02   Add MU BDD translation
  *
  */
 
@@ -33,6 +35,9 @@ int maxindexlocvar;
 int num_thread;
 int CS;
 int n_bit_pc;
+
+
+int NUM_WRITE = 41; // Some random value
 
 /******************************************************************/
 
@@ -218,8 +223,55 @@ static bp_ident_t All_locals(void) {
 // ##   #  ##  ##  ##   #   #   #  # # # #
 // #   # # #   # # #     #   #  #  # # # #
 // ### # # #   # # ### ##  ##  ###  #  # #
+static int
+check_access_global_expression(bp_expr_t p)
+{
+    bp_ident_t y, q;
 
-static void print_Mucke_expression(bp_expr_t p, char *prefix, char constrain) {
+    if (!p) return 0;
+
+    switch (p->token) {
+    case BP_CONST: {
+        return 0;
+    }
+    case BP_IDENT: {
+        y = Is_there_var(bp_globals, p->var_name);
+        if (y) {       // y is a global variable (a read to global variable)
+            if (p->primed) {
+                y->read_mark = 2;
+            }
+            else {
+                y->read_mark = 1;
+            }
+
+            return 1;
+        }
+        return 0;
+    }
+    case BP_NOT: {
+        return check_access_global_expression(p->left);
+    }
+    case BP_EQ: {
+        return (check_access_global_expression(p->left) + check_access_global_expression(p->right));
+    }
+    case BP_NE: {
+        return (check_access_global_expression(p->left) + check_access_global_expression(p->right));
+    }
+    case BP_AND: {
+        return (check_access_global_expression(p->left) + check_access_global_expression(p->right));
+    }
+    case BP_OR: {
+        return (check_access_global_expression(p->left) + check_access_global_expression(p->right));
+    }
+    case BP_IMP: {
+        return (check_access_global_expression(p->left) + check_access_global_expression(p->right));
+    }
+    }
+    return 0;
+}
+
+static void print_Mucke_expression(bp_expr_t p, char *prefix, char constrain)
+{
     bp_ident_t y, q;
 
     if (!p) return;
@@ -237,12 +289,12 @@ static void print_Mucke_expression(bp_expr_t p, char *prefix, char constrain) {
 
         if (y) {       // y is a global variable (a read to global variable)
             if (constrain == 0) {
-                printf("%sG.v%d", prefix, y->varname_replace);
+                printf("%sv%d", prefix, y->varname_replace);
             } else {
                 if (p->primed == 1) {
-                    printf("dG.v%d", y->varname_replace);
+                    printf("dv%d", y->varname_replace);
                 } else {
-                    printf("G.v%d", y->varname_replace);
+                    printf("v%d", y->varname_replace);
                 }
             }
         }
@@ -325,13 +377,6 @@ static void print_Mucke_expression(bp_expr_t p, char *prefix, char constrain) {
 }
 
 /******************************************************************/
-static void
-print_variable_LHS(int i, bp_ident_t z)
-{
-    if (i == 0) printf("dG.v%d", z->varname_replace);
-    else printf("dL.v%d", z->varname_replace);
-}
-
 static void print_recursive_statement_program_Int1(bp_stmt_t p, bp_fun_t fun, short *head) {
     bp_ident_t y;
     bp_idref_t q;
@@ -348,6 +393,9 @@ static void print_recursive_statement_program_Int1(bp_stmt_t p, bp_fun_t fun, sh
         for (z = bp_all_locals; z; z = z->next) z->mark = 0;
         for (z = fun->locals; z; z = z->next) z->mark = 0;
 
+        // TODO: reserve for context switch (atomic=T) or (atomic=F)
+
+
         if ((*head) == 0) {
             printf("| ((cm=%d)&(false", fun->funname_replace);
             (*head) = 1;
@@ -356,7 +404,6 @@ static void print_recursive_statement_program_Int1(bp_stmt_t p, bp_fun_t fun, sh
         printf("                    /* ASSIGN */ \n");
         //      printf(" cp=%d", p->numlabel);
         print_PC("cp", p->numlabel, n_bit_pc);
-
         print_d_pc(p);
 
         // For each variable in LHS of assignment
@@ -375,86 +422,231 @@ static void print_recursive_statement_program_Int1(bp_stmt_t p, bp_fun_t fun, sh
 
             z->mark = 1;
 
-            if (((q->expr)->token) == BP_CHOOSE) {
+            if (((q->expr)->token) == BP_CHOOSE) {    // ESPECIALLY for schoose
                 if (q->expr->left->token == BP_CONST) {
-                    if (q->expr->left->left) {
+                    if (q->expr->left->left) {       // a = 1
                         printf("&");
-                        // if (i == 0) printf("&dG.v%d", z->varname_replace);
-                        // else printf("&dL.v%d", z->varname_replace);
-                        print_variable_LHS(i, z);
+                        if (i == 0) printf("WRITE(MU, dMU, %d, true)", z->varname_replace);
+                        else printf("dL.v%d", z->varname_replace);
                     } else {
-                        // ( (!a & f2 ) | (! f2))
-                        printf(" &((!");
-                        // if (i == 0) printf("dG.v%d", z->varname_replace);
-                        // else printf("dL.v%d", z->varname_replace);
-                        print_variable_LHS(i, z);
-                        printf("&(");
-                        print_Mucke_expression(q->expr->right, "", 0);
-                        printf("))|(!");
-                        print_Mucke_expression(q->expr->right, "", 0);
-                        printf("))\n");
+                        // ( (!a & f2 ) | (!f2))
+                        for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) temp_var->read_mark = 0;
+                        int flag = check_access_global_expression(q->expr->right);
+                        if (flag) {   // There is access to global variable of the expression
+                            printf("&(exists");
+                            char firsttime = 1;
+                            for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                                if (temp_var->read_mark == 1) {
+                                    if (firsttime) firsttime = 0;
+                                    else printf(",");
+                                    printf(" bool v%d", temp_var->varname_replace);
+                                }
+                            }
+                            printf(". (true");
+                            for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                                if (temp_var->read_mark == 1) {
+                                    printf(" &READ(MU, %d, v%d)", temp_var->varname_replace, temp_var->varname_replace);
+                                }
+                            }
+                            if (i == 0) printf(" &((WRITE(MU, dMU, %d, false)", z->varname_replace);
+                            else printf(" &((!dL.v%d", z->varname_replace);
+                            printf("&(");
+                            print_Mucke_expression(q->expr->right, "", 0);
+                            printf("))|(!");
+                            print_Mucke_expression(q->expr->right, "", 0);
+                            printf("))");
+                            printf("))\n");
+                        }
+                        else {  // No read to global variable
+                            if (i == 0) printf(" &((WRITE(MU, dMU, %d, false)", z->varname_replace);
+                            else printf(" &((!dL.v%d", z->varname_replace);
+                            printf("&(");
+                            print_Mucke_expression(q->expr->right, "", 0);
+                            printf("))|(!");
+                            print_Mucke_expression(q->expr->right, "", 0);
+                            printf("))\n");
+                        }
                     }
                 } else {
                     if (q->expr->right->token == BP_CONST) {
-                        // ((a&f1)|(!f1))
-                        printf(" &(( ");
-                        // if (i == 0) printf("dG.v%d", z->varname_replace);
-                        // else printf("dL.v%d", z->varname_replace);
-                        print_variable_LHS(i, z);
-                        printf("&(");
-                        print_Mucke_expression(q->expr->left, "", 0);
-                        printf("))|(!");
-                        print_Mucke_expression(q->expr->left, "", 0);
-                        printf("))\n");
+                        // ((a & f1) | (!f1))
+                        // Check for read from global var
+                        for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) temp_var->read_mark = 0;
+                        int flag = check_access_global_expression(q->expr->left);
+                        if (flag) {
+                            printf("&(exists");
+                            char firsttime = 1;
+                            for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                                if (temp_var->read_mark == 1) {
+                                    if (firsttime) firsttime = 0;
+                                    else printf(",");
+                                    printf(" bool v%d", temp_var->varname_replace);
+                                }
+                            }
+                            printf(". (true");
+                            for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                                if (temp_var->read_mark == 1) {
+                                    printf(" &READ(MU, %d, v%d)", temp_var->varname_replace, temp_var->varname_replace);
+                                }
+                            }
+                            printf(" &(( ");
+                            if (i == 0) printf("WRITE(MU, dMU, %d, true)", z->varname_replace);
+                            else printf("dL.v%d", z->varname_replace);
+                            printf("&(");
+                            print_Mucke_expression(q->expr->left, "", 0);
+                            printf("))|(!");
+                            print_Mucke_expression(q->expr->left, "", 0);
+                            printf("))");
+                            printf("))\n");
+                        }
+                        else {
+                            printf(" &(( ");
+                            if (i == 0) printf("WRITE(MU, dMU, %d, true)", z->varname_replace);
+                            else printf("dL.v%d", z->varname_replace);
+                            printf("&(");
+                            print_Mucke_expression(q->expr->left, "", 0);
+                            printf("))|(!");
+                            print_Mucke_expression(q->expr->left, "", 0);
+                            printf("))\n");
+                        }
                     } else {
                         // ((a&f1) | (!a & !f1 & f2 ) | (!f1 & ! f2))
-                        printf(" &(( ");
-                        // if (i == 0) printf("dG.v%d", z->varname_replace);
-                        // else printf("dL.v%d", z->varname_replace);
-                        print_variable_LHS(i, z);
-                        printf("&(");
-                        print_Mucke_expression(q->expr->left, "", 0);
-                        printf("))|((!");
-                        // if (i == 0) printf("dG.v%d", z->varname_replace);
-                        // else printf("dL.v%d", z->varname_replace);
-                        print_variable_LHS(i, z);
-                        printf(")&(!");
-                        print_Mucke_expression(q->expr->left, "", 0);
-                        printf(")&(");
-                        print_Mucke_expression(q->expr->right, "", 0);
-                        printf("))|((!");
-                        print_Mucke_expression(q->expr->left, "", 0);
-                        printf(")&(!");
-                        print_Mucke_expression(q->expr->right, "", 0);
-                        printf(")))\n");
+                        for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) temp_var->read_mark = 0;
+                        int flag = check_access_global_expression(q->expr->left) + check_access_global_expression(q->expr->right);
+                        if (flag) {
+                            printf("&(exists");
+                            char firsttime = 1;
+                            for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                                if (temp_var->read_mark == 1) {
+                                    if (firsttime) firsttime = 0;
+                                    else printf(",");
+                                    printf(" bool v%d", temp_var->varname_replace);
+                                }
+                            }
+                            printf(". (true");
+                            for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                                if (temp_var->read_mark == 1) {
+                                    printf(" &READ(MU, %d, v%d)", temp_var->varname_replace, temp_var->varname_replace);
+                                }
+                            }
+                            printf(" &(( ");
+                            if (i == 0) printf("WRITE(MU, dMU, %d, true)", z->varname_replace);
+                            else printf("dL.v%d", z->varname_replace);
+                            printf("&(");
+                            print_Mucke_expression(q->expr->left, "", 0);
+                            printf("))|((");
+                            if (i == 0) printf("WRITE(MU, dMU, %d, false)", z->varname_replace);
+                            else printf("!dL.v%d", z->varname_replace);
+                            printf(")&(!");
+                            print_Mucke_expression(q->expr->left, "", 0);
+                            printf(")&(");
+                            print_Mucke_expression(q->expr->right, "", 0);
+                            printf("))|((!");
+                            print_Mucke_expression(q->expr->left, "", 0);
+                            printf(")&(!");
+                            print_Mucke_expression(q->expr->right, "", 0);
+                            printf(")))");
+                            printf("))\n");
+                        }
+                        else {
+                            printf(" &(( ");
+                            if (i == 0) printf("WRITE(MU, dMU, %d, true)", z->varname_replace);
+                            else printf("dL.v%d", z->varname_replace);
+                            printf("&(");
+                            print_Mucke_expression(q->expr->left, "", 0);
+                            printf("))|((");
+                            if (i == 0) printf("WRITE(MU, dMU, %d, false)", z->varname_replace);
+                            else printf("!dL.v%d", z->varname_replace);
+                            printf(")&(!");
+                            print_Mucke_expression(q->expr->left, "", 0);
+                            printf(")&(");
+                            print_Mucke_expression(q->expr->right, "", 0);
+                            printf("))|((!");
+                            print_Mucke_expression(q->expr->left, "", 0);
+                            printf(")&(!");
+                            print_Mucke_expression(q->expr->right, "", 0);
+                            printf(")))\n");
+                        }
                     }
                 }
-
-            } else {
-                printf("&(");
-                // if (i == 0) printf("&(dG.v%d", z->varname_replace);
-                // else printf("&(dL.v%d", z->varname_replace);
-                print_variable_LHS(i, z);
-
-                if ((q->expr->token == BP_IDENT) || (q->expr->token == BP_CONST))
-                    printf("=");
-                else printf("<->");
-
-                print_Mucke_expression(q->expr, "", 0);
-                printf(")\n");
+            } else { // Other case
+                if (i == 0) {       // write to global var
+                    for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) temp_var->read_mark = 0;
+                    int flag = check_access_global_expression(q->expr);
+                    if (flag) {
+                        printf("&(exists");
+                        for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                            if (temp_var->read_mark == 1) {
+                                printf(" bool v%d,", temp_var->varname_replace);
+                            }
+                        }
+                        printf(" bool temp. (true");
+                        for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                            if (temp_var->read_mark == 1) {
+                                printf(" &READ(MU, %d, v%d)", temp_var->varname_replace, temp_var->varname_replace);
+                            }
+                        }
+                        printf("&(temp");
+                        if ((q->expr->token == BP_IDENT) || (q->expr->token == BP_CONST)) printf("=");
+                        else printf("<->");
+                        print_Mucke_expression(q->expr, "", 0);
+                        printf(")");
+                        printf("&WRITE(MU, dMU, %d, temp)", z->varname_replace);
+                        printf("))\n");
+                    }
+                    else {
+                        printf("&(exists bool temp. (true");
+                        printf("&(temp");
+                        if ((q->expr->token == BP_IDENT) || (q->expr->token == BP_CONST)) printf("=");
+                        else printf("<->");
+                        print_Mucke_expression(q->expr, "", 0);
+                        printf(")");
+                        printf("&WRITE(MU, dMU, %d, temp)", z->varname_replace);
+                        printf("))\n");
+                    }
+                }
+                else {   // write to local var
+                    for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) temp_var->read_mark = 0;
+                    int flag = check_access_global_expression(q->expr);
+                    if (flag) {
+                        printf("&(exists");
+                        char firsttime = 1;
+                        for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                            if (temp_var->read_mark == 1) {
+                                if (firsttime) firsttime = 0;
+                                else printf(",");
+                                printf(" bool v%d", temp_var->varname_replace);
+                            }
+                        }
+                        printf(". (true");
+                        for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                            if (temp_var->read_mark == 1) {
+                                printf(" &READ(MU, %d, v%d)", temp_var->varname_replace, temp_var->varname_replace);
+                            }
+                        }
+                        // Assignment
+                        printf("&(dL.v%d", z->varname_replace);
+                        if ((q->expr->token == BP_IDENT) || (q->expr->token == BP_CONST)) printf("=");
+                        else printf("<->");
+                        print_Mucke_expression(q->expr, "", 0);
+                        printf(")");
+                        printf("))\n");
+                    }
+                    else {
+                        printf("&(dL.v%d", z->varname_replace);
+                        if ((q->expr->token == BP_IDENT) || (q->expr->token == BP_CONST)) printf("=");
+                        else printf("<->");
+                        print_Mucke_expression(q->expr, "", 0);
+                        printf(")\n");
+                    }
+                }
             }
         }
-
         printf(")");
         break;
     }
 
-    // TRUC
     case BP_CALL: {
-        // for (z = bp_globals;     z; z = z->next) z->mark = 0;
-        // for (z = bp_all_locals;  z; z = z->next) z->mark = 0;
-        // for (z = fun->locals; z; z = z->next) z->mark = 0;
-
         if ((*head) == 0) {
             printf("| ((cm=%d)&(false", fun->funname_replace);
             (*head) = 1;
@@ -469,18 +661,18 @@ static void print_recursive_statement_program_Int1(bp_stmt_t p, bp_fun_t fun, sh
         printf("& (exists\n");
         printf("    Local   u_ENTRY_CL.\n");
         printf("    (\n");
-        printf("      programCall(cm, %d, cp, L, u_ENTRY_CL, G)\n", callee->funname_replace);
+        printf("      programCall(cm, %d, cp, L, u_ENTRY_CL, MU)\n", callee->funname_replace);
         printf("    & (exists\n");
-        printf("         PrCount u_pc,\n");
-        printf("         Local   u_CL,\n");
-        printf("         Global  u_CG.\n");
+        printf("         PrCount    u_pc,\n");
+        printf("         Local      u_CL,\n");
+        printf("         MemUnwind  u_MU.\n");
         printf("         (\n");
         printf("           (\n");
-        printf("              %s(%d, u_pc, u_CL, u_CG, u_ENTRY_CL, G)\n", callee->funname, callee->funname_replace);
+        printf("              %s(%d, u_pc, u_CL, u_MU, u_ENTRY_CL, MU)\n", callee->funname, callee->funname_replace);
         printf("             & Exit(%d, u_pc)\n", callee->funname_replace);
         printf("           )\n");
-        printf("          & SetReturnTS(cm, %d, cp, u_pc, L, dL, G, dG)\n", callee->funname_replace);
-        printf("          & SetReturnUS(cm, %d, cp, u_pc, u_CL, dL, u_CG, dG)\n", callee->funname_replace);
+        printf("          & SetReturnTS(cm, %d, cp, u_pc, L, dL, MU, dMU)\n", callee->funname_replace);
+        printf("          & SetReturnUS(cm, %d, cp, u_pc, u_CL, dL, u_MU, dMU)\n", callee->funname_replace);
         printf("         )\n");
         printf("      )\n");
         printf("    )\n");
@@ -531,7 +723,39 @@ static void print_recursive_statement_program_Int3(bp_stmt_t p, bp_fun_t fun, sh
 
         if (((p->e.c.expr)->token) != BP_ND) {
             printf(" & ");
-            print_Mucke_expression(p->e.c.expr, "", 1);
+            for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) temp_var->read_mark = 0;
+            int flag = check_access_global_expression(p->e.c.expr);
+            if (flag) {
+                printf("(exists");
+                char firsttime = 1;
+                for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                    if (temp_var->read_mark == 2) {
+                        if (firsttime) firsttime = 0;
+                        else printf(",");
+                        printf(" bool dv%d", temp_var->varname_replace);
+                    }
+                    else if (temp_var->read_mark == 1) {
+                        if (firsttime) firsttime = 0;
+                        else printf(",");
+                        printf(" bool v%d", temp_var->varname_replace);
+                    }
+                }
+                printf(". (true");
+                for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                    if (temp_var->read_mark == 2) {
+                        printf(" &READ(dMU, %d, dv%d)", temp_var->varname_replace, temp_var->varname_replace);
+                    }
+                    else if (temp_var->read_mark == 1) {
+                        printf(" &READ(MU, %d, v%d)", temp_var->varname_replace, temp_var->varname_replace);
+                    }
+                }
+                printf("&");
+                print_Mucke_expression(p->e.c.expr, "", 0);
+                printf("))");
+            }
+            else {
+                print_Mucke_expression(p->e.c.expr, "", 1);
+            }
             printf("\n");
         }
 
@@ -582,7 +806,31 @@ static void print_recursive_statement_program_Int2(bp_stmt_t p, bp_fun_t fun, sh
 
         if (((p->e.c.expr)->token) != BP_ND) {
             printf("&");
-            print_Mucke_expression(p->e.c.expr, "", 0);
+            for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) temp_var->read_mark = 0;
+            int flag = check_access_global_expression(p->e.c.expr);
+            if (flag) {
+                printf("(exists");
+                char firsttime = 1;
+                for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                    if (temp_var->read_mark == 1) {
+                        if (firsttime) firsttime = 0;
+                        else printf(",");
+                        printf(" bool v%d", temp_var->varname_replace);
+                    }
+                }
+                printf(". (true");
+                for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                    if (temp_var->read_mark == 1) {
+                        printf(" &READ(MU, %d, v%d)", temp_var->varname_replace, temp_var->varname_replace);
+                    }
+                }
+                printf("&");
+                print_Mucke_expression(p->e.c.expr, "", 0);
+                printf("))");
+            }
+            else {
+                print_Mucke_expression(p->e.c.expr, "", 0);
+            }
             printf("\n");
         }
 
@@ -604,10 +852,35 @@ static void print_recursive_statement_program_Int2(bp_stmt_t p, bp_fun_t fun, sh
 
             printf(" & ");
             printf("(!");
-            print_Mucke_expression(p->e.c.expr, "", 0);
-            printf(")\n");
-            printf("\n");
 
+            for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) temp_var->read_mark = 0;
+            int flag = check_access_global_expression(p->e.c.expr);
+            if (flag) {
+                printf("(exists");
+                char firsttime = 1;
+                for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                    if (temp_var->read_mark == 1) {
+                        if (firsttime) firsttime = 0;
+                        else printf(",");
+                        printf(" bool v%d", temp_var->varname_replace);
+                    }
+                }
+                printf(". (true");
+                for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                    if (temp_var->read_mark == 1) {
+                        printf(" &READ(MU, %d, v%d)", temp_var->varname_replace, temp_var->varname_replace);
+                    }
+                }
+                printf("&");
+                print_Mucke_expression(p->e.c.expr, "", 0);
+                printf("))");
+            }
+            else {
+                print_Mucke_expression(p->e.c.expr, "", 0);
+            }
+
+            printf("\n");
+            printf(")\n");
             printf(")");
         }
         break;
@@ -622,7 +895,6 @@ static void print_recursive_statement_program_Int2(bp_stmt_t p, bp_fun_t fun, sh
         }
 
         if (((p->e.c.expr)->token) != BP_ND) {
-
             if (p->next_then) {
                 printf("|(\n");
                 printf("                    /* IF 1*/\n");
@@ -636,7 +908,32 @@ static void print_recursive_statement_program_Int2(bp_stmt_t p, bp_fun_t fun, sh
 
 
                 printf(" & ");
-                print_Mucke_expression(p->e.c.expr, "", 0);
+                for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) temp_var->read_mark = 0;
+                int flag = check_access_global_expression(p->e.c.expr);
+                if (flag) {
+                    printf("(exists");
+                    char firsttime = 1;
+                    for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                        if (temp_var->read_mark == 1) {
+                            if (firsttime) firsttime = 0;
+                            else printf(",");
+                            printf(" bool v%d", temp_var->varname_replace);
+                        }
+                    }
+                    printf(". (true");
+                    for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                        if (temp_var->read_mark == 1) {
+                            printf(" &READ(MU, %d, v%d)", temp_var->varname_replace, temp_var->varname_replace);
+                        }
+                    }
+                    printf("&");
+                    print_Mucke_expression(p->e.c.expr, "", 0);
+                    printf("))");
+                }
+                else {
+                    print_Mucke_expression(p->e.c.expr, "", 0);
+                }
+
                 printf("\n)");
             }
 
@@ -659,9 +956,33 @@ static void print_recursive_statement_program_Int2(bp_stmt_t p, bp_fun_t fun, sh
             }
             printf("\n");
             printf(" &");
-            printf("(!");
-            print_Mucke_expression(p->e.c.expr, "", 0);
-            printf(")\n");
+            for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) temp_var->read_mark = 0;
+            int flag = check_access_global_expression(p->e.c.expr);
+            if (flag) {
+                printf("(exists");
+                char firsttime = 1;
+                for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                    if (temp_var->read_mark == 1) {
+                        if (firsttime) firsttime = 0;
+                        else printf(",");
+                        printf(" bool v%d", temp_var->varname_replace);
+                    }
+                }
+                printf(". (true");
+                for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                    if (temp_var->read_mark == 1) {
+                        printf(" &READ(MU, %d, v%d)", temp_var->varname_replace, temp_var->varname_replace);
+                    }
+                }
+                printf("& (!");
+                print_Mucke_expression(p->e.c.expr, "", 0);
+                printf(")))");
+            }
+            else {
+                printf("(!");
+                print_Mucke_expression(p->e.c.expr, "", 0);
+                printf(")\n");
+            }
 
             printf(")");
         } else {
@@ -736,7 +1057,31 @@ static void print_recursive_statement_program_Int2(bp_stmt_t p, bp_fun_t fun, sh
 
             if (((p->e.c.expr)->token) != BP_ND) {
                 printf(" &");
-                print_Mucke_expression(p->e.c.expr, "", 0);
+                for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) temp_var->read_mark = 0;
+                int flag = check_access_global_expression(p->e.c.expr);
+                if (flag) {
+                    printf("(exists");
+                    char firsttime = 1;
+                    for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                        if (temp_var->read_mark == 1) {
+                            if (firsttime) firsttime = 0;
+                            else printf(",");
+                            printf(" bool v%d", temp_var->varname_replace);
+                        }
+                    }
+                    printf(". (true");
+                    for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                        if (temp_var->read_mark == 1) {
+                            printf(" &READ(MU, %d, v%d)", temp_var->varname_replace, temp_var->varname_replace);
+                        }
+                    }
+                    printf("&");
+                    print_Mucke_expression(p->e.c.expr, "", 0);
+                    printf("))");
+                }
+                else {
+                    print_Mucke_expression(p->e.c.expr, "", 0);
+                }
                 printf("\n");
             }
 
@@ -749,14 +1094,37 @@ static void print_recursive_statement_program_Int2(bp_stmt_t p, bp_fun_t fun, sh
         print_PC("cp", p->numlabel, n_bit_pc);
         printf("\n");
 
-
         print_d_pc(p);
 
         if (((p->e.c.expr)->token) != BP_ND) {
             printf(" &");
-            printf(" (!");
-            print_Mucke_expression(p->e.c.expr, "", 0);
-            printf(")\n");
+            for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) temp_var->read_mark = 0;
+            int flag = check_access_global_expression(p->e.c.expr);
+            if (flag) {
+                printf("(exists");
+                char firsttime = 1;
+                for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                    if (temp_var->read_mark == 1) {
+                        if (firsttime) firsttime = 0;
+                        else printf(",");
+                        printf(" bool v%d", temp_var->varname_replace);
+                    }
+                }
+                printf(". (true");
+                for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                    if (temp_var->read_mark == 1) {
+                        printf(" &READ(MU, %d, v%d)", temp_var->varname_replace, temp_var->varname_replace);
+                    }
+                }
+                printf("&(!");
+                print_Mucke_expression(p->e.c.expr, "", 0);
+                printf(")))");
+            }
+            else {
+                printf(" (!");
+                print_Mucke_expression(p->e.c.expr, "", 0);
+                printf(")\n");
+            }
         }
 
         printf(")");
@@ -930,15 +1298,11 @@ static void CopyVariables_ProgramInt(void) {
     printf(" Module  m,\n");
     printf(" PrCount p,\n");
     printf(" Local   cL,\n");
-    printf(" Local   dL,\n");
-    printf(" Global  cG,\n");
-    printf(" Global  dG\n");
+    printf(" Local   dL\n");
     printf(")\n");
     printf(" m <  p,\n");
     printf(" p  <  cL,\n");
-    printf(" cL  ~+ dL,\n");
-    printf(" cL  <  cG,\n");
-    printf(" cG  ~+ dG\n");
+    printf(" cL  ~+ dL\n");
     printf("(false \n");
 
     // TRUC's modification
@@ -961,16 +1325,16 @@ static void CopyVariables_ProgramInt(void) {
         printf(")\n");
     }
 
-    for (z = bp_globals; z; z = z->next) {
-        printf("&((dG.v%d=cG.v%d) ", z->varname_replace, z->varname_replace);
-        for (fun = bp_functions; fun; fun = fun->next) {
-            if (Is_there_var(fun->globals, z->varname)) {
-                reset_flag_visited(fun->stmt);
-                print_recursive_statement_Copy_Var_Assign(fun->stmt, fun, z);
-            }//else printf("|(m=%d)", fun->funname_replace);
-        }
-        printf(")\n");
-    }
+    // for (z = bp_globals; z; z = z->next) {
+    //  printf("&((dG.v%d=cG.v%d) ", z->varname_replace, z->varname_replace);
+    //  for (fun = bp_functions; fun; fun = fun->next) {
+    //      if (Is_there_var(fun->globals, z->varname)) {
+    //          reset_flag_visited(fun->stmt);
+    //          print_recursive_statement_Copy_Var_Assign(fun->stmt, fun, z);
+    //      }//else printf("|(m=%d)", fun->funname_replace);
+    //  }
+    //  printf(")\n");
+    // }
 
     printf("));\n");
 
@@ -1054,25 +1418,24 @@ static void print_Mucke_programInt1(void) {
     short head;
 
     printf("bool programInt1(\n");
-    printf(" Module  cm,\n");
-    printf(" PrCount cp,\n");
-    printf(" PrCount dp,\n");
-    printf(" Local   L,\n");
-    printf(" Local   dL,\n");
-    printf(" Global  G,\n");
-    printf(" Global  dG\n");
+    printf(" Module      cm,\n");
+    printf(" PrCount     cp,\n");
+    printf(" PrCount     dp,\n");
+    printf(" Local       L,\n");
+    printf(" Local       dL,\n");
+    printf(" MemUnwind   MU,\n");
+    printf(" MemUnwind   dMU\n");
     printf(")\n");
-    printf(" cm <  cp,\n");
+    printf(" cm  <  cp,\n");
     printf(" cp  ~+ dp,\n");
     printf(" cp  <  L,\n");
     printf(" L   ~+ dL,\n");
-    printf(" L   <  G,\n");
-    printf(" G   ~+ dG\n");
+    printf(" L   <  MU,\n");
+    printf(" MU  ~+ dMU\n");
     printf("(false\n");
 
     for (fun = bp_functions; fun; fun = fun->next) {
-        if (isThreadFunction(fun))
-        {
+        if (isThreadFunction(fun)) {
             head = 0;
             reset_flag_visited(fun->stmt);
             print_recursive_statement_program_Int1(fun->stmt, fun, &head);
@@ -1090,26 +1453,21 @@ static void print_Mucke_programInt2(void) {
     short flag;
 
     printf("bool programInt2(\n");
-    printf(" Module  cm,\n");
-    printf(" PrCount cp,\n");
-    printf(" PrCount dp,\n");
-    printf(" Local   L, \n");
-    printf(" Global  G  \n");
+    printf(" Module     cm,\n");
+    printf(" PrCount    cp,\n");
+    printf(" PrCount    dp,\n");
+    printf(" Local      L, \n");
+    printf(" MemUnwind  MU \n");
     printf(")          \n");
-    printf(" cm <  cp, \n");
+    printf(" cm  <  cp, \n");
     printf(" cp  ~+ dp,\n");
     printf(" cp  <  L, \n");
-    printf(" L  <  G   \n");
+    printf(" L   <  MU   \n");
     printf("(false    \n");
 
     for (fun = bp_functions; fun; fun = fun->next) {
-        if (isThreadFunction(fun))
-        {
+        if (isThreadFunction(fun)) {
             flag = 0;
-            /*
-            printf("| ((cm=%d)&\n",fun->funname_replace);
-            printf("((false\n");
-            */
             reset_flag_visited(fun->stmt);
             print_recursive_statement_program_Int2(fun->stmt, fun, &flag);
             if (flag == 1) printf(")))\n");
@@ -1125,40 +1483,29 @@ static void print_Mucke_programInt3(void) {
     short flag;
 
     printf("bool programInt3(\n");
-    printf(" Module  cm,\n");
-    printf(" PrCount cp,\n");
-    printf(" PrCount dp,\n");
-    printf(" Local   L,\n");
-    printf(" Local   dL,\n");
-    printf(" Global  G,\n");
-    printf(" Global  dG\n");
+    printf(" Module     cm,\n");
+    printf(" PrCount    cp,\n");
+    printf(" PrCount    dp,\n");
+    printf(" Local      L,\n");
+    printf(" Local      dL,\n");
+    printf(" MemUnwind  MU,\n");
+    printf(" MemUnwind  dMU\n");
     printf(")\n");
-    printf(" cm <  cp,\n");
+    printf(" cm  <  cp,\n");
     printf(" cp  ~+ dp,\n");
     printf(" cp  <  L,\n");
-    printf(" L  ~+ dL,\n");
-    printf(" L  <  G,\n");
-    printf(" G  ~+ dG\n");
+    printf(" L   ~+ dL,\n");
+    printf(" L   <  MU,\n");
+    printf(" MU  ~+ dMU\n");
     printf("(false\n");
 
     for (p = bp_functions; p; p = p->next) {
         if (isThreadFunction(p))
         {   flag = 0;
             reset_flag_visited(p->stmt);
-            /*
-             printf("| ( (cm=%d) &\n",p->funname_replace);
-             printf("    (\n");
-
-               printf("( false\n");
-            */
             reset_flag_visited(p->stmt);
             print_recursive_statement_program_Int3(p->stmt, p, &flag);
-
             if (flag == 1) printf(")))");
-
-            //      printf(")");
-
-            //      printf(")\n");
         }
     }
     printf(");\n");
@@ -1181,20 +1528,20 @@ static void print_Mucke_programInt1_nonthread(void) {
     short head;
 
     printf("bool programInt1nonthread(\n");
-    printf(" Module  cm,\n");
-    printf(" PrCount cp,\n");
-    printf(" PrCount dp,\n");
-    printf(" Local   L,\n");
-    printf(" Local   dL,\n");
-    printf(" Global  G,\n");
-    printf(" Global  dG\n");
+    printf(" Module     cm,\n");
+    printf(" PrCount    cp,\n");
+    printf(" PrCount    dp,\n");
+    printf(" Local      L,\n");
+    printf(" Local      dL,\n");
+    printf(" MemUnwind  MU,\n");
+    printf(" MemUnwind  dMU\n");
     printf(")\n");
-    printf(" cm <  cp,\n");
+    printf(" cm  <  cp,\n");
     printf(" cp  ~+ dp,\n");
     printf(" cp  <  L,\n");
     printf(" L   ~+ dL,\n");
-    printf(" L   <  G,\n");
-    printf(" G   ~+ dG\n");
+    printf(" L   <  MU,\n");
+    printf(" MU  ~+ dMU\n");
     printf("(false\n");
 
     for (fun = bp_functions; fun; fun = fun->next) {
@@ -1216,25 +1563,21 @@ static void print_Mucke_programInt2_nonthread(void) {
     short flag;
 
     printf("bool programInt2nonthread(\n");
-    printf(" Module  cm,\n");
-    printf(" PrCount cp,\n");
-    printf(" PrCount dp,\n");
-    printf(" Local   L, \n");
-    printf(" Global  G  \n");
+    printf(" Module     cm,\n");
+    printf(" PrCount    cp,\n");
+    printf(" PrCount    dp,\n");
+    printf(" Local      L, \n");
+    printf(" MemUnwind  MU\n");
     printf(")          \n");
-    printf(" cm <  cp, \n");
+    printf(" cm  <  cp, \n");
     printf(" cp  ~+ dp,\n");
     printf(" cp  <  L, \n");
-    printf(" L  <  G   \n");
+    printf(" L   <  MU   \n");
     printf("(false    \n");
 
     for (fun = bp_functions; fun; fun = fun->next) {
         if (!isThreadFunction(fun)) {
             flag = 0;
-            /*
-            printf("| ((cm=%d)&\n",fun->funname_replace);
-            printf("((false\n");
-            */
             reset_flag_visited(fun->stmt);
             print_recursive_statement_program_Int2(fun->stmt, fun, &flag);
             if (flag == 1) printf(")))\n");
@@ -1250,41 +1593,28 @@ static void print_Mucke_programInt3_nonthread(void) {
     short flag;
 
     printf("bool programInt3nonthread(\n");
-    printf(" Module  cm,\n");
-    printf(" PrCount cp,\n");
-    printf(" PrCount dp,\n");
-    printf(" Local   L,\n");
-    printf(" Local   dL,\n");
-    printf(" Global  G,\n");
-    printf(" Global  dG\n");
+    printf(" Module     cm,\n");
+    printf(" PrCount    cp,\n");
+    printf(" PrCount    dp,\n");
+    printf(" Local      L,\n");
+    printf(" Local      dL,\n");
+    printf(" MemUnwind  MU,\n");
+    printf(" MemUnwind  dMU\n");
     printf(")\n");
-    printf(" cm <  cp,\n");
+    printf(" cm  <  cp,\n");
     printf(" cp  ~+ dp,\n");
     printf(" cp  <  L,\n");
-    printf(" L  ~+ dL,\n");
-    printf(" L  <  G,\n");
-    printf(" G  ~+ dG\n");
+    printf(" L   ~+ dL,\n");
+    printf(" L   <  MU,\n");
+    printf(" MU  ~+ dMU\n");
     printf("(false\n");
 
     for (p = bp_functions; p; p = p->next) {
         if (!isThreadFunction(p)) {
             flag = 0;
             reset_flag_visited(p->stmt);
-            /*
-             printf("| ( (cm=%d) &\n",p->funname_replace);
-             printf("    (\n");
-
-               printf("( false\n");
-            */
-            reset_flag_visited(p->stmt);
             print_recursive_statement_program_Int3(p->stmt, p, &flag);
-
             if (flag == 1) printf(")))");
-
-            //      printf(")");
-
-            //      printf(")\n");
-
         }
     }
     printf(");\n");
@@ -1297,7 +1627,7 @@ static void print_Mucke_programInt3_nonthread(void) {
 static void print_recursive_statement_program_Call(bp_stmt_t p, bp_fun_t fun) {
     bp_fun_t y;
     bp_idref_t q;
-    bp_ident_t z = NULL, t, tmp;
+    bp_ident_t z = NULL, t, tmp, temp_var;
     int i;
 
     if ((!p) || (p->visited != 0)) return;
@@ -1317,34 +1647,71 @@ static void print_recursive_statement_program_Call(bp_stmt_t p, bp_fun_t fun) {
 
         printf("&dm=%d", y->funname_replace);
 
-        // Parameter of callee
+        // Parameter of callee (passing parameter)
         t = y->parms;
         for (q = (p->e.a.fmllist); q; q = q->next) {
             z = Is_there_var(bp_all_locals, t->varname);
             if (!z) common_error("error in ProgramCall: local variable not found\n");
             //          t->varname_replace = tmp->varname_replace;
+
             if (((q->expr)->token) == BP_CHOOSE) {
                 // ((a&f1) | (!a & !f1 & f2 ) | (!f1 & ! f2))
-                printf("&((");
-                printf("dL.v%d", z->varname_replace);
-                printf("&(");
-                print_Mucke_expression(q->expr->left, "c", 0);
-                printf("))|((!");
-                printf("dL.v%d", z->varname_replace);
-                printf(")&(!");
-                print_Mucke_expression(q->expr->left, "c", 0);
-                printf(")&(");
-                print_Mucke_expression(q->expr->right, "c", 0);
-                printf("))|((!");
-                print_Mucke_expression(q->expr->left, "c", 0);
-                printf(")&(!");
-                print_Mucke_expression(q->expr->right, "c", 0);
-                printf(")))\n");
+                for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) temp_var->read_mark = 0;
+                int flag = check_access_global_expression(q->expr->left) + check_access_global_expression(q->expr->right);
+                if (flag) {
+                    printf("&(exists");
+                    char firsttime = 1;
+                    for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                        if (temp_var->read_mark == 1) {
+                                    if (firsttime) firsttime = 0;
+                                    else printf(",");
+                            printf(" bool cv%d", temp_var->varname_replace);
+                        }
+                    }
+                    printf(". (true");
+                    for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                        if (temp_var->read_mark == 1) {
+                            printf(" &READ(MU, %d, cv%d)", temp_var->varname_replace, temp_var->varname_replace);
+                        }
+                    }
+                    printf("&((");
+                    printf("dL.v%d", z->varname_replace);
+                    printf("&(");
+                    print_Mucke_expression(q->expr->left, "c", 0);
+                    printf("))|((!");
+                    printf("dL.v%d", z->varname_replace);
+                    printf(")&(!");
+                    print_Mucke_expression(q->expr->left, "c", 0);
+                    printf(")&(");
+                    print_Mucke_expression(q->expr->right, "c", 0);
+                    printf("))|((!");
+                    print_Mucke_expression(q->expr->left, "c", 0);
+                    printf(")&(!");
+                    print_Mucke_expression(q->expr->right, "c", 0);
+                    printf(")))\n");
+                    printf("))\n");
+                }
+                else {
+                    printf("&((");
+                    printf("dL.v%d", z->varname_replace);
+                    printf("&(");
+                    print_Mucke_expression(q->expr->left, "c", 0);
+                    printf("))|((!");
+                    printf("dL.v%d", z->varname_replace);
+                    printf(")&(!");
+                    print_Mucke_expression(q->expr->left, "c", 0);
+                    printf(")&(");
+                    print_Mucke_expression(q->expr->right, "c", 0);
+                    printf("))|((!");
+                    print_Mucke_expression(q->expr->left, "c", 0);
+                    printf(")&(!");
+                    print_Mucke_expression(q->expr->right, "c", 0);
+                    printf(")))\n");
+                }
             }
             else {
                 printf("&(dL.v%d", z->varname_replace);
-                if ((q->expr->token == BP_IDENT) || (q->expr->token == BP_CONST))
-                    printf("=");
+                if ((q->expr->token == BP_IDENT) || (q->expr->token == BP_CONST)) printf("=");
                 else printf("<->");
 
                 print_Mucke_expression(q->expr, "c", 0);
@@ -1385,22 +1752,22 @@ static void print_statements_programCall(void) {
 }
 
 /**
- * This is to set parameter of a function call
+ * Set parameters of a function call
  */
 static void print_Mucke_programCall(void) {
     printf("bool programCall( \n");
-    printf(" Module  cm,    \n");                // Caller
-    printf(" Module  dm,    \n");                // Callee
-    printf(" PrCount cp,     \n");               // Caller PC
-    printf(" Local   cL,      \n");              // Caller Local
-    printf(" Local   dL,      \n");              // Callee Local (Parameter)
-    printf(" Global  cG       \n");
-    printf(")                 \n");
-    printf(" cm ~+ dm,    \n");
-    printf(" cm < cp,      \n");
-    printf(" cp  < cL,       \n");
-    printf(" cL  ~+ dL,       \n");
-    printf(" cL  < cG         \n");
+    printf(" Module     cm,\n");                // Caller
+    printf(" Module     dm,\n");                // Callee
+    printf(" PrCount    cp,\n");               // Caller PC
+    printf(" Local      cL,\n");              // Caller Local
+    printf(" Local      dL,\n");              // Callee Local (Parameter)
+    printf(" MemUnwind  MU \n");
+    printf(")\n");
+    printf(" cm  ~+ dm,\n");
+    printf(" cm  <  cp,\n");
+    printf(" cp  <  cL,\n");
+    printf(" cL  ~+ dL,\n");
+    printf(" cL  <  MU\n");
     printf("(false\n");
     print_statements_programCall();
     printf("\n);\n");
@@ -1443,17 +1810,14 @@ static void print_statements_Calling(void) {
 }
 
 /**
- * Calling is where a module get call
+ * Program point (of caller) where a module get call
  */
 static void print_Mucke_Calling(void) {
     printf("bool Calling(Module m, PrCount p)\n");
     printf("(false\n");
-
     print_statements_Calling();
-
     printf(");\n");
 }
-
 
 /***********************************************************************/
 static void print_recursive_SkipCall(bp_stmt_t p, bp_fun_t fun) {
@@ -1500,7 +1864,7 @@ static void print_statements_SkipCall(void) {
 }
 
 /**
- * Change program counter of caller
+ * Change program counter of caller (from point of calling to return)
  */
 static void print_Mucke_SkipCall(void) {
     printf("bool SkipCall(\n");
@@ -1511,9 +1875,7 @@ static void print_Mucke_SkipCall(void) {
     printf("cm < cp, \n");
     printf("dp ~+ dp \n");
     printf("(false\n");
-
     print_statements_SkipCall();
-
     printf("\n);\n\n");
 }
 
@@ -1532,7 +1894,6 @@ static void print_recursive_Exit(bp_stmt_t p, bp_fun_t fun) {
         printf(" & ");
         print_PC("cp", p->numlabel, n_bit_pc);
         printf(")\n");
-
         break;
     }
     case BP_IF:
@@ -1554,8 +1915,8 @@ static void print_statements_Exit(void) {
     for (p = bp_functions; p; p = p->next) {
         reset_flag_visited(p->stmt);
         print_recursive_Exit(p->stmt, p);
-        if (p->num_returns == 0)    /// If there is no return
-        {   printf("|( cm=%d & ", p->funname_replace);
+        if (p->num_returns == 0)   { /// If there is no return
+            printf("|( cm=%d & ", p->funname_replace);
             print_PC("cp", pc_return, n_bit_pc);
             printf(")\n");
         }
@@ -1566,32 +1927,26 @@ static void print_statements_Exit(void) {
  * Set exist point of callee
  */
 static void print_Mucke_Exit(void) {
-
     printf(" bool Exit( Module cm, PrCount cp )\n");
     printf("(false\n");
-
     print_statements_Exit();
-
-    //  printf("|( cp = %d)\n", pc_return);
-
     printf("); \n");
 }
 
 
 /***************************************************************/
-static void print_recursive_SetReturnUS_FromCall(bp_stmt_t p, bp_fun_t fun_call, bp_stmt_t p_return,
-        bp_fun_t fun_return, short *flag) {
+static void print_recursive_SetReturnUS_FromCall(
+    bp_stmt_t p, bp_fun_t fun_call, bp_stmt_t p_return, bp_fun_t fun_return, short *flag)
+{
     int i = 0, j = 0;
     bp_ident_t z, y, temp_var;
     bp_idref_t assign_call, list_return_expr;
-
 
     if (!p) return;
 
     switch (p->type) {
     case BP_CALL: {
         if ((strcmp(p->e.a.label, fun_return->funname) == 0) && ((p->numlabel) >= 0)) {
-
             if (*flag == 0) {
                 *flag = 1;
                 printf("|(\n");
@@ -1601,7 +1956,6 @@ static void print_recursive_SetReturnUS_FromCall(bp_stmt_t p, bp_fun_t fun_call,
                 print_PC("up", p_return->numlabel, n_bit_pc);
                 printf("\n");
                 printf(" & (false\n");
-
             }
 
             printf("    |(");
@@ -1611,34 +1965,62 @@ static void print_recursive_SetReturnUS_FromCall(bp_stmt_t p, bp_fun_t fun_call,
             print_PC("tp", p->numlabel, n_bit_pc);
             printf("\n");
 
-
             list_return_expr = p_return->e.a.asgnlist;
 
             for (assign_call = (p->e.a.asgnlist); assign_call; assign_call = assign_call->next) {
                 z = Is_there_var(bp_globals, assign_call->var_name);
                 if (z) {    // z is a global variable, this is a write (return from function call)
-                    printf("       &(sG.v%d", z->varname_replace);
+                    printf("&(");
+                    for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) temp_var->read_mark = 0;
+                    int flag = check_access_global_expression(list_return_expr->expr);
+                    if (flag) {   // write to global variable
+                        printf("(exists");
+                        for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                            if (temp_var->read_mark == 1) {
+                                printf(" bool uv%d,", temp_var->varname_replace);
+                            }
+                        }
+                        printf(" bool temp. (true");
+                        for (temp_var = bp_globals; temp_var; temp_var = temp_var->next) {
+                            if (temp_var->read_mark == 1) {
+                                printf(" &READ(uMU, %d, uv%d)", temp_var->varname_replace, temp_var->varname_replace);
+                            }
+                        }
+                        printf(" &(temp");
+                        if ((list_return_expr->expr->token == BP_IDENT) || (list_return_expr->expr->token == BP_CONST)) printf("=");
+                        else printf("<->");
+                        print_Mucke_expression(list_return_expr->expr, "u", 0);
+                        printf(")");
+                        printf(" &WRITE(uMU, sMU, %d, temp)", z->varname_replace);
+                        printf("))");
+                    }
+                    else {
+                        printf("(exists");
+                        printf(" bool temp. (true");
+                        printf(" &(temp");
+                        if ((list_return_expr->expr->token == BP_IDENT) || (list_return_expr->expr->token == BP_CONST)) printf("=");
+                        else printf("<->");
+                        print_Mucke_expression(list_return_expr->expr, "u", 0);
+                        printf(")");
+                        printf(" &WRITE(uMU, sMU, %d, temp)", z->varname_replace);
+                        printf("))");
+                    }
                 }
                 else {
                     z = Is_there_var(bp_all_locals, assign_call->var_name);
                     if (!z) common_error("error in SetReturn: variable not found\n");
 
                     printf("       &(sL.v%d", z->varname_replace);
+                    if ((list_return_expr->expr->token == BP_IDENT) || (list_return_expr->expr->token == BP_CONST)) printf("=");
+                    else printf("<->");
+                    print_Mucke_expression(list_return_expr->expr, "u", 0);
+                    printf(")\n");
                 }
-
-                if ((list_return_expr->expr->token == BP_IDENT) || (list_return_expr->expr->token == BP_CONST))
-                    printf("=");
-                else printf("<->");
-
-                print_Mucke_expression(list_return_expr->expr, "u", 0);
-                printf(")\n");
-
+                // Move to the next expression
                 list_return_expr = list_return_expr->next;
             }
-
             printf("     )\n");
         }
-
         break;
     }
 
@@ -1667,11 +2049,10 @@ static void print_recursive_SetReturnUS(bp_stmt_t p, bp_fun_t fun) {
     switch (p->type) {
     case BP_RETURN: {
         flag = 0;
-        for (fun_p = bp_functions; fun_p; fun_p = fun_p->next)
+        for (fun_p = bp_functions; fun_p; fun_p = fun_p->next) {
             print_recursive_SetReturnUS_FromCall(fun_p->stmt, fun_p, p, fun, &flag);
-
+        }
         if (flag == 1) printf("   )\n)\n");
-
         break;
     }
 
@@ -1697,8 +2078,9 @@ static void print_statements_SetReturnUS(void) {
     }
 }
 
-static void print_recursive_SetReturnUS_FromCallglobals(bp_stmt_t p, bp_fun_t fun_call, bp_stmt_t p_return,
-        bp_fun_t fun_return, bp_ident_t var, short *head) {
+static void print_recursive_SetReturnUS_FromCallglobals(
+    bp_stmt_t p, bp_fun_t fun_call, bp_stmt_t p_return, bp_fun_t fun_return, bp_ident_t var, short *head)
+{
     bp_ident_t z, y, temp_var;
     bp_idref_t assign_call, list_return_expr;
     int flag;
@@ -1768,9 +2150,9 @@ static void print_recursive_SetReturnUSglobals(bp_stmt_t p, bp_fun_t fun, bp_ide
     switch (p->type) {
     case BP_RETURN: {
         head = 1;
-        for (fun_p = bp_functions; fun_p; fun_p = fun_p->next)
+        for (fun_p = bp_functions; fun_p; fun_p = fun_p->next){
             print_recursive_SetReturnUS_FromCallglobals(fun_p->stmt, fun_p, p, fun, var, &head);
-
+        }
         if (head == 0) printf("   ))\n");
 
         break;
@@ -1789,38 +2171,38 @@ static void print_recursive_SetReturnUSglobals(bp_stmt_t p, bp_fun_t fun, bp_ide
 }
 
 /**
- * Set return from the callee
- * - Set all the relevant variable (LHS of functioncall) when returning from callee (u)
+ * Set return from the callee (U) to the point of returning
+ * caller (S point)
  */
 static void print_SetReturnUS(void) {
     bp_fun_t fun;
     bp_ident_t z;
 
     printf("bool SetReturnUS(\n");
-    printf(" Module  tm,\n");     // Caller module
-    printf(" Module  um,\n");     // Callee module
-    printf(" PrCount tp,\n");     // Caller point (making call)
-    printf(" PrCount up,\n");     // Callee return point
-    printf(" Local   uL,\n");     // Callee local variable
-    printf(" Local   sL,\n");     // Caller local variable when return
-    printf(" Global  uG,\n");     // Callee global variable
-    printf(" Global  sG \n");     // Caller global variable when return
+    printf(" Module     tm,\n");
+    printf(" Module     um,\n");
+    printf(" PrCount    tp,\n");
+    printf(" PrCount    up,\n");
+    printf(" Local      uL,\n");
+    printf(" Local      sL,\n");
+    printf(" MemUnwind  uMU,\n");
+    printf(" MemUnwind  sMU \n");
     printf(")           \n");
     printf(" tm   ~+ um,\n");
     printf(" tm   <  tp,\n");
-    printf(" tp  ~+ up, \n");
-    printf(" tp  <  uL, \n");
-    printf(" uL  ~+ sL, \n");
-    printf(" uL  <  uG, \n");
-    printf(" uG  ~+ sG  \n");
+    printf(" tp   ~+ up, \n");
+    printf(" tp   <  uL, \n");
+    printf(" uL   ~+ sL, \n");
+    printf(" uL   <  uMU, \n");
+    printf(" uMU  ~+ sMU  \n");
     printf("((false\n");
-    // Set all the variables (changed) by return value
     print_statements_SetReturnUS();
     printf(")");
 
-
+    // Not necssesary since MU already hold all information
+    /*
     for (z = bp_globals; z; z = z->next) {
-        // All the other global variables are copied at the point of returning
+        // Copy other global variable from callee (U) to caller (S)
         printf("&((sG.v%d=uG.v%d)", z->varname_replace, z->varname_replace);
         for (fun = bp_functions; fun; fun = fun->next) {
             reset_flag_visited(fun->stmt);
@@ -1828,8 +2210,7 @@ static void print_SetReturnUS(void) {
         }
         printf(")\n");
     }
-
-
+    */
     printf(");\n\n\n");
 }
 
@@ -1894,8 +2275,6 @@ static void print_recursive_SetReturnTS_FromCall_globals(
 static void print_recursive_SetReturnTS_globals(bp_stmt_t p, bp_fun_t fun, bp_ident_t var) {
     bp_fun_t fun_p;
     short head;
-
-
     if ((!p) || (p->visited != 0)) return;
     p->visited = 1;
 
@@ -1906,7 +2285,6 @@ static void print_recursive_SetReturnTS_globals(bp_stmt_t p, bp_fun_t fun, bp_id
         for (fun_p = bp_functions; fun_p; fun_p = fun_p->next)
             if (Is_there_var(fun_p->globals, var->varname))
                 print_recursive_SetReturnTS_FromCall_globals(fun_p->stmt, fun_p, p, fun, var, &head);
-
         if (head == 0) printf("   ))\n");
 
         break;
@@ -1927,8 +2305,9 @@ static void print_recursive_SetReturnTS_globals(bp_stmt_t p, bp_fun_t fun, bp_id
 
 /*******************************************************************************/
 
-static void print_recursive_SetReturnTS_FromCall_locals(bp_stmt_t p, bp_fun_t fun_call, bp_stmt_t p_return,
-        bp_fun_t fun_return, int varnum, short *head) {
+static void print_recursive_SetReturnTS_FromCall_locals(
+    bp_stmt_t p, bp_fun_t fun_call, bp_stmt_t p_return, bp_fun_t fun_return, int varnum, short *head)
+{
     bp_ident_t z, y, temp_var;
     bp_idref_t assign_call, list_return_expr;
 
@@ -1995,7 +2374,6 @@ static void print_recursive_SetReturnTS_locals(bp_stmt_t p, bp_fun_t fun, int va
 
         head = 1;
         for (fun_p = bp_functions; fun_p; fun_p = fun_p->next) {
-            //        if (Is_there_var(fun_p->locals, var->varname))
             print_recursive_SetReturnTS_FromCall_locals(fun_p->stmt, fun_p, p, fun, varnum, &head);
         }
         if (head == 0) printf("   ))\n");
@@ -2029,17 +2407,17 @@ static void print_SetReturnTS(void) {
     bp_fun_t fun;
     int varnum;
     printf("bool SetReturnTS( \n");
-    printf(" Module  tm,\n");  // Caller
-    printf(" Module  um,\n");  // Callee
-    printf(" PrCount tp,\n");  // Caller PC
-    printf(" PrCount up,\n");  // Callee PC (when returning)
-    printf(" Local   tL,\n");  // Local of Caller
-    printf(" Local   sL,\n");  // Local of Caller after returning
-    printf(" Global  tG,\n");  // Global of Caller
-    printf(" Global  sG \n");  // Global of Caller after returning
+    printf(" Module     tm,\n");  // Caller
+    printf(" Module     um,\n");  // Callee
+    printf(" PrCount    tp,\n");  // Caller PC
+    printf(" PrCount    up,\n");  // Callee PC (when returning)
+    printf(" Local      tL,\n");  // Local of Caller
+    printf(" Local      sL,\n");  // Local of Caller after returning
+    printf(" MemUnwind  tG,\n");  // Global of Caller
+    printf(" MemUnwind  sG \n");  // Global of Caller after returning
     printf(")           \n");
-    printf(" tm ~+ um,  \n");
-    printf(" tm <  tp,  \n");
+    printf(" tm  ~+ um,  \n");
+    printf(" tm  <  tp,  \n");
     printf(" tp  ~+ up, \n");
     printf(" tp  <  tL, \n");
     printf(" tL  ~+ sL, \n");
@@ -2051,7 +2429,6 @@ static void print_SetReturnTS(void) {
 
     for (varnum = 0; varnum <= maxindexlocvar; varnum++) {
         printf("&((sL.v%d=tL.v%d)", varnum, varnum);   // All local variable will be copied exept that
-        // All the one in the LHS of assignment call
         for (fun = bp_functions; fun; fun = fun->next) {
             reset_flag_visited(fun->stmt);
             print_recursive_SetReturnTS_locals(fun->stmt, fun, varnum);
@@ -2059,20 +2436,21 @@ static void print_SetReturnTS(void) {
         printf(")\n");
     }
 
+    /*
     for (z = bp_globals; z; z = z->next) {
-        printf("&((sG.v%d=tG.v%d)", z->varname_replace, z->varname_replace); // All global variable will be copied exept that
+        printf("&((sG.v%d=tG.v%d)", z->varname_replace, z->varname_replace);
         for (fun = bp_functions; fun; fun = fun->next) {
             reset_flag_visited(fun->stmt);
             print_recursive_SetReturnTS_globals(fun->stmt, fun, z);
-
             if (Is_there_var(fun->globals, z->varname))
-                printf("|(um=%d)", fun->funname_replace);  // It is in callee (thus may change)
+                printf("|(um=%d)", fun->funname_replace);
             else
-                printf("|(tm=%d)", fun->funname_replace);  // Or the varibale is not in the function
+                printf("|(tm=%d)", fun->funname_replace);
 
         }
         printf(")\n");
     }
+    */
     printf("));\n");
 }
 
@@ -2405,52 +2783,54 @@ static void print_CopyLocals(void) {
 
 /********************************************************************/
 
-static void print_CopyGlobals(void) {
-    bp_fun_t fun;
-    bp_ident_t z, temp_var;
+// static void print_CopyGlobals(void) {
+//  bp_fun_t fun;
+//  bp_ident_t z, temp_var;
+
+//  printf("bool CopyGlobals(\n");
+//  printf("Module m,\n");
+//  printf("Global c,\n");
+//  printf("Global d\n");
+//  printf(")\n");
+//  printf("m < c,\n");
+//  printf("c ~+ d\n");
+//  printf("(false\n");
+
+//  for (fun = bp_functions; fun; fun = fun->next) {
+//      printf(" |(m=%d", fun->funname_replace);
+
+//      for (z = bp_globals; z; z = z->next) z->mark = -1;
+//      for (z = fun->globals; z; z = z->next) {
+//          temp_var = Is_there_var(bp_globals, z->varname);
+//          temp_var->mark = 0;
+//      }
+//      for (z = bp_globals; z; z = z->next) {
+//          if (z->mark == 0) {
+//              printf("\n  &d.v%d=c.v%d", z->varname_replace, z->varname_replace);
+//          }
+//      }
+//      printf(")\n");
+//  }
 
 
-    printf("bool CopyGlobals(\n");
-    printf("Module m,\n");
-    printf("Global c,\n");
-    printf("Global d\n");
-    printf(")\n");
-    printf("m < c,\n");
-    printf("c ~+ d\n");
-    printf("(false\n");
+//  printf(");\n");
 
 
-    for (fun = bp_functions; fun; fun = fun->next) {
-        printf(" |(m=%d", fun->funname_replace);
+//  printf("#size CopyGlobals;\n");
 
-        for (z = bp_globals; z; z = z->next) z->mark = -1;
-        for (z = fun->globals; z; z = z->next) {
-            temp_var = Is_there_var(bp_globals, z->varname);
-            temp_var->mark = 0;
-        }
-        for (z = bp_globals; z; z = z->next) {
-            if (z->mark == 0) {
-                printf("\n  &d.v%d=c.v%d", z->varname_replace, z->varname_replace);
-            }
-        }
-        printf(")\n");
-    }
-
-
-    printf(");\n");
-
-
-    printf("#size CopyGlobals;\n");
-
-}
+// }
 
 
 
 
 /********************************************************************/
 
-/********************************************************************/
-
+// ###   #  #  ###   ###
+//  #    ## #   #     #
+//  #    ## #   #     #
+//  #    # ##   #     #
+//  #    # ##   #     #
+// ###   #  #  ###    #
 
 static void print_Global_init()
 {
@@ -2459,7 +2839,7 @@ static void print_Global_init()
     bp_ident_t z;
     bp_fun_t fun;
 
-    printf("bool GlobalInit(Global CG)( true ");
+    printf("bool GlobalInit( MemUnwind MU )( true ");
 
     for (fun = bp_functions; fun; fun = fun->next) {
         if ((strlen(fun->funname) == 4) &&
@@ -2470,7 +2850,7 @@ static void print_Global_init()
            ) {
             p = fun->stmt;
             if ((!p) ||/* (p->next!=NULL) ||*/ (p->type != BP_ASSIGN)) {
-                common_error("error init \n");
+                common_error("error init\n");
             }
 
             for (q = (p->e.a.asgnlist); q; q = q->next) {
@@ -2481,14 +2861,11 @@ static void print_Global_init()
                     common_error("error init choose is not allowed\n");
                 }
                 else {
-                    printf("&(CG.v%d", z->varname_replace);
+                    if (q->expr->token == BP_CONST) printf("=");
+                    else common_error("error init only constants can be assigned\n");
 
-                    if (q->expr->token == BP_CONST)
-                        printf("=");
-                    else
-                        common_error("error init only constants can be assigned\n");
-
-                    print_Mucke_expression(q->expr, "C", 0);
+                    printf("& WRITE( MU, MU, v%d, ", z->varname_replace);
+                    print_Mucke_expression(q->expr, "", 0);
                     printf(")");
                 }
             }
@@ -2547,11 +2924,9 @@ static void print_PC_0() {
 /***           VARIABLE ORDERING for globals                     ****/
 /********************************************************************/
 
-
 /*****************************/
 /*    for an expression      */
 /*****************************/
-
 static void recursive_add_edges_dependency_graph_EXPRESSIONGLOBALS(bp_expr_t p, int a, graph *g) {
     bp_ident_t z, q;
 
@@ -2712,15 +3087,9 @@ static void build_dependency_graphGLOBALS(graph *g) {
 /***           VARIABLE ORDERING for locals                      ****/
 /********************************************************************/
 
-
-
-
-
-
 /*****************************/
 /*    for an expression      */
 /*****************************/
-
 static void recursive_add_edges_dependency_graph_EXPRESSIONLOCALS(bp_expr_t p, int a, graph *g) {
     bp_ident_t z, q;
 
@@ -2882,7 +3251,7 @@ static void build_dependency_graphLOCALS(graph *g) {
 }
 
 
-static void print_Variables(int ord) {
+static void print_Mucke_Variables(int ord) {
     graph *g;
     linkedList *orderedVertexList;
     item *curr, *prev, *first;
@@ -2892,33 +3261,44 @@ static void print_Variables(int ord) {
 
     ord = 0;
 
-    printf("class Global {");
+    // printf("class Global {");
+    // if (bp_globals && (ord != -1)) {
 
-    if (bp_globals && (ord != -1)) {
+    //  g = newGraph();
 
-        g = newGraph();
+    //  build_dependency_graphGLOBALS(g);
+    //  orderedVertexList = variableOrdering(g, ord);
 
-        build_dependency_graphGLOBALS(g);
-        orderedVertexList = variableOrdering(g, ord);
+    //  first = curr = orderedVertexList->head;
+    //  while (curr != NULL) {
+    //      if (curr != first) printf(";\n");
+    //      else printf("\n");
+    //      printf("bool v%d", curr->vert->val);
+    //      curr = curr->next;
+    //  }
+    //  printf(";");
 
-        first = curr = orderedVertexList->head;
-        while (curr != NULL) {
-            if (curr != first) printf(";\n");
-            else printf("\n");
-            printf("bool v%d", curr->vert->val);
+    // } else printf(" bool fake; ");
+    // printf("};\n\n");
 
-            curr = curr->next;
-        }
+    printf("class write { // represent a write to MemUnwind\n");
+    printf("  bool  value;  // value of variable\n");
+    printf("  VarID ID;\n");
+    printf("  bool  valid; // valid write\n");
+    printf("};\n");
 
-        printf(";");
+    // printf("enum Index {0..%d};\n", NUM_WRITE);
 
-    } else printf(" bool fake; ");
-
-
+    // TODO: reserve for MemUnwind variable
+    printf("class MemUnwind {\n");
+    for (i = 0; i < NUM_WRITE; i++) {
+        printf("  write  w%d;\n", i);
+    }
+    // printf("  Index  index;\n");
     printf("};\n\n");
 
-    printf("class Local {");
 
+    printf("class Local {");
     if (bp_all_locals && (ord != -1)) {
 
         g = newGraph();
@@ -3697,15 +4077,16 @@ print_debug_program(void) {
 /*                      PRINT ENFORCE FORMULA                     */
 /******************************************************************/
 
+// TODO: fix enforce (not necessary now)
 static void print_enforce(void) {
     bp_fun_t fun;
 
     printf("bool enforce(\n");
-    printf(" Module  m,\n");
-    printf(" Local   L,\n");
-    printf(" Global  G \n");
+    printf(" Module     m,\n");
+    printf(" Local      L,\n");
+    printf(" MemUnwind  G \n");
     printf(")          \n");
-    printf(" m <  L,   \n");
+    printf(" m   <  L,   \n");
     printf(" L   <  G  \n");
     printf("(false    \n");
 
@@ -3978,12 +4359,12 @@ print_Mucke_function(bp_fun_t fun) {
     int i;
     printf("mu bool %s(\n", fun->funname);
     // Declaration of variables
-    printf("   Module  s_mod,\n");
-    printf("   PrCount s_pc,\n");
-    printf("   Local   s_CL,\n");
-    printf("   Global  s_G,\n");
-    printf("   Local   s_ENTRY_CL,\n");
-    printf("   Global  s_ENTRY_CG\n");
+    printf("   Module     s_mod,\n");
+    printf("   PrCount    s_pc,\n");
+    printf("   Local      s_CL,\n");
+    printf("   MemUnwind  s_G,\n");
+    printf("   Local      s_ENTRY_CL,\n");
+    printf("   MemUnwind  s_ENTRY_CG\n");
     printf(")\n");
     // Ordering of variables
     printf("  s_mod   <  s_pc,\n");
@@ -4004,15 +4385,15 @@ print_Mucke_function(bp_fun_t fun) {
     printf("|(\n");
     printf("     s_mod=%d\n", fun->funname_replace);
     printf("   & (exists \n");
-    printf("         PrCount  t_pc,\n");
-    printf("         Local    t_CL,\n");
-    printf("         Global   t_G.\n");
+    printf("         PrCount     t_pc,\n");
+    printf("         Local       t_CL,\n");
+    printf("         MemUnwind   t_G.\n");
     printf("         (\n");
     printf("              %s(%d, t_pc, t_CL, t_G, s_ENTRY_CL, s_ENTRY_CG)\n", fun->funname, fun->funname_replace);
     printf("            & (\n");
     printf("                (\n");
     printf("                     programInt1nonthread( %d, t_pc, s_pc, t_CL, s_CL, t_G, s_G )\n", fun->funname_replace);
-    printf("                   & CopyVariables_ProgramInt( %d, t_pc, t_CL, s_CL, t_G, s_G )\n", fun->funname_replace);
+    printf("                   & CopyVariables_ProgramInt( %d, t_pc, t_CL, s_CL )\n", fun->funname_replace);
     printf("                )\n");
     printf("                | programInt3nonthread(%d, t_pc, s_pc, t_CL, s_CL, t_G, s_G )\n", fun->funname_replace);
     printf("              )\n");
@@ -4053,6 +4434,20 @@ static void
 print_Mucke_forward_decls(void)
 {
     printf("//FORWARD DECLARATIONS\n");
+
+    // printf("bool READ(\n");
+    // printf("   MemUnwind MU,\n");
+    // printf("   VarID     id,\n");
+    // printf("   bool      ret\n");
+    // printf(");\n");
+
+    // printf("bool WRITE(\n");
+    // printf("   MemUnwind MU,\n");
+    // printf("   MemUnwind dMU,\n");
+    // printf("   VarID     id,\n");
+    // printf("   bool      val\n");
+    // printf(");\n");
+
     // // print_Mucke_programInt1();
     // printf("bool programInt1(\n");
     // printf(" Module  cm,\n");
@@ -4092,12 +4487,12 @@ print_Mucke_forward_decls(void)
     // printf(");\n");
     // print_Mucke_programCall();
     printf("bool programCall( \n");
-    printf(" Module  cm,    \n");                // Caller
-    printf(" Module  dm,    \n");                // Callee
-    printf(" PrCount cp,     \n");               // Caller PC
-    printf(" Local   cL,      \n");              // Caller Local
-    printf(" Local   dL,      \n");              // Callee Local (Parameter)
-    printf(" Global  cG       \n");
+    printf(" Module     cm,\n");                // Caller
+    printf(" Module     dm,\n");                // Callee
+    printf(" PrCount    cp,\n");               // Caller PC
+    printf(" Local      cL,\n");              // Caller Local
+    printf(" Local      dL,\n");              // Callee Local (Parameter)
+    printf(" MemUnwind  cG \n");
     printf(");\n");
     // print_Mucke_Calling();
     printf("bool Calling(Module m, PrCount p);\n");
@@ -4111,8 +4506,8 @@ print_Mucke_forward_decls(void)
     printf(" PrCount up,\n");
     printf(" Local   uL,\n");
     printf(" Local   sL,\n");
-    printf(" Global  uG,\n");
-    printf(" Global  sG \n");
+    printf(" MemUnwind  uG,\n");
+    printf(" MemUnwind  sG \n");
     printf(");\n");
 // print_SetReturnTS();
     printf("bool SetReturnTS( \n");
@@ -4122,8 +4517,8 @@ print_Mucke_forward_decls(void)
     printf(" PrCount up,\n");  // Callee PC (when returning)
     printf(" Local   tL,\n");  // Local of Caller
     printf(" Local   sL,\n");  // Local of Caller after returning
-    printf(" Global  tG,\n");  // Global of Caller
-    printf(" Global  sG \n");  // Global of Caller after returning
+    printf(" MemUnwind  tG,\n");  // Global of Caller
+    printf(" MemUnwind  sG \n");  // Global of Caller after returning
     printf(");\n");
 
     // print_Mucke_SkipCall();
@@ -4141,9 +4536,9 @@ print_Mucke_forward_decls(void)
             printf("   Module  s_mod,\n");
             printf("   PrCount s_pc,\n");
             printf("   Local   s_CL,\n");
-            printf("   Global  s_G,\n");
+            printf("   MemUnwind  s_G,\n");
             printf("   Local   s_ENTRY_CL,\n");
-            printf("   Global  s_ENTRY_CG\n");
+            printf("   MemUnwind  s_ENTRY_CG\n");
             printf(");\n");
         }
     }
@@ -4208,22 +4603,22 @@ print_Mucke_program(int ord, char *formulaFilename) {
     }
     printf("};\n\n");
 
-    j = 1;
+    j = 0;
     for (z = bp_globals; z; z = z->next) {
         (z->varname_replace) = j++;
         printf("// v%d is %s\n", z->varname_replace, z->varname);
     }
-
     max_global_var = j - 1;
+    printf("// max_global_var is %d\n", max_global_var);
+
+    printf("enum VarID {0..%d};\n\n", max_global_var);
 
     //some local variables could not be declared
     discover_new_locals();
 
     bp_all_locals = All_locals();
 
-
     clousure_globals();
-
 
     // Labeling formula
     for (fun = bp_functions; fun; fun = fun->next) {
@@ -4231,8 +4626,6 @@ print_Mucke_program(int ord, char *formulaFilename) {
             insert_CS_into_module(fun);
         }
     }
-
-
     //ord is always set to 1
     if (ord == 1) {
         j = 0;
@@ -4281,8 +4674,7 @@ print_Mucke_program(int ord, char *formulaFilename) {
     }
     put_name_numb_fun_locals();
 
-
-    print_Variables(ord);
+    print_Mucke_Variables(ord);
 
     // print_CopyLocals();
     // print_CopyGlobals();
@@ -4311,20 +4703,18 @@ print_Mucke_program(int ord, char *formulaFilename) {
     printf("\n\n");
 
 
-    printf("class Globals{\n");
-    for (i = 0; i <= CS - 1; i++) {
-        printf(" Global  g%d;\n", i);
-        printf(" Global  h%d;\n", i);
-    }
-    printf("}\n");
-    for (i = 0; i <= CS - 2; i++) {
-        printf(" g%d  ~+ h%d,\n", i, i);
-        printf(" h%d  ~+  g%d,\n", i, i + 1);
-    }
-
-    printf(" g%d  ~+ h%d;\n", CS - 1, CS - 1);
-
-    printf("\n\n");
+    // printf("class Globals{\n");
+    // for (i = 0; i <= CS - 1; i++) {
+    //  printf(" Global  g%d;\n", i);
+    //  printf(" Global  h%d;\n", i);
+    // }
+    // printf("}\n");
+    // for (i = 0; i <= CS - 2; i++) {
+    //  printf(" g%d  ~+ h%d,\n", i, i);
+    //  printf(" h%d  ~+  g%d,\n", i, i + 1);
+    // }
+    // printf(" g%d  ~+ h%d;\n", CS - 1, CS - 1);
+    // printf("\n\n");
 
     printf("bool max_round( CS r ) (r=%d);\n\n", CS - 1);
 
@@ -4384,91 +4774,100 @@ print_Mucke_program(int ord, char *formulaFilename) {
 
     // printf("#size increaseCS;\n\n");
 
+    // printf("/******************************************************************************/\n\n");
 
-    printf("/******************************************************************************/\n\n");
+    // printf("bool copy_g_g(Globals s, Globals t, CS r)\n");
+    // printf(" r  < s,\n");
+    // printf(" s  ~+ t\n");
+    // printf("( true\n");
 
-    printf("bool copy_g_g(Globals s, Globals t, CS r)\n");
-    printf(" r  < s,\n");
-    printf(" s  ~+ t\n");
-    printf("( true\n");
+    // for (i = 0; i <= CS - 1; i++) {
+    //  printf("  & ( s.g%d=t.g%d | (false ", i, i);
+    //  for (j = 0; j < i; j++) printf(" | r=%d ", j);
+    //  printf(" ) )\n");
+    // }
+    // printf(");\n\n");
 
-    for (i = 0; i <= CS - 1; i++) {
-        printf("  & ( s.g%d=t.g%d | (false ", i, i);
-        for (j = 0; j < i; j++) printf(" | r=%d ", j);
-        printf(" ) )\n");
-    }
-    printf(");\n\n");
+    // // printf("#size copy_g_g;\n\n");
 
-    // printf("#size copy_g_g;\n\n");
+    // printf("/******************************************************************************/\n\n");
 
-    printf("/******************************************************************************/\n\n");
+    // printf("bool copy_h_h(Globals s, Globals t, CS r)\n");
+    // printf(" r  < s,\n");
+    // printf(" s  ~+ t\n");
+    // printf("( true\n");
+    // for (i = 0; i <= CS - 1; i++) {
+    //  printf("  & ( s.h%d=t.h%d | (false", i, i);
+    //  for (j = 0; j < i; j++) printf(" | r=%d ", j);
+    //  printf(" ) )\n");
+    // }
+    // printf(");\n\n");
+    // // printf("#size copy_h_h;\n\n");
 
-    printf("bool copy_h_h(Globals s, Globals t, CS r)\n");
-    printf(" r  < s,\n");
-    printf(" s  ~+ t\n");
-    printf("( true\n");
-    for (i = 0; i <= CS - 1; i++) {
-        printf("  & ( s.h%d=t.h%d | (false", i, i);
-        for (j = 0; j < i; j++) printf(" | r=%d ", j);
-        printf(" ) )\n");
-    }
-    printf(");\n\n");
+    // printf("/******************************************************************************/\n\n");
 
-    // printf("#size copy_h_h;\n\n");
+    // printf("bool copy_g_h(Globals s, Globals t, CS r)\n");
+    // printf(" r  < s,\n");
+    // printf(" s  ~+ t\n");
+    // printf("( true\n");
+    // for (i = 0; i <= CS - 1; i++) {
+    //  printf("  & ( s.g%d=t.h%d | (false", i, i);
+    //  for (j = 0; j < i; j++) printf(" | r=%d ", j);
+    //  printf(" ) )\n");
+    // }
+    // printf(");\n\n");
+    // // printf("#size copy_g_h;\n\n");
 
-    printf("/******************************************************************************/\n\n");
+    // printf("/******************************************************************************/\n\n");
 
-    printf("bool copy_g_h(Globals s, Globals t, CS r)\n");
-    printf(" r  < s,\n");
-    printf(" s  ~+ t\n");
-    printf("( true\n");
-    for (i = 0; i <= CS - 1; i++) {
-        printf("  & ( s.g%d=t.h%d | (false", i, i);
-        for (j = 0; j < i; j++) printf(" | r=%d ", j);
-        printf(" ) )\n");
-    }
-    printf(");\n\n");
+    // printf("bool folding( Globals G,  Globals H, CS r )\n");
+    // printf(" r  < G,\n");
+    // printf(" G ~+ H\n");
+    // printf("(\n");
+    // printf("   true\n");
 
-    // printf("#size copy_g_h;\n\n");
+    // for (i = 0; i < CS - 1; i++) {
+    //  printf("   & (H.h%d = G.g%d ", i, i + 1);
+    //  for (j = 0; j <= i; j++) printf(" | r=%d ", j);
+    //  printf(" )\n");
+    // }
+    // printf(");\n\n");
+    // // printf("#size folding;\n\n");
 
-    printf("/******************************************************************************/\n\n");
+    // printf("/******************************************************************************/\n\n");
 
-    printf("bool folding( Globals G,  Globals H, CS r )\n");
-    printf(" r  < G,\n");
-    printf(" G ~+ H\n");
-    printf("(\n");
-    printf("   true\n");
+    // /*
+    // printf("bool copy_g_and_h(Globals s, Globals t)\n");
+    // printf(" s  ~+ t\n");
+    // printf("(   true\n");
+    // for(i=0; i<=CS-1; i++)
+    //   printf("  & s.g%d=t.g%d\n", i, i);
 
-    for (i = 0; i < CS - 1; i++) {
-        printf("   & (H.h%d = G.g%d ", i, i + 1);
-        for (j = 0; j <= i; j++) printf(" | r=%d ", j);
-        printf(" )\n");
-    }
-    printf(");\n\n");
+    // for(i=0; i<=CS-1; i++)
+    //   printf("  & s.h%d=t.h%d\n", i, i);
+    // printf(");\n\n");
 
-    // printf("#size folding;\n\n");
-
-    printf("/******************************************************************************/\n\n");
-
-    /*
-    printf("bool copy_g_and_h(Globals s, Globals t)\n");
-    printf(" s  ~+ t\n");
-    printf("(   true\n");
-    for(i=0; i<=CS-1; i++)
-      printf("  & s.g%d=t.g%d\n", i, i);
-
-    for(i=0; i<=CS-1; i++)
-      printf("  & s.h%d=t.h%d\n", i, i);
-    printf(");\n\n");
-
-    printf("#size copy_g_and_h;\n\n");
-    */
+    // printf("#size copy_g_and_h;\n\n");
+    // */
 
     //  printf("\n\n");
 
     //  print_Global_init();
 
     printf("\n\n");
+
+    printf("bool READ(\n");
+    printf("   MemUnwind MU,\n");
+    printf("   VarID     ID,\n");
+    printf("   bool      ret\n");
+    printf(");\n");
+
+    printf("bool WRITE(\n");
+    printf("   MemUnwind MU,\n");
+    printf("   MemUnwind dMU,\n");
+    printf("   VarID     ID,\n");
+    printf("   bool      val\n");
+    printf(");\n");
 
     // print_Mucke_forward_decls();
     // printf("\n\n");
@@ -4510,13 +4909,11 @@ print_Mucke_program(int ord, char *formulaFilename) {
 
     print_Mucke_programInt1();
     printf("\n\n");
-
     printf("\n#size programInt1;\n");
     printf("\n\n");
 
     print_Mucke_programInt2();
     printf("\n\n");
-
     printf("\n#size programInt2;\n");
     printf("\n\n");
 
@@ -4587,6 +4984,103 @@ print_Mucke_program(int ord, char *formulaFilename) {
     print_Mucke_programContextSwitch();
     printf("\n\n");
 
+
+    printf("// READ \n");
+
+    printf("bool READ (\n");
+    printf("    MemUnwind MU,\n");
+    printf("    VarID     ID,\n");
+    printf("    bool      ret\n");
+    printf(")\n");
+    printf("  ID < ret,\n");
+    printf("  ret < MU\n");
+    printf("(false\n");
+    for (i = 0; i < NUM_WRITE; i++)
+    {
+        printf("|(\n");
+        for (int j = NUM_WRITE-1; j > i; j--)
+        {
+            printf("    (MU.w%d.valid | (MU.w%d.ID!=ID)) &\n", j, j);
+        }
+        printf("   (MU.w%d.valid & MU.w%d.ID=ID & ret=MU.w%d.value)\n", i, i, i);
+        printf(")\n");
+    }
+    printf(");\n");
+    printf("#size READ;\n");
+
+    printf("bool ForceOrdering( MemUnwind fake, MemUnwind  MU ) MU ~+ fake (true);\n");
+
+    printf("bool WRITE (\n");
+    printf("    MemUnwind  MU,     // previous MU\n");
+    printf("    MemUnwind  dMU,    // current MU\n");
+    printf("    VarID      ID,\n");
+    printf("    bool       val     // value to be written\n");
+    printf(")\n");
+    printf("  ID   <  MU,\n");
+    printf("  MU   ~+ dMU,\n");
+    printf("  dMU  < val\n");
+    printf("(\n");
+    printf("   (exists MemUnwind fake.\n");
+    printf("      (ForceOrdering (fake, MU)\n");
+
+    // For the corner case
+    i = 0;
+    printf("    & (\n");
+    printf("          (\n");
+    printf("              !MU.w0.valid\n");
+    printf("            & (\n");
+    printf("                  MU.w0.valid\n");
+    printf("                & (\n");
+    printf("                       (val=false & !dMU.w0.valid)\n");
+    printf("                     | (val=true  & dMU.w0.valid & dMU.w0.value=val & dMU.w0.ID=ID)\n");
+    printf("                  )\n");
+    printf("              )\n");
+    printf("          )\n");
+    printf("        | (\n");
+    printf("              MU.w0.valid\n");
+    printf("            & dMU.w0.valid\n");
+    printf("            & dMU.w0.value=MU.w0.value\n");
+    printf("            & dMU.w0.ID=MU.w0.ID\n");
+    printf("            & (\n");
+    printf("                  (fake.w0.value=MU.w0.value & MU.w0.ID=ID )\n");
+    printf("                | (MU.w0.ID!=ID & fake.w0.value=false)\n");
+    printf("              )\n");
+    printf("          )\n");
+    printf("      )\n");
+
+    // For the rest
+    for(i = 1; i < NUM_WRITE; i++) {
+        printf("    & (// For write %d\n", i);
+        printf("        (\n");
+        printf("            !MU.w%d.valid\n", i);
+        printf("          & (\n");
+        printf("                (!MU.w%d.valid & !dMU.w%d.valid)\n", i-1, i);
+        printf("              | (\n");
+        printf("                    MU.w%d.valid\n", i-1);
+        printf("                  & (\n");
+        printf("                        (val=fake.w%d.value & !dMU.w%d.valid)\n", i-1, i);
+        printf("                      | (val!=fake.w%d.value & dMU.w%d.valid & dMU.w%d.value=val & dMU.w%d.ID=ID)\n", i-1, i, i, i);
+        printf("                    )\n");
+        printf("                )\n");
+        printf("            )\n");
+        printf("        )\n");
+        printf("      | (\n");
+        printf("              MU.w%d.valid\n", i);
+        printf("            & dMU.w%d.valid\n", i);
+        printf("            & dMU.w%d.value=MU.w%d.value\n", i, i);
+        printf("            & dMU.w%d.ID=MU.w%d.ID\n", i, i);
+        printf("            & (\n");
+        printf("                  (fake.w%d.value=MU.w%d.value & MU.w%d.ID=ID)\n", i, i, i);
+        printf("                | (MU.w%d.ID!=ID & fake.w%d.value=fake.w%d.value)\n", i, i, i-1);
+        printf("              )\n");
+        printf("          )\n");
+        printf("       )\n");
+    }
+    printf("      )\n");
+    printf("   )\n");
+    printf(");\n");
+    printf("#size WRITE;\n");
+
     // ####   ##   ###   #  #  #  #  #      ##
     // #     #  #  #  #  ####  #  #  #     #  #
     // ###   #  #  #  #  ####  #  #  #     #  #
@@ -4620,20 +5114,21 @@ int main(int argc, char **argv) {
         {"context", required_argument, 0, 'c'},
         {"label", required_argument,   0, 'l'},
         {"formula", required_argument, 0, 'f'},
+        {"write", required_argument,   0, 'w'},
         {"help", no_argument,          0, 'h'},
         {0, 0,                         0, 0}
     };
 
     while (1) {
         int option_index = 0;
-        c = getopt_long(argc, argv, "i:c:l:f:h", long_options, &option_index);
+        c = getopt_long(argc, argv, "i:c:l:f:w:h", long_options, &option_index);
 
         if (c == -1) {
             break;
         }
         switch (c) {
         case 'h':
-            printf("usage: program -i FILE_NAME -c ROUND -l TARGET_LABEL -f FORMULA\n");
+            printf("usage: program_mu -i FILE_NAME -c ROUND -l TARGET_LABEL -f FORMULA\n");
             exit(0);
         case 'i':
             inputFilename = calloc(strlen(optarg) + 1, sizeof(char));
@@ -4642,6 +5137,9 @@ int main(int argc, char **argv) {
         case 'c':
             CS = -1;
             CS = atoi(optarg);
+            break;
+        case 'w':
+            NUM_WRITE = atoi(optarg);
             break;
         case 'l':
             target_label = calloc(strlen(optarg) + 1, sizeof(char));
@@ -4657,7 +5155,7 @@ int main(int argc, char **argv) {
     }
 
     if (argc <= 1) {
-        printf("usage: program -i FILE_NAME -c ROUND -l TARGET_LABEL -f FORMULA\n");
+        printf("usage: program_mu -i FILE_NAME -c ROUND -l TARGET_LABEL -f FORMULA\n");
         exit(0);
     }
 

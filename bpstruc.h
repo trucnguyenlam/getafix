@@ -31,6 +31,7 @@ struct bp_ident_element
 	char* varname;
 	int varname_replace;
         int mark;
+        int read_mark;
 	int index;
 	short fun;
 	bp_ident_t next;

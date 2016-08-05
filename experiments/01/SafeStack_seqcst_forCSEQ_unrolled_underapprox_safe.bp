@@ -1266,60 +1266,16 @@ decl head1Push_0, head1Push_1, head1Push_2;
     EndThread_While1: skip;
 
 
-    atomic := T;
-    // stack.array[elem].Value := 1;
-    if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
-        stack_value0_0, stack_value0_1, stack_value0_2 := F, F, T;   // value := 1
-    else
-        if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
-            stack_value1_0, stack_value1_1, stack_value1_2 := F, F, T;
-        else
-            if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
-                stack_value2_0, stack_value2_1, stack_value2_2 := F, F, T;
-            else
-                assume(F);
-            fi
-        fi
-    fi
-    atomic := F;
-    atomic := T;
-    // assert(stack.array[elem].Value == 1);
-    if (!elem_0 & !elem_1 & !elem_2) then
-        if (!(!stack_value0_0 & !stack_value0_1 & stack_value0_2)) then
-            atomic := F;
-            goto SLIC_ERROR;
-        fi
-    else
-        if (!elem_0 & !elem_1 & elem_2) then
-            if (!(!stack_value1_0 & !stack_value1_1 & stack_value1_2)) then
-                atomic := F;
-                goto SLIC_ERROR;
-            fi
-        else
-            if (!elem_0 & elem_1 & !elem_2) then
-                if(!(!stack_value2_0 & !stack_value2_1 & stack_value2_2)) then
-                    atomic := F;
-                    goto SLIC_ERROR;
-                fi
-            else
-                assume(F);
-            fi
-        fi
-    fi
-    atomic := F;
-
-
-
     // atomic := T;
-    // // stack.array[elem].Value := 0;
+    // // stack.array[elem].Value := 1;
     // if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
-    //     stack_value0_0, stack_value0_1, stack_value0_2 := F, F, F;   // value := 0
+    //     stack_value0_0, stack_value0_1, stack_value0_2 := F, F, T;   // value := 1
     // else
     //     if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
-    //         stack_value1_0, stack_value1_1, stack_value1_2 := F, F, F;
+    //         stack_value1_0, stack_value1_1, stack_value1_2 := F, F, T;
     //     else
     //         if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
-    //             stack_value2_0, stack_value2_1, stack_value2_2 := F, F, F;
+    //             stack_value2_0, stack_value2_1, stack_value2_2 := F, F, T;
     //         else
     //             assume(F);
     //         fi
@@ -1327,21 +1283,21 @@ decl head1Push_0, head1Push_1, head1Push_2;
     // fi
     // atomic := F;
     // atomic := T;
-    // // assert(stack.array[elem].Value :=:= 0);
+    // // assert(stack.array[elem].Value == 1);
     // if (!elem_0 & !elem_1 & !elem_2) then
-    //     if (!(!stack_value0_0 & !stack_value0_1 & !stack_value0_2)) then
+    //     if (!(!stack_value0_0 & !stack_value0_1 & stack_value0_2)) then
     //         atomic := F;
     //         goto SLIC_ERROR;
     //     fi
     // else
     //     if (!elem_0 & !elem_1 & elem_2) then
-    //         if (!(!stack_value1_0 & !stack_value1_1 & !stack_value1_2)) then
+    //         if (!(!stack_value1_0 & !stack_value1_1 & stack_value1_2)) then
     //             atomic := F;
     //             goto SLIC_ERROR;
     //         fi
     //     else
     //         if (!elem_0 & elem_1 & !elem_2) then
-    //             if(!(!stack_value2_0 & !stack_value2_1 & !stack_value2_2)) then
+    //             if(!(!stack_value2_0 & !stack_value2_1 & stack_value2_2)) then
     //                 atomic := F;
     //                 goto SLIC_ERROR;
     //             fi
@@ -1351,6 +1307,50 @@ decl head1Push_0, head1Push_1, head1Push_2;
     //     fi
     // fi
     // atomic := F;
+
+
+
+    atomic := T;
+    // stack.array[elem].Value := 0;
+    if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
+        stack_value0_0, stack_value0_1, stack_value0_2 := F, F, F;   // value := 0
+    else
+        if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
+            stack_value1_0, stack_value1_1, stack_value1_2 := F, F, F;
+        else
+            if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
+                stack_value2_0, stack_value2_1, stack_value2_2 := F, F, F;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic := F;
+    atomic := T;
+    // assert(stack.array[elem].Value :=:= 0);
+    if (!elem_0 & !elem_1 & !elem_2) then
+        if (!(!stack_value0_0 & !stack_value0_1 & !stack_value0_2)) then
+            atomic := F;
+            goto SLIC_ERROR;
+        fi
+    else
+        if (!elem_0 & !elem_1 & elem_2) then
+            if (!(!stack_value1_0 & !stack_value1_1 & !stack_value1_2)) then
+                atomic := F;
+                goto SLIC_ERROR;
+            fi
+        else
+            if (!elem_0 & elem_1 & !elem_2) then
+                if(!(!stack_value2_0 & !stack_value2_1 & !stack_value2_2)) then
+                    atomic := F;
+                    goto SLIC_ERROR;
+                fi
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic := F;
 
 
 
@@ -1745,60 +1745,16 @@ decl head1Push_0, head1Push_1, head1Push_2;
     EndThread_While2: skip;
 
 
-    atomic := T;
-    // stack.array[elem].Value := 1;
-    if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
-        stack_value0_0, stack_value0_1, stack_value0_2 := F, F, T;   // value := 1
-    else
-        if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
-            stack_value1_0, stack_value1_1, stack_value1_2 := F, F, T;
-        else
-            if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
-                stack_value2_0, stack_value2_1, stack_value2_2 := F, F, T;
-            else
-                assume(F);
-            fi
-        fi
-    fi
-    atomic := F;
-    atomic := T;
-    // assert(stack.array[elem].Value == 1);
-    if (!elem_0 & !elem_1 & !elem_2) then
-        if (!(!stack_value0_0 & !stack_value0_1 & stack_value0_2)) then
-            atomic := F;
-            goto SLIC_ERROR;
-        fi
-    else
-        if (!elem_0 & !elem_1 & elem_2) then
-            if (!(!stack_value1_0 & !stack_value1_1 & stack_value1_2)) then
-                atomic := F;
-                goto SLIC_ERROR;
-            fi
-        else
-            if (!elem_0 & elem_1 & !elem_2) then
-                if(!(!stack_value2_0 & !stack_value2_1 & stack_value2_2)) then
-                    atomic := F;
-                    goto SLIC_ERROR;
-                fi
-            else
-                assume(F);
-            fi
-        fi
-    fi
-    atomic := F;
-
-
-
     // atomic := T;
-    // // stack.array[elem].Value := 0;
+    // // stack.array[elem].Value := 1;
     // if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
-    //     stack_value0_0, stack_value0_1, stack_value0_2 := F, F, F;   // value := 0
+    //     stack_value0_0, stack_value0_1, stack_value0_2 := F, F, T;   // value := 1
     // else
     //     if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
-    //         stack_value1_0, stack_value1_1, stack_value1_2 := F, F, F;
+    //         stack_value1_0, stack_value1_1, stack_value1_2 := F, F, T;
     //     else
     //         if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
-    //             stack_value2_0, stack_value2_1, stack_value2_2 := F, F, F;
+    //             stack_value2_0, stack_value2_1, stack_value2_2 := F, F, T;
     //         else
     //             assume(F);
     //         fi
@@ -1806,21 +1762,21 @@ decl head1Push_0, head1Push_1, head1Push_2;
     // fi
     // atomic := F;
     // atomic := T;
-    // // assert(stack.array[elem].Value :=:= 0);
+    // // assert(stack.array[elem].Value == 1);
     // if (!elem_0 & !elem_1 & !elem_2) then
-    //     if (!(!stack_value0_0 & !stack_value0_1 & !stack_value0_2)) then
+    //     if (!(!stack_value0_0 & !stack_value0_1 & stack_value0_2)) then
     //         atomic := F;
     //         goto SLIC_ERROR;
     //     fi
     // else
     //     if (!elem_0 & !elem_1 & elem_2) then
-    //         if (!(!stack_value1_0 & !stack_value1_1 & !stack_value1_2)) then
+    //         if (!(!stack_value1_0 & !stack_value1_1 & stack_value1_2)) then
     //             atomic := F;
     //             goto SLIC_ERROR;
     //         fi
     //     else
     //         if (!elem_0 & elem_1 & !elem_2) then
-    //             if(!(!stack_value2_0 & !stack_value2_1 & !stack_value2_2)) then
+    //             if(!(!stack_value2_0 & !stack_value2_1 & stack_value2_2)) then
     //                 atomic := F;
     //                 goto SLIC_ERROR;
     //             fi
@@ -1830,6 +1786,50 @@ decl head1Push_0, head1Push_1, head1Push_2;
     //     fi
     // fi
     // atomic := F;
+
+
+
+    atomic := T;
+    // stack.array[elem].Value := 0;
+    if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
+        stack_value0_0, stack_value0_1, stack_value0_2 := F, F, F;   // value := 0
+    else
+        if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
+            stack_value1_0, stack_value1_1, stack_value1_2 := F, F, F;
+        else
+            if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
+                stack_value2_0, stack_value2_1, stack_value2_2 := F, F, F;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic := F;
+    atomic := T;
+    // assert(stack.array[elem].Value :=:= 0);
+    if (!elem_0 & !elem_1 & !elem_2) then
+        if (!(!stack_value0_0 & !stack_value0_1 & !stack_value0_2)) then
+            atomic := F;
+            goto SLIC_ERROR;
+        fi
+    else
+        if (!elem_0 & !elem_1 & elem_2) then
+            if (!(!stack_value1_0 & !stack_value1_1 & !stack_value1_2)) then
+                atomic := F;
+                goto SLIC_ERROR;
+            fi
+        else
+            if (!elem_0 & elem_1 & !elem_2) then
+                if(!(!stack_value2_0 & !stack_value2_1 & !stack_value2_2)) then
+                    atomic := F;
+                    goto SLIC_ERROR;
+                fi
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic := F;
 
 
 
@@ -2246,60 +2246,16 @@ decl head1Push_0, head1Push_1, head1Push_2;
 
 
 
-    atomic := T;
-    // stack.array[elem].Value := 2;
-    if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
-        stack_value0_0, stack_value0_1, stack_value0_2 := F, T, F;   // value := 2
-    else
-        if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
-            stack_value1_0, stack_value1_1, stack_value1_2 := F, T, F;
-        else
-            if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
-                stack_value2_0, stack_value2_1, stack_value2_2 := F, T, F;
-            else
-                assume(F);
-            fi
-        fi
-    fi
-    atomic := F;
-    atomic := T;
-    // assert(stack.array[elem].Value == 2);
-    if (!elem_0 & !elem_1 & !elem_2) then
-        if (!(!stack_value0_0 & stack_value0_1 & !stack_value0_2)) then
-    atomic := F;
-            goto SLIC_ERROR;
-        fi
-    else
-        if (!elem_0 & !elem_1 & elem_2) then
-            if (!(!stack_value1_0 & stack_value1_1 & !stack_value1_2)) then
-    atomic := F;
-                goto SLIC_ERROR;
-            fi
-        else
-            if (!elem_0 & elem_1 & !elem_2) then
-                if(!(!stack_value2_0 & stack_value2_1 & !stack_value2_2)) then
-    atomic := F;
-                    goto SLIC_ERROR;
-                fi
-            else
-                assume(F);
-            fi
-        fi
-    fi
-    atomic := F;
-
-
-
     // atomic := T;
-    // // stack.array[elem].Value := 0;
+    // // stack.array[elem].Value := 2;
     // if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
-    //     stack_value0_0, stack_value0_1, stack_value0_2 := F, F, F;   // value := 0
+    //     stack_value0_0, stack_value0_1, stack_value0_2 := F, T, F;   // value := 2
     // else
     //     if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
-    //         stack_value1_0, stack_value1_1, stack_value1_2 := F, F, F;
+    //         stack_value1_0, stack_value1_1, stack_value1_2 := F, T, F;
     //     else
     //         if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
-    //             stack_value2_0, stack_value2_1, stack_value2_2 := F, F, F;
+    //             stack_value2_0, stack_value2_1, stack_value2_2 := F, T, F;
     //         else
     //             assume(F);
     //         fi
@@ -2307,22 +2263,22 @@ decl head1Push_0, head1Push_1, head1Push_2;
     // fi
     // atomic := F;
     // atomic := T;
-    // // assert(stack.array[elem].Value :=:= 0);
+    // // assert(stack.array[elem].Value == 2);
     // if (!elem_0 & !elem_1 & !elem_2) then
-    //     if (!(!stack_value0_0 & !stack_value0_1 & !stack_value0_2)) then
-    //         atomic := F;
+    //     if (!(!stack_value0_0 & stack_value0_1 & !stack_value0_2)) then
+    // atomic := F;
     //         goto SLIC_ERROR;
     //     fi
     // else
     //     if (!elem_0 & !elem_1 & elem_2) then
-    //         if (!(!stack_value1_0 & !stack_value1_1 & !stack_value1_2)) then
-    //             atomic := F;
+    //         if (!(!stack_value1_0 & stack_value1_1 & !stack_value1_2)) then
+    // atomic := F;
     //             goto SLIC_ERROR;
     //         fi
     //     else
     //         if (!elem_0 & elem_1 & !elem_2) then
-    //             if(!(!stack_value2_0 & !stack_value2_1 & !stack_value2_2)) then
-    //                 atomic := F;
+    //             if(!(!stack_value2_0 & stack_value2_1 & !stack_value2_2)) then
+    // atomic := F;
     //                 goto SLIC_ERROR;
     //             fi
     //         else
@@ -2331,6 +2287,50 @@ decl head1Push_0, head1Push_1, head1Push_2;
     //     fi
     // fi
     // atomic := F;
+
+
+
+    atomic := T;
+    // stack.array[elem].Value := 0;
+    if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
+        stack_value0_0, stack_value0_1, stack_value0_2 := F, F, F;   // value := 0
+    else
+        if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
+            stack_value1_0, stack_value1_1, stack_value1_2 := F, F, F;
+        else
+            if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
+                stack_value2_0, stack_value2_1, stack_value2_2 := F, F, F;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic := F;
+    atomic := T;
+    // assert(stack.array[elem].Value :=:= 0);
+    if (!elem_0 & !elem_1 & !elem_2) then
+        if (!(!stack_value0_0 & !stack_value0_1 & !stack_value0_2)) then
+            atomic := F;
+            goto SLIC_ERROR;
+        fi
+    else
+        if (!elem_0 & !elem_1 & elem_2) then
+            if (!(!stack_value1_0 & !stack_value1_1 & !stack_value1_2)) then
+                atomic := F;
+                goto SLIC_ERROR;
+            fi
+        else
+            if (!elem_0 & elem_1 & !elem_2) then
+                if(!(!stack_value2_0 & !stack_value2_1 & !stack_value2_2)) then
+                    atomic := F;
+                    goto SLIC_ERROR;
+                fi
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic := F;
 
 
 
@@ -2725,60 +2725,16 @@ decl head1Push_0, head1Push_1, head1Push_2;
     EndThread_While2: skip;
 
 
-    atomic := T;
-    // stack.array[elem].Value := 2;
-    if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
-        stack_value0_0, stack_value0_1, stack_value0_2 := F, T, F;   // value := 2
-    else
-        if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
-            stack_value1_0, stack_value1_1, stack_value1_2 := F, T, F;
-        else
-            if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
-                stack_value2_0, stack_value2_1, stack_value2_2 := F, T, F;
-            else
-                assume(F);
-            fi
-        fi
-    fi
-    atomic := F;
-    atomic := T;
-    // assert(stack.array[elem].Value == 2);
-    if (!elem_0 & !elem_1 & !elem_2) then
-        if (!(!stack_value0_0 & stack_value0_1 & !stack_value0_2)) then
-    atomic := F;
-            goto SLIC_ERROR;
-        fi
-    else
-        if (!elem_0 & !elem_1 & elem_2) then
-            if (!(!stack_value1_0 & stack_value1_1 & !stack_value1_2)) then
-    atomic := F;
-                goto SLIC_ERROR;
-            fi
-        else
-            if (!elem_0 & elem_1 & !elem_2) then
-                if(!(!stack_value2_0 & stack_value2_1 & !stack_value2_2)) then
-    atomic := F;
-                    goto SLIC_ERROR;
-                fi
-            else
-                assume(F);
-            fi
-        fi
-    fi
-    atomic := F;
-
-
-
     // atomic := T;
-    // // stack.array[elem].Value := 0;
+    // // stack.array[elem].Value := 2;
     // if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
-    //     stack_value0_0, stack_value0_1, stack_value0_2 := F, F, F;   // value := 0
+    //     stack_value0_0, stack_value0_1, stack_value0_2 := F, T, F;   // value := 2
     // else
     //     if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
-    //         stack_value1_0, stack_value1_1, stack_value1_2 := F, F, F;
+    //         stack_value1_0, stack_value1_1, stack_value1_2 := F, T, F;
     //     else
     //         if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
-    //             stack_value2_0, stack_value2_1, stack_value2_2 := F, F, F;
+    //             stack_value2_0, stack_value2_1, stack_value2_2 := F, T, F;
     //         else
     //             assume(F);
     //         fi
@@ -2786,22 +2742,22 @@ decl head1Push_0, head1Push_1, head1Push_2;
     // fi
     // atomic := F;
     // atomic := T;
-    // // assert(stack.array[elem].Value :=:= 0);
+    // // assert(stack.array[elem].Value == 2);
     // if (!elem_0 & !elem_1 & !elem_2) then
-    //     if (!(!stack_value0_0 & !stack_value0_1 & !stack_value0_2)) then
-    //         atomic := F;
+    //     if (!(!stack_value0_0 & stack_value0_1 & !stack_value0_2)) then
+    // atomic := F;
     //         goto SLIC_ERROR;
     //     fi
     // else
     //     if (!elem_0 & !elem_1 & elem_2) then
-    //         if (!(!stack_value1_0 & !stack_value1_1 & !stack_value1_2)) then
-    //             atomic := F;
+    //         if (!(!stack_value1_0 & stack_value1_1 & !stack_value1_2)) then
+    // atomic := F;
     //             goto SLIC_ERROR;
     //         fi
     //     else
     //         if (!elem_0 & elem_1 & !elem_2) then
-    //             if(!(!stack_value2_0 & !stack_value2_1 & !stack_value2_2)) then
-    //                 atomic := F;
+    //             if(!(!stack_value2_0 & stack_value2_1 & !stack_value2_2)) then
+    // atomic := F;
     //                 goto SLIC_ERROR;
     //             fi
     //         else
@@ -2810,6 +2766,50 @@ decl head1Push_0, head1Push_1, head1Push_2;
     //     fi
     // fi
     // atomic := F;
+
+
+
+    atomic := T;
+    // stack.array[elem].Value := 0;
+    if (!elem_0 & !elem_1 & !elem_2) then    // elem := 0
+        stack_value0_0, stack_value0_1, stack_value0_2 := F, F, F;   // value := 0
+    else
+        if (!elem_0 & !elem_1 & elem_2) then   // elem := 1
+            stack_value1_0, stack_value1_1, stack_value1_2 := F, F, F;
+        else
+            if (!elem_0 & elem_1 & !elem_2) then   // elem := 2
+                stack_value2_0, stack_value2_1, stack_value2_2 := F, F, F;
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic := F;
+    atomic := T;
+    // assert(stack.array[elem].Value :=:= 0);
+    if (!elem_0 & !elem_1 & !elem_2) then
+        if (!(!stack_value0_0 & !stack_value0_1 & !stack_value0_2)) then
+            atomic := F;
+            goto SLIC_ERROR;
+        fi
+    else
+        if (!elem_0 & !elem_1 & elem_2) then
+            if (!(!stack_value1_0 & !stack_value1_1 & !stack_value1_2)) then
+                atomic := F;
+                goto SLIC_ERROR;
+            fi
+        else
+            if (!elem_0 & elem_1 & !elem_2) then
+                if(!(!stack_value2_0 & !stack_value2_1 & !stack_value2_2)) then
+                    atomic := F;
+                    goto SLIC_ERROR;
+                fi
+            else
+                assume(F);
+            fi
+        fi
+    fi
+    atomic := F;
 
 
 
