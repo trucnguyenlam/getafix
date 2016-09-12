@@ -37,7 +37,7 @@ int CS;
 int n_bit_pc;
 
 
-int NUM_WRITE = 41; // Some random value
+int NUM_WRITE = 41; // Default to 41
 
 /******************************************************************/
 
