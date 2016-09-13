@@ -4,7 +4,7 @@
 #include <assert.h>
 
 #define CASDEF(t,ty) \
-    int __VERIFIER_atomic ## t ## _cas(ty *p, ty cmp, ty new) { \
+    int __VERIFIER_atomic_ ## t ## _cas(ty *p, ty cmp, ty new) { \
         if (*p == cmp) { \
             *p = new; \
             return 1; \
@@ -12,7 +12,7 @@
         else \
             return 0; \
     }
-#define CAS(t,x,y,z) __VERIFIER_atomic ## t ## _cas(x,y,z)
+#define CAS(t,x,y,z) __VERIFIER_atomic_ ## t ## _cas(x,y,z)
 
 #define LOCATION_ARRAY_SIZE 2
 #define COLLISION_ARRAY_SIZE 1

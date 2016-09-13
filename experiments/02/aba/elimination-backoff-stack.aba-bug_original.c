@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <pthread.h>
 
+/**
+ * This version is from JAD paper
+ */
 
 #define CASDEF(t,ty) \
     char __VERIFIER_atomic ## t ## _cas(ty *p, ty cmp, ty new) { \

@@ -4,11 +4,11 @@
 #include <assert.h>
 
 /**
- * This version try to simulate the bug
+ * This version try to simulate the bug and succeeded
  */
 
 #define CASDEF(t,ty) \
-    int __VERIFIER_atomic ## t ## _cas(ty *p, ty cmp, ty new) { \
+    int __VERIFIER_atomic_ ## t ## _cas(ty *p, ty cmp, ty new) { \
         if (*p == cmp) { \
             *p = new; \
             return 1; \
@@ -17,7 +17,7 @@
             return 0; \
     }
 
-#define CAS(t,x,y,z) __VERIFIER_atomic ## t ## _cas(x,y,z)
+#define CAS(t,x,y,z) __VERIFIER_atomic_ ## t ## _cas(x,y,z)
 
 #define LOCATION_ARRAY_SIZE 8 // 8 is original number
 #define COLLISION_ARRAY_SIZE 1
@@ -156,7 +156,7 @@ int TryPerformStackOp(ThreadInfo * p) {
             __VERIFIER_assume(&threads[i].cell == phead);
             allocated[i] = 0;
             __VERIFIER_atomic_end();
-            // ThreadInfo *oldti;
+            // ThreadInfo *oldti;     // this will get init to 0 in Lazy-CSeq, that's why it cannot detect the problem
             // __VERIFIER_assume(&oldti->cell == phead);
             // __VERIFIER_atomic_free_ThreadInfo(oldti);
             // assert(0);
